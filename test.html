@@ -1,0 +1,33 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <title>Pause Video After Every 10 Seconds</title>
+    <script>
+        window.onload = function () {
+            var video = document.getElementById('myVideo');
+            var interval;
+
+            video.addEventListener('play', function () {
+                var time = 0;
+                interval = setInterval(function () {
+                    time += 1;
+                    if (time >= 10) {
+                        video.pause();
+                        clearInterval(interval);
+                    }
+                }, 1000);
+            });
+
+            video.addEventListener('pause', function () {
+                clearInterval(interval);
+            });
+        };
+    </script>
+</head>
+<body>
+    <video id="myVideo" width="320" height="240" controls>
+        <source src="movie.mp4" type="video/mp4">
+        Your browser does not support the video tag.
+    </video>
+</body>
+</html>

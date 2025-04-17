@@ -1,0 +1,1116 @@
+﻿
+<!DOCTYPE html>
+<html>
+<head>
+    <!--<script src="jquery-1.10.2.js" type="text/JavaScript" language="javascript"></script>-->
+    <!--PWA-->
+    <link rel="manifest" href="./Content/manifest.json">
+    <link rel="shortcut icon" href="./Content/favicon.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="./Content/images/icons/favicon-16x16.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="./Content/images/icons/favicon-32x32.png">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="default">
+    <meta name="apple-mobile-web-app-title" content="PWA Splash">
+    <link rel="apple-touch-startup-image" href="./Content/images/splash/launch-640x1136.png" media="(device-width: 320px) and (device-height: 568px) and (-webkit-device-pixel-ratio: 2) and (orientation: portrait)">
+    <link rel="apple-touch-startup-image" href="./Content/images/splash/launch-750x1294.png" media="(device-width: 375px) and (device-height: 667px) and (-webkit-device-pixel-ratio: 2) and (orientation: portrait)">
+    <link rel="apple-touch-startup-image" href="./Content/images/splash/launch-1242x2148.png" media="(device-width: 414px) and (device-height: 736px) and (-webkit-device-pixel-ratio: 3) and (orientation: portrait)">
+    <link rel="apple-touch-startup-image" href="./Content/images/splash/launch-1125x2436.png" media="(device-width: 375px) and (device-height: 812px) and (-webkit-device-pixel-ratio: 3) and (orientation: portrait)">
+    <link rel="apple-touch-startup-image" href="./Content/images/splash/launch-1536x2048.png" media="(min-device-width: 768px) and (max-device-width: 1024px) and (-webkit-min-device-pixel-ratio: 2) and (orientation: portrait)">
+    <link rel="apple-touch-startup-image" href="./Content/images/splash/launch-1668x2224.png" media="(min-device-width: 834px) and (max-device-width: 834px) and (-webkit-min-device-pixel-ratio: 2) and (orientation: portrait)">
+    <link rel="apple-touch-startup-image" href="./Content/images/splash/launch-2048x2732.png" media="(min-device-width: 1024px) and (max-device-width: 1024px) and (-webkit-min-device-pixel-ratio: 2) and (orientation: portrait)">
+    <link rel="apple-touch-icon" sizes="180x180" href="./Content/images/icons/apple-touch-icon.png">
+    <link rel="mask-icon" href="./Content/images/icons/safari-pinned-tab.svg" color="#6F6F6F">
+    <!--PWA-->
+
+    <script src="jquery-3.3.1.min.js" type="text/JavaScript" language="javascript"></script>
+    <script src="jquery-ui-1.10.4.custom.js"></script>
+    <script src="jquery.PrintArea.js" type="text/JavaScript" language="javascript"></script>
+
+    <link type="text/css" rel="stylesheet" href="css/ui-lightness/jquery-ui-1.10.4.custom.css" />
+
+    <link type="text/css" rel="stylesheet" href="PrintArea3.css" />                <!-- Y : rel is stylesheet and media is in [all,print,empty,undefined] -->
+    <link type="text/css" rel="stylesheet" href="media_all.css" media="all" />   <!-- Y : rel is stylesheet and media is in [all,print,empty,undefined] -->
+    <link type="text/css" rel="" href="empty.css" />                    <!-- N : rel is not stylesheet -->
+    <link type="text/css" rel="noPrint" href="noPrint.css" />                  <!-- N : rel is not stylesheet -->
+    <link type="text/css" rel="stylesheet" href="media_none.css" media="xyz" />   <!-- N : media not in [all,print,empty,undefined] -->
+    <link type="text/css" href="no_rel.css" media="print" /> <!-- N : no rel attribute -->
+    <link type="text/css" href="no_rel_no_media.css" /> <!-- N : no rel, no media attributes -->
+    <link rel="stylesheet" type="text/css" href="bootstrap/css/bootstrap.min.css">
+    <!--<link rel="stylesheet" type="text/css"  href="bootstrap/css/bootstrap.css.map">-->
+
+    <link rel="stylesheet" type="text/css" href="fonts/font-awesome-4.7.0/css/font-awesome.min.css">
+    <script type="text/javascript" src="qr-code.js"></script>
+</head>
+<body>
+    <div class="container">
+        <div class="overlay"></div>
+        <div class="row printview">
+            <div class="button b1 btn btn-primary  tooltip "><i class="fa fa-print" data-toggle="tooltip" data-placement="bottom" title="Print"></i><span class="tooltiptext">Print</span></div>
+        </div>
+        <div class="PrintArea area1 all" id="Retain">
+            <!--boostrap-->
+
+            <div class="container serachprinttable">
+                <!--container-->
+
+                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 no-padding">
+
+                    <!--section 1--->
+                    <!--<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 displayflex">
+                        <p><span class="headerstudentname"></span><span class="floatright headerstudentcenter"></span></p>
+
+                    </div>-->
+                    <!--remove sec---->
+                    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 no-padding uppersec">
+
+                    </div>
+
+                    <!--section 1--->
+                    <!--section 2--->
+                    <!--section 2--->
+                    <!--remove sec-->
+                    <!--section 3--->
+                    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 no-padding">
+                        <div class="reporttable article">
+                            <div class="firstthreetable"></div>
+                            <!--<div class="remainingtable"></div>-->
+                        </div>
+                    </div>
+                    <!--<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 sec3">
+                                <table class="table table-bordered subjecttable">
+                                        <tr class="text-center">
+                                            <td class="centertd">Mathematics</td>
+                                        <td style="padding: 0px !important;">
+                                            <table class="table no-table-border">
+                                            <tr>
+                                                <td>Exam</td>
+
+                                                <td>CA</td>
+
+                                                <td>Grade</td>
+
+                                                <td>Effort</td>
+                                            </tr>
+                                            <tr>
+                                                <td>72%</td>
+
+                                                <td>68%</td>
+
+                                                <td>A</td>
+
+                                                <td>2</td>
+                                            </tr>
+                                        </table>
+                                        </td>
+
+                                        </tr>
+                                    </table>
+                                    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                                        <p>During  this term, Ahmed did well in subtracting two 3-digit numbers and solving division word problems. Ahmedneeds to revise his work on comparing and ordering fractions and converting between dollars and cents.</p>
+                    <p>I am really  pleased with Ahmed’sattitude during lessons and the way he asks questions when unsure of a concept. I would like to see an improvement in hispresentation by using a ruler to draw lines. Also, he should practise his work on adding fractions.</p>
+                    <p class="text-right"><strong>Teacher:</strong> Shenal Irenga</p>
+                                    </div>
+                            </div>-->
+                    <!--section 3--->
+                </div>
+            </div>
+
+            <!--bootsrap-->
+        </div>
+
+
+
+
+    </div>
+
+
+
+    <div style="border: solid 2px #999fff; float: left; margin-left: 20px;" class="SettingsBox">
+        <div style="width: 400px; padding: 20px;">
+            <div style="padding: 0 10px 10px;" class="buttonBar">
+                <div class="button b1">Print</div>
+                <div class="toggleDialog">open dialog</div>
+            </div>
+
+            <div style="font-weight: bold; border-top: solid 1px #999fff; padding-top: 10px;">Settings</div>
+            <table>
+                <tbody>
+                    <tr>
+                        <td><input value="popup" name="mode" id="popup" checked="" type="radio"> Popup</td>
+                    </tr>
+                    <tr>
+                        <td style="padding-left: 20px;"><input value="popup" name="popup" id="closePop" type="checkbox"> Close popup</td>
+                    </tr>
+                    <tr>
+                        <td><input value="iframe" name="mode" id="iFrame" type="radio"> IFrame</td>
+                    </tr>
+                    <tr>
+                        <td>Extra css: <input type="text" name="extraCss" size="50" /></td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <div class="settingName">Print area:</div>
+                            <div class="settingVals">
+                                <input type="checkbox" class="selPA" value="area1" checked /> Area 1<br>
+                                <input type="checkbox" class="selPA" value="area2" checked /> Area 2<br>
+                                <input type="checkbox" class="selPA" value="area3" checked /> Area 3<br>
+                            </div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <div class="settingName">Retain Attributes:</div>
+                            <div class="settingVals">
+                                <input type="checkbox" checked name="retainCss" id="retainCss" class="chkAttr" value="class" /> Class
+                                <br>
+                                <input type="checkbox" checked name="retainId" id="retainId" class="chkAttr" value="id" /> ID
+                                <br>
+                                <input type="checkbox" checked name="retainStyle" id="retainId" class="chkAttr" value="style" /> Style
+                            </div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <div style="padding: 3px; border: solid 1px #ddd;">
+                                Add to head :
+                                <input type="checkbox" checked name="addElements" id="addElements" class="chkAttr" />
+                                <pre>&lt;meta charset="utf-8" /&gt;<br>&lt;http-equiv="X-UA-Compatible" content="IE=edge"/&gt;</pre>
+                            </div>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+
+
+        <footer>okss</footer>
+    </div>
+
+    <script>
+      /****Disabled f12 and right click key***/
+
+      $(document).keydown(function(event){
+            if(event.keycode==123){
+                return false;
+            }
+            else if (event.ctrlkey && event.shiftkey && event.keycode==73){
+                     return false;
+            }
+        });
+
+        $(document).on("contextmenu",function(e){
+           e.preventdefault();
+        });
+      /****Disabled f12 and right click key***/
+
+    $(document).ready(function(){
+        $(".overlay").show();
+  $('[data-toggle="tooltip"]').tooltip();
+        var dialog = $("div.testDialog").dialog({position : { my : "left top", at : "left bottom+50", of : ".SettingsBox" }, width: "1000", title: "Print Dialog Box Contents"});
+
+        $(".toggleDialog").click(function(){
+            dialog.dialog("open");
+        });
+
+        $("div.b1").click(function(){
+
+            var mode = $("input[name='mode']:checked").val();
+            var close = mode == "popup" && $("input#closePop").is(":checked");
+            var extraCss = $("input[name='extraCss']").val();
+
+            var print = "";
+            $("input.selPA:checked").each(function(){
+                print += (print.length > 0 ? "," : "") + "div.PrintArea." + $(this).val();
+            });
+
+            var keepAttr = [];
+            $(".chkAttr").each(function(){
+                if ($(this).is(":checked") == false )
+                    return;
+
+                keepAttr.push( $(this).val() );
+            });
+
+            var headElements = $("input#addElements").is(":checked") ? '<meta charset="utf-8" />,<meta http-equiv="X-UA-Compatible" content="IE=edge"/>' : '';
+
+            var options = { mode : mode, popClose : close, extraCss : extraCss, retainAttr : keepAttr, extraHead : headElements };
+
+            $( print ).printArea( options );
+
+
+$('#qrcode').empty();
+
+// Set Size to Match User Input
+$('#qrcode').css({
+'width' : $('.qr-size').val(),
+'height' : $('.qr-size').val()
+})
+
+// Generate and Output QR Code
+$('#qrcode').qrcode({width: $('.qr-size').val(),height: $('.qr-size').val(),text: "https://www.codegrepper.com/code-examples/javascript/jquery+get+url+parameter"});//$('.qr-url').val()
+
+//});
+/****QR CODE***/
+
+        });
+
+
+    const months = ["January", "February", "March", "April", "May", "June",
+        "July", "August", "September", "October", "November", "December"
+    ];
+
+    /**Format Date**/
+    function formatdate(datevalue) {
+        var date = new Date(datevalue);
+        var datess = date.getDate();
+        var monthss = months[date.getMonth()];
+        var fullyear = date.getFullYear();
+        var hours = date.getHours();
+        var minutes = date.getMinutes();
+        var mili = date.getMilliseconds();
+
+        var strdate = monthss + "  " + datess + ", " + fullyear;
+        return strdate;
+    }
+
+
+
+//const value = encodeURIComponent(value).replace('%20','+');
+
+var reportcard="";
+        var reportcard2 = "";
+        var uppersec = "";
+        var already = "";
+//var Roll_Number="189570";
+//var Session_Id="11";
+//var Class_Id=13;
+        var count =1;
+        var first_time = 1;
+        var icount = 1;
+         var incomplete_already = 0;
+
+    /*****************************************DECRYPT************************************/
+
+        var uri = window.location.href;
+  var enc = encodeURIComponent(uri).replace('%20','+');
+  var dec = decodeURIComponent(enc);
+  var res = "Encoded URI: " + enc + "<br>" + "Decoded URI: " + dec;
+console.log("LINKS:"+res);
+var sURLVariableswithurl="";
+function GetUrlParameter(sParam)
+
+{
+    var sPageURL = dec;//window.location.search.substring(1);
+
+    sURLVariableswithurl = sPageURL.split('?');
+     var sURLVariables = sURLVariableswithurl[1].split('&');
+
+    for (var i = 0; i < sURLVariables.length; i++)
+    {
+        var sParameterName = sURLVariables[i].split('=');
+
+        if (sParameterName[0] == sParam)
+
+        {
+           // return sParameterName[1];
+        /*******************************DECRPT in Function*******************/
+            var scids = sParameterName[1];
+             scids=scids.replace(/Z|z/g, '');//replace("Z",'');
+             var scidss="";
+
+      var i="";
+      for(i=0;i<scids.length;i += 2)
+      {
+      var res = scids.substr(i, 2);
+        if(res=="KL")
+        {
+            scidss+="0"
+        }
+        else if(res=="JK")
+        {
+            scidss+="1"
+        }
+         else if(res=="HJ")
+        {
+            scidss+="2"
+        }
+          else if(res=="GH")
+        {
+            scidss+="3"
+        }
+          else if(res=="NM")
+        {
+            scidss+="4"
+        }
+           else if(res=="BN")
+        {
+            scidss+="5"
+        }
+              else if(res=="VB")
+        {
+            scidss+="6"
+        }
+         else if(res=="TY")
+        {
+            scidss+="7"
+        }
+          else if(res=="ER")
+        {
+            scidss+="8"
+        }
+          else if(res=="WE")
+        {
+            scidss+="9"
+        }
+
+      }
+        //console.log("SessionID Decode-----"+scidss);
+        //ScId=scidss;
+            return scidss;
+        /*****************************DECRTPT IN FUNCTION********************/
+        }
+    }
+}
+
+
+
+
+
+
+var ScId = GetUrlParameter('Section_Id');
+var Sd = GetUrlParameter('Session_Id');
+var Ty = GetUrlParameter('Term');
+//var CI= GetUrlParameter('CI');
+//var ClId = GetUrlParameter('ClId');
+//var RID= GetUrlParameter('RID');
+//console.log("ScId" + ScId + "------" + "Sd" + Sd + "------" + "Ty" + Ty+ "------" +"CI" + CI+ "------" +"ClId" + ClId+ "------" +"RID" + RID);
+console.log("ScId" + ScId + "------" + "Sd" + Sd + "------" + "Ty" + Ty );
+
+
+
+
+/****DECREPT CODE***/
+
+
+
+
+
+
+    /*****************************************DECRYPT************************************/
+
+$('.container').off('scroll touchmove mousewheel');
+
+
+
+        $.ajax({
+            type: 'GET',
+            //ScId=592&Sd=12&Ty=1&CI=2010501&ClId=14&RID=2000000
+            //data: { ScId: ScId, Sd: Sd, Ty: Ty, CI: CI, ClId: ClId, RID: RID },
+            data: { Section_Id: ScId, Session_Id: Sd, Term: Ty },
+
+            url: 'http://localhost:52673/api/Setup/GerReportCardBySectionID',//sURLVariableswithurl[0]+"?",//getsearchedpatient
+            /*http://tcsresults.csn.edu.pk*/
+            success: function (result) {
+                console.log(JSON.stringify(result));
+
+                for (var i = 0; i < result.length; i++) {//result.length
+/*var numItems = $('.reporttable').length;
+alert(numItems);*/
+                    //var demo = [1,1,1,1,1,1,1,1,0,0,0,0,0,0,0,0,1,1,1,1,1,1,1,1];
+                    var effort;
+                    var remarks;
+                    var comments;
+                    var fullname;
+                    var course_work;
+                    console.log(result);
+                    if (result[i].isAbsent == true) {
+                        effort = "-";
+                    }
+                    else
+                    {
+                        effort = result[i].Effort;
+                    }
+                    if (result[i].Comments == null || result[i].Comments == "" || result[i].Comments == " ") {
+                        comments = "";
+                    }
+                    else {
+                        comments = result[i].Comments;
+                    }
+                    if (result[i].Remarks == null || result[i].Remarks == "" || result[i].Remarks == " ") {
+                        remarks = "";
+                    }
+                    else {
+                        remarks = result[i].Remarks;
+                    }
+                    if (result[i].FullName == null || result[i].FullName == "" || result[i].FullName == " ") {
+                        fullname = "";
+                    }
+                    else {
+                        fullname = result[i].FullName;
+                    }
+                    if (result[i].isAbsent == true) {
+                        course_work = "-";
+                    }
+                    else {
+                        course_work = result[i].Course_Work + " %";
+                    }
+                    //is complete if start
+                    if (result[i].isComplete != 0) {//result[i].isComplete
+                        incomplete_already = 0;
+
+
+                        if (already != result[i].Student_Id) {
+                            if (first_time == 1) {
+
+                                reportcard += '<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 displayflex printmediabordertopafter3">';
+                                reportcard += '<p><span>' + result[i].StudentName + "-" + result[i].Student_Id + '</span><span class="floatright">' + result[i].Center_Name + '</span></p>';
+                                reportcard += '</div>';
+                                /*****HEADER SEC1 *********/
+                                reportcard += '<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 sec1 article">';
+                                reportcard += '<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">';
+                                reportcard += '<h2 class="text-right schoolname">The City School</h2>';
+                                reportcard += '</div>';
+
+                                reportcard += '<div class="row rowdisplayflex headerwithlogo">';
+                                reportcard += '<div class="col-lg-3 col-md-3 col-sm-3 col-xs-3 visiblity-hidden_mediaclass">';
+
+                                reportcard += '</div>';
+                                reportcard += '<div class="col-lg-6 col-md-6 col-sm-6 col-xs-6 text-mediaalign">';
+                                reportcard += '<h4><span class="termname">' + result[i].Evaluation_Criteria_Type_Name + '</span> Report Card <span class="yearname">' + result[i].Description.replace("AY", '') + '</span></h4>';
+                                reportcard += '<h4 class="fullnamestudent">' + result[i].StudentName + '</h4>';
+                                reportcard += '<h4><span class="classname">' + result[i].Class_Name + '</span> - <span class="classsec">' + result[i].Section_Name + '</span></h4>';
+                                reportcard += '</div>';
+                                reportcard += '<div class="col-lg-3 col-md-3 col-sm-3 col-xs-3 text-mediaalignright schoollogo">';
+                                reportcard += '<img src="images/logo.png" />';
+                                reportcard += '</div>';
+                                reportcard += '</div>';
+
+                                reportcard += '<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 dobtable">';
+                                reportcard += '<table>';
+                                reportcard += '<tr><td><strong>Date of Birth:</strong>  </td><td class="dobclass">' + formatdate(result[i].Date_Of_Birth) + '</td></tr>';
+
+                                var attendenceperc = (result[i].DaysPresent / result[i].FirstTermDaysCH) * 100;
+                                var attendence;
+
+                                if (attendenceperc < 25) {
+                                    attendence = "Low";
+                                }
+                                else {
+                                    attendence = result[i].DaysPresent;
+                                }
+
+
+
+                                reportcard += '<tr><td><strong>Attendance:</strong> </td><td><span class="attendenceclass">' + attendence + '</span> (Out of <span class="attendencetotal">' + result[i].FirstTermDaysCH + " days" + '</span>)</td></tr>';
+                                reportcard += '</table>';
+                                reportcard += '</div>';
+                                reportcard += '</div>';
+                                /****HEADER SEC1 ********/
+
+                                /*****HEADER SEC2 *********/
+                                reportcard += '<div class="row sec2 article">';
+                                reportcard += '<div class="col-lg-9 col-md-9 col-sm-9 col-xs-12 floatleft mediawidth">';
+                                reportcard += '<h4>Understanding your child' + "'" + '<span class="fontchange"></span>s report</h4>';
+                                reportcard += '<ul>';
+                                reportcard += '<li><strong>Exam:</strong> There were no mid-year exams this session, and so a mark will not be reported.</li>';
+                                reportcard += '<li>';
+                                reportcard += '<strong>CA:</strong> Continuous Assessment marks given during regular classes.';
+
+                                reportcard += '</li>';
+                                reportcard += '<li><strong>Grade:</strong> No mid-year exams this session and so a standardised grade will not be reported.</li>';
+                                reportcard += '<li><strong>Effort:</strong> A teacher judgement describing how much effort your child puts into his/her studies.</li>';
+                                reportcard += '</ul>';
+                                reportcard += '</div>';
+
+                                reportcard += '<div class="col-lg-3 col-md-3 col-sm-3 col-xs-12 floatleft ">';
+
+                                reportcard += '<table class="table-bordered effort-table">';
+                                reportcard += '<tr class="text-center"><td colspan="2" style=" background:#e4e4e4 !important;">Effort</td></tr>';
+                                reportcard += '<tr><td>Excellent</td><td>1</td></tr>';
+                                reportcard += '<tr><td>Good</td><td>2</td></tr>';
+                                reportcard += '<tr><td>Satisfactory</td><td>3</td></tr>';
+                                reportcard += '<tr><td>Needs improvement</td><td>4</td></tr>';
+                                reportcard += '</table>';
+                                reportcard += '</div>';
+
+                                reportcard += '<div class="headsigndiv">';
+                                reportcard += '<div class="col-lg-9 col-md-6 col-sm-6 col-xs-6 floatleft mediawidthlg8">';
+                                reportcard += '<p style="width: 100%" class="visiblity-hidden_class">p</p>';
+                                reportcard += '</div>';
+                                reportcard += '<div class="col-lg-3 col-md-6 col-sm-6 col-xs-6 floatleft mediawidthlg4">';
+                                reportcard += '<label class="headsign form-control text-center">' + result[i].HeadName + '</label>';
+
+                                reportcard += '<label class="label-100 ">Head of School</label>';
+                                reportcard += '</div>';
+                                reportcard += '</div>';
+                                reportcard += '</div>';
+
+                                /****HEADER SEC2 ********/
+                                //reportcard += '<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 incomplete text-center"></div>';
+
+                                //if (result[i].IsComplete == 0) {
+
+                                //    reportcard += '<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 text-center">';
+                                //    reportcard += '<div class=""><img src="images/warning.png"/><h4 class="redcolor">InComplete Result</h4></div>';
+                                //    reportcard += '</div>';
+
+                                //    continue;
+
+                                //}
+                                //else {
+                                    /**TABLE**/
+
+                                    reportcard += '<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 sec3">';
+                                    reportcard += '<table class="table  subjecttable">';
+                                    reportcard += '<tr class="text-center">';
+                                    reportcard += '<td rowspan="2"  class="centertd">' + result[i].Subject_Name + '</td>';
+                                    reportcard += '<td class="text-center">Exam</td>';
+                                    reportcard += '<td class="text-center">CA</td>';
+                                    reportcard += '<td class="text-center">Grade</td>';
+                                    reportcard += '<td class="text-center norightborder">Effort</td>';
+                                    reportcard += '</tr>';
+                                    reportcard += '<tr>';
+                                    reportcard += '<td class="text-center">' + result[i].Theory_Exam + '</td>';
+                                    reportcard += '<td class="text-center">' + course_work + '</td>';
+                                    reportcard += '<td class="text-center">' + result[i].Grade + '</td>';
+                                    reportcard += '<td class="text-center norightborder">' + effort + '</td>';
+                                    reportcard += '</tr>';
+                                    reportcard += '</table>';
+                                    reportcard += '<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 commentsec">';/*'+result[i].ClassTeacher_Comments+'*/
+                                    if (result[i].Subject_Id == 17 || result[i].Subject_Id == 12 || result[i].Subject_Id == 133) {
+                                        reportcard += '<p class="commentsec1 text-right">' + comments + '</p>';
+                                    }
+                                    else {
+                                        reportcard += '<p class="commentsec1 col-lg-12 col-md-12 col-sm-12 col-xs-12">' + comments + '</p>';
+                                    }
+
+                                    reportcard += '<p class="commentsec1 col-lg-12 col-md-12 col-sm-12 col-xs-12">' + remarks + '</p>';//' + remarks + '
+
+                                    reportcard += '<p class="text-right commentsectec captilizetext"><strong class="teachername">Teacher:</strong>' + fullname + '</p>';
+                                    reportcard += '</div>';
+                                    reportcard += '</div>';
+                                    first_time += 1
+                                    /**TABLE**/
+                                //}
+                            }
+                            else {
+                                reportcard += '<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 pagecut printmediaborderbottom pehlewala">';/*<p>ok</p>*/
+                                reportcard += '</div>';
+                                reportcard += '<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 displayflex printmediabordertopafter3">';
+                                reportcard += '<p><span>' + result[i].StudentName + "-" + result[i].Student_Id + '</span><span class="floatright">' + result[i].Center_Name + '</span></p>';
+                                reportcard += '</div>';
+                                /*****HEADER SEC1 *********/
+                                reportcard += '<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 sec1 article">';
+                                reportcard += '<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">';
+                                reportcard += '<h2 class="text-right schoolname">The City School</h2>';
+                                reportcard += '</div>';
+
+                                reportcard += '<div class="row rowdisplayflex headerwithlogo">';
+                                reportcard += '<div class="col-lg-3 col-md-3 col-sm-3 col-xs-3 visiblity-hidden_mediaclass">';
+
+                                reportcard += '</div>';
+                                reportcard += '<div class="col-lg-6 col-md-6 col-sm-6 col-xs-6 text-mediaalign">';
+                                reportcard += '<h4><span class="termname">' + result[i].Evaluation_Criteria_Type_Name + '</span> Report Card <span class="yearname">' + result[i].Description.replace("AY", '') + '</span></h4>';
+                                reportcard += '<h4 class="fullnamestudent">' + result[i].StudentName + '</h4>';
+                                reportcard += '<h4><span class="classname">' + result[i].Class_Name + '</span> - <span class="classsec">' + result[i].Section_Name + '</span></h4>';
+                                reportcard += '</div>';
+                                reportcard += '<div class="col-lg-3 col-md-3 col-sm-3 col-xs-3 text-mediaalignright schoollogo">';
+                                reportcard += '<img src="images/logo.png" />';
+                                reportcard += '</div>';
+                                reportcard += '</div>';
+
+                                reportcard += '<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 dobtable">';
+                                reportcard += '<table>';
+                                reportcard += '<tr><td><strong>Date of Birth:</strong>  </td><td class="dobclass">' + formatdate(result[i].Date_Of_Birth) + '</td></tr>';
+
+                                var attendenceperc = (result[i].DaysPresent / result[i].FirstTermDaysCH) * 100;
+                                var attendence;
+
+                                if (attendenceperc < 25) {
+                                    attendence = "Low";
+                                }
+                                else {
+                                    attendence = result[i].DaysPresent;
+                                }
+
+
+
+                                reportcard += '<tr><td><strong>Attendance:</strong> </td><td><span class="attendenceclass">' + attendence + '</span> (Out of <span class="attendencetotal">' + result[i].FirstTermDaysCH + " days" + '</span>)</td></tr>';
+                                reportcard += '</table>';
+                                reportcard += '</div>';
+                                reportcard += '</div>';
+                                /****HEADER SEC1 ********/
+
+                                /*****HEADER SEC2 *********/
+                                reportcard += '<div class="row sec2 article">';
+                                reportcard += '<div class="col-lg-9 col-md-9 col-sm-9 col-xs-12 floatleft mediawidth">';
+                                reportcard += '<h4>Understanding your child' + "'" + '<span class="fontchange"></span>s report</h4>';
+                                reportcard += '<ul>';
+                                reportcard += '<li><strong>Exam:</strong> There were no mid-year exams this session, and so a mark will not be reported.</li>';
+                                reportcard += '<li>';
+                                reportcard += '<strong>CA:</strong> Continuous Assessment marks given during regular classes.';
+
+                                reportcard += '</li>';
+                                reportcard += '<li><strong>Grade:</strong> No mid-year exams this session and so a standardised grade will not be reported.</li>';
+                                reportcard += '<li><strong>Effort:</strong> A teacher judgement describing how much effort your child puts into his/her studies.</li>';
+                                reportcard += '</ul>';
+                                reportcard += '</div>';
+
+                                reportcard += '<div class="col-lg-3 col-md-3 col-sm-3 col-xs-12 floatleft ">';
+
+                                reportcard += '<table class="table-bordered effort-table">';
+                                reportcard += '<tr class="text-center"><td colspan="2" style=" background:#e4e4e4 !important;">Effort</td></tr>';
+                                reportcard += '<tr><td>Excellent</td><td>1</td></tr>';
+                                reportcard += '<tr><td>Good</td><td>2</td></tr>';
+                                reportcard += '<tr><td>Satisfactory</td><td>3</td></tr>';
+                                reportcard += '<tr><td>Needs improvement</td><td>4</td></tr>';
+                                reportcard += '</table>';
+                                reportcard += '</div>';
+
+                                reportcard += '<div class="headsigndiv">';
+                                reportcard += '<div class="col-lg-9 col-md-6 col-sm-6 col-xs-6 floatleft mediawidthlg8">';
+                                reportcard += '<p style="width: 100%" class="visiblity-hidden_class">p</p>';
+                                reportcard += '</div>';
+                                reportcard += '<div class="col-lg-3 col-md-6 col-sm-6 col-xs-6 floatleft mediawidthlg4">';
+                                reportcard += '<label class="headsign form-control text-center">' + result[i].HeadName + '</label>';
+
+                                reportcard += '<label class="label-100 ">Head of School</label>';
+                                reportcard += '</div>';
+                                reportcard += '</div>';
+                                reportcard += '</div>';
+                                /****HEADER SEC2 ********/
+                                //reportcard += '<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 incomplete text-center"></div>';
+
+                                //if (result[i].IsComplete == 0) {
+                                //    reportcard += '<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12  text-center">';
+                                //    reportcard += '<div class=""><img src="images/warning.png"/><h4 class="redcolor">incomplete result</h4></div>';
+                                //    reportcard += '</div>';
+
+                                //    continue;
+                                //} else {
+                                    /**TABLE**/
+                                    reportcard += '<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 sec3">';
+                                    reportcard += '<table class="table  subjecttable">';
+                                    reportcard += '<tr class="text-center">';
+                                    reportcard += '<td rowspan="2"  class="centertd">' + result[i].Subject_Name + '</td>';
+                                    reportcard += '<td class="text-center">Exam</td>';
+                                    reportcard += '<td class="text-center">CA</td>';
+                                    reportcard += '<td class="text-center">Grade</td>';
+                                    reportcard += '<td class="text-center norightborder">Effort</td>';
+                                    reportcard += '</tr>';
+                                    reportcard += '<tr>';
+                                    reportcard += '<td class="text-center">' + result[i].Theory_Exam + '</td>';
+                                    reportcard += '<td class="text-center">' + course_work + '</td>';
+                                    reportcard += '<td class="text-center">' + result[i].Grade + '</td>';
+                                    reportcard += '<td class="text-center norightborder">' + effort + '</td>';
+                                    reportcard += '</tr>';
+                                    reportcard += '</table>';
+                                    reportcard += '<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 commentsec">';/*'+result[i].ClassTeacher_Comments+'*/
+                                    if (result[i].Subject_Id == 17 || result[i].Subject_Id == 12 || result[i].Subject_Id == 133) {
+                                        reportcard += '<p class="commentsec1 col-lg-12 col-md-12 col-sm-12 col-xs-12 text-right">' + comments + '</p>';
+                                    }
+                                    else {
+                                        reportcard += '<p class="commentsec1 col-lg-12 col-md-12 col-sm-12 col-xs-12">' + comments + '</p>';
+                                    }
+
+                                    reportcard += '<p class="commentsec1 col-lg-12 col-md-12 col-sm-12 col-xs-12">' + remarks + '</p>';//' + remarks + '
+
+                                    reportcard += '<p class="text-right commentsectec captilizetext"><strong class="teachername">Teacher:</strong>' + fullname + '</p>';
+                                    reportcard += '</div>';
+                                    reportcard += '</div>';
+
+                                    /**TABLE**/
+                                //}
+
+                                icount = 1;
+                                count = 1;
+                            }
+
+
+                            already = result[i].Student_Id;
+                            /***IF CONDTION if STUDENT NOT EXIST***/
+
+                            /***IF CONDITION if Student NOT EXIST***/
+                        }
+
+
+
+                        else {
+                            /******ELSE CONDITION if student is exist**/
+
+                            if (icount < 3) {
+
+
+
+
+                                reportcard += '<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 sec3">';
+                                reportcard += '<table class="table  subjecttable">';
+                                reportcard += '<tr class="text-center">';
+                                reportcard += '<td rowspan="2"  class="centertd">' + result[i].Subject_Name + '</td>';
+                                reportcard += '<td class="text-center">Exam</td>';
+                                reportcard += '<td class="text-center">CA</td>';
+                                reportcard += '<td class="text-center">Grade</td>';
+                                reportcard += '<td class="text-center norightborder">Effort</td>';
+                                reportcard += '</tr>';
+                                reportcard += '<tr>';
+                                reportcard += '<td class="text-center">' + result[i].Theory_Exam + '</td>';
+                                reportcard += '<td class="text-center">' + course_work + '</td>';
+                                reportcard += '<td class="text-center">' + result[i].Grade + '</td>';
+                                reportcard += '<td class="text-center norightborder">' + effort + '</td>';
+                                reportcard += '</tr>';
+                                reportcard += '</table>';
+                                reportcard += '<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 commentsec">';/*'+result[i].ClassTeacher_Comments+'*/
+                                if (result[i].Subject_Id == 17 || result[i].Subject_Id == 12 || result[i].Subject_Id == 133) {
+                                    reportcard += '<p class="commentsec1 col-lg-12 col-md-12 col-sm-12 col-xs-12 text-right">' + comments + '</p>';
+                                }
+                                else {
+                                    reportcard += '<p class="commentsec1 col-lg-12 col-md-12 col-sm-12 col-xs-12">' + comments + '</p>';
+                                }
+
+                                reportcard += '<p class="commentsec1 col-lg-12 col-md-12 col-sm-12 col-xs-12">' + remarks + '</p>';//' + remarks + '
+
+                                reportcard += '<p class="text-right commentsectec captilizetext"><strong class="teachername">Teacher:</strong>' + fullname + '</p>';
+                                reportcard += '</div>';
+                                reportcard += '</div>';
+                                icount += 1;
+
+                            }
+                            else {
+
+                                if (icount == 3) {
+
+
+                                    reportcard += '<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 pagecut printmediaborderbottom iequal3wala">';/*<p>ok</p>*/
+                                    reportcard += '</div>';
+                                    reportcard += '<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 displayflex printmediabordertopafter3">';
+                                    reportcard += '<p><span>' + result[i].StudentName + "-" + result[i].Student_Id + '</span><span class="floatright">' + result[i].Center_Name + '</span></p>';
+
+                                    reportcard += '</div>';
+
+                                    //count += 1;
+
+                                    /*****4 table*****/
+
+                                    reportcard += '<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 sec3 after3">';
+                                    reportcard += '<table class="table  subjecttable">';
+                                    reportcard += '<tr class="text-center">';
+                                    reportcard += '<td rowspan="2"  class="centertd">' + result[i].Subject_Name + '</td>';
+                                    reportcard += '<td class="text-center">Exam</td>';
+                                    reportcard += '<td class="text-center">CA</td>';
+                                    reportcard += '<td class="text-center">Grade</td>';
+                                    reportcard += '<td class="text-center norightborder">Effort</td>';
+                                    reportcard += '</tr>';
+                                    reportcard += '<tr>';
+                                    reportcard += '<td class="text-center">' + result[i].Theory_Exam + '</td>';
+                                    reportcard += '<td class="text-center">' + course_work + '</td>';
+                                    reportcard += '<td class="text-center">' + result[i].Grade + '</td>';
+                                    reportcard += '<td class="text-center norightborder">' + effort + '</td>';
+                                    reportcard += '</tr>';
+                                    reportcard += '</table>';
+                                    reportcard += '<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 commentsec">';
+
+                                    if (result[i].Subject_Id == 17 || result[i].Subject_Id == 12 || result[i].Subject_Id == 133) {
+                                        reportcard += '<p class="commentsec1 col-lg-12 col-md-12 col-sm-12 col-xs-12 text-right">' + comments + '</p>';
+                                    }
+                                    else {
+                                        reportcard += '<p class="commentsec1 col-lg-12 col-md-12 col-sm-12 col-xs-12">' + comments + '</p>';
+                                    }
+                                    reportcard += '<p class=" commentsec1 col-lg-12 col-md-12 col-sm-12 col-xs-12">' + remarks + '</p>';
+
+                                    reportcard += '<p class="text-right commentsectec captilizetext"><strong class="teachername">Teacher:</strong>' + fullname + '</p>';
+                                    reportcard += '</div>';
+                                    reportcard += '</div>';
+                                    /*****4 Table****/
+                                    icount += 1;
+
+                                }
+                                else if (count % 5 == 0 && count != 0) {
+
+
+                                    reportcard += '<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 pagecut printmediaborderbottom countmodilewala">';
+                                    reportcard += '</div>';
+                                    reportcard += '<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 displayflex printmediabordertopafter3">';
+                                    reportcard += '<p><span>' + result[i].StudentName + "-" + result[i].Student_Id + '</span><span class="floatright">' + result[i].Center_Name + '</span></p>';
+
+                                    reportcard += '</div>';
+
+
+
+
+                                    reportcard += '<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 sec3">';
+                                    reportcard += '<table class="table  subjecttable">';
+                                    reportcard += '<tr class="text-center">';
+                                    reportcard += '<td rowspan="2"  class="centertd">' + result[i].Subject_Name + '</td>';
+                                    reportcard += '<td class="text-center">Exam</td>';
+                                    reportcard += '<td class="text-center">CA</td>';
+                                    reportcard += '<td class="text-center">Grade</td>';
+                                    reportcard += '<td class="text-center norightborder">Effort</td>';
+                                    reportcard += '</tr>';
+                                    reportcard += '<tr>';
+                                    reportcard += '<td class="text-center">' + result[i].Theory_Exam + '</td>';
+                                    reportcard += '<td class="text-center">' + course_work + '</td>';
+                                    reportcard += '<td class="text-center">' + result[i].Grade + '</td>';
+                                    reportcard += '<td class="text-center norightborder">' + effort + '</td>';
+                                    reportcard += '</tr>';
+                                    reportcard += '</table>';
+                                    reportcard += '<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 commentsec">';
+
+                                    reportcard += '<p class="commentsec1 col-lg-12 col-md-12 col-sm-12 col-xs-12">' + comments + '</p>';
+                                    reportcard += '<p class=" commentsec1 col-lg-12 col-md-12 col-sm-12 col-xs-12">' + remarks + '</p>';
+
+                                    reportcard += '<p class="text-right commentsectec captilizetext"><strong class="teachername">Teacher:</strong>' + fullname + '</p>';
+                                    reportcard += '</div>';
+                                    reportcard += '</div>';
+                                    count += 1;
+                                }
+                                else {
+                                    count += 1
+
+                                    reportcard += '<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 sec3">';
+                                    reportcard += '<table class="table  subjecttable">';
+                                    reportcard += '<tr class="text-center">';
+                                    reportcard += '<td rowspan="2"  class="centertd">' + result[i].Subject_Name + '</td>';
+                                    reportcard += '<td class="text-center">Exam</td>';
+                                    reportcard += '<td class="text-center">CA</td>';
+                                    reportcard += '<td class="text-center">Grade</td>';
+                                    reportcard += '<td class="text-center norightborder">Effort</td>';
+                                    reportcard += '</tr>';
+                                    reportcard += '<tr>';
+                                    reportcard += '<td class="text-center">' + result[i].Theory_Exam + '</td>';
+                                    reportcard += '<td class="text-center">' + course_work + '</td>';
+                                    reportcard += '<td class="text-center">' + result[i].Grade + '</td>';
+                                    reportcard += '<td class="text-center norightborder">' + effort + '</td>';
+                                    reportcard += '</tr>';
+                                    reportcard += '</table>';
+                                    reportcard += '<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 commentsec">';
+
+                                    if (result[i].Subject_Id == 17 || result[i].Subject_Id == 12 || result[i].Subject_Id == 133) {
+                                        reportcard += '<p class="commentsec1 col-lg-12 col-md-12 col-sm-12 col-xs-12 text-right">' + comments + '</p>';
+                                    }
+                                    else {
+                                        reportcard += '<p class="commentsec1 col-lg-12 col-md-12 col-sm-12 col-xs-12">' + comments + '</p>';
+                                    }
+                                    reportcard += '<p class=" commentsec1 col-lg-12 col-md-12 col-sm-12 col-xs-12">' + remarks + '</p>';
+
+                                    reportcard += '<p class="text-right commentsectec captilizetext"><strong class="teachername">Teacher:</strong>' + fullname + '</p>';
+                                    reportcard += '</div>';
+                                    reportcard += '</div>';
+                                }
+                            }
+
+
+                            /******ELSE CONDITION if student is exist***/
+                        }
+
+                    }//is complete if end.IsComplete
+                    else
+                    {//is incomplete else start
+                        if (incomplete_already != 1) {
+                            incomplete_already = 1;
+                            //alert(result[i].StudentName);
+                            first_time += 1;
+                            //continue;
+                            /***incomplete sec***/
+
+                            reportcard += '<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 pagecut printmediaborderbottom iccomalreadywala">';
+                            reportcard += '<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 displayflex printmediabordertopafter3">';
+                            reportcard += '<p><span>' + result[i].StudentName + "-" + result[i].Student_Id + '</span><span class="floatright">' + result[i].Center_Name + '</span></p>';
+                            reportcard += '</div>';
+                            /*****HEADER SEC1 *********/
+                            reportcard += '<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 sec1 article">';
+                            reportcard += '<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">';
+                            reportcard += '<h2 class="text-right schoolname">The City School</h2>';
+                            reportcard += '</div>';
+
+                            reportcard += '<div class="row rowdisplayflex headerwithlogo">';
+                            reportcard += '<div class="col-lg-3 col-md-3 col-sm-3 col-xs-3 visiblity-hidden_mediaclass">';
+
+                            reportcard += '</div>';
+                            reportcard += '<div class="col-lg-6 col-md-6 col-sm-6 col-xs-6 text-mediaalign">';
+                            reportcard += '<h4><span class="termname">' + result[i].Evaluation_Criteria_Type_Name + '</span> Report Card <span class="yearname">' + result[i].Description.replace("AY", '') + '</span></h4>';
+                            reportcard += '<h4 class="fullnamestudent">' + result[i].StudentName + '</h4>';
+                            reportcard += '<h4><span class="classname">' + result[i].Class_Name + '</span> - <span class="classsec">' + result[i].Section_Name + '</span></h4>';
+                            reportcard += '</div>';
+                            reportcard += '<div class="col-lg-3 col-md-3 col-sm-3 col-xs-3 text-mediaalignright schoollogo">';
+                            reportcard += '<img src="images/logo.png" />';
+                            reportcard += '</div>';
+                            reportcard += '</div>';
+
+                            reportcard += '<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 dobtable">';
+                            reportcard += '<table>';
+                            reportcard += '<tr><td><strong>Date of Birth:</strong>  </td><td class="dobclass">' + formatdate(result[i].Date_Of_Birth) + '</td></tr>';
+
+                            var attendenceperc = (result[i].DaysPresent / result[i].FirstTermDaysCH) * 100;
+                            var attendence;
+
+                            if (attendenceperc < 25) {
+                                attendence = "Low";
+                            }
+                            else {
+                                attendence = result[i].DaysPresent;
+                            }
+
+
+
+                            reportcard += '<tr><td><strong>Attendance:</strong> </td><td><span class="attendenceclass">' + attendence + '</span> (Out of <span class="attendencetotal">' + result[i].FirstTermDaysCH + " days" + '</span>)</td></tr>';
+                            reportcard += '</table>';
+                            reportcard += '</div>';
+                            reportcard += '</div>';
+                            /****HEADER SEC1 ********/
+
+                            /*****HEADER SEC2 *********/
+                            reportcard += '<div class="row sec2 article">';
+                            reportcard += '<div class="col-lg-9 col-md-9 col-sm-9 col-xs-12 floatleft mediawidth">';
+                            reportcard += '<h4>Understanding your child' + "'" + '<span class="fontchange"></span>s report</h4>';
+                            reportcard += '<ul>';
+                            reportcard += '<li><strong>Exam:</strong> There were no mid-year exams this session, and so a mark will not be reported.</li>';
+                            reportcard += '<li>';
+                            reportcard += '<strong>CA:</strong> Continuous Assessment marks given during regular classes.';
+
+                            reportcard += '</li>';
+                            reportcard += '<li><strong>Grade:</strong> No mid-year exams this session and so a standardised grade will not be reported.</li>';
+                            reportcard += '<li><strong>Effort:</strong> A teacher judgement describing how much effort your child puts into his/her studies.</li>';
+                            reportcard += '</ul>';
+                            reportcard += '</div>';
+
+                            reportcard += '<div class="col-lg-3 col-md-3 col-sm-3 col-xs-12 floatleft ">';
+
+                            reportcard += '<table class="table-bordered effort-table">';
+                            reportcard += '<tr class="text-center"><td colspan="2" style=" background:#e4e4e4 !important;">Effort</td></tr>';
+                            reportcard += '<tr><td>Excellent</td><td>1</td></tr>';
+                            reportcard += '<tr><td>Good</td><td>2</td></tr>';
+                            reportcard += '<tr><td>Satisfactory</td><td>3</td></tr>';
+                            reportcard += '<tr><td>Needs improvement</td><td>4</td></tr>';
+                            reportcard += '</table>';
+                            reportcard += '</div>';
+
+                            reportcard += '<div class="headsigndiv">';
+                            reportcard += '<div class="col-lg-9 col-md-6 col-sm-6 col-xs-6 floatleft mediawidthlg8">';
+                            reportcard += '<p style="width: 100%" class="visiblity-hidden_class">p</p>';
+                            reportcard += '</div>';
+                            reportcard += '<div class="col-lg-3 col-md-6 col-sm-6 col-xs-6 floatleft mediawidthlg4">';
+                            reportcard += '<label class="headsign form-control text-center">' + result[i].HeadName + '</label>';
+
+                            reportcard += '<label class="label-100 ">Head of School</label>';
+                            reportcard += '</div>';
+                            reportcard += '</div>';
+                            reportcard += '</div>';
+
+                            /****HEADER SEC2 ********/
+                            reportcard += '<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 text-center incompletealready">';
+                            reportcard += '<div class="incom-child"><img src="images/warning.png"/><h4 class="redcolor">InComplete Result</h4></div>';
+                            reportcard += '</div>';
+                        /***incomplete sec***/
+                        }
+                    }//is incomplete else end
+
+                }//For loop end
+
+                //var attendenceperc = (result[0].DaysPresent / result[0].FirstTermDaysCH) * 100;
+                //var attendence;
+
+                //if (attendenceperc < 25) {
+                //    attendence = "Low";
+                //}
+                //else
+                //{
+                //    attendence = result[0].DaysPresent;
+                //}
+                //$(".uppersec").html(uppersec);
+
+     $(".firstthreetable").html(reportcard);
+                //$(".remainingtable").html(reportcard2);
+
+                //$(".attendenceclass").text(attendence);
+                //$(".attendencetotal").text(result[0].FirstTermDaysCH+" days");
+//$(".dobclass").text(formatdate(result[0].Date_Of_Birth));
+//$(".fullnamestudent").text(result[0].StudentName);
+//$(".classname").text(result[0].Class_Name);
+//$(".classsec").text(result[0].Section_Name);
+                //$(".termname").text(result[0].Evaluation_Criteria_Type_Name);
+
+                //$(".yearname").text(result[0].Description.replace("AY", ''));
+//$(".headerstudentname").text(result[0].StudentName+"-"+result[0].Student_Id);
+//$(".headerstudentcenter").text(result[0].Center_Name);
+            }, complete: function () {
+                /*$('.costgraph').css({
+                    'cssText': 'background:none !important'
+                });*/
+                $(".overlay").hide();
+                $('.container').on('scroll touchmove mousewheel');
+            }, error: function (err) {
+
+                console.log(JSON.stringify(err));
+
+            }
+
+        });
+
+
+
+
+//***PWA****/
+       if ('serviceWorker' in navigator) {
+            navigator.serviceWorker.register('./Content/service-worker.js').then(res => {
+                //alert('SW register');
+            }).catch(err => {
+               // alert("Error SW", err);
+                })
+
+        }
+        else {
+            console.log('SW Not supported');
+        }
+//***PWA****/
+/****QR CODE***/
+$('#qrcode').empty();
+
+// Set Size to Match User Input
+$('#qrcode').css({
+'width' : $('.qr-size').val(),
+'height' : $('.qr-size').val()
+})
+
+// Generate and Output QR Code
+$('#qrcode').qrcode({width: $('.qr-size').val(),height: $('.qr-size').val(),text: "https://www.codegrepper.com/code-examples/javascript/jquery+get+url+parameter"});//$('.qr-url').val()
+
+//});
+/****QR CODE***/
+    });
+
+
+
+
+
+
+
+
+
+    </script>
+    <style>
+                /*.overlay {
+            background: url('./images/loader.gif') no-repeat center center;
+            background-size: cover;
+            position: fixed;
+            top: 0;
+            left: 0;
+            height: 100%;
+            width: 100%;
+            z-index: 9999999;
+            background-color: rgba(0,0,0,0.5);
+            display: none;
+        }*/
+                .overlay {
+                    background: url('./images/logo2.gif') no-repeat center center; /*loader.gif*/
+                    position: fixed;
+                    top: 0;
+                    left: 0;
+                    height: 100%;
+                    width: 100%;
+                    z-index: 9999999;
+                    background-color: rgba(0,0,0,0.5);
+                }
+    </style>
+</body>
+</html>

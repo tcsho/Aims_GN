@@ -1,0 +1,131 @@
+﻿
+<!DOCTYPE html>
+<html>
+<head>
+    <!--<script src="jquery-1.10.2.js" type="text/JavaScript" language="javascript"></script>-->
+    <!--PWA-->
+    <link rel="manifest" href="./Content/manifest.json">
+    <link rel="shortcut icon" href="./Content/favicon.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="./Content/images/icons/favicon-16x16.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="./Content/images/icons/favicon-32x32.png">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="default">
+    <meta name="apple-mobile-web-app-title" content="PWA Splash">
+    <link rel="apple-touch-startup-image" href="./Content/images/splash/launch-640x1136.png" media="(device-width: 320px) and (device-height: 568px) and (-webkit-device-pixel-ratio: 2) and (orientation: portrait)">
+    <link rel="apple-touch-startup-image" href="./Content/images/splash/launch-750x1294.png" media="(device-width: 375px) and (device-height: 667px) and (-webkit-device-pixel-ratio: 2) and (orientation: portrait)">
+    <link rel="apple-touch-startup-image" href="./Content/images/splash/launch-1242x2148.png" media="(device-width: 414px) and (device-height: 736px) and (-webkit-device-pixel-ratio: 3) and (orientation: portrait)">
+    <link rel="apple-touch-startup-image" href="./Content/images/splash/launch-1125x2436.png" media="(device-width: 375px) and (device-height: 812px) and (-webkit-device-pixel-ratio: 3) and (orientation: portrait)">
+    <link rel="apple-touch-startup-image" href="./Content/images/splash/launch-1536x2048.png" media="(min-device-width: 768px) and (max-device-width: 1024px) and (-webkit-min-device-pixel-ratio: 2) and (orientation: portrait)">
+    <link rel="apple-touch-startup-image" href="./Content/images/splash/launch-1668x2224.png" media="(min-device-width: 834px) and (max-device-width: 834px) and (-webkit-min-device-pixel-ratio: 2) and (orientation: portrait)">
+    <link rel="apple-touch-startup-image" href="./Content/images/splash/launch-2048x2732.png" media="(min-device-width: 1024px) and (max-device-width: 1024px) and (-webkit-min-device-pixel-ratio: 2) and (orientation: portrait)">
+    <link rel="apple-touch-icon" sizes="180x180" href="./Content/images/icons/apple-touch-icon.png">
+    <link rel="mask-icon" href="./Content/images/icons/safari-pinned-tab.svg" color="#6F6F6F">
+    <!--PWA-->
+
+    <script src="jquery-3.3.1.min.js" type="text/JavaScript" language="javascript"></script>
+    <script src="jquery-ui-1.10.4.custom.js"></script>
+    <script src="jquery.PrintArea.js" type="text/JavaScript" language="javascript"></script>
+
+    <link type="text/css" rel="stylesheet" href="css/ui-lightness/jquery-ui-1.10.4.custom.css" />
+
+    <link type="text/css" rel="stylesheet" href="PrintArea3.css" />                <!-- Y : rel is stylesheet and media is in [all,print,empty,undefined] -->
+    <link type="text/css" rel="stylesheet" href="media_all.css" media="all" />   <!-- Y : rel is stylesheet and media is in [all,print,empty,undefined] -->
+    <link type="text/css" rel="" href="empty.css" />                    <!-- N : rel is not stylesheet -->
+    <link type="text/css" rel="noPrint" href="noPrint.css" />                  <!-- N : rel is not stylesheet -->
+    <link type="text/css" rel="stylesheet" href="media_none.css" media="xyz" />   <!-- N : media not in [all,print,empty,undefined] -->
+    <link type="text/css" href="no_rel.css" media="print" /> <!-- N : no rel attribute -->
+    <link type="text/css" href="no_rel_no_media.css" /> <!-- N : no rel, no media attributes -->
+    <link rel="stylesheet" type="text/css" href="bootstrap/css/bootstrap.min.css">
+    <!--<link rel="stylesheet" type="text/css"  href="bootstrap/css/bootstrap.css.map">-->
+
+    <link rel="stylesheet" type="text/css" href="fonts/font-awesome-4.7.0/css/font-awesome.min.css">
+    <script type="text/javascript" src="qr-code.js"></script>
+</head>
+<body>
+
+    <!--<div class="logo">
+
+    </div>-->
+    <div class="container">
+        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 text-center logodiv">
+            <img src="images/logo.png" />
+            <h1 class="schoolnamef">The City School</h1>
+        </div>
+            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 text-center msgdiv">
+                <h2>"You are not authorized to access this page"</h2>
+            </div>
+        </div>
+        <!--<img src="images/logo.png" />-->
+
+
+        <script>
+
+            /****Disabled f12 and right click key***/
+
+            //$(document).keydown(function (event) {
+            //    if (event.keyCode == 123) {
+            //        return false;
+            //    }
+            //    else if (event.ctrlKey && event.shiftKey && event.keyCode == 73) {
+            //        return false;
+            //    }
+            //});
+
+            //$(document).on("contextmenu", function (e) {
+            //    e.preventDefault();
+            //});
+            /****Disabled f12 and right click key***/
+
+
+
+
+
+
+
+            //***PWA****/
+            if ('serviceWorker' in navigator) {
+                navigator.serviceWorker.register('./Content/service-worker.js').then(res => {
+                    //alert('SW register');
+                }).catch(err => {
+                    // alert("Error SW", err);
+                })
+
+            }
+            else {
+                console.log('SW Not supported');
+            }
+//***PWA****/
+
+
+
+
+
+
+        </script>
+       <style>
+           .logodiv {
+           padding: 2rem;
+           }
+           .msgdiv {
+            padding: 2rem;
+           }
+           .msgdiv h2
+           {
+           font-family: fantasy;
+           }
+           @font-face {
+    font-family: myFirstFont;
+    src: url(arenski/arenskiregular.ttf);
+}
+           .schoolnamef {
+    font-family: myFirstFont !important;
+    color: #0c4da2 !important;
+}
+           .warnimg {
+           position: relative;
+top: -9px;
+padding: 0px 20px;
+           }
+       </style>
+</body>
+</html>

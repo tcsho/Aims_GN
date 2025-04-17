@@ -1,0 +1,8 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<Toolbar>
+  <Item command="UpOneLevel" description="100" image="up.png" />
+  <Item command="NewFolder" description="101" image="newfolder.png" parentPermissions="Create" />
+  <Item command="[Separator]" />
+  <Item command="Download" description="102" image="download.png" />
+  <Item command="Upload" description="103" image="upload.png" parentPermissions="Upload" />
+</Toolbar>

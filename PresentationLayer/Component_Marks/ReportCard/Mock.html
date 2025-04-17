@@ -1,0 +1,827 @@
+﻿
+<!DOCTYPE html>
+<html>
+<head>
+    <!--<script src="jquery-1.10.2.js" type="text/JavaScript" language="javascript"></script>-->
+    <title>Mock Report</title>
+    <!--PWA-->
+    <!--<link rel="manifest" href="./Content/manifest.json">-->
+    <link rel="shortcut icon" href="./Content/favicon.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="./Content/images/icons/favicon-16x16.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="./Content/images/icons/favicon-32x32.png">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="default">
+    <meta name="apple-mobile-web-app-title" content="PWA Splash">
+    <link rel="apple-touch-startup-image" href="./Content/images/splash/launch-640x1136.png" media="(device-width: 320px) and (device-height: 568px) and (-webkit-device-pixel-ratio: 2) and (orientation: portrait)">
+    <link rel="apple-touch-startup-image" href="./Content/images/splash/launch-750x1294.png" media="(device-width: 375px) and (device-height: 667px) and (-webkit-device-pixel-ratio: 2) and (orientation: portrait)">
+    <link rel="apple-touch-startup-image" href="./Content/images/splash/launch-1242x2148.png" media="(device-width: 414px) and (device-height: 736px) and (-webkit-device-pixel-ratio: 3) and (orientation: portrait)">
+    <link rel="apple-touch-startup-image" href="./Content/images/splash/launch-1125x2436.png" media="(device-width: 375px) and (device-height: 812px) and (-webkit-device-pixel-ratio: 3) and (orientation: portrait)">
+    <link rel="apple-touch-startup-image" href="./Content/images/splash/launch-1536x2048.png" media="(min-device-width: 768px) and (max-device-width: 1024px) and (-webkit-min-device-pixel-ratio: 2) and (orientation: portrait)">
+    <link rel="apple-touch-startup-image" href="./Content/images/splash/launch-1668x2224.png" media="(min-device-width: 834px) and (max-device-width: 834px) and (-webkit-min-device-pixel-ratio: 2) and (orientation: portrait)">
+    <link rel="apple-touch-startup-image" href="./Content/images/splash/launch-2048x2732.png" media="(min-device-width: 1024px) and (max-device-width: 1024px) and (-webkit-min-device-pixel-ratio: 2) and (orientation: portrait)">
+    <link rel="apple-touch-icon" sizes="180x180" href="./Content/images/icons/apple-touch-icon.png">
+    <link rel="mask-icon" href="./Content/images/icons/safari-pinned-tab.svg" color="#6F6F6F">
+    <!--PWA-->
+
+    <script src="jquery-3.3.1.min.js" type="text/JavaScript" language="javascript"></script>
+    <script src="jquery-ui-1.10.4.custom.js"></script>
+    <script src="jquery.PrintArea.js" type="text/JavaScript" language="javascript"></script>
+
+    <link type="text/css" rel="stylesheet" href="css/ui-lightness/jquery-ui-1.10.4.custom.css" />
+
+    <link type="text/css" rel="stylesheet" href="PrintArea3.css" />                <!-- Y : rel is stylesheet and media is in [all,print,empty,undefined] -->
+    <link type="text/css" rel="stylesheet" href="media_all.css" media="all" />   <!-- Y : rel is stylesheet and media is in [all,print,empty,undefined] -->
+    <link type="text/css" rel="" href="empty.css" />                    <!-- N : rel is not stylesheet -->
+    <link type="text/css" rel="noPrint" href="noPrint.css" />                  <!-- N : rel is not stylesheet -->
+    <link type="text/css" rel="stylesheet" href="media_none.css" media="xyz" />   <!-- N : media not in [all,print,empty,undefined] -->
+    <link type="text/css" href="no_rel.css" media="print" /> <!-- N : no rel attribute -->
+    <link type="text/css" href="no_rel_no_media.css" /> <!-- N : no rel, no media attributes -->
+    <link rel="stylesheet" type="text/css" href="bootstrap/css/bootstrap.css">
+    <!--<link rel="stylesheet" type="text/css"  href="bootstrap/css/bootstrap.css.map">-->
+
+    <link rel="stylesheet" type="text/css" href="fonts/font-awesome-4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" type="text/css" href="sweetalert2.min.css">
+    <script type="text/javascript" src="sweetalert2.min.js"></script>
+    <script type="text/javascript" src="qr-code.js"></script>
+</head>
+<body>
+    <div class="container">
+        <div class="overlay"></div>
+        <div class="row printview">
+            <div class="button b1 btn btn-primary  tooltip "><i class="fa fa-print" data-toggle="tooltip" data-placement="bottom" title="Print"></i><span class="tooltiptext">Print</span></div>
+        </div>
+
+
+        <div class="PrintArea area1 all" id="Retain">
+            <!--boostrap-->
+
+            <div class="container" id="printtable">
+
+
+                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 no-padding innerdiv">
+
+                    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 sec1 article noticesec1">
+
+                        <div class="row rowdisplayflex headerwithlogo">
+
+                            <div class="col-lg-3 col-md-3 col-sm-3 col-xs-3 visiblity-hidden_mediaclass">
+                            </div>
+                            <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6 text-mediaalign">
+
+                                <h4 class="visiblity-hidden_mediaclass">Report Card2020-2021</h4>
+                                <h2 class="schoolname">The City School</h2>
+                                <h5>Mock Examination <span class="SessionCode"></span></h5>
+                                <h6><span class="CenterCode"></span></h6>
+                                <h6>Progress Report for <span class="CenterClassName"></span></h6>
+
+                            </div>
+                            <div class="col-lg-3 col-md-3 col-sm-3 col-xs-3 text-right schoollogo">
+
+                                <img src="images/logo.png" style="margin-top: 25px" />
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
+
+
+
+
+
+
+                    <div class="row adarticle attendesec2 margin-bottoms">
+
+
+                        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 attend2subsec1 no-padding">
+
+                            <div class="row">
+
+                                <div class="col-lg-6 col-md-6 col-xs-12 col-sm-12 for992">
+
+                                    <div class="col-lg-12 col-md-12 col-xs-12 col-sm-12 float_left"><span class="mockstudentheading">ERP No:</span><span class="student_name_admission student_erpno marginlfttxt"></span></div><!--<div class="col-lg-6 col-md-6 col-xs-12 col-sm-12 float_left"></div>-->
+
+                                </div>
+                                <div class="col-lg-6 col-md-6 col-xs-12 col-sm-12 for992">
+
+                                    <div class="col-lg-12 col-md-12 col-xs-12 col-sm-12 float_left"><span class="mockstudentheading">Term:</span><span class="student_name_admission student_termss marginlfttxt"></span></div><!--<div class="col-lg-6 col-md-6 col-xs-12 col-sm-12 float_left"></div>-->
+
+                                </div>
+
+                            </div>
+                            <div class="row">
+
+                                <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 for992">
+
+                                    <div class="col-lg-12 col-md-12 col-xs-12 col-sm-12 float_left"><span class="mockstudentheading">Name:</span><span class="student_class student_namess marginlfttxt"></span></div><!--<div class="col-lg-6 col-md-6 col-xs-12 col-sm-12 float_left"></div>-->
+
+                                </div>
+                                <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 for992">
+
+
+                                    <div class="col-lg-12 col-md-12 col-xs-12 col-sm-12 float_left"><span class="mockstudentheading">Total No. of Students:</span><span class="student_erp student_no_stu marginlfttxt"></span></div><!--<div class="col-lg-6 col-md-6 col-xs-12 col-sm-12 float_left"></div>-->
+
+                                </div>
+
+                            </div>
+
+                            <div class="row">
+
+                                <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 for992">
+
+                                    <div class="col-lg-12 col-md-12 col-xs-12 col-sm-12 float_left"><span class="mockstudentheading">Section:</span><span class="student_room student_sectionss marginlfttxt"></span></div><div class="col-lg-6 col-md-6 col-xs-12 col-sm-12 float_left"></div>
+
+                                </div>
+                                <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 for992">
+
+                                    <div class="col-lg-12 col-md-12 col-xs-12 col-sm-12 float_left"><span class="mockstudentheading">Average Age of Class:</span><span class="student_rollno student_avg_class marginlfttxt"></span></div><div class="col-lg-6 col-md-6 col-xs-12 col-sm-12 float_left"></div>
+
+                                </div>
+
+                            </div>
+
+                            <div class="row">
+
+                                <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 for992">
+
+                                    <div class="col-lg-12 col-md-12 col-xs-12 col-sm-12 float_left"><span class="mockstudentheading">Days Present / Total No. of Term Days:</span><span class="student_room student_dayprent marginlfttxt"></span><span> / </span><span class="student_secondtermss"></span></div><!--<div class="col-lg-6 col-md-6 col-xs-12 col-sm-12 float_left"></div>-->
+
+                                </div>
+                                <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 for992">
+
+                                    <div class="col-lg-12 col-md-12 col-xs-12 col-sm-12 float_left"><span class="mockstudentheading">Student's Age:</span><span class="student_rollno student_agess marginlfttxt"></span></div><!--<div class="col-lg-6 col-md-6 col-xs-12 col-sm-12 float_left"></div>-->
+
+                                </div>
+
+                            </div>
+
+
+                        </div>
+
+
+
+                    </div>
+
+
+                    <div class="row adarticle attendesec3">
+
+                        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 attend3subsec1 no-padding">
+                            <h6 class="acheading">
+                                ACADEMIC PERFORMANCE
+                            </h6>
+                            <table class="table table-bordered mockacademictable">
+                                <thead>
+
+                                <th>Subject</th>
+                                <th class="text-center">Mid-year<br>Coursework %</th>
+                                <th class="text-center">Component/Paper <br>Code</th>
+                                <th class="text-center">Component/<br> Paper %</th>
+                                <th class="text-center">Total Exam %</th>
+                                <th class="text-center">Grade</th>
+                                </thead>
+                                <tbody>
+                                </tbody>
+                            </table>
+
+                            <table class="overall1_table table table-bordered"><tr><td>Overall Exam %</td><td class="overallp text-center"></td><td>Overall Exam Grade</td><td class="overallg text-center"></td></tr></table>
+
+                            <table class="overall2_table table table-bordered"><tr><td>Class Highest Exam %</td><td class="overallhigh text-center"></td><td>Class Lowest Exam %</td><td class="overalllow text-center"></td><td>Class Average Exam %</td><td class="overallavg text-center"></td></tr></table>
+
+                            <h6 class="acheading">
+                                GENERAL PERFORMANCE
+                            </h6>
+                            <table class="table table-bordered mockacademictable3 generaltable">
+                                <thead>
+                                <th>Area</th>
+                                <th>Grade</th>
+                                <th>Area</th>
+                                <th>Grade</th></thead>
+                                <tbody>
+                                </tbody>
+                            </table>
+
+
+
+                            <h6 class="acheading">
+                                PERFORMANCE INDICATORS
+                            </h6>
+                            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 performancediv">
+
+                                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 performancedivchild">
+                                    <span class="performancedivchildheading">Academic Grade</span>
+                                    <span><span class="mockgradbold">A*</span>=90-100,</span>
+                                    <span><span class="mockgradbold">A</span>=80-89,</span>
+                                    <span><span class="mockgradbold">B</span>=70-79,</span>
+                                    <span><span class="mockgradbold">C</span>=60-69,</span>
+                                    <span><span class="mockgradbold">D</span>=50-59,</span>
+                                    <span><span class="mockgradbold">E</span>=40-49,</span>
+                                    <span><span class="mockgradbold">U</span>=39 or less</span>
+                                </div>
+                                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 performancedivchild">
+                                    <span class="performancedivchildheading">General Performance</span>
+                                    <span><span class="mockgradbold">A*</span>= Outstanding,</span>
+                                    <span><span class="mockgradbold">A</span>= Very Good,</span>
+                                    <span><span class="mockgradbold">B</span>= Good,</span>
+                                    <span><span class="mockgradbold">C</span>= Acceptable,</span>
+                                    <span><span class="mockgradbold">D</span>= Needs Improvement</span>
+
+                                </div>
+                            </div>
+
+                            <div class="row adarticle attendesec4 mockhead-margin-top">
+
+                                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 attend4subsec1 no-padding">
+
+                                    <!--<label class="headsign form-control text-center"></label>
+                                    <label class="label-100 ">Head of School</label>-->
+                                    <label>*This is a system generated report and does not require any signature or stamp.</label>
+                                    <label class="label-100 resultdates text-left"></label>
+                                </div>
+                                <!--<div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 attend4subsec2">
+
+                                    <label class="headsign form-control text-center"></label>
+                                    <label class="label-100 ">Parent / Guardian</label>
+
+                                </div>-->
+
+                            </div>
+
+                        </div>
+                    </div>
+
+
+
+
+
+                </div>
+
+            </div>
+        </div>
+
+        <!--bootsrap-->
+    </div>
+
+
+
+    <!--</div>-->
+
+
+
+    <div style="border: solid 2px #999fff; float: left; margin-left: 20px;" class="SettingsBox">
+        <div style="width: 400px; padding: 20px;">
+            <div style="padding: 0 10px 10px;" class="buttonBar">
+                <div class="button b1">Print</div>
+                <div class="toggleDialog">open dialog</div>
+            </div>
+
+            <div style="font-weight: bold; border-top: solid 1px #999fff; padding-top: 10px;">Settings</div>
+            <table>
+                <tbody>
+                    <tr>
+                        <td><input value="popup" name="mode" id="popup" checked="" type="radio"> Popup</td>
+                    </tr>
+                    <tr>
+                        <td style="padding-left: 20px;"><input value="popup" name="popup" id="closePop" type="checkbox"> Close popup</td>
+                    </tr>
+                    <tr>
+                        <td><input value="iframe" name="mode" id="iFrame" type="radio"> IFrame</td>
+                    </tr>
+                    <tr>
+                        <td>Extra css: <input type="text" name="extraCss" size="50" /></td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <div class="settingName">Print area:</div>
+                            <div class="settingVals">
+                                <input type="checkbox" class="selPA" value="area1" checked /> Area 1<br>
+                                <input type="checkbox" class="selPA" value="area2" checked /> Area 2<br>
+                                <input type="checkbox" class="selPA" value="area3" checked /> Area 3<br>
+                            </div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <div class="settingName">Retain Attributes:</div>
+                            <div class="settingVals">
+                                <input type="checkbox" checked name="retainCss" id="retainCss" class="chkAttr" value="class" /> Class
+                                <br>
+                                <input type="checkbox" checked name="retainId" id="retainId" class="chkAttr" value="id" /> ID
+                                <br>
+                                <input type="checkbox" checked name="retainStyle" id="retainId" class="chkAttr" value="style" /> Style
+                            </div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <div style="padding: 3px; border: solid 1px #ddd;">
+                                Add to head :
+                                <input type="checkbox" checked name="addElements" id="addElements" class="chkAttr" />
+                                <pre>&lt;meta charset="utf-8" /&gt;<br>&lt;http-equiv="X-UA-Compatible" content="IE=edge"/&gt;</pre>
+                            </div>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+
+
+        <footer>okss</footer>
+    </div>
+
+    <script>
+
+        /****Disabled f12 and right click key***/
+
+        //$(document).keydown(function(event){
+        //        if(event.keyCode==123){
+        //            return false;
+        //        }
+        //        else if (event.ctrlKey && event.shiftKey && event.keyCode==73){
+        //                 return false;
+        //        }
+        //    });
+
+        //    $(document).on("contextmenu",function(e){
+        //       e.preventDefault();
+        //    });
+        /****Disabled f12 and right click key***/
+
+        $(document).ready(function () {
+            $(".overlay").show();
+            $('[data-toggle="tooltip"]').tooltip();
+            var dialog = $("div.testDialog").dialog({ position: { my: "left top", at: "left bottom+50", of: ".SettingsBox" }, width: "1000", title: "Print Dialog Box Contents" });
+
+            $(".toggleDialog").click(function () {
+                dialog.dialog("open");
+            });
+
+            $("div.b1").click(function () {
+
+                var mode = $("input[name='mode']:checked").val();
+                var close = mode == "popup" && $("input#closePop").is(":checked");
+                var extraCss = $("input[name='extraCss']").val();
+
+                var print = "";
+                $("input.selPA:checked").each(function () {
+                    print += (print.length > 0 ? "," : "") + "div.PrintArea." + $(this).val();
+                });
+
+                var keepAttr = [];
+                $(".chkAttr").each(function () {
+                    if ($(this).is(":checked") == false)
+                        return;
+
+                    keepAttr.push($(this).val());
+                });
+
+                var headElements = $("input#addElements").is(":checked") ? '<meta charset="utf-8" />,<meta http-equiv="X-UA-Compatible" content="IE=edge"/>' : '';
+
+                var options = { mode: mode, popClose: close, extraCss: extraCss, retainAttr: keepAttr, extraHead: headElements };
+
+                $(print).printArea(options);
+
+
+
+
+            });
+
+            //var uri = window.location.href;
+            //var enc = encodeURIComponent(uri).replace('%27', '+');
+            //var dec = decodeURIComponent(enc);
+            //var sURLVariableswithurl = "";
+            //function GetUrlParameter(sParam) {
+            //    var sPageURL = dec;//window.location.search.substring(1);
+
+            //    sURLVariableswithurl = sPageURL.split('?');
+            //    var sURLVariables = sURLVariableswithurl[1].split('&');
+
+            //    for (var i = 0; i < sURLVariables.length; i++) {
+            //        var sParameterName = sURLVariables[i].split('=');
+
+            //        if (sParameterName[0] == sParam) {
+            //            return sParameterName[1];
+            //        }
+            //    }
+            //}
+
+              var uri = window.location.href;
+  var enc = encodeURIComponent(uri).replace('%20','+');
+  var dec = decodeURIComponent(enc);
+  var res = "Encoded URI: " + enc + "<br>" + "Decoded URI: " + dec;
+//console.log("LINKS:"+res);
+var sURLVariableswithurl="";
+function GetUrlParameter(sParam)
+
+{
+    var sPageURL = dec;//window.location.search.substring(1);
+
+    sURLVariableswithurl = sPageURL.split('?');
+     var sURLVariables = sURLVariableswithurl[1].split('&');
+
+    for (var i = 0; i < sURLVariables.length; i++)
+    {
+        var sParameterName = sURLVariables[i].split('=');
+
+        if (sParameterName[0] == sParam)
+
+        {
+           //return sParameterName[1];
+             /*******************************DECRPT in Function*******************/
+            var scids = sParameterName[1];
+            scids = scids.replace(/Z|z/g, '');//replace("Z",'');
+             var scidss="";
+
+      var i="";
+      for(i=0;i<scids.length;i += 2)
+      {
+      var res = scids.substr(i, 2);
+        if(res=="KL")
+        {
+            scidss+="0"
+        }
+        else if(res=="JK")
+        {
+            scidss+="1"
+        }
+         else if(res=="HJ")
+        {
+            scidss+="2"
+        }
+          else if(res=="GH")
+        {
+            scidss+="3"
+        }
+          else if(res=="NM")
+        {
+            scidss+="4"
+        }
+           else if(res=="BN")
+        {
+            scidss+="5"
+        }
+              else if(res=="VB")
+        {
+            scidss+="6"
+        }
+         else if(res=="TY")
+        {
+            scidss+="7"
+        }
+          else if(res=="ER")
+        {
+            scidss+="8"
+        }
+          else if(res=="WE")
+        {
+            scidss+="9"
+        }
+
+      }
+        //console.log("SessionID Decode-----"+scidss);
+        //ScId=scidss;
+            return scidss;
+        /*****************************DECRTPT IN FUNCTION********************/
+
+
+        }
+    }
+}
+
+
+            var Session_Id = GetUrlParameter('Session_Id');
+            var TermGroup_Id = GetUrlParameter('TermGroup_Id');
+
+
+            var Section_Id = GetUrlParameter('Section_Id');
+            var Student_Id = GetUrlParameter('Student_Id');
+
+
+
+
+            const months = ["January", "February", "March", "April", "May", "June",
+                "July", "August", "September", "October", "November", "December"
+            ];
+
+
+
+
+            var alreadyt = "";
+
+            var subjectarray = [];
+            subjectarray.length = 0;
+            var dataadd = [];
+            dataadd.length = 0;
+            var date_list = "";
+            var mockacademictable = "";
+              $(".overlay").show();
+            $.ajax({
+                type: 'GET',
+                data: { Section_Id: Section_Id, Session_Id: Session_Id, TermGroup_Id: TermGroup_Id, Student_Id:Student_Id },
+
+
+                url: 'http://localhost:52673/api/Mock/PopulateMockResult',
+                success: function (result) {
+                    ///console.log(JSON.stringify(result));
+
+                    if (result == null || result == "" || result == " ") {
+                        Swal.fire(
+                            'No Data',
+                            '',
+                            'error'
+                        )
+                        return;
+                    }
+
+
+                    /****TRY****/
+
+                    for (var tr = 0; tr < result.length; tr++) {
+
+
+                        if (alreadyt != result[tr].Subject_Id) {
+                            /**FIRST tIME USER**/
+                            if (alreadyt == "") {
+                                subjectarray.push({
+
+                                    Component_Code: result[tr].Comp,
+                                    Component_Paper: result[tr].Percent_Marks,
+
+                                });
+
+                                dataadd.push({
+
+                                    Subject_Name: result[tr].Subject_Name,
+                                    Course_Work: result[tr].Course_Work,
+                                    Marks: result[tr].Marks,
+                                    Grade: result[tr].Grade,
+                                    ERPNo: result[tr].Student_Id,
+                                    Term: result[tr].Term,
+                                    StudentName: result[tr].StudentName,
+                                    TotalStudent: result[tr].Strength,
+                                    Section: result[tr].Section_Name,
+                                    Average_Age_Class: result[tr].Class_Avg_Age,
+                                    Daypresent: result[tr].DaysPresent,
+                                    SecondTermDaysCH:result[tr].SecondTermDaysCH,
+                                    StudentAge: result[tr].Student_Age,
+                                    ResultDate:result[tr].ResultDate,
+                                    Subjects_Component: subjectarray
+
+                                });
+                                alreadyt = result[tr].Subject_Id;
+                            }
+                            /**FIRST tIME USER**/
+
+                            else {
+                                subjectarray = [];
+                                subjectarray.push({
+
+                                     Component_Code: result[tr].Comp,
+                                    Component_Paper: result[tr].Percent_Marks
+
+                                });
+
+                                dataadd.push({
+
+                                     Subject_Name: result[tr].Subject_Name,
+                                    Course_Work: result[tr].Course_Work,
+                                    Marks: result[tr].Marks,
+                                    Grade: result[tr].Grade,
+
+
+                                    ERPNo: result[tr].Student_Id,
+                                    Term: result[tr].Term,
+                                    StudentName: result[tr].StudentName,
+                                    TotalStudent: result[tr].Strength,
+                                    Section: result[tr].Section_Name,
+                                    Average_Age_Class: result[tr].Class_Avg_Age,
+                                    Daypresent: result[tr].DaysPresent,
+                                      SecondTermDaysCH:result[tr].SecondTermDaysCH,
+                                    StudentAge: result[tr].Student_Age,
+                                    ResultDate: result[tr].ResultDate,
+
+                                    Subjects_Component: subjectarray
+
+                                });
+                                alreadyt = result[tr].Subject_Id;
+                            }
+                        }
+                        else {
+                            subjectarray.push({
+
+                                Component_Code: result[tr].Comp,
+                                    Component_Paper: result[tr].Percent_Marks
+
+                            });
+                        }
+
+                    }//first forloop
+                    //console.log("1st wala" + JSON.stringify(dataadd));
+
+                    for (var i = 0; i < dataadd.length; i++) {
+                        mockacademictable += '<tr>';
+                        mockacademictable += '<td class="mocksubjectnametd">'+dataadd[i].Subject_Name+'</td>';
+                        mockacademictable += '<td class="text-center">'+dataadd[i].Course_Work+'</td>';
+                        mockacademictable += '<td class="tdssp">';
+                        for (var compo = 0; compo < dataadd[i].Subjects_Component.length; compo++) {
+                            mockacademictable += '<p class="borderp marginpzero">'+dataadd[i].Subjects_Component[compo].Component_Code+'</p>';
+                        }
+                        mockacademictable+='</td>';
+                        mockacademictable += '<td class="tdssp">';
+                        for (var compo = 0; compo < dataadd[i].Subjects_Component.length; compo++) {
+                            mockacademictable += '<p class="borderp marginpzero">'+dataadd[i].Subjects_Component[compo].Component_Paper+'</p>';
+                        }
+                         mockacademictable+='</td>';
+                         mockacademictable+='<td class="text-center">'+parseFloat(dataadd[i].Marks).toFixed(2)+'</td>';
+                         mockacademictable+='<td class="text-center">'+dataadd[i].Grade+'</td>';
+                         mockacademictable+='</tr>';
+
+
+                    }
+                    $(".mockacademictable tbody").html(mockacademictable);
+
+                /**UPPER DIV DETAIL**/
+                    $(".student_erpno").text(dataadd[0].ERPNo);
+                    $(".student_termss").text("Second Term");//dataadd[0].Term
+                    $(".student_namess").text(dataadd[0].StudentName);
+                    $(".student_no_stu").text(dataadd[0].TotalStudent);
+                    $(".student_sectionss").text(dataadd[0].Section);
+                    $(".student_avg_class").text(dataadd[0].Average_Age_Class);
+                    $(".student_dayprent").text(dataadd[0].Daypresent);
+                    $(".student_secondtermss").text(dataadd[0].SecondTermDaysCH);
+                    $(".student_agess").text(dataadd[0].StudentAge);
+                    $(".resultdates").text("Date: " + formatdate(dataadd[0].ResultDate));
+                    $(".overallp").text(parseFloat(result[0].Overall_P).toFixed(2));
+                    $(".overallg").text(result[0].Overall_G);
+                    $(".overallhigh").text(parseFloat(result[0].Class_Heighest).toFixed(2));
+                    $(".overalllow").text(parseFloat(result[0].ClassMinimum).toFixed(2));
+                    $(".overallavg").text(parseFloat(result[0].Class_Average).toFixed(2));
+
+                    $(".SessionCode").text(result[0].SessionCode);
+                    $(".CenterCode").text(result[0].Center_Name);
+                    $(".CenterClassName").text(result[0].Class_Name);
+
+
+
+                    /**UPPER DIV DETAIL**/
+                },//success
+                complete: function () {
+
+                    $(".overlay").hide();
+
+                }, error: function (err) {
+                     $(".overlay").hide();
+                    console.log(JSON.stringify(err));
+
+                }
+            });
+
+            var generaltable = "";
+
+            $.ajax({
+                type: 'GET',
+                data: { Section_Id: Section_Id, Session_Id: Session_Id, TermGroup_Id: TermGroup_Id, Student_Id: Student_Id },
+                url: 'http://localhost:52673/api/Mock/PrintMockResult',//sURLVariableswithurl[0]+"?",//getsearchedpatient
+                success: function (result) {
+
+                    if (result == null || result == "" || result == " ") {
+                        Swal.fire(
+                            'No Data',
+                            '',
+                            'error'
+                        )
+                        return;
+                    }
+
+
+                    /****TRY****/
+
+                    for (var tr = 0; tr < result.length; tr++) {
+                        generaltable += '<tr>';
+                        generaltable += '<td>'+result[tr].Activity1+'</td>';
+                        generaltable += '<td>'+result[tr].Perf1+'</td>';
+                        generaltable += '<td>'+result[tr].Activity2+'</td>';
+                        generaltable += '<td>'+result[tr].Perf2+'</td>';
+                        generaltable += '</tr>';
+                    }
+                    $(".generaltable tbody").html(generaltable);
+                },//success
+                complete: function () {
+
+                    //$(".overlay").hide();
+
+                }, error: function (err) {
+                     //$(".overlay").hide();
+                    console.log(JSON.stringify(err));
+
+                }
+            });
+
+
+
+
+
+
+
+
+
+            /**string date format**/
+            function stringtodate(str) {
+
+                const months = ["null", "Jan", "Feb", "Mar", "Apr", "May", "Jun",
+                    "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"
+                ];
+
+                var res = str.split("/");
+                var month = res[0];
+
+                var monthfirstcheck = res[0].slice(0, 1);
+                if (monthfirstcheck == 0) {
+                    month = res[0].replace("0", "")
+                }
+                month = parseInt(month);
+
+
+                var date = res[1];
+
+                var year = res[2];
+                //console.log(months[month] + " " + date + "," + " " + year);
+                var strdate = months[month] + " " + date + "," + " " + year;
+                return strdate;
+
+            }
+            /**string date format**/
+            /**Format Date**/
+            function formatdate(datevalue) {
+                var date = new Date(datevalue);
+                var datess = date.getDate();
+                var monthss = months[date.getMonth()];
+                var fullyear = date.getFullYear();
+                var hours = date.getHours();
+                var minutes = date.getMinutes();
+                var mili = date.getMilliseconds();
+
+                var strdate =  datess+ "th" +" "+ monthss + " " + fullyear;
+                return strdate;
+            }
+
+            function minsplit(vmins) {
+
+                var min_res = vmins.split(":");
+                return min_res[1];
+            }
+
+
+
+
+
+            $('.container').off('scroll touchmove mousewheel');
+
+
+
+
+
+            //***PWA****/
+            //if ('serviceWorker' in navigator) {
+            //    navigator.serviceWorker.register('./Content/service-worker.js').then(res => {
+            //        //alert('SW register');
+            //    }).catch(err => {
+            //        // alert("Error SW", err);
+            //    })
+
+            //}
+            //else {
+            //    console.log('SW Not supported');
+            //}
+            //***PWA****/
+
+
+
+
+        });
+
+
+
+
+
+
+
+
+
+    </script>
+    <style>
+        .overlay {
+            background: url('./images/logo2.gif') no-repeat center center; /*loader.gif*/
+            position: fixed;
+            top: 0;
+            left: 0;
+            height: 100%;
+            width: 100%;
+            z-index: 9999999;
+            background-color: rgba(0,0,0,0.5);
+        }
+    </style>
+
+</body>
+</html>

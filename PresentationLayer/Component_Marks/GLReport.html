@@ -1,0 +1,803 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GL Report</title>
+    <link rel="icon" type="image/x-icon" href="assets/images/favicon.ico">
+    <link rel="stylesheet" href="assets/vendor/Fonts.css" />
+    <link rel="stylesheet" href="assets/vendor/CustomStyle.css" />
+    <link rel="stylesheet" href="assets/vendor/toastr.css" />
+    <link rel="stylesheet" href="assets/vendor/bootstrap/css/bootstrap.css" />
+    <link rel="stylesheet" href="assets/vendor/font-awesome/css/font-awesome.css" />
+    <link href="assets/vendor/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <!--<script src="Content/jquery.js"></script>-->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <!-- <script src="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script> -->
+    <link rel="stylesheet" href="node_modules/ng-select/ng-select/themes/default.theme.css">
+
+    <!--Datatables-->
+
+    <link rel="stylesheet" href="Content/DataTables/datatables.min.css" />
+    <link href="Content/DataTables/Buttons-1.6.3/css/buttons.dataTables.min.css" rel="stylesheet" />
+
+
+    <script src="Content/DataTables/Buttons-1.6.3/js/dataTables.buttons.min.js"></script>
+    <script src="Content/DataTables/datatables.min.js"></script>
+
+
+    <!--Datatables-->
+
+    <link rel="stylesheet" href="node_modules/pnotify/core/dist/PNotify.css">
+    <link rel="stylesheet" href="node_modules/pnotify/core/BrightTheme.css">
+    <link href="Content/Header_Component.css" rel="stylesheet" />
+
+    <link href="Content/Site.css" rel="stylesheet" />
+    <link href="Content/sweetalert2.min.css" rel="stylesheet" />
+    <script src="Content/jquery.limitText.js"></script>
+</head>
+
+<body>
+
+    <!--HEADER COMPONENT-->
+    <div class='overlay'></div>
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 BackgroundBlue">
+                <div class="Gap"></div>
+                <div class="row">
+                    <div class="col-lg-2 col-md-2 col-sm-12 col-xs-12">
+                        <img src="assets/images/logo1.png" class="ImageLayoutCenter" />
+                    </div>
+                    <div class="col-lg-10 col-md-10 col-sm-12 col-xs-12">
+                        <div class="Gap"></div>
+                        <div class="Gap"></div>
+                        <p class="HeaderHeadingAMISPlus text-lg-left text-md-left text-sm-left text-xs-left text-center">The City School:	Southern Region</p>
+                        <div class="row">
+                            <nav class="navbar navbar-light navbar-expand-lg mainmenu">
+                                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                                    <span class="navbar-toggler-icon"></span>
+                                </button>
+                                <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                                    <ul class="navbar-nav mr-auto">
+                                        <li><a href="#">Home <span class="sr-only">(current)</span></a></li>
+                                        <li class="dropdown">
+                                            <a class="dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Results</a>
+                                            <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                                <li><a href="#">Result Card</a></li>
+                                            </ul>
+                                        </li>
+                                        <li class="dropdown">
+                                            <a class="dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">TCS Reports</a>
+                                            <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                                <li class="dropdown">
+                                                    <a class="dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Non Academic Reports</a>
+                                                    <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                                        <li><a href="#">Non Academic Reports(RO)</a></li>
+                                                        <li><a href="#">Non Academic Reports(CO)</a></li>
+                                                    </ul>
+                                                </li>
+                                                <li class="dropdown">
+                                                    <a class="dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Academic Reports</a>
+                                                    <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                                        <li><a href="#">Academic Reports(CO)</a></li>
+                                                        <li><a href="#">Academic Reports(RO)</a></li>
+                                                    </ul>
+                                                </li>
+                                            </ul>
+                                        </li>
+
+                                        <li class="dropdown">
+                                            <a class="dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Component Marks Setup</a>
+                                            <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                                <li><a href="Unit_Setup.html">Unit/Sub Unit Setup</a></li>
+                                                <li><a href="Curriculum_Objectives.html">Curriculum Objectives Setup</a></li>
+                                                <li><a href="Cl_Exam.html">CL Exam Setup</a></li>
+                                                <li><a href="General_Comment_Section.html">Comments Setup</a></li>
+
+                                            </ul>
+                                        </li>
+
+                                        <li class="dropdown">
+                                            <a class="dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Exam Module</a>
+                                            <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                                <li><a href="Mark_Entry.aspx">Marks Entry</a></li>
+                                                <li><a href="Progress_Report.html">Subject Progress Report</a></li>
+                                                <li><a href="Progress_Report_Class.html">Class Progress Report</a></li>
+                                                <li><a href="ExamDate.html">Exam DateSheet</a></li>
+                                                <li><a href="Reports.aspx">Reports</a></li>
+                                            </ul>
+                                        </li>
+
+
+                                        <!-- <li><a href="#">Service</a></li> -->
+                                    </ul>
+                                </div>
+                            </nav>
+                        </div>
+                    </div>
+                    <!--<div class="col-lg-3 col-md-3 col-sm-12 col-xs-12 ">
+                        <div class="Gap"></div>
+                        <div class="Gap"></div>
+                        <p class="HeaderHeadingSubmenu text-lg-right text-md-right text-center">
+                            <a href="" class="LogoutButton">
+                                Logout &nbsp;&nbsp;&nbsp;<i class="fa fa-sign-out" aria-hidden="true"></i>
+                            </a>
+                        </p>
+                        <div class="Gap"></div>
+                        <p class="HeaderHeadingSubmenu text-lg-right text-md-right text-center">
+                            Logged in as: <span class="LoginAs"> Sr Exams</span>
+                        </p>
+                    </div>-->
+                </div>
+                <div class="Gap"></div>
+            </div>
+        </div>
+    </div>
+    <!--HEADER COMPONENT-->
+
+    <div class="container body-content">
+        <!--Body-->
+        <div class="row">
+            <div class="col-lg-12 col-md-12 col-xs-12 col-sm-12" style="box-shadow: 0px 2px 4px -1px #00006a;padding: 7px 40px 40px 40px;">
+                <p class="PageMainHeading"><i class="glyphicon glyphicon-folder-open" style="color: #00006a;"></i> &nbsp;&nbsp;Unit / Sub-Units Setup</p>
+                <div style="background-color: #00006a;" class="Gap"></div>
+
+                <form class="form-horizontal product-setup-form custom-form unit_subunitform" autocomplete="off">
+                    <p class="PageMainHeading"><span class="PageMainHeadingBorder"> <i class="glyphicon glyphicon-tags" style="color: #00006a;"></i> &nbsp;&nbsp;Header Setup &nbsp;&nbsp;&nbsp;</span> </p>
+                    <!-- unitHeaderSetup Start -->
+                    <div>
+                        <div class="row">
+
+                            <div class="col-lg-3 col-md-3 col-sm-12 col-xs-12">
+                                <span class="CustomLabel">Main Organization</span> <span class="RequiredLbl"> * </span><br>
+
+                                <select class="Country_list form-control" disabled>
+                                    <option value="cityschool">The City School</option>
+
+                                </select>
+                                <p class="error-message">* Organization Required</p>
+                            </div>
+
+                            <div class="col-lg-3 col-md-3 col-sm-12 col-xs-12">
+                                <span class="CustomLabel">Main Organization Country</span> <span class="RequiredLbl"> * </span><br>
+
+                                <select class="Country_list form-control">
+                                    <option value="Pakistan">Pakistan</option>
+
+                                </select>
+                                <p class="error-message">* Country Required</p>
+                            </div>
+
+                            <div class="col-lg-3 col-md-3 col-sm-12 col-xs-12">
+                                <span class="CustomLabel">Region</span> <span class="RequiredLbl"> * </span><br>
+
+                                                                                                            <select class="Region_list form-control">
+                                                                                                                <option selected="true" disabled="disabled" value="">---Select---</option>
+                                                                                                                <option value="2000000">Southern Region</option>
+                                                                                                                <option value="3000000">Northern Region</option>
+                                                                                                                <option value="4000000">Central Region</option>
+                                                                                                            </select>
+                                <p class="error-message">* Region Required</p>
+                            </div>
+
+                            <div class="col-lg-3 col-md-3 col-sm-12 col-xs-12">
+                                <span class="CustomLabel">Academic Year</span> <span class="RequiredLbl"> * </span><br>
+
+                                <input type="text" class="form-control systopicsno visibilityhidden" />
+                                <select class="AcademicYearList form-control" multiple>
+                                </select>
+                                <p class="error-message">* Academic Year Required</p>
+
+                            </div>
+
+                            <div class="col-lg-3 col-md-3 col-sm-12 col-xs-12">
+                                <span class="CustomLabel">Term</span> <span class="RequiredLbl"> * </span><br>
+
+                                <select class="Term_list form-control " multiple>
+                                    <!--<option selected="true" disabled="disabled" value="">---Select---</option>-->
+                                    <option value="1">First Term</option>
+                                    <option value="2">Second Term</option>
+
+                                </select>
+                                <p class="error-message">* Term Required</p>
+                            </div>
+
+                            <div class="col-lg-3 col-md-3 col-sm-12 col-xs-12">
+                                <span class="CustomLabel">School</span> <span class="RequiredLbl"> * </span><br>
+
+                                <select class="Center_list form-control" multiple>
+                                </select>
+                                <p class="error-message">* School Required</p>
+                            </div>
+
+                            <div class="col-lg-3 col-md-3 col-sm-12 col-xs-12">
+
+                                <span class="CustomLabel">Class</span> <span class="RequiredLbl"> * </span>
+                                <select class="Class_list form-control" multiple>
+                                </select>
+                                <p class="error-message">* Class Required</p>
+                            </div>
+
+                            <div class="col-lg-3 col-md-3 col-sm-12 col-xs-12">
+                                <span class="CustomLabel">Subject</span> <span class="RequiredLbl"> * </span><br>
+
+                                <select class="Subject_list form-control" multiple>
+                                </select>
+                                <p class="error-message">* Subject Required</p>
+                            </div>
+
+
+
+                        </div>
+
+
+
+
+
+
+                        <!-- unitGroup Start -->
+                        <div class="row">
+
+
+
+                            <div class="col-sm-12">
+
+
+                                <button type="button" class=" btn  btn-primary saveunit savebtn" id="searchunit">Search</button>
+
+                            </div>
+
+                        </div>
+                    </div>
+                </form>
+                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 table-scroll fabricselling_loader detaildiv nopadding">
+
+                    <table class="table table-responsive table-striped  table-bordered table-sm row-border hover grid_table fabricbuyingtable customdatatablestyle table_withoutscroll detail-list">
+                        <thead class="custththead">
+                            <tr role="row">
+
+
+                                <th>School Name</th>
+                                <th>Academic</th>
+                                <th>Term</th>
+                                <th>Subject</th>
+                                <th>ERP</th>
+                                <th>Student</th>
+                                <th>Class</th>
+                                <th>Section</th>
+                                <th>Class Learning</th>
+                                <th>Exam</th>
+                                <th>GL-Test Name</th>
+                                <th>GL-Standard Age Score</th>
+                                <th>GL-Overall Stanine</th>
+                                <th>GL-Percentile Rank</th>
+                            </tr>
+                        </thead>
+
+
+                        <tbody style="border-top-color: #367fa9">
+                        </tbody>
+                    </table>
+                </div>
+
+
+                <div class="col-sm-12" hidden>
+                    <ul class="pager ps-action-btn" style="float: right;margin: 10px 0px 0px 0px;">
+                        <li class="pagerButton">
+                            <a (click)="SubmitData()" class="pagerButton">Submit</a>
+                        </li>&nbsp;&nbsp;&nbsp;
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+
+
+        <!-- Main Page End   -->
+        <link rel="stylesheet" type="text/css" href="Content/example-styles.css">
+        <script type="text/javascript" src="Content/jquery.multi-select.min.js"></script>
+        <script>
+
+            var updateflag = 0;
+            //var EmployeeCode =@Session["UserID"];
+            /********DROPDOWN*****/
+            $(".overlay").show();
+            var AcademicYearList = "";
+            $.ajax({
+                type: 'GET',
+                //data:,
+                url: 'http://democity3.csn.edu.pk/api/Setup/AcademicYearDropDown',
+                success: function (result) {
+                    //AcademicYearList += '<option selected="true" disabled="disabled" value="">---Select---</option>';
+
+                    for (var i = 0; i < result.length; i++) {
+
+
+                        AcademicYearList += '<option value="' + result[i].Session_Id + '">' + result[i].Description + '</option>';
+
+
+                    }
+
+
+                    $(".AcademicYearList").html(AcademicYearList);
+                    $('.AcademicYearList').multiSelect();
+                },
+                complete: function (result) {
+
+                    $(".overlay").hide();
+                },
+                error: function (err) {
+
+                    //console.log(JSON.stringify(err));
+
+                }
+            });
+
+             $('.Term_list').multiSelect();
+            var Class_list = "";
+            $(".overlay").show();
+            $.ajax({
+                type: 'GET',
+                //data:,
+                url: 'http://democity3.csn.edu.pk/api/Setup/ClassDropDown',//sURLVariableswithurl[0]+"?",//getsearchedpatient
+                success: function (result) {
+                    //Class_list += '<option selected="true" disabled="disabled" value="">---Select---</option>';
+                    for (var i = 0; i < result.length; i++) {
+                        Class_list += '<option value="' + result[i].Class_Id + '">' + result[i].Class_Name + '</option>';
+                    }
+                    $(".Class_list").html(Class_list);
+                        $('.Class_list').multiSelect();
+
+                },
+                complete: function (result) {
+
+                    $(".overlay").hide();
+                },
+                error: function (err) {
+
+                    //console.log(JSON.stringify(err));
+
+                }
+            });
+
+            var Subject_list = "";
+             $(".overlay").show();
+                $.ajax({
+                    type: 'GET',
+                    //data: { classId: classId },
+                    url: 'http://democity3.csn.edu.pk/api/Setup/SubjectDropDown',//sURLVariableswithurl[0]+"?",//getsearchedpatient
+                    success: function (result) {
+                        //Subject_list += '<option selected="true" disabled="disabled" value="">---Select---</option>';
+                        for (var i = 0; i < result.length; i++) {
+                            Subject_list += '<option value="' + result[i].Subject_Id + '">' + result[i].City_Name + '</option>';
+                        }
+                        $(".Subject_list").html(Subject_list);
+                        $('.Subject_list').multiSelect();
+
+                    },
+                    complete: function (result) {
+                         
+                        $(".overlay").hide();
+                    },
+                    error: function (err) {
+
+                        //console.log(JSON.stringify(err));
+
+                    }
+                });
+
+
+                      var Center_list = "";
+      $(".overlay").show();
+    $.ajax({
+        type: 'GET',
+        //data:,
+        url: 'http://democity3.csn.edu.pk/api/Setup/GetCenter',
+        success: function (result) {
+            //Center_list += '<option selected="true" disabled="disabled" value="">---Select---</option>';
+            for (var i = 0; i < result.length; i++) {
+                Center_list += '<option value="' + result[i].Center_Id + '">' + result[i].Center_Name + '</option>';
+            }
+            $(".Center_list").html(Center_list);
+             $('.Center_list').multiSelect();
+
+        },
+        complete: function (result) {
+
+            $(".overlay").hide();
+            },
+            error: function (err) {
+
+               
+
+            }
+    });
+           
+            /********DROPDOWN*****/
+
+
+
+
+
+
+            /********************VALIDATION*******************/
+            var AcademicYearListvalidation;
+            var TermListvalidation;
+            var ClassListvalidation;
+            var SubjectListvalidation;
+            var Unit_Namevalidation;
+            function onlytthreefieldvali() {
+                AcademicYearListvalidation = $('.AcademicYearList').val();
+                TermListvalidation = $('.Term_list').val();
+                ClassListvalidation = $('.Class_list').val();
+
+                $('.AcademicYearList').change("select", function () {
+                    $('.AcademicYearList').next(".error-message").hide();
+                    $('.AcademicYearList').css('border', 'none');
+                    $('.AcademicYearList').css('background', '#d8f9d8');
+                });
+                if (AcademicYearListvalidation == null || AcademicYearListvalidation == undefined || AcademicYearListvalidation == "" || AcademicYearListvalidation == " ") {
+                    $('.AcademicYearList').next(".error-message").text("* Academic Year Required");
+                    $('.AcademicYearList').next(".error-message").show();
+                    $('.AcademicYearList').css('border', '1px solid red');
+                    $('.AcademicYearList').css('background', '#fff');
+                    $('.AcademicYearList').focus();
+                    return false;
+                }
+                $('.Term_list').change("select", function () {
+                    $('.Term_list').next(".error-message").hide();
+                    $('.Term_list').css('border', 'none');
+                    $('.Term_list').css('background', '#d8f9d8');
+                });
+                if (TermListvalidation == null || TermListvalidation == undefined || TermListvalidation == "" || TermListvalidation == " ") {
+                    $('.Term_list').next(".error-message").text("* Term Required");
+                    $('.Term_list').next(".error-message").show();
+                    $('.Term_list').css('border', '1px solid red');
+                    $('.Term_list').css('background', '#fff');
+                    $('.Term_list').focus();
+                    return false;
+                }
+                $('.Class_list').change("select", function () {
+                    $('.Class_list').next(".error-message").hide();
+                    $('.Class_list').css('border', 'none');
+                    $('.Class_list').css('background', '#d8f9d8');
+                });
+                if (ClassListvalidation == null || ClassListvalidation == undefined || ClassListvalidation == "" || ClassListvalidation == " ") {
+                    $('.Class_list').next(".error-message").text("* Class Required");
+                    $('.Class_list').next(".error-message").show();
+                    $('.Class_list').css('border', '1px solid red');
+                    $('.Class_list').css('background', '#fff');
+                    $('.Class_list').focus();
+                    return false;
+                }
+
+
+            }
+
+            function validation() {
+                AcademicYearListvalidation = $('.AcademicYearList').val();
+                TermListvalidation = $('.Term_list').val();
+                ClassListvalidation = $('.Class_list').val();
+                SubjectListvalidation = $('.Subject_list').val();
+                Unit_Namevalidation = $('.Unit_Name').val();
+                $('.AcademicYearList').change("select", function () {
+                    $('.AcademicYearList').next(".error-message").hide();
+                    $('.AcademicYearList').css('border', 'none');
+                    $('.AcademicYearList').css('background', '#d8f9d8');
+                });
+                if (AcademicYearListvalidation == null || AcademicYearListvalidation == undefined || AcademicYearListvalidation == "" || AcademicYearListvalidation == " ") {
+                    $('.AcademicYearList').next(".error-message").text("* Academic Year Required");
+                    $('.AcademicYearList').next(".error-message").show();
+                    $('.AcademicYearList').css('border', '1px solid red');
+                    $('.AcademicYearList').css('background', '#fff');
+                    $('.AcademicYearList').focus();
+                    return false;
+                }
+                $('.Term_list').change("select", function () {
+                    $('.Term_list').next(".error-message").hide();
+                    $('.Term_list').css('border', 'none');
+                    $('.Term_list').css('background', '#d8f9d8');
+                });
+                if (TermListvalidation == null || TermListvalidation == undefined || TermListvalidation == "" || TermListvalidation == " ") {
+                    $('.Term_list').next(".error-message").text("* Term Required");
+                    $('.Term_list').next(".error-message").show();
+                    $('.Term_list').css('border', '1px solid red');
+                    $('.Term_list').css('background', '#fff');
+                    $('.Term_list').focus();
+                    return false;
+                }
+                $('.Class_list').change("select", function () {
+                    $('.Class_list').next(".error-message").hide();
+                    $('.Class_list').css('border', 'none');
+                    $('.Class_list').css('background', '#d8f9d8');
+                });
+                if (ClassListvalidation == null || ClassListvalidation == undefined || ClassListvalidation == "" || ClassListvalidation == " ") {
+                    $('.Class_list').next(".error-message").text("* Class Required");
+                    $('.Class_list').next(".error-message").show();
+                    $('.Class_list').css('border', '1px solid red');
+                    $('.Class_list').css('background', '#fff');
+                    $('.Class_list').focus();
+                    return false;
+                }
+
+                $('.Subject_list').on("input", function () {
+                    $('.Subject_list').next(".error-message").hide();
+                    $('.Subject_list').css('border', 'none');
+                    $('.Subject_list').css('background', '#d8f9d8');
+                });
+                if (SubjectListvalidation == null || SubjectListvalidation == undefined || SubjectListvalidation == "" || SubjectListvalidation == " ") {
+                    $('.Subject_list').next(".error-message").text("* Subject Required");
+                    $('.Subject_list').next(".error-message").show();
+                    $('.Subject_list').css('border', '1px solid red');
+                    $('.Subject_list').css('background', '#fff');
+                    $('.Subject_list').focus();
+                    return false;
+                }
+
+                $('.Unit_Name').on("input", function () {
+                    $('.Unit_Name').next(".error-message").hide();
+                    $('.Unit_Name').css('border', 'none');
+                    $('.Unit_Name').css('background', '#d8f9d8');
+                });
+                if (Unit_Namevalidation == null || Unit_Namevalidation == undefined || Unit_Namevalidation == "" || Unit_Namevalidation == " ") {
+                    $('.Unit_Name').next(".error-message").text("* Subject Required");
+                    $('.Unit_Name').next(".error-message").show();
+                    $('.Unit_Name').css('border', '1px solid red');
+                    $('.Unit_Name').css('background', '#fff');
+                    $('.Unit_Name').focus();
+                    return false;
+                }
+
+
+            }
+            /*******************VALIDATION********************/
+             var session_string,term_string,class_string,sub_string,region_string,final;
+            $("#searchunit").click(function () {
+                session_string ="";
+                term_string ="";
+                class_string ="";
+                sub_string = "";
+                region_string = "";
+                final = "";
+                var glsession = $(".AcademicYearList").val();
+                var glterm = $(".Term_list").val();
+                var glclass = $(".Class_list").val();
+                var glsub = $(".Subject_list").val();
+                var glregion = $(".Region_list").val();
+
+                var commasession = "";
+                var commaterm = "";
+                var commaclass = "";
+                  var commasub = "";
+                //Region_Id IN (2000000) and Session_Id IN (11,null) and TermGroupID IN (1,2) and Class_Id IN (8,9)
+                if (glsession.length!=0) {
+                    for (var sess = 0; sess < glsession.length; sess++) {
+                       commasession += glsession[sess]+",";
+                    }
+                   // console.log("ss" + session_string);
+                    //session_string = removelastand(session_string);
+                     session_string="(Session_Id IN (" +removelastcomma(commasession)+") OR Session_Id IS NULL) and ";
+                    //console.log("Final Session String" + session_string);
+                }
+                if (glterm.length!=0) {
+                    for (var sess = 0; sess < glterm.length; sess++) {
+                        //term_string += "TermGroupID=" + glterm[sess] + " and ";
+                        commaterm += glterm[sess]+",";
+                    }
+                   // console.log("ts" + term_string);
+                  //  term_string = removelastand(term_string);
+                    term_string="TermGroupID IN (" +removelastcomma(commaterm)+") and ";
+                   // console.log("Final term String" + term_string);
+                }
+                if (glclass.length!=0) {
+                    for (var sess = 0; sess < glclass.length; sess++) {
+                       commaclass += glclass[sess]+",";
+                    }
+                    //console.log("class" + class_string);
+                    //class_string = removelastand(class_string);
+                     class_string = "Class_Id IN (" +removelastcomma(commaclass)+") and ";
+                    //console.log("Final class String" + class_string);
+                }
+                if (glsub.length!=0) {
+                    for (var sess = 0; sess < glsub.length; sess++) {
+                        
+                        commasub += glsub[sess]+",";
+                    }
+                    //console.log("sub" + sub_string);
+                    //sub_string = removelastand(sub_string);
+                    sub_string = "Subject_Id IN (" +removelastcomma(commasub)+") and ";
+                    //console.log("Final sub String" + sub_string);
+                }
+
+                 if (glregion!=null) {//|| glregion!='null' || glregion!="null" || glregion!="" || glregion!=" "
+                    //ssssssssfor (var sess = 0; sess < glregion.length; sess++) {
+                        region_string += "Region_Id=" + glregion + " and ";
+                    //}
+                    //console.log("sub" + sub_string);
+                    //sub_string = removelastand(sub_string);
+                    //console.log("Final region String" + region_string);
+                }
+
+                final = "" + session_string + "" + term_string + "" + class_string + "" + sub_string + "" + region_string + "";
+            
+            final = removelastthreeand(final);
+                //console.log("-------Final------" + final);
+               //exit();
+                //final = "Session_Id=11";
+                UpdateGrid(final);
+            });
+
+
+
+            function removelastthreeand(strr)
+            {
+                return strr.substring(0,strr.length-4)
+            }
+             function removelastcomma(comma)
+            {
+                return comma.substring(0,comma.length-1)
+            }
+            
+  //          function myFunction(str) {
+  ////var str = "How?";
+  //              console.log(str);
+  //var res = str.split(",");
+                
+  //              for (var sess = 0; sess < res.length; sess++)
+  //              {
+  //                  session_string += "Session=" + res[sess];
+  //              }
+
+                
+  //          }
+         
+            /*****RESET PARENT AND CHILD*********/
+
+
+
+          
+
+
+
+
+
+            function resetaddmodel() {
+                //$(".unit_subunitform input").val("");
+                // $(".unit_subunitform input").css("border:1px solid #ced4da;background:#fff;");
+                //$(".unit_subunitform select").val("");
+                //$(".unit_subunitform select").css("border:1px solid #ced4da;background:#fff;");
+                $(".unit_subunitform .Unit_Name").val("");
+                $(".unit_subunitform .UnitNameobj").val("");
+                $(".systopicsno").val("");
+                $("#detailTableadd tbody").html("");
+                $(".detail-list tbody").html("");
+                $(".saveunit").text("Save");
+                updateflag = 0;
+                $(".addunitcheck").prop("checked", false);
+
+            }
+
+
+
+            /***GRID***/
+            function UpdateGrid(final) {
+                 $(".overlay").show();
+                var hummus = { 'final': final };
+                
+                $.ajax({
+                    //type: 'GET',
+                    ////data: {_cri:final},
+                    //url: '../TCS/GLReports.aspx.cs/search_resp',
+
+                    type: "POST",
+                    url: "../TCS/GLReport.aspx/SendParameters",
+                    data: JSON.stringify(hummus),//JSON.stringify(obj),
+                    contentType: "application/json; charset=utf-8",
+                    dataType: "json",
+                    success: function (result) {
+
+                        //console.log("result" + JSON.stringify(result));
+
+
+
+                        if (result == null || result == "" || result == " ") {
+
+
+                            alert("No Data");
+                        }
+
+                        else {
+
+                            /****GRID TABLE */
+                            var topic_list = ""
+                            var s = JSON.parse(result.d);
+
+                            for (var i = 0; i < s.length; i++) {
+
+                                topic_list += '<tr>';
+                                topic_list += '<td>' + s["" + i + ""].SchoolName + '</td>';
+                                topic_list += '<td>' + s["" + i + ""].AcademicYear + '</td>';
+                                topic_list += '<td>' + s["" + i + ""].Term + '</td>';
+                                topic_list += '<td>' + s["" + i + ""].Subject + '</td>';
+                                topic_list += '<td>' + s["" + i + ""].ERP + '</td>';
+                                topic_list += '<td>' + s["" + i + ""].StudentName + '</td>';
+                                topic_list += '<td>' + s["" + i + ""].Class + '</td>';
+                                topic_list += '<td>' + s["" + i + ""].Section + '</td>';
+                                topic_list += '<td>' + s["" + i + ""].LearningPerc + '</td>';
+                                topic_list += '<td>' + s["" + i + ""].ExamPerc + '</td>';
+                                topic_list += '<td>' + s["" + i + ""].TestName + '</td>';
+                                topic_list += '<td>' + s["" + i + ""].StandardAgeScore + '</td>';
+                                topic_list += '<td>' + s["" + i + ""].OverallStanine + '</td>';
+                                topic_list += '<td>' + s["" + i + ""].PercentileRank + '</td>';
+
+
+                                topic_list += '</tr>';
+                            }
+                            $(".detail-list tbody").html(topic_list);
+                            $('.detail-list').DataTable({
+                                "dom": 'Blfrtip',
+                                "bPaginate": true,
+                                "bLengthChange": true,
+                                "bFilter": true,
+                                "bInfo": true,
+                                "buttons": [
+                                    "copy", "excel", "pdf"
+                                ],
+                                "lengthMenu": [[10, 25, 50, -1], [10, 25, 50, "All"]]
+
+                            });
+                            /****GRID TABLE */
+                            /****grid***/
+
+                            /**grid***/
+                        }
+
+                    },
+                    complete: function (result) {
+
+                        $(".overlay").hide();
+                    },
+                    error: function (err) {
+
+                        console.log(JSON.stringify(err));
+
+                    }
+                });
+//                .then(function( data, textStatus, jqXHR ) {
+//  alert( jqXHR.status ); // Alerts 200
+//});
+            }
+                    /***GRID***/
+
+        </script>
+        <!--Body-->
+        <hr />
+        <footer>
+            <p>&copy; 2021 - The City School</p>
+        </footer>
+    </div>
+
+
+    <script src="Content/sweetalert2.min.js"></script>
+
+    <style>
+        .multi-select-container {
+           
+            width: 100%;
+        }
+        .multi-select-button {
+             width: 100% !important;
+             max-width:100% !important;
+             height: 29px !important;
+             font-size: 1.3rem !important;
+             border: 1px solid #ced4da !important;
+    box-shadow: inset 0 1px 1px rgb(0 0 0 / 8%) !important;
+        }
+    
+    </style>
+</body>
+</html>

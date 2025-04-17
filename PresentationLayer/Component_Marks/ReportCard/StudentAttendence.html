@@ -1,0 +1,652 @@
+﻿
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Student Attendence Report</title>
+    <!--<script src="jquery-1.10.2.js" type="text/JavaScript" language="javascript"></script>-->
+    <!--PWA-->
+    <link rel="manifest" href="./Content/manifest.json">
+    <link rel="shortcut icon" href="./Content/favicon.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="./Content/images/icons/favicon-16x16.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="./Content/images/icons/favicon-32x32.png">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="default">
+    <meta name="apple-mobile-web-app-title" content="PWA Splash">
+    <link rel="apple-touch-startup-image" href="./Content/images/splash/launch-640x1136.png" media="(device-width: 320px) and (device-height: 568px) and (-webkit-device-pixel-ratio: 2) and (orientation: portrait)">
+    <link rel="apple-touch-startup-image" href="./Content/images/splash/launch-750x1294.png" media="(device-width: 375px) and (device-height: 667px) and (-webkit-device-pixel-ratio: 2) and (orientation: portrait)">
+    <link rel="apple-touch-startup-image" href="./Content/images/splash/launch-1242x2148.png" media="(device-width: 414px) and (device-height: 736px) and (-webkit-device-pixel-ratio: 3) and (orientation: portrait)">
+    <link rel="apple-touch-startup-image" href="./Content/images/splash/launch-1125x2436.png" media="(device-width: 375px) and (device-height: 812px) and (-webkit-device-pixel-ratio: 3) and (orientation: portrait)">
+    <link rel="apple-touch-startup-image" href="./Content/images/splash/launch-1536x2048.png" media="(min-device-width: 768px) and (max-device-width: 1024px) and (-webkit-min-device-pixel-ratio: 2) and (orientation: portrait)">
+    <link rel="apple-touch-startup-image" href="./Content/images/splash/launch-1668x2224.png" media="(min-device-width: 834px) and (max-device-width: 834px) and (-webkit-min-device-pixel-ratio: 2) and (orientation: portrait)">
+    <link rel="apple-touch-startup-image" href="./Content/images/splash/launch-2048x2732.png" media="(min-device-width: 1024px) and (max-device-width: 1024px) and (-webkit-min-device-pixel-ratio: 2) and (orientation: portrait)">
+    <link rel="apple-touch-icon" sizes="180x180" href="./Content/images/icons/apple-touch-icon.png">
+    <link rel="mask-icon" href="./Content/images/icons/safari-pinned-tab.svg" color="#6F6F6F">
+    <!--PWA-->
+
+    <script src="jquery-3.3.1.min.js" type="text/JavaScript" language="javascript"></script>
+    <script src="jquery-ui-1.10.4.custom.js"></script>
+    <script src="jquery.PrintArea.js" type="text/JavaScript" language="javascript"></script>
+
+    <link type="text/css" rel="stylesheet" href="css/ui-lightness/jquery-ui-1.10.4.custom.css" />
+
+    <link type="text/css" rel="stylesheet" href="PrintArea3.css" />                <!-- Y : rel is stylesheet and media is in [all,print,empty,undefined] -->
+    <link type="text/css" rel="stylesheet" href="media_all.css" media="all" />   <!-- Y : rel is stylesheet and media is in [all,print,empty,undefined] -->
+    <link type="text/css" rel="" href="empty.css" />                    <!-- N : rel is not stylesheet -->
+    <link type="text/css" rel="noPrint" href="noPrint.css" />                  <!-- N : rel is not stylesheet -->
+    <link type="text/css" rel="stylesheet" href="media_none.css" media="xyz" />   <!-- N : media not in [all,print,empty,undefined] -->
+    <link type="text/css" href="no_rel.css" media="print" /> <!-- N : no rel attribute -->
+    <link type="text/css" href="no_rel_no_media.css" /> <!-- N : no rel, no media attributes -->
+    <link rel="stylesheet" type="text/css" href="bootstrap/css/bootstrap.min.css">
+    <!--<link rel="stylesheet" type="text/css"  href="bootstrap/css/bootstrap.css.map">-->
+
+    <link rel="stylesheet" type="text/css" href="fonts/font-awesome-4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" type="text/css" href="sweetalert2.min.css">
+    <script type="text/javascript" src="sweetalert2.min.js"></script>
+    <script type="text/javascript" src="qr-code.js"></script>
+</head>
+<body>
+    <div class="container">
+        <div class="overlay"></div>
+        <div class="row printview">
+            <div class="button b1 btn btn-primary  tooltip "><i class="fa fa-print" data-toggle="tooltip" data-placement="bottom" title="Print"></i><span class="tooltiptext">Print</span></div>
+        </div>
+
+
+        <div class="PrintArea area1 all" id="Retain">
+            <!--boostrap-->
+
+            <div class="container noticeborder" id="">
+                <!--serachprinttable-->
+                <!--container-->
+
+                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 no-padding innerdiv">
+
+                    <!--section 1--->
+                    <!--<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 displayflex">
+                    <p><span class="headerstudentname"></span><span class="floatright headerstudentcenter"></span></p>
+
+                </div>-->
+                    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 sec1 article noticesec1">
+                        <!--<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                        <h5 class="text-right">S013-GulshanABoysCampusKarachi</h5>
+                    </div>-->
+
+
+
+                        <div class="row rowdisplayflex headerwithlogo">
+                            <div class="col-lg-3 col-md-3 col-sm-3 col-xs-3 visiblity-hidden_mediaclass">
+                                <!--visiblity-hidden_mediaclass-->
+                                <!--<div id="qrcode"></div>-->
+                            </div>
+                            <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6 text-mediaalign">
+                                <h4 class="visiblity-hidden_mediaclass">Report Card2020-2021</h4>
+                                <h2 class="schoolname">The City School</h2>
+                                <h6>Southern Region</h6>
+                                <h5>Student Attendence Sheet</h5>
+                            </div>
+                            <div class="col-lg-3 col-md-3 col-sm-3 col-xs-3 text-right schoollogo">
+                                <img src="images/logo.png" style="margin-top: 25px" />
+                            </div>
+                        </div>
+
+
+
+
+                    </div>
+
+                    <!--section 1--->
+                    <!--section 2--->
+
+
+                    <div class="row adarticle noticesec2 attendesec1">
+
+
+                        <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 inputflex">
+                            <div class="col-lg-4 col-md-4 col-sm-4 col-xs-6 no-padding"><label class="flexlabel">Name Of School:</label></div>
+                            <div class="col-lg-8 col-md-8 col-sm-8 col-xs-6 no-padding">
+                                <input type="text" class="form-control onlybottomborder center-nametxt" />
+                            </div>
+                        </div>
+                        <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 inputflex">
+                            <div class="col-lg-4 col-md-4 col-sm-4 col-xs-6 no-padding"><label class="flexlabel">Name Of Examination:</label></div>
+                            <div class="col-lg-8 col-md-8 col-sm-8 col-xs-6 no-padding">
+                                <input type="text" class="form-control onlybottomborder term-nametxt" />
+                            </div>
+                        </div>
+                        <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 inputflex">
+
+                            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 no-padding inputflex" style="text-align: center;display: block;">
+                                <label class="flexlabel">Room</label>
+                                <input type="text" class="onlybottomborder roomiid text-center" />
+                            </div>
+                        </div>
+                        <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 inputflex">
+
+                            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 no-padding inputflex" style="text-align: center;display: block;">
+                                <label class="flexlabel">Block / Gender</label>
+                                <input type="text" class="onlybottomborder blockgenid text-center" />
+                            </div>
+                        </div>
+
+                    </div>
+                    <!--section 2--->
+                    <!--section 2--->
+
+
+                    <div class="row adarticle attendesec2">
+
+                        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 attend2subsec1">
+                            <table class="table table-bordered studentattendencetable">
+                                <thead>
+                                <th>Roll #</th>
+                                <th>Student Name</th>
+                                <th>Class</th>
+
+                                <th>Date</th>
+                                <th>Date</th>
+                                <th>Date</th>
+                                <th>Date</th>
+                                <th>Date</th>
+                                <th>Date</th>
+                                <th>Date</th>
+                                <th>Date</th>
+                                <th>Date</th>
+                                <th>Date</th>
+                                <th>Date</th>
+
+
+                                </thead>
+                                <tbody>
+                                    <!--<tr><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr>
+                                <tr><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr>
+                                <tr><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr>
+                                <tr><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr>
+                                <tr><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr>
+                                <tr><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr>
+                                <tr><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr>
+                                <tr><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr>
+                                <tr><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr>
+                                <tr><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr>
+                                <tr><td colspan="4" class="text-right">No. of students Present</td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr>
+                                <tr><td colspan="4" class="text-right">No. of students Absent / On Leave</td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr>
+                                <tr><td colspan="4" class="text-right">Invigilator’s Signature</td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr>-->
+
+
+
+                                </tbody>
+                            </table>
+
+                        </div>
+
+
+                    </div>
+                    <!--section 2--->
+                    <!--Section4-->
+
+
+                </div>
+                <!--section4-->
+
+
+
+            </div>
+        </div>
+
+        <!--bootsrap-->
+    </div>
+
+
+
+    </div>
+
+
+
+    <div style="border: solid 2px #999fff; float: left; margin-left: 20px;" class="SettingsBox">
+        <div style="width: 400px; padding: 20px;">
+            <div style="padding: 0 10px 10px;" class="buttonBar">
+                <div class="button b1">Print</div>
+                <div class="toggleDialog">open dialog</div>
+            </div>
+
+            <div style="font-weight: bold; border-top: solid 1px #999fff; padding-top: 10px;">Settings</div>
+            <table>
+                <tbody>
+                    <tr>
+                        <td><input value="popup" name="mode" id="popup" checked="" type="radio"> Popup</td>
+                    </tr>
+                    <tr>
+                        <td style="padding-left: 20px;"><input value="popup" name="popup" id="closePop" type="checkbox"> Close popup</td>
+                    </tr>
+                    <tr>
+                        <td><input value="iframe" name="mode" id="iFrame" type="radio"> IFrame</td>
+                    </tr>
+                    <tr>
+                        <td>Extra css: <input type="text" name="extraCss" size="50" /></td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <div class="settingName">Print area:</div>
+                            <div class="settingVals">
+                                <input type="checkbox" class="selPA" value="area1" checked /> Area 1<br>
+                                <input type="checkbox" class="selPA" value="area2" checked /> Area 2<br>
+                                <input type="checkbox" class="selPA" value="area3" checked /> Area 3<br>
+                            </div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <div class="settingName">Retain Attributes:</div>
+                            <div class="settingVals">
+                                <input type="checkbox" checked name="retainCss" id="retainCss" class="chkAttr" value="class" /> Class
+                                <br>
+                                <input type="checkbox" checked name="retainId" id="retainId" class="chkAttr" value="id" /> ID
+                                <br>
+                                <input type="checkbox" checked name="retainStyle" id="retainId" class="chkAttr" value="style" /> Style
+                            </div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <div style="padding: 3px; border: solid 1px #ddd;">
+                                Add to head :
+                                <input type="checkbox" checked name="addElements" id="addElements" class="chkAttr" />
+                                <pre>&lt;meta charset="utf-8" /&gt;<br>&lt;http-equiv="X-UA-Compatible" content="IE=edge"/&gt;</pre>
+                            </div>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+
+
+        <footer>okss</footer>
+    </div>
+
+    <script>
+
+            /****Disabled f12 and right click key***/
+
+    //$(document).keydown(function(event){
+    //        if(event.keyCode==123){
+    //            return false;
+    //        }
+    //        else if (event.ctrlKey && event.shiftKey && event.keyCode==73){
+    //                 return false;
+    //        }
+    //    });
+
+    //    $(document).on("contextmenu",function(e){
+    //       e.preventDefault();
+    //    });
+      /****Disabled f12 and right click key***/
+
+    $(document).ready(function(){
+        $(".overlay").show();
+  $('[data-toggle="tooltip"]').tooltip();
+        var dialog = $("div.testDialog").dialog({position : { my : "left top", at : "left bottom+50", of : ".SettingsBox" }, width: "1000", title: "Print Dialog Box Contents"});
+
+        $(".toggleDialog").click(function(){
+            dialog.dialog("open");
+        });
+
+        $("div.b1").click(function(){
+
+            var mode = $("input[name='mode']:checked").val();
+            var close = mode == "popup" && $("input#closePop").is(":checked");
+            var extraCss = $("input[name='extraCss']").val();
+
+            var print = "";
+            $("input.selPA:checked").each(function(){
+                print += (print.length > 0 ? "," : "") + "div.PrintArea." + $(this).val();
+            });
+
+            var keepAttr = [];
+            $(".chkAttr").each(function(){
+                if ($(this).is(":checked") == false )
+                    return;
+
+                keepAttr.push( $(this).val() );
+            });
+
+            var headElements = $("input#addElements").is(":checked") ? '<meta charset="utf-8" />,<meta http-equiv="X-UA-Compatible" content="IE=edge"/>' : '';
+
+            var options = { mode : mode, popClose : close, extraCss : extraCss, retainAttr : keepAttr, extraHead : headElements };
+
+            $( print ).printArea( options );
+
+
+
+
+        });
+
+
+    const months = ["January", "February", "March", "April", "May", "June",
+        "July", "August", "September", "October", "November", "December"
+        ];
+
+
+          var uri = window.location.href;
+  var enc = encodeURIComponent(uri).replace('%27','+');
+  var dec = decodeURIComponent(enc);
+        var sURLVariableswithurl="";
+        function GetUrlParameter(sParam) {
+            var sPageURL = dec;//window.location.search.substring(1);
+
+            sURLVariableswithurl = sPageURL.split('?');
+            var sURLVariables = sURLVariableswithurl[1].split('&');
+
+            for (var i = 0; i < sURLVariables.length; i++) {
+                var sParameterName = sURLVariables[i].split('=');
+
+                if (sParameterName[0] == sParam) {
+                    return sParameterName[1];
+                }
+            }
+        }
+
+        
+        var Session_Id = GetUrlParameter('Session_Id');
+        var Center_Id = GetUrlParameter('Center_Id');
+        var Room_Id = GetUrlParameter('Room_Id');
+        var TermGroup_Id = GetUrlParameter('TermGroup_Id');
+         var Block_Id = GetUrlParameter('Block_Id');
+     //console.log("TermGroup_Id" + TermGroup_Id + "------" + "Session_Id" + Session_Id);
+        var headingonruntime = "";
+        var date_list = "";
+
+         var alreadyt = "";
+      
+                var ExamDatearray = [];
+        ExamDatearray.length = 0;
+                var dataadd = [];
+        dataadd.length = 0;
+        var list_duplication = [];
+        list_duplication.length = 0;
+        $.ajax({
+            type: 'GET',
+            data: { Session_Id: Session_Id, Center_Id:Center_Id,TermGroup_Id: TermGroup_Id,Room_Id:Room_Id,Block_Id:Block_Id },
+            url: 'http://localhost:52673/api/Setup/StudentAttendenceSheetReportWithoutclass',//sURLVariableswithurl[0]+"?",//getsearchedpatient
+            success: function (result) {
+                //console.log(JSON.stringify(result));
+                 if (result == null || result == "" || result == " ") {
+                          Swal.fire(
+                                'No Data',
+                                '',
+                                'error'
+                            )
+                        return;
+                    }
+
+                
+                /****TRY****/
+    
+                for (var tr = 0; tr < result.length; tr++) {
+
+
+                    if (alreadyt != result[tr].StudentERPNo) {
+                        /**FIRST tIME USER**/
+                        if (alreadyt == "") {
+                            ExamDatearray.push({
+                               
+                              ExamDate: result[tr].ExamDate,
+                                Subject_Name: result[tr].Subject_Name,
+
+                            });
+
+                            dataadd.push({
+                              
+                                StudentERPNo: result[tr]. StudentERPNo,
+                                First_Name: result[tr].First_Name,
+                                StudentMaskNo: result[tr].StudentMaskNo,
+                                Class_Id: result[tr].Class_Id,
+                                Room_Id: result[tr].Room_Id,
+                                Class_Name: result[tr].Class_Name,
+                                Block_Id: result[tr].Block_Id,
+                                Block_Name: result[tr].BlockName,
+                                GenderName: result[tr].GenderName,
+                                ExamDate_Subjects: ExamDatearray,
+
+                            });
+                            alreadyt = result[tr].StudentERPNo;
+                        }
+                        /**FIRST tIME USER**/
+
+                        else {
+                            ExamDatearray = [];
+                            ExamDatearray.push({
+                               
+                              ExamDate: result[tr].ExamDate,
+                              Subject_Name: result[tr].Subject_Name,
+
+                            });
+
+                           dataadd.push({
+                              
+                                StudentERPNo: result[tr]. StudentERPNo,
+                                First_Name: result[tr].First_Name,
+                                StudentMaskNo: result[tr].StudentMaskNo,
+                                Class_Id: result[tr].Class_Id,
+                                Room_Id: result[tr].Room_Id,
+                                Class_Name:result[tr].Class_Name,
+                               Block_Id: result[tr].Block_Id,
+                               Block_Name: result[tr].BlockName,
+                                GenderName: result[tr].GenderName,
+                                ExamDate_Subjects: ExamDatearray,
+
+                            });
+                            alreadyt = result[tr].StudentERPNo;
+                        }
+                    }
+                    else {
+                        ExamDatearray.push({
+                               
+                              ExamDate: result[tr].ExamDate,
+                              Subject_Name: result[tr].Subject_Name,
+
+                            });
+                    }
+
+                }//first forloop
+               console.log("1st wala" + JSON.stringify(dataadd));
+             
+                headingonruntime += "<tr><th>Roll No</th><th>Student Name</th><th>Class</th>";
+               
+                for (var dt = 0; dt < dataadd.length; dt++)
+                {
+                   
+                    for (var dr = 0; dr < dataadd[dt].ExamDate_Subjects.length; dr++)
+                    {
+                       list_duplication.push(dataadd[dt].ExamDate_Subjects[dr].ExamDate);   
+                    }
+                 
+                }
+                var duplications = unique(list_duplication);
+                
+                for (var dr = 0; dr < duplications.length; dr++)
+                {
+                    if (duplications[dr] != null) {
+                        headingonruntime += '<th>' + stringtodate(duplications[dr]) + '</th>';
+                    }
+                }
+                          /**AGAIN ***/
+                for (var dt = 0; dt < dataadd.length; dt++)
+                {
+                    date_list += '<tr>';
+                    date_list += '<td>'+ dataadd[dt].StudentMaskNo+'</td>';
+                    date_list += '<td>' + dataadd[dt].First_Name + '</td>';
+                    date_list += '<td>' + dataadd[dt].Class_Name + '</td>';
+                    for (var dr = 0; dr < duplications.length; dr++)
+                    {
+                        if (duplications[dr] != null) {
+                            date_list += '<td></td>';
+                        }
+                    }
+                    
+                            
+                    date_list += '</tr>';
+               
+                }
+                /**AGAIN ***/
+
+            /**HARDCODED ROW**/
+                var hardcoded=["No. of students Present","No. of students Absent / On Leave","Invigilator’s Signature"]
+                for (var hd = 0; hd <3; hd++)
+                {
+                        date_list+="<tr><td colspan='3' class='hardcoded'>"+hardcoded[hd]+"</td>";
+            
+                   for (var hdr = 0; hdr <  duplications.length; hdr++)
+                    {
+                       if (duplications[hdr] != null) {
+                           date_list += "<td></td>";
+                       }
+                    } 
+                      date_list +="</tr>";
+                }
+                
+                /**HARDCODED ROW**/
+            
+              headingonruntime +="</tr>";
+                    $(".studentattendencetable thead").html(headingonruntime);
+                $(".studentattendencetable tbody").html(date_list);
+                $(".roomiid").val(Room_Id);
+                $(".blockgenid").val(dataadd[0].Block_Name + "/" + dataadd[0].GenderName);
+                $(".center-nametxt").val(result[0].Center_Name);
+               
+                    if (TermGroup_Id == 1)
+                    {
+                        $(".term-nametxt").val("First Term");
+                    }
+                    else if (TermGroup_Id == 2)
+                    {
+                        $(".term-nametxt").val("Second Term");
+                    }
+            },//success
+            complete: function () {
+             
+                $(".overlay").hide();
+                $('.container').on('scroll touchmove mousewheel');
+            }, error: function (err) {
+
+                console.log(JSON.stringify(err));
+
+            }
+        });
+
+
+            /**string date format**/
+                    function stringtodate(str) {
+                       
+const months = ["null","Jan", "Feb", "Mar", "Apr", "May", "Jun",
+        "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"
+    ];
+            
+  var res = str.split("/");
+                        var month = res[0];
+
+  var monthfirstcheck=  res[0].slice(0, 1);
+  if(monthfirstcheck==0)
+  {
+  month=res[0].replace("0", "")
+                        }
+                        month = parseInt(month);
+ 
+                      
+                        var date = res[1];
+                        
+                        var year = res[2];
+                        console.log(months[month] + " " + date + "," + " " + year);
+   var strdate =months[month]+" "+date+","+" "+year;
+        return strdate;
+  
+}
+         /**string date format**/
+    /**Format Date**/
+    function formatdate(datevalue) {
+        var date = new Date(datevalue);
+        var datess = date.getDate();
+        var monthss = months[date.getMonth()];
+        var fullyear = date.getFullYear();
+        var hours = date.getHours();
+        var minutes = date.getMinutes();
+        var mili = date.getMilliseconds();
+
+        var strdate = monthss + "  " + datess + ", " + fullyear;
+        return strdate;
+    }
+   
+        
+//const value = encodeURIComponent(value).replace('%20','+');
+
+var reportcard="";
+var reportcard2="";
+//var Roll_Number="189570";
+//var Session_Id="11";
+//var Class_Id=13;
+
+
+
+$('.container').off('scroll touchmove mousewheel');
+
+
+
+
+
+//***PWA****/
+       if ('serviceWorker' in navigator) {
+            navigator.serviceWorker.register('./Content/service-worker.js').then(res => {
+                //alert('SW register');
+            }).catch(err => {
+               // alert("Error SW", err);
+                })
+
+        }
+        else {
+            console.log('SW Not supported');
+        }
+//***PWA****/
+
+
+
+
+    });
+
+
+
+        var duplresult = [];
+        duplresult.length = 0;
+        function unique(list) {
+    duplresult = [];
+    $.each(list, function(i, e) {
+        if ($.inArray(e, duplresult) == -1) duplresult.push(e);
+    });
+    return duplresult;
+}
+
+
+
+
+
+    </script>
+    <style>
+        .overlay {
+            background: url('./images/logo2.gif') no-repeat center center; /*loader.gif*/
+            position: fixed;
+            top: 0;
+            left: 0;
+            height: 100%;
+            width: 100%;
+            z-index: 9999999;
+            background-color: rgba(0,0,0,0.5);
+            
+            }
+
+        #serachprinttable {
+            /*border: none;
+        padding: 1px !important;
+        height: 1000px !important;*/
+            border: 1px solid #000 !important;
+        }
+    </style>
+</body>
+</html>

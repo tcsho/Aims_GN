@@ -1,0 +1,16 @@
+﻿@charset 'utf-8';.liteAccordion{text-align:left;font-size:16px;line-height:24px;font:'Helvetica Neue',Verdana,Arial,sans-serif;-webkit-backface-visibility:hidden;-webkit-perspective:1000;-webkit-tap-highlight-color:transparent}
+.liteAccordion, .liteAccordion *{padding:0;margin:0;border:0;box-sizing:content-box}
+.liteAccordion >ol{position:relative;overflow:hidden;height:100%;margin:0;padding:0;list-style-type:none}
+.liteAccordion >ol >li{list-style-type:none}
+.liteAccordion .slide > h2{color:black;font-size:16px;font-weight:normal;margin:0;z-index:100;position:absolute;top:0;left:0;-webkit-backface-visibility:hidden;-webkit-transform:translateX(-100%) rotate(-90deg);-webkit-transform-origin:right top;-moz-transform:translateX(-100%) rotate(-90deg);-moz-transform-origin:right top;-o-transform:translateX(-100%) rotate(-90deg);-o-transform-origin:right top;transform:translateX(-100%) rotate(-90deg);transform-origin:right top}
+.liteAccordion .slide > h2 span{display:block;padding-right:8%;text-align:right;height:90%;margin-top:5px;-webkit-user-select:none;-khtml-user-select:none;-moz-user-select:none;-ms-user-select:none;user-select:none}
+.liteAccordion .slide > h2 b{display:inline-block;position:absolute;top:13%;left:10%;text-align:center;-webkit-transform:rotate(90deg);-moz-transform:rotate(90deg);-o-transform:rotate(90deg);transform:rotate(90deg)}
+.liteAccordion .slide > h2:hover{cursor:pointer}
+.liteAccordion .slide > div{height:100%;position:absolute;top:0;z-index:10;overflow:hidden;background:white}
+.liteAccordion.os-tpl .slide > h2{color:#F8F9F3;background-color:#8199A9;line-height:225%;text-transform:uppercase;font-size:13px;font-weight:bold;font-family:Georgia,"Times New Roman",Times,serif;border-top:2px solid #F8F9F3;}
+.liteAccordion.os-tpl .slide > h2 span{}
+.liteAccordion.os-tpl .slide > h2 b{font-size:24px;font-weight:normal;}
+.liteAccordion.os-tpl .slide > h2:hover, .liteAccordion.os-tpl .slide > h2.selected{color:#F8F9F3;background-color:#0C4DA2;}
+.liteAccordion.os-tpl .slide > h2.selected{cursor:default;}
+.liteAccordion.os-tpl .slide > h2.selected b{}
+.liteAccordion.os-tpl .slide > div{}

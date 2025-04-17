@@ -1,0 +1,207 @@
+﻿
+
+
+
+    select.form-control:not([size]):not([multiple]) {
+        height: 29px !important;
+    }
+/*input:not([size]):not([multiple]) {
+    height: 29px !important;
+}*/
+.visiblehidden {
+    visibility: hidden;
+}
+
+.PageMainHeading i {
+    margin-right: 10px !important;
+}
+.btn {
+    cursor: pointer !important;
+    padding: 5px 10px 5px 10px !important;
+    background-color: #00006a !important;
+    color: white !important;
+    font-weight: 500 !important;
+    border-radius: 5px !important;
+    font-family: -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif,"Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol";
+    font-size: 1.3rem;
+}
+.nopadding {
+    padding-left: 0px !important;
+    padding-right: 0px !important;
+}
+.paddingtopbottom {
+    padding-top: 10px !important;
+    padding-bottom: 10px !important;
+}
+.error-message {
+display:none;
+}
+.error-message {
+    padding: 5px;
+    /* background: red; */
+    background: #ed1313;
+    width: 100% !important;
+    font-size: 10px;
+    color: #fff;
+    border-radius: 3px;
+    margin-bottom: 0px;
+}
+
+.detailtable {
+    padding: 10px 0px !important;
+}
+.table {
+    margin-bottom: 0px !important;
+}
+    .table tr td, .table tr th {
+        color: #000 !important;
+    }
+
+.detaildiv {
+    padding-top: 10px;
+    padding-bottom: 10px;
+}
+.customdatatablestyle thead tr th {
+    background: #00006a !important;
+    color: #fff !important;
+}
+.dataTables_length select {
+    border-radius: 5px;
+    padding: .375rem .75rem;
+    padding-left: 0.75rem;
+    font-size: 1.3rem;
+    line-height: 1.5;
+    color: #495057;
+    background-color: #fff;
+    background-clip: padding-box;
+    border: 1px solid #ced4da;
+    transition: border-color .15s ease-in-out,box-shadow .15s ease-in-out;
+}
+.dataTables_filter input {
+    border-radius: 5px;
+    padding: .375rem .75rem;
+    padding-left: 0.75rem;
+    font-size: 1.3rem;
+    line-height: 1.5;
+    color: #495057;
+    background-color: #fff;
+    background-clip: padding-box;
+    border: 1px solid #ced4da;
+    transition: border-color .15s ease-in-out,box-shadow .15s ease-in-out;
+}
+.dt-buttons {
+    width: 100%;
+    text-align: center;
+    background: #f8f8f8;
+    padding: 5px 0px;
+    margin-bottom: 10px;
+}
+button.dt-button {
+    margin: 0px !important;
+    padding: 5px 20px;
+    background: #00006a;
+    color: #fff;
+    border-color: #0062cc !important;
+    border-radius: 6px;
+    cursor: pointer !important;
+    padding: 5px 10px 5px 10px !important;
+    background-color: #00006a !important;
+    color: white !important;
+    font-weight: 500 !important;
+    border-radius: 5px !important;
+    font-family: -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif,"Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol";
+    font-size: 1.3rem;
+}
+
+table tbody tr td {
+    vertical-align: middle !important;
+}
+.visibilityhidden {
+visibility:hidden;
+display:none;
+}
+
+.savebtn {
+margin-top:10px !important;
+}
+
+
+/* Chrome, Safari, Edge, Opera */
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+
+/* Firefox */
+input[type=number] {
+    -moz-appearance: textfield;
+}
+
+.checkboxposition {
+    /*position: relative;
+    bottom: 10px;
+    margin-left: 10px;*/
+
+    margin-top: 10px;
+    margin-left: 10px;
+    margin-bottom: 0px;
+}
+
+
+.nestedtd {
+padding:0px !important;
+}
+.nestedtable td{
+    border:none !important;
+}
+
+
+.accordion .card-header:after {
+    font-family: 'FontAwesome';
+    content: "\f068";
+    float: right;
+}
+
+.accordion .card-header.collapsed:after {
+    /* symbol for "collapsed" panels */
+    content: "\f067";
+}
+
+.card-header {
+    background: rgb(0 0 106) !important;
+    color: #fff !important;
+}
+.boxpadding {
+    padding-top: 10px;
+    padding-bottom: 10px;
+}
+
+    .boxpadding .boxheading {
+        color: #fff;
+        margin-bottom: 0px;
+    }
+    .boxpadding .boxtext {
+        color: #f4e22b;
+        margin-bottom: 0px;
+    }
+    .boxpadding .markbox {
+        background: rgb(0 0 106) !important;
+        padding: 10px;
+        border-radius: 10px;
+    }
+
+.accordion .card:first-of-type {
+    border-bottom: 1px solid rgba(0,0,0,.125) !important;
+}
+
+.overlay {
+    background: url('../Content/logo2.gif') no-repeat center center;
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 100%;
+    z-index: 9999999;
+    background-color: rgba(0,0,0,0.5);
+}

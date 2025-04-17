@@ -1,0 +1,2572 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Marks Entry</title>
+    <link rel="icon" type="image/x-icon" href="assets/images/favicon.ico">
+    <link rel="stylesheet" href="assets/vendor/Fonts.css" />
+    <link rel="stylesheet" href="assets/vendor/CustomStyle.css" />
+    <link rel="stylesheet" href="assets/vendor/toastr.css" />
+    <link rel="stylesheet" href="assets/vendor/bootstrap/css/bootstrap.css" />
+    <link rel="stylesheet" href="assets/vendor/font-awesome/css/font-awesome.css" />
+    <link href="assets/vendor/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="Content/jquery.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <!-- <script src="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script> -->
+    <link rel="stylesheet" href="node_modules/ng-select/ng-select/themes/default.theme.css">
+
+    <!--Datatables-->
+
+    <link rel="stylesheet" href="Content/DataTables/datatables.min.css" />
+    <link href="Content/DataTables/Buttons-1.6.3/css/buttons.dataTables.min.css" rel="stylesheet" />
+
+
+    <script src="Content/DataTables/Buttons-1.6.3/js/dataTables.buttons.min.js"></script>
+    <script src="Content/DataTables/datatables.min.js"></script>
+
+
+    <!--Datatables-->
+
+    <link rel="stylesheet" href="node_modules/pnotify/core/dist/PNotify.css">
+    <link rel="stylesheet" href="node_modules/pnotify/core/BrightTheme.css">
+    <link href="Content/Header_Component.css" rel="stylesheet" />
+
+    <link href="Content/Site.css" rel="stylesheet" />
+    <link href="Content/sweetalert2.min.css" rel="stylesheet" />
+    <script src="Content/jquery.limitText.js"></script>
+</head>
+
+<body>
+
+    <!--HEADER COMPONENT-->
+    <div class='overlay'></div>
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 BackgroundBlue">
+                <div class="Gap"></div>
+                <div class="row">
+                    <div class="col-lg-2 col-md-2 col-sm-12 col-xs-12">
+                        <img src="assets/images/logo1.png" class="ImageLayoutCenter" />
+                    </div>
+                    <div class="col-lg-10 col-md-10 col-sm-12 col-xs-12">
+                        <div class="Gap"></div>
+                        <div class="Gap"></div>
+                        <p class="HeaderHeadingAMISPlus text-lg-left text-md-left text-sm-left text-xs-left text-center">The City School:	Southern Region</p>
+                        <div class="row">
+                            <nav class="navbar navbar-light navbar-expand-lg mainmenu">
+                                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                                    <span class="navbar-toggler-icon"></span>
+                                </button>
+                                <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                                    <ul class="navbar-nav mr-auto">
+                                        <li><a href="#">Home <span class="sr-only">(current)</span></a></li>
+                                        <li class="dropdown">
+                                            <a class="dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Results</a>
+                                            <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                                <li><a href="#">Result Card</a></li>
+                                            </ul>
+                                        </li>
+                                        <li class="dropdown">
+                                            <a class="dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">TCS Reports</a>
+                                            <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                                <li class="dropdown">
+                                                    <a class="dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Non Academic Reports</a>
+                                                    <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                                        <li><a href="#">Non Academic Reports(RO)</a></li>
+                                                        <li><a href="#">Non Academic Reports(CO)</a></li>
+                                                    </ul>
+                                                </li>
+                                                <li class="dropdown">
+                                                    <a class="dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Academic Reports</a>
+                                                    <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                                        <li><a href="#">Academic Reports(CO)</a></li>
+                                                        <li><a href="#">Academic Reports(RO)</a></li>
+                                                    </ul>
+                                                </li>
+                                            </ul>
+                                        </li>
+
+                                        <li class="dropdown">
+                                            <a class="dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Component Marks Setup</a>
+                                            <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                                <li><a href="Unit_Setup.html">Unit/Sub Unit Setup</a></li>
+                                                <li><a href="Curriculum_Objectives.html">Curriculum Objectives Setup</a></li>
+                                                <li><a href="Cl_Exam.html">CL Exam Setup</a></li>
+                                                <li><a href="General_Comment_Section.html">Comments Setup</a></li>
+
+                                            </ul>
+                                        </li>
+
+                                        <li class="dropdown">
+                                            <a class="dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Exam Module</a>
+                                            <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                                <li><a href="Mark_Entry.aspx">Marks Entry</a></li>
+                                                <li><a href="Progress_Report.html">Subject Progress Report</a></li>
+                                                <li><a href="Progress_Report_Class.html">Class Progress Report</a></li>
+                                                <li><a href="ExamDate.html">Exam DateSheet</a></li>
+                                                <li><a href="Reports.aspx">Reports</a></li>
+                                            </ul>
+                                        </li>
+
+
+                                        <!-- <li><a href="#">Service</a></li> -->
+                                    </ul>
+                                </div>
+                            </nav>
+                        </div>
+                    </div>
+                    <!--<div class="col-lg-3 col-md-3 col-sm-12 col-xs-12 ">
+                        <div class="Gap"></div>
+                        <div class="Gap"></div>
+                        <p class="HeaderHeadingSubmenu text-lg-right text-md-right text-center">
+                            <a href="" class="LogoutButton">
+                                Logout &nbsp;&nbsp;&nbsp;<i class="fa fa-sign-out" aria-hidden="true"></i>
+                            </a>
+                        </p>
+                        <div class="Gap"></div>
+                        <p class="HeaderHeadingSubmenu text-lg-right text-md-right text-center">
+                            Logged in as: <span class="LoginAs"> Sr Exams</span>
+                        </p>
+                    </div>-->
+                </div>
+                <div class="Gap"></div>
+            </div>
+        </div>
+    </div>
+    <!--HEADER COMPONENT-->
+
+    <div class="container body-content">
+        <!--Body-->
+        <div class="row">
+            <div class="col-lg-12 col-md-12 col-xs-12 col-sm-12" style="box-shadow: 0px 2px 4px -1px #00006a;padding: 7px 40px 40px 40px;">
+                <p class="PageMainHeading"><i class="glyphicon glyphicon-folder-open" style="color: #00006a;"></i>Exam Marks Entry</p>
+                <div style="background-color: #00006a;" class="Gap"></div>
+                <ngx-spinner></ngx-spinner>
+                <form class="form-horizontal product-setup-form marks_form custom-form" autocomplete="off">
+                    <p class="PageMainHeading"><span class="PageMainHeadingBorder"> <i class="glyphicon glyphicon-tags" style="color: #00006a;"></i>Header</span> </p>
+
+                    <!--tab---->
+                    <!-- Nav tabs -->
+                    <!--<ul class="nav nav-tabs yarntabs" role="tablist">
+        <li role="presentation" class="tabsli">
+            <a href="#SeatPlan" aria-controls="home" role="tab" data-toggle="tab" aria-expanded="true">Seat Plan</a>
+        </li>
+        <li role="presentation" class="tabsli">
+            <a href="#Normal" aria-controls="home" role="tab" data-toggle="tab" aria-expanded="false">Normal</a>
+        </li>
+    </ul>-->
+                    <!--<ul class="nav nav-pills">
+        <li class="active">
+            <a href="#SeatPlan" data-toggle="tab">SeatPlan</a>
+        </li>
+        <li>
+            <a href="#Normal" data-toggle="tab">Normal</a>
+        </li>
+
+    </ul>-->
+                    <!--<ul class="nav nav-tabs" role="tablist">
+        <li class="nav-item">
+            <a class="nav-link active" href="#SeatPlan" role="tab" data-toggle="tab">SeatPlan</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" href="#Normal" role="tab" data-toggle="tab">Normal</a>
+        </li>
+
+    </ul>-->
+
+
+                    <div class="tab-wrapper">
+                        <ul class="tabs">
+                            <li class="tab-link active" data-tab="1">SeatPlan</li>
+                            <li class="tab-link" data-tab="2">Normal</li>
+
+                        </ul>
+                    </div>
+
+                    <!-- Tab panes -->
+
+                    <div class="content-wrapper">
+
+                        <div id="tab-1" class="tab-content active">
+                            <!--Seat PLan-->
+                            <div [formGroup]="unitGroup">
+                                <div class="row">
+                                    <div class="col-lg-2 col-md-2 col-sm-12 col-xs-12">
+                                        <span class="CustomLabel">Academic Year</span> <span class="RequiredLbl"> * </span><br>
+
+                                        <select class="AcademicYearList form-control">
+                                            <option value="">---Select---</option>
+                                        </select>
+                                        <p class="error-message">* Academic Year Required</p>
+
+                                    </div>
+
+                                    <div class="col-lg-2 col-md-2 col-sm-12 col-xs-12">
+                                        <span class="CustomLabel">Term</span> <span class="RequiredLbl"> * </span><br>
+
+                                        <select class="Term_list form-control">
+                                            <option value="">---Select---</option>
+                                            <option value="1">First Term</option>
+                                            <option value="2">Second Term</option>
+                                        </select>
+                                        <p class="error-message">* Term Required</p>
+                                    </div>
+
+                                    <div class="col-lg-2 col-md-2 col-sm-12 col-xs-12">
+
+                                        <span class="CustomLabel">Class</span> <span class="RequiredLbl"> * </span>
+                                        <select class="Class_list form-control">
+                                        </select>
+                                        <p class="error-message">* Class Required</p>
+                                    </div>
+
+                                    <div class="col-lg-2 col-md-2 col-sm-12 col-xs-12">
+                                        <span class="CustomLabel">Subject</span> <span class="RequiredLbl"> * </span><br>
+                                        <select class="Subject_list form-control">
+                                            <option value="">---Select---</option>
+
+                                        </select>
+                                        <p class="error-message">* Subject Required</p>
+                                    </div>
+                                    <div class="col-lg-2 col-md-2 col-sm-12 col-xs-12">
+                                        <span class="CustomLabel">Room</span> <span class="RequiredLbl"> * </span><br>
+                                        <select class="Room_list form-control">
+                                            <option value="">---Select---</option>
+
+                                        </select>
+                                        <p class="error-message">* Room Required</p>
+                                    </div>
+
+                                    <div class="col-lg-2 col-md-2 col-sm-12 col-xs-12">
+                                        <span class="CustomLabel">Block</span> <span class="RequiredLbl"> * </span><br>
+                                        <select class="Block_list form-control">
+                                            <option value="">---Select---</option>
+
+                                        </select>
+                                        <p class="error-message">* Block Required</p>
+                                    </div>
+
+
+                                    <div class="col-lg-2 col-md-2 col-sm-12 col-xs-12">
+                                        <span class="CustomLabel">Entry Option</span><br>
+                                        <select class="Entry_list form-control">
+                                            <option value="">All</option>
+                                            <option value="1">Total Marks</option>
+                                            <option value="2">Question</option>
+
+                                        </select>
+                                    </div>
+                                    <div class="col-lg-2 col-md-2 col-sm-12 col-xs-12">
+                                        <span class="CustomLabel">Mode</span><br>
+                                        <select class="Mode_list form-control">
+
+                                            <option value="1">Seat Plan</option>
+                                            <option value="2">Normal</option>
+
+                                        </select>
+                                    </div>
+                                    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 normalhide">
+
+
+
+                                        <p class="PageMainHeading"><span class="PageMainHeadingBorder"> <i class="glyphicon glyphicon-tags" style="color: #00006a;"></i>Filter</span> </p>
+                                        <div class="form-check-inline">
+                                            <label class="form-check-label" for="radio1">
+
+                                                <input type='radio' id='roomwise_radio' class="marks_show form-check-input" name='gridcheck' value='1' />Roll Wise
+                                            </label>
+                                        </div>
+                                        <div class="form-check-inline">
+                                            <label class="form-check-label" for="radio2">
+
+                                                <input type='radio' id='erpwise_radio' class="marks_show form-check-input" name='gridcheck' value='2' />ERP BASED
+                                            </label>
+                                        </div>
+
+                                        <input type="checkbox" class="updatecheck" style="display:none" /><label class="checkboxposition" style="display:none">Update</label>
+
+                                    </div>
+                                    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                                        <button class="fetch btn btn-primary savebtn normalhide" type="button">Show</button>
+
+                                    </div>
+                                </div>
+
+
+
+
+
+                                <!-- unitGroup Start -->
+
+                            </div>
+
+                            <div class="row">
+
+                                <div class="res col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                                    <p class="PageMainHeading"><span class="PageMainHeadingBorder"> <i class="glyphicon glyphicon-tags" style="color: #00006a;"></i>Student List</span> </p>
+
+
+                                </div>
+                            </div>
+
+                            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 boxpadding nopadding normalhide">
+                                <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12 text-center ">
+                                    <div class="markbox">
+                                        <h3 class="boxheading">Room</h3>
+                                        <h1 class="boxtext totalotherlabelstudent roombox"></h1>
+                                    </div>
+                                </div>
+                                <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12 text-center ">
+                                    <div class="markbox">
+                                        <h3 class="boxheading">ERP</h3>
+                                        <h1 class="totalotherlabelstudent boxtext erpbox"></h1>
+                                    </div>
+                                </div>
+                                <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12 text-center">
+                                    <div class="markbox">
+                                        <h3 class="boxheading">Incomplete</h3>
+                                        <h1 class="boxtext"></h1>
+                                    </div>
+                                </div>
+                            </div>
+
+
+                            <div class="col-lg-12 col-md-12 col-xs-12 col-sm-12 nopadding normalhide">
+                                <div id="accordion" class="accordion">
+                                    <div class="card mb-0">
+                                        <div class="card-header collapsed" data-toggle="collapse" href="#collapseTwo">
+                                            <a class="card-title">
+                                                <strong>Student#  (<span class="totalotherlabelstudent"></span>)</strong>
+                                            </a>
+                                        </div>
+                                        <div id="collapseTwo" class="card-body collapse" data-parent="#accordion">
+                                            <table class="marktable table">
+                                                <thead>
+                                                <th>Unified Exam Not Taken</th>
+                                                <th class="student_rollno">Roll No</th>
+                                                <th class="student_attendence">Attendence</th>
+                                                <th class="student_totalmarks">Total Marks</th>
+                                                </thead>
+                                                <tbody>
+                                                </tbody>
+                                            </table>
+                                        </div>
+
+
+                                    </div>
+                                </div>
+                            </div>
+                            <!--Seat PLan-->
+                        </div>
+
+                        <div id="tab-2" class="tab-content">
+                            <!--Normal-->
+                            <div class="row">
+                                <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12">
+                                    <span class="CustomLabel">Class Section</span> <span class="RequiredLbl"> * </span><br>
+
+                                    <select class="NormalClassSectionList form-control">
+                                        <option value="">---Select---</option>
+                                    </select>
+                                    <p class="error-message">* Class Section Required</p>
+
+                                </div>
+                                <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12">
+                                    <span class="CustomLabel">Subject</span> <span class="RequiredLbl"> * </span><br>
+
+                                    <select class="NormalSubjectList form-control">
+                                        <option value="">---Select---</option>
+                                    </select>
+                                    <p class="error-message">* Subjec Required</p>
+
+                                </div>
+                                <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12">
+                                    <span class="CustomLabel">Student</span> <span class="RequiredLbl"> * </span><br>
+
+                                    <select class="NormalStudentList form-control">
+                                        <option value="">---Select---</option>
+                                    </select>
+                                    <p class="error-message">* Student Required</p>
+
+                                </div>
+
+                                <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12">
+                                    <span class="CustomLabel">Term</span> <span class="RequiredLbl"> * </span><br>
+
+                                    <select class="NormalTermList form-control">
+                                        <option value="">---Select---</option>
+                                    </select>
+                                    <p class="error-message">* Term Required</p>
+
+                                </div>
+
+                                <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12">
+                                    <span class="CustomLabel">Evaluation Type</span> <span class="RequiredLbl"> * </span><br>
+
+                                    <select class="NormalEvaluationTypeList form-control">
+                                        <option value="">---Select---</option>
+                                    </select>
+                                    <p class="error-message">* Evaluation Type Required</p>
+
+                                </div>
+                                <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12">
+                                    <span class="CustomLabel">Evaluation Criteria</span> <span class="RequiredLbl"> * </span><br>
+
+                                    <select class="NormalEvaluationCriteriaList form-control">
+                                        <option value="">---Select---</option>
+                                    </select>
+                                    <p class="error-message">* Evaluation Criteria Required</p>
+
+                                </div>
+
+                                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+
+                                    <button class="fetch_mode btn btn-primary savebtn normalshow" type="button">Show Normal</button>
+                                    <button class="test btn btn-primary savebtn" type="button" id="test">Test</button>
+                                    
+                                </div>
+
+                                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 normaltable normalshow">
+                                    <table class="table table-bordered">
+                                        <thead>
+                                            <tr>
+                                                <th class="visibilityhidden">Hidden</th>
+                                                <th>No</th>
+                                                <th>Name</th>
+                                                <th>Roll No</th>
+                                                <th>
+                                                    Class Learning
+                                                    Percentage 100
+                                                </th>
+
+                                                <th>Action</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                            <!--Normal-->
+                        </div>
+
+
+
+                    </div>
+                </form>
+                    </div>
+
+
+                    
+
+
+
+
+                        <!--<div class="tab-content clearfix">
+        <div class="tab-pane active" id="SeatPlan">
+
+        </div>
+        <div class="tab-pane" id="Normal">
+
+        </div>
+
+
+    </div>-->
+                        <!--tab-->
+                        <!-- unitHeaderSetup Start -->
+                  
+
+
+
+                <!--accordian-->
+               
+                <!--accordian-->
+
+                <!---->
+
+
+                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 nopadding">
+
+                    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 totalotherstudent nopadding text-right savebtn">
+
+                    </div>
+                </div>
+
+
+            </div>
+        </div>
+        <!-- Main Page End   -->
+
+
+
+
+        <script>
+            // $(document).ready(function () {
+            var uri = window.location.href;
+            var enc = encodeURIComponent(uri).replace('%27', '+');
+            var dec = decodeURIComponent(enc);
+            var sURLVariableswithurl = "";
+            function GetUrlParameter(sParam) {
+                var sPageURL = dec;//window.location.search.substring(1);
+
+                sURLVariableswithurl = sPageURL.split('?');
+                var sURLVariables = sURLVariableswithurl[1].split('&');
+
+                for (var i = 0; i < sURLVariables.length; i++) {
+                    var sParameterName = sURLVariables[i].split('=');
+
+                    if (sParameterName[0] == sParam) {
+                        return sParameterName[1];
+                    }
+                }
+            }
+
+
+
+
+            var UserId = GetUrlParameter('UserID');
+            var cenid = GetUrlParameter('Center_ID');
+            var Org_Id=GetUrlParameter('Org_Id');
+            //alert(UserId + "--" + cenid);
+            var updateflag = 0;
+            //var UrlRoute = {
+            //            ERPUrl: 'http://localhost:52673/api/Setup/AllStudentbysessionsubclassempid',
+            //            RoomUrl:'http://localhost:52673/api/Setup/SeatPlanAllocatedStudentsbyRoom',
+
+            //           }
+
+            /********DROPDOWN*****/
+
+            var AcademicYearList = "";
+            $.ajax({
+                type: 'GET',
+                //data:,
+                url: 'http://localhost:52673/api/Setup/AcademicYearDropDown',//sURLVariableswithurl[0]+"?",//getsearchedpatient
+                success: function (result) {
+                    AcademicYearList += '<option selected="true" disabled="disabled" value="">---Select---</option>';
+
+                    for (var i = 0; i < result.length; i++) {
+
+
+                        AcademicYearList += '<option value="' + result[i].Session_Id + '">' + result[i].Description + '</option>';
+
+
+                    }
+                    $(".AcademicYearList").html(AcademicYearList);
+
+                },
+                complete: function (result) {
+
+                    $(".overlay").hide();
+                },
+                error: function (err) {
+
+                    //console.log(JSON.stringify(err));
+
+                }
+            });
+
+
+
+            // $(".AcademicYearList").change(function () {
+
+            var Class_list = "";
+            $(".overlay").show();
+            $.ajax({
+                type: 'GET',
+                //data: { Employee_Id: UserId, Session_Id: thisacc },
+                // url: 'http://localhost:52673/api/Setup/Dropdownbyssessionempid',//sURLVariableswithurl[0]+"?",//getsearchedpatient
+                url: 'http://localhost:52673/api/Setup/ClassDropDown',
+                success: function (result) {
+                    Class_list += '<option selected="true" disabled="disabled" value="">---Select---</option>';
+                    for (var i = 0; i < result.length; i++) {
+                        Class_list += '<option value="' + result[i].Class_Id + '">' + result[i].Class_Name + '</option>';
+                    }
+                    $(".Class_list").html(Class_list);
+
+                },
+                complete: function (result) {
+
+                    $(".overlay").hide();
+                },
+                error: function (err) {
+
+                    //console.log(JSON.stringify(err));
+
+                }
+            });
+            //});
+
+
+
+
+            $(".Term_list").change(function () {
+                var RoomList = "";
+                var sess_id = $(".AcademicYearList").val();
+                var trmid = $(".Term_list").val();
+                $(".overlay").show();
+                $.ajax({
+                    type: 'GET',
+                    data: { Session_Id: sess_id, TermGroup_Id: trmid, Center_Id: cenid, Teacher_Id: UserId },
+                    //url: 'http://localhost:52673/api/Setup/GetRoomByTeacherID',//sURLVariableswithurl[0]+"?",//getsearchedpatient
+                    url: 'http://localhost:52673/api/Setup/DropdownTeacherRooms',
+                    success: function (result) {
+                        RoomList += '<option selected="true" disabled="disabled" value="">---Select---</option>';
+
+                        for (var i = 1; i < result.length; i++) {
+
+
+                            //RoomList += '<option value="' + result[i].Room_Id + '">' + result[i].RoomAllot_Id + '</option>';//Id
+                            //RoomList += '<option value="' + i + '">' + i + '</option>';
+                            RoomList += '<option value="' + result[i].Room_Id + '">' + result[i].Room_Id + '</option>';
+
+                        }
+                        $(".Room_list").html(RoomList);
+
+                    },
+                    complete: function (result) {
+
+                        $(".overlay").hide();
+                    },
+                    error: function (err) {
+
+                        //console.log(JSON.stringify(err));
+
+                    }
+                });
+
+            });
+
+            $(".Class_list").change(function () {
+                $(".overlay").show();
+
+                var classId = $(this).val();
+
+                var Subject_list = "";
+                $.ajax({
+                    type: 'GET',
+                    data: { classId: classId },
+                    url: 'http://localhost:52673/api/Setup/SubjectByClassIdDropDown',//sURLVariableswithurl[0]+"?",//getsearchedpatient
+                    success: function (result) {
+                        Subject_list += '<option selected="true" disabled="disabled" value="">---Select---</option>';
+                        for (var i = 0; i < result.length; i++) {
+                            Subject_list += '<option value="' + result[i].Subject_Id + '">' + result[i].Subject_Name + '</option>';
+                        }
+                        $(".Subject_list").html(Subject_list);
+
+                    },
+                    complete: function (result) {
+
+                        $(".overlay").hide();
+                    },
+                    error: function (err) {
+                        $(".overlay").hide();
+                        //console.log(JSON.stringify(err));
+
+                    }
+                });
+            });
+
+
+            var BlockList = "";
+            $(".overlay").show();
+            $.ajax({
+                type: 'GET',
+                //data:,
+                url: 'http://localhost:52673/api/Setup/GetBlock',//sURLVariableswithurl[0]+"?",//getsearchedpatient
+                success: function (result) {
+                    BlockList += '<option selected="true" disabled="disabled" value="">---Select---</option>';
+
+                    for (var i = 0; i < result.length; i++) {
+
+
+                        BlockList += '<option value="' + result[i].Block_Id + '">' + result[i].Block_Name + '</option>';
+
+
+                    }
+                    $(".Block_list").html(BlockList);
+
+                },
+                complete: function (result) {
+
+                    $(".overlay").hide();
+                },
+                error: function (err) {
+
+                    //console.log(JSON.stringify(err));
+
+                }
+            });
+
+            /**MODE CHANGE ***/
+            //$(".Mode_list").change(function () {
+            //    var Modes = $(this).val();
+            //    if (Modes == 1) {
+            //        $(".normalshow").hide("slow");
+            //        $(".normalhide").show("slow");
+            //    }
+            //    else {
+            //        $(".normalshow").show("slow");
+            //        $(".normalhide").hide("slow");
+            //    }
+            //});
+            /***MODE CHANGE ***/
+
+
+
+
+
+            /********DROPDOWN*****/
+
+
+
+
+            /****UPDATE FILLING */
+            //$(".Subject_list").change(function () {
+
+
+            //    if (onlytthreefieldvali() == false) {
+
+            //        $(".Subject_list").val("");
+            //        return;
+            //    }
+            //    else {
+            //        var subj = $(this).val();
+            //        $.ajax({
+            //            type: 'GET',
+            //            data: { Session_Id: AcademicYearListvalidation, Class_Id: ClassListvalidation, Subject_Id: subj },
+
+            //            url: 'http://localhost:52673/api/Setup/ObjectiveDropDownBysubjectsessionclassid',
+            //            success: function (result) {
+            //                //console.log("Resultss"+result);
+            //                if (result == null || result == "" || result == " ") {
+
+
+            //                    //alert("null value");
+            //                    $(".saveunit").text("Save");
+            //                    $(".Chapter_list").val("");
+            //                    $(".SubUnit_list").val("");
+            //                    updateflag = 0;
+
+            //                }
+            //                else {
+
+            //                    $(".error-message").hide();
+            //                    $("input").css("border:1px solid #ced4da");
+            //                    $("select").css("border:1px solid #ced4da");
+            //                    $(".saveunit").text("Update");
+            //                    $(".Chapter_list").val(result[0].Sys_TopicSno);
+
+            //                    $(".setobjectiveid").val(result[0].Objective_Id);
+            //                    $(".unitname").val(result[0].Objective_Name);
+            //                    var SubUnit_list = "";
+            //                    $.ajax({
+            //                        type: 'GET',
+            //                        data: { ID: result[0].Sys_TopicSno },
+            //                        url: 'http://localhost:52673/api/Setup/SubTopicDropdown',
+            //                        success: function (result) {
+            //                            SubUnit_list += '<option selected="true" disabled="disabled" value="">---Select---</option>';
+            //                            for (var i = 0; i < result.length; i++) {
+            //                                SubUnit_list += '<option value="' + result[i].Sys_SubTopicSno + '">' + result[i].Sub_TopicName + '</option>';
+            //                            }
+            //                            $(".SubUnit_list").html(SubUnit_list);
+
+            //                        }
+            //                    });
+
+            //                    updateflag = 1;
+
+
+
+            //                }
+
+            //            }
+            //        });
+            //    }
+            //});
+
+
+            /*****THREE FIELD VALIDATION */
+            var AcademicYearListvalidation;
+            var TermListvalidation;
+            var ClassListvalidation;
+            var SubjectListvalidation;
+            var Room_listvalidation;
+            var Block_listvalidation;
+            function onlytthreefieldvali() {
+                AcademicYearListvalidation = $('.AcademicYearList').val();
+                TermListvalidation = $('.Term_list').val();
+                ClassListvalidation = $('.Class_list').val();
+                SubjectListvalidation = $('.Subject_list').val();
+                Room_listvalidation = $('.Room_list').val();
+                Block_listvalidation = $(".Block_list").val();
+                $('.AcademicYearList').change("select", function () {
+                    $('.AcademicYearList').next(".error-message").hide();
+                    $('.AcademicYearList').css('border', 'none');
+                    $('.AcademicYearList').css('background', '#d8f9d8');
+                });
+                if (AcademicYearListvalidation == null || AcademicYearListvalidation == undefined || AcademicYearListvalidation == "" || AcademicYearListvalidation == " ") {
+                    $('.AcademicYearList').next(".error-message").text("* Academic Year Required");
+                    $('.AcademicYearList').next(".error-message").show();
+                    $('.AcademicYearList').css('border', '1px solid red');
+                    $('.AcademicYearList').css('background', '#fff');
+                    $('.AcademicYearList').focus();
+                    return false;
+                }
+                $('.Term_list').change("select", function () {
+                    $('.Term_list').next(".error-message").hide();
+                    $('.Term_list').css('border', 'none');
+                    $('.Term_list').css('background', '#d8f9d8');
+                });
+                if (TermListvalidation == null || TermListvalidation == undefined || TermListvalidation == "" || TermListvalidation == " ") {
+                    $('.Term_list').next(".error-message").text("* Term Required");
+                    $('.Term_list').next(".error-message").show();
+                    $('.Term_list').css('border', '1px solid red');
+                    $('.Term_list').css('background', '#fff');
+                    $('.Term_list').focus();
+                    return false;
+                }
+                $('.Class_list').change("select", function () {
+                    $('.Class_list').next(".error-message").hide();
+                    $('.Class_list').css('border', 'none');
+                    $('.Class_list').css('background', '#d8f9d8');
+                });
+                if (ClassListvalidation == null || ClassListvalidation == undefined || ClassListvalidation == "" || ClassListvalidation == " ") {
+                    $('.Class_list').next(".error-message").text("* Class Required");
+                    $('.Class_list').next(".error-message").show();
+                    $('.Class_list').css('border', '1px solid red');
+                    $('.Class_list').css('background', '#fff');
+                    $('.Class_list').focus();
+                    return false;
+                }
+
+                $('.Subject_list').on("input", function () {
+                    $('.Subject_list').next(".error-message").hide();
+                    $('.Subject_list').css('border', 'none');
+                    $('.Subject_list').css('background', '#d8f9d8');
+                });
+                if (SubjectListvalidation == null || SubjectListvalidation == undefined || SubjectListvalidation == "" || SubjectListvalidation == " ") {
+                    $('.Subject_list').next(".error-message").text("* Subject Required");
+                    $('.Subject_list').next(".error-message").show();
+                    $('.Subject_list').css('border', '1px solid red');
+                    $('.Subject_list').css('background', '#fff');
+                    $('.Subject_list').focus();
+                    return false;
+                }
+
+
+
+            }
+
+            /*****THREE FIELD VALIDATION */
+
+            
+
+            /*******TRY */
+            //$('.marks_show:radio[name=gridcheck]').change(function() {
+
+            //});
+
+
+            $(".fetch").click(function () {
+
+                if (updateflag == 0) { saveflagzero(); }
+                if (updateflag == 1) { updateflagzero(); }
+            });//Fetch BTN
+
+
+            /***NORMAL VALIDATION**/
+            var NormalClassSectionListvalidation;
+            var NormalSubjectListvalidation;
+              var NormalStudentListvalidation;
+                var NormalTermListvalidation;
+                var NormalEvaluationTypeListvalidation;
+            var NormalEvaluationCriteriaListvalidation;
+
+            function normalvalidation() { 
+               NormalClassSectionListvalidation = $('.NormalClassSectionList').val();
+               NormalSubjectListvalidation = $('.NormalSubjectList').val();
+                NormalStudentListvalidation = $('.NormalStudentList').val();
+                NormalTermListvalidation = $('.NormalTermList').val();
+                NormalEvaluationTypeListvalidation = $('.NormalEvaluationTypeList').val();
+            var NormalEvaluationCriteriaListvalidation = $(".NormalEvaluationCriteriaList").val();
+
+                $('.NormalClassSectionList').change("select", function () {
+                    $('.NormalClassSectionList').next(".error-message").hide();
+                    $('.NormalClassSectionList').css('border', 'none');
+                    $('.NormalClassSectionList').css('background', '#d8f9d8');
+                });
+                if (NormalClassSectionListvalidation == null || NormalClassSectionListvalidation == undefined || NormalClassSectionListvalidation == "" || NormalClassSectionListvalidation == " ") {
+                    $('.NormalClassSectionList').next(".error-message").text("* Class Section Required");
+                    $('.NormalClassSectionList').next(".error-message").show();
+                    $('.NormalClassSectionList').css('border', '1px solid red');
+                    $('.NormalClassSectionList').css('background', '#fff');
+                    $('.NormalClassSectionList').focus();
+                    return false;
+            }
+
+               $('.NormalSubjectList').change("select", function () {
+                    $('.NormalSubjectList').next(".error-message").hide();
+                    $('.NormalSubjectList').css('border', 'none');
+                    $('.NormalSubjectList').css('background', '#d8f9d8');
+                });
+                if (NormalSubjectListvalidation == null || NormalSubjectListvalidation == undefined || NormalSubjectListvalidation == "" || NormalSubjectListvalidation == " ") {
+                    $('.NormalSubjectList').next(".error-message").text("* Subject Required");
+                    $('.NormalSubjectList').next(".error-message").show();
+                    $('.NormalSubjectList').css('border', '1px solid red');
+                    $('.NormalSubjectList').css('background', '#fff');
+                    $('.NormalSubjectList').focus();
+                    return false;
+            }
+
+             $('.NormalTermList').change("select", function () {
+                    $('.NormalTermList').next(".error-message").hide();
+                    $('.NormalTermList').css('border', 'none');
+                    $('.NormalTermList').css('background', '#d8f9d8');
+                });
+                if (NormalTermListvalidation == null || NormalTermListvalidation == undefined || NormalTermListvalidation == "" || NormalTermListvalidation == " ") {
+                    $('.NormalTermList').next(".error-message").text("* Term Required");
+                    $('.NormalTermList').next(".error-message").show();
+                    $('.NormalTermList').css('border', '1px solid red');
+                    $('.NormalTermList').css('background', '#fff');
+                    $('.NormalTermList').focus();
+                    return false;
+            }
+            $('.NormalEvaluationTypeList').change("select", function () {
+                    $('.NormalEvaluationTypeList').next(".error-message").hide();
+                    $('.NormalEvaluationTypeList').css('border', 'none');
+                    $('.NormalEvaluationTypeList').css('background', '#d8f9d8');
+                });
+                if (NormalEvaluationTypeListvalidation == null || NormalEvaluationTypeListvalidation == undefined || NormalEvaluationTypeListvalidation == "" || NormalEvaluationTypeListvalidation == " ") {
+                    $('.NormalEvaluationTypeList').next(".error-message").text("* Evaluation Type Required");
+                    $('.NormalEvaluationTypeList').next(".error-message").show();
+                    $('.NormalEvaluationTypeList').css('border', '1px solid red');
+                    $('.NormalEvaluationTypeList').css('background', '#fff');
+                    $('.NormalEvaluationTypeList').focus();
+                    return false;
+            }
+
+              $('.NormalEvaluationCriteriaList').change("select", function () {
+                    $('.NormalEvaluationCriteriaList').next(".error-message").hide();
+                    $('.NormalEvaluationCriteriaList').css('border', 'none');
+                    $('.NormalEvaluationCriteriaList').css('background', '#d8f9d8');
+                });
+                if (NormalEvaluationCriteriaListvalidation == null || NormalEvaluationCriteriaListvalidation == undefined || NormalEvaluationCriteriaListvalidation == "" || NormalEvaluationCriteriaListvalidation == " ") {
+                    $('.NormalEvaluationCriteriaList').next(".error-message").text("* Evaluation Criteria Required");
+                    $('.NormalEvaluationCriteriaList').next(".error-message").show();
+                    $('.NormalEvaluationCriteriaList').css('border', '1px solid red');
+                    $('.NormalEvaluationCriteriaList').css('background', '#fff');
+                    $('.NormalEvaluationCriteriaList').focus();
+                    return false;
+                }
+                }
+            /**NORMAL VALIDATION***/
+            var SSECID = "";
+
+            $(".fetch_mode").click(function () {
+               
+                if (normalvalidation() == false) {
+                    $(".overlay").hide();
+                    return;
+
+                }
+                else {
+                     $(".overlay").show();
+                //alert($(".NormalStudentList option").length);
+                //exit();
+
+                // int Evaluation_Criteria_Type_Id = Convert.ToInt32(list_Term.SelectedValue.ToString());
+                //int Section_Subject_Id = Convert.ToInt32(list_Subject.SelectedValue.ToString());
+                //int Student_id = Convert.ToInt32(list_student.SelectedValue.ToString());
+                //int Evaluation_Type_Id =  Convert.ToInt32(list_EvlType.SelectedValue.ToString());
+                //int Evaluation_Criteria_Id = Convert.ToInt32(list_EvlCriteria.SelectedValue.ToString());
+ 
+
+                /**ADD MISSING STUDENT**/
+                     var AlreadyIn = 0;
+                    $(".NormalStudentList option").each(function () {
+
+                        //Student_Evaluation_CriteriaInsertMissingStudent(long StudentId, long Section_Id, long AlreadyIn)
+                        var NormalClassSectionId = parseInt($(".NormalClassSectionList").val());
+                        var NormalTermId = $(".NormalTermList").val();
+                        var NormalSectionSubjectId = $(".NormalSubjectList").val();
+                        var NormalStudentId = parseInt($(this).val());
+                        var NormalEvaluationTypeId = $(".NormalEvaluationTypeList").val();
+                        var NormalEvaluationCriteriaId = $(".NormalEvaluationCriteriaList").val();
+                       
+                        if (NormalStudentId != 0) {
+                            $.ajax({
+                                
+                                async: false,
+                               // data: { StudentId: NormalStudentId, Section_Id: NormalClassSectionId, AlreadyIn: AlreadyIn },
+                                //dataType: 'json',
+                                //url: 'http://localhost:52673/api/Setup/Student_Evaluation_CriteriaInsertMissingStudent',
+                                 url: 'http://localhost:52673/api/Setup/Student_Evaluation_CriteriaInsertMissingStudent?StudentId='+NormalStudentId+'&Section_Id='+NormalClassSectionId+'&AlreadyIn='+AlreadyIn,
+                                type: 'POST',
+                                success: function (result) {
+                                    AlreadyIn = 1;
+                                },
+                                error: function (err) {
+                                    AlreadyIn = 0;
+                                    console.log("Add missing data" + JSON.stringify(err))
+
+                                }
+                            });
+                        }
+                    });
+                /**ADD MISSING STUDENT**/
+                      var NormalClassSectionId = $(".NormalClassSectionList").val();
+                    var NormalTermId = $(".NormalTermList").val();
+                        var NormalSectionSubjectId = $(".NormalSubjectList").val();
+                        var NormalStudentId = $(".NormalStudentList").val();
+                        var NormalEvaluationTypeId = $(".NormalEvaluationTypeList").val();
+                    var NormalEvaluationCriteriaId = $(".NormalEvaluationCriteriaList").val();
+                /**GET SSEC_Id */
+                   
+
+                   
+                    $.ajax({
+                        type: 'GET',
+                        async: false,
+                        data: { ClassSection_Id: NormalClassSectionId, Section_Subject_Id: NormalSectionSubjectId, TermGroup_Id: NormalTermId, Evaluation_Type_Id: NormalEvaluationTypeId},//, Evaluation_Criteria_Id: NormalEvaluationCriteriaId 
+                        url: 'http://localhost:52673/api/Setup/CheckSSECID',
+
+                        success: function (result) {
+                            //console.log("SSEC_ID" + JSON.stringify(result));
+                            SSECID=result[0].SSEC_Id;
+                        }
+                    });
+                /**GET SSEC_Id */
+                    $(".normaltable tbody").html("");
+                var normaltable = "";
+                
+                var srno = 0;
+                    //if ($(".NormalStudentList").val() == "" || $(".NormalStudentList").val() == null) {
+                    //  $(".NormalStudentList option").each(function () {
+                            
+                    //        // Add $(this).val() to your list
+
+                    //        var NormalTermId = $(".NormalTermList").val();
+                    //        var NormalSectionSubjectId = $(".NormalSubjectList").val();
+                    //        var NormalStudentId = $(this).val();
+                    //        var NormalEvaluationTypeId = $(".NormalEvaluationTypeList").val();
+                    //        var NormalEvaluationCriteriaId = $(".NormalEvaluationCriteriaList").val();
+
+
+                    //        $.ajax({
+                    //            type: 'GET',
+                    //            async: false,
+                    //            data: { Evaluation_Criteria_Type_Id: NormalTermId, Section_Subject_Id: NormalSectionSubjectId, Student_id: NormalStudentId, Evaluation_Type_Id: NormalEvaluationTypeId, Evaluation_Criteria_Id: NormalEvaluationCriteriaId },
+                    //            url: 'http://localhost:52673/api/Setup/Student_Evaluation_CriteriaEVlCriteriaBySectSubjIdNew',
+
+                    //            success: function (result) {
+                    //                console.log("reusltsyyu" + JSON.stringify(result));
+                    //                srno = srno + 1;
+                    //                if (result == null || result == "" || result == " ") {
+                    //                    Swal.fire(
+                    //                        'No Data',
+                    //                        '',
+                    //                        'error'
+                    //                    )
+                    //                }
+                    //                else {
+
+                    //                    for (var tt = 0; tt < result.length; tt++) {
+
+                    //                        normaltable += '<tr>';
+                    //                        normaltable += '<td class="visibilityhidden"><span class="normal_RollNo">' + result[tt].RollNo + '</span><span class="normal_stusecsubid">' + result[tt].Student_Section_Subject_Id + '</span>';
+                    //                        //normaltable += '<span class="normal_section_subject_id">' + result[tt].Section_Subject_Id + '</span><span class="normal_student_section_subject_id">' + result[tt].Student_Section_Subject_Id + '</span></span><span class="normal_sess_id">' + result[tt].Session_Id + '</span>';
+                    //                        normaltable += '</td>';
+                    //                        normaltable += '<td class="normal_studentname">' + srno + '</td>';
+                    //                        normaltable += '<td class="normal_teachername">' + result[tt].Name + '</td>';
+                    //                        normaltable += '<td class="normal_subjectname">' + result[tt].RollNo + '</td>';
+                    //                        if (result[tt].DDD == null) {
+
+                    //                            normaltable += '<td class="normal_markbox"><input type="text" class="form-control normaltotalmarks" placeholder="Enter Marks"  onchange="normalstudent_totalmarks(this)" onkeydown="normalstudent_totalmarks(this)" onkeyup="normalstudent_totalmarks(this)" /><p class="error-message">* Total Mark Required</p></td>';//onchange="normalstudent_totalmarks(this)" onkeydown="normalstudent_totalmarks(this)" onkeyup="normalstudent_totalmarks(this)" <p class="error-message">* Total Mark Required</p>
+                    //                        }
+                    //                        else {
+                    //                            normaltable += '<td class="normal_markbox">' + result[tt].DDD + '</td>';
+                    //                        }
+
+                    //                        //normaltable += '<td><input type="text" class="form-control normaltotalmarks" placeholder="Enter Marks" onchange="normalstudent_totalmarks(this)" onkeydown="normalstudent_totalmarks(this)" onkeyup="normalstudent_totalmarks(this)"/><p class="error-message">* Total Mark Required</p></td>';
+                    //                        normaltable += '<td><button type="button" class="savenormal_student btn btn-primary" onClick="SaveNormalStudent(this)">Save</button></td>';
+                    //                        normaltable += '</tr>';
+
+                    //                    }
+
+                    //                }
+                    //            },
+                    //            complete: function (result) {
+
+                    //                //$(".overlay").hide();
+                    //            },
+                    //            error: function (err) {
+                    //                //$(".overlay").hide();
+                    //            }
+                    //        });
+                    //        // }
+                    //    });
+                    //}
+                    //else {
+                           /***FOR ONE STUDENT**/
+                        //var NormalTermId = $(".NormalTermList").val();
+                        //var NormalSectionSubjectId = $(".NormalSubjectList").val();
+                        //var NormalStudentId = $(".NormalStudentList").val();
+                        //var NormalEvaluationTypeId = $(".NormalEvaluationTypeList").val();
+                        //var NormalEvaluationCriteriaId = $(".NormalEvaluationCriteriaList").val();
+
+                        $.ajax({
+                            type: 'GET',
+                            async: false,
+                            data: { Evaluation_Criteria_Type_Id: NormalTermId, Section_Subject_Id: NormalSectionSubjectId, Student_id: NormalStudentId, Evaluation_Type_Id: NormalEvaluationTypeId, Evaluation_Criteria_Id: NormalEvaluationCriteriaId },
+                           // url: 'http://localhost:52673/api/Setup/Student_Evaluation_CriteriaEVlCriteriaBySectSubjIdNew',
+                            url: 'http://localhost:52673/api/Setup/Student_Evaluation_Criteria_MarkNormal',
+                            
+                            success: function (result) {
+                                console.log("1resrilu" + JSON.stringify(result));
+                                
+                                srno = srno + 1;
+                                if (result == null || result == "" || result == " ") {
+                                    Swal.fire(
+                                        'No Data',
+                                        '',
+                                        'error'
+                                    )
+                                }
+                                else {
+
+                                    for (var tt = 0; tt < result.length; tt++) {
+
+                                        normaltable += '<tr>';
+                                        normaltable += '<td class="visibilityhidden"><span class="normal_RollNo">' + result[tt].Student_Id + '</span><span class="normal_stusecsubid">' + result[tt].Student_Section_Subject_Id + '</span>';
+                                        //normaltable += '<span class="normal_section_subject_id">' + result[tt].Section_Subject_Id + '</span><span class="normal_student_section_subject_id">' + result[tt].Student_Section_Subject_Id + '</span></span><span class="normal_sess_id">' + result[tt].Session_Id + '</span>';
+                                        normaltable += '</td>';
+                                        normaltable += '<td class="normal_studentname">' + srno + '</td>';
+                                        normaltable += '<td class="normal_teachername">' + result[tt].student_name + '</td>';
+                                        normaltable += '<td class="normal_subjectname">' + result[tt].Student_Id + '</td>';
+                                        if (result[tt].Marks_Obtained == null) {
+
+                                            normaltable += '<td class="normal_markbox"><input type="text" class="form-control normaltotalmarks" placeholder="Enter Marks" onchange="normalstudent_totalmarks(this)" onkeydown="normalstudent_totalmarks(this)" onkeyup="normalstudent_totalmarks(this)"  value="'+result[tt].Marks_Obtained+'"/><p class="error-message">* Total Mark Required</p></td>';//onchange="normalstudent_totalmarks(this)" onkeydown="normalstudent_totalmarks(this)" onkeyup="normalstudent_totalmarks(this)" <p class="error-message">* Total Mark Required</p>
+                                        }
+                                        else {
+                                            //normaltable += '<td class="normal_markbox">' + result[tt].Marks_Obtained + '</td>';
+                                           normaltable += '<td class="normal_markbox"><input type="text" class="form-control normaltotalmarks" placeholder="Enter Marks" onchange="normalstudent_totalmarks(this)" onkeydown="normalstudent_totalmarks(this)" onkeyup="normalstudent_totalmarks(this)"  value=""/><p class="error-message">* Total Mark Required</p></td>';//onchange="normalstudent_totalmarks(this)" onkeydown="normalstudent_totalmarks(this)" onkeyup="normalstudent_totalmarks(this)" <p class="error-message">* Total Mark Required</p>
+
+                                        }
+
+                                        //normaltable += '<td><input type="text" class="form-control normaltotalmarks" placeholder="Enter Marks" onchange="normalstudent_totalmarks(this)" onkeydown="normalstudent_totalmarks(this)" onkeyup="normalstudent_totalmarks(this)"/><p class="error-message">* Total Mark Required</p></td>';
+                                        normaltable += '<td><button type="button" class="savenormal_student btn btn-primary" onClick="SaveNormalStudent(this)">Save</button></td>';
+                                        normaltable += '</tr>';
+
+                                    }
+                                    $(".normaltable tbody").html(normaltable);
+                                }
+                            },
+                            complete: function (result) {
+
+                                $(".overlay").hide();
+                            },
+                            error: function (err) {
+                                console.log(JSON.stringify(err))
+                                $(".overlay").hide();
+                            }
+                        });
+                        /**FOR ONE STUDENT**/
+
+                       
+                    //}
+               
+            
+                  
+                }
+            });
+
+            /**Save when update flag in 0**/
+            function saveflagzero() {
+                var alreadyt = "";
+                var data_on_url = "";
+                var currenturl = "";
+                var data_types = "";
+                var Question = [];
+                Question.length = 0
+                var dataadd = [];
+                dataadd.length = 0;
+                //var dataadd = "";
+                if (onlytthreefieldvali() == false) {
+                    //$(".Subject_list").val("");
+                    return;
+                }
+                else {
+                    //Session_Id: 12, Employee_Id: 34185, Class_Id: 11, Subject_Id: 163
+                    // data: { Session_Id: 12, Employee_Id: 34185, Class_Id: 11, Subject_Id: 163 },
+                    var rheading = "";
+                    if ($("#erpwise_radio").is(':checked') == true) {//this.value == '1'
+                        currenturl = 'http://localhost:52673/api/Setup/AllStudentbysessionsubclassempid';
+                        data_on_url = { Session_Id: AcademicYearListvalidation, Employee_Id: UserId, Class_Id: ClassListvalidation, Subject_Id: SubjectListvalidation };
+                        rheading = "ERP";
+                    }
+                    else if ($("#roomwise_radio").is(':checked') == true) {
+
+
+                        /***ROOM AND BLOCK VALIDTAION**/
+                        $('.Room_list').on("input", function () {
+                            $('.Room_list').next(".error-message").hide();
+                            $('.Room_list').css('border', 'none');
+                            $('.Room_list').css('background', '#d8f9d8');
+                        });
+                        if (Room_listvalidation == null || Room_listvalidation == undefined || Room_listvalidation == "" || Room_listvalidation == " ") {
+                            $('.Room_list').next(".error-message").text("* Room Required");
+                            $('.Room_list').next(".error-message").show();
+                            $('.Room_list').css('border', '1px solid red');
+                            $('.Room_list').css('background', '#fff');
+                            $('.Room_list').focus();
+                            return;
+                        }
+                        $('.Block_list').on("input", function () {
+                            $('.Block_list').next(".error-message").hide();
+                            $('.Block_list').css('border', 'none');
+                            $('.Block_list').css('background', '#d8f9d8');
+                        });
+                        if (Block_listvalidation == null || Block_listvalidation == undefined || Block_listvalidation == "" || Block_listvalidation == " ") {
+                            $('.Block_list').next(".error-message").text("* Block Required");
+                            $('.Block_list').next(".error-message").show();
+                            $('.Block_list').css('border', '1px solid red');
+                            $('.Block_list').css('background', '#fff');
+                            $('.Block_list').focus();
+                            return;
+                        }
+                        /***ROOM AND BLOCK VALIDTAION**/
+
+
+                        currenturl = 'http://localhost:52673/api/Setup/SeatPlanAllocatedStudentsbyRoom';
+                        data_on_url = { Session_Id: AcademicYearListvalidation, TermGroup_Id: TermListvalidation, Room_Id: Room_listvalidation, Class_Id: ClassListvalidation, Teacher_Id: UserId, Subject_Id: SubjectListvalidation, Block_Id: Block_listvalidation };//Session_Id: 12, TermGroup_Id: 1, Room_Id: 1
+
+                        rheading = "Roll No";
+
+                        //console.log("Restlyuyuyu"+"Session" + AcademicYearListvalidation + "--" + "Terms" + TermListvalidation + "--" + "RoomID" + Room_listvalidation + "--" + "ClassId" + ClassListvalidation + "Teacher" + UserId);
+                    }
+                    else {
+                        Swal.fire(
+                            'Kindly Check radio button',
+                            '',
+                            'error'
+                        )
+                        return;
+                    }
+
+
+
+
+                    var marktable = "";
+                    var headingonruntime = "";
+                    $(".overlay").show();
+                    $.ajax({
+                        type: 'GET',
+                        //data: { Session_Id: AcademicYearListvalidation, Employee_Id: UserId, Class_Id: ClassListvalidation, Subject_Id: SubjectListvalidation },
+                        //url: 'http://localhost:52673/api/Setup/AllStudentbysessionsubclassempid',
+                        data: data_on_url,
+                        url: currenturl,
+
+
+                        success: function (result) {
+                            //console.log("Resultgh" + JSON.stringify(result));
+
+                            if (result == null || result == "" || result == " ") {
+                                Swal.fire(
+                                    'No Data',
+                                    '',
+                                    'error'
+                                )
+                            }
+                            else {
+                                for (var tr = 0; tr < result.length; tr++) {
+
+
+                                    if (alreadyt != result[tr].Student_Id) {
+                                        /**FIRST tIME USER**/
+                                        if (alreadyt == "") {
+                                            Question.push({
+                                                Question_No: result[tr].Question_No,
+                                                Question_Parts: result[tr].Question_Parts,
+                                                Question_Parts_Name: result[tr].Question_Parts_Name,
+                                                Max_Marks_Question: result[tr].Max_Marks_Question,
+                                                Objective_Id: result[tr].Objective_Id,
+                                                Objective_Name: result[tr].Objective_Name
+
+                                            });
+
+                                            dataadd.push({
+                                                Student_Id: result[tr].Student_Id,
+                                                StudentMaskNo: result[tr].StudentMaskNo,
+                                                Student_Name: result[tr].First_Name,
+                                                Center_Id: result[tr].Center_Id,
+                                                Center_Name: result[tr].Center_Name,
+                                                Class_Name: result[tr].Class_Name,
+                                                Max_Paper_Marks: result[tr].Max_Paper_Marks,
+
+                                                Question: Question,
+
+                                            });
+                                            alreadyt = result[tr].Student_Id;
+                                        }
+                                        /**FIRST tIME USER**/
+
+                                        else {
+                                            Question = [];
+                                            Question.push({
+                                                Question_No: result[tr].Question_No,
+                                                Question_Parts: result[tr].Question_Parts,
+                                                Question_Parts_Name: result[tr].Question_Parts_Name,
+                                                Max_Marks_Question: result[tr].Max_Marks_Question,
+                                                Objective_Id: result[tr].Objective_Id,
+                                                Objective_Name: result[tr].Objective_Name
+                                            });
+
+                                            dataadd.push({
+                                                Student_Id: result[tr].Student_Id,
+                                                StudentMaskNo: result[tr].StudentMaskNo,
+                                                Student_Name: result[tr].First_Name,
+                                                Center_Id: result[tr].Center_Id,
+                                                Center_Name: result[tr].Center_Name,
+                                                Class_Name: result[tr].Class_Name,
+                                                Max_Paper_Marks: result[tr].Max_Paper_Marks,
+                                                Question: Question
+                                            });
+                                            alreadyt = result[tr].Student_Id;
+                                        }
+                                    }
+                                    else {
+                                        Question.push({
+                                            Question_No: result[tr].Question_No,
+                                            Question_Parts: result[tr].Question_Parts,
+                                            Question_Parts_Name: result[tr].Question_Parts_Name,
+                                            Max_Marks_Question: result[tr].Max_Marks_Question,
+                                            Objective_Id: result[tr].Objective_Id,
+                                            Objective_Name: result[tr].Objective_Name
+
+                                        });
+                                    }
+                                    //console.log("niche wala" + datadd);
+                                }
+                                /************TRY */
+                                /***TABLE GENRATION***/
+                                headingonruntime += "<tr><th>Unified Exam Not Taken</th><th>" + rheading + "</th><th>Attendence</th><th>Total Marks</th>";
+
+
+                                var rowquestionTotalmarks = 0;
+                                marktable += "<tr class='marks_row'>";
+                                marktable += "<td></td><td></td><td></td><td><span class='total_mark_Paper'></span></td>";//dataadd[0].Max_Paper_Marks
+                                //for (var ti = 0; ti < data.length; ti++) {
+                                for (var tj = 0; tj < dataadd[0].Question.length; tj++) {
+                                    marktable += "<td class='maxquestion_nr'>";
+
+                                    marktable += "<span>" + dataadd[0].Question[tj].Max_Marks_Question + "</span>";
+                                    rowquestionTotalmarks += parseInt(dataadd[0].Question[tj].Max_Marks_Question);
+                                    marktable += "</td>";
+                                    //var questionparts = (dataadd[0].Question[tj].Question_Parts == null || dataadd[0].Question[tj].Question_Parts=="" || dataadd[0].Question[tj].Question_Parts==" ") ? "" : dataadd[0].Question[tj].Question_Parts;
+                                    var questionparts = (dataadd[0].Question[tj].Question_Parts_Name == null || dataadd[0].Question[tj].Question_Parts_Name == "" || dataadd[0].Question[tj].Question_Parts_Name == " ") ? "" : dataadd[0].Question[tj].Question_Parts_Name;
+
+                                    headingonruntime += "<th>Q" + dataadd[0].Question[tj].Question_No + " " + questionparts + "</th>";
+                                }
+                                // }
+                                marktable += "</tr>";
+                                headingonruntime += "<th>Action</th>";
+                                headingonruntime += "</tr>";
+                                // var sno = 0;
+                                for (var i = 0; i < dataadd.length; i++) {
+                                    //console.log("dataa" + JSON.stringify(dataadd));
+                                    // sno += 1;
+                                    marktable += "<tr class='orignaltr'>";
+                                    // marktable += "<td>"+sno+"</td>";
+                                    marktable += "<td class='visibilityhidden'><span class='trmasknumber'>" + dataadd[i].StudentMaskNo + "</span><span class='trstudentname'>" + dataadd[i].Student_Name + "</span><span class='trcenterid'>" + dataadd[i].Center_Id + "</span><span class='trcentername'>" + dataadd[i].Center_Name + "</span><span class='trclassname'>" + dataadd[i].Class_Name + "</span>";
+                                    marktable += "</td>";
+                                    marktable += "<td><input type='checkbox' class='markbox' id='markbox' onclick='hidecheckbox(this)' ></td>";
+                                    marktable += "<td class='student_rollno'>";
+                                    if ($("#erpwise_radio").is(':checked') == true) {
+                                        marktable += "<span class='student_rollnospan'>" + dataadd[i].Student_Id + "</span>";
+                                        marktable += "<span class='student_maskspan visibilityhidden'>" + dataadd[i].StudentMaskNo + "</span>";
+                                    }
+                                    else if ($("#roomwise_radio").is(':checked') == true) {
+                                        marktable += "<span class='student_rollnospan visibilityhidden'>" + dataadd[i].Student_Id + "</span>";
+                                        marktable += "<span class='student_maskspan'>" + dataadd[i].StudentMaskNo + "</span>";
+                                    }
+                                    marktable += "</td>";
+                                    marktable += "<td><select class='form-control attendence' onchange='hideattendence(this)'>";
+                                    marktable += "<option value='1'>Present</option>";
+                                    marktable += "<option value='2'>Absent</option>";
+                                    marktable += "</td>";
+                                    marktable += "<td class='student_totalmarks'><input type='number' class='form-control student_totalmarksvalidation' placeholder='Enter Total Marks' onchange='student_totalmarks(this)' onkeydown='student_totalmarks(this)' onkeyup='student_totalmarks(this)'><p class='error-message'>* Total Mark Excessed</p></td>";//
+                                    for (var j = 0; j < dataadd[i].Question.length; j++) {
+                                        marktable += "<td class='nr'>";
+                                        marktable += "<span class='question_id visibilityhidden'>" + dataadd[i].Question[j].Question_No + "</span>";
+                                        marktable += "<span class='objective_id visibilityhidden'>" + dataadd[i].Question[j].Objective_Id + "</span>";
+                                        marktable += "<span class='objective_name visibilityhidden'>" + dataadd[i].Question[j].Objective_Name + "</span>";
+                                        marktable += "<select class='form-control' >";
+                                        for (var q = 0; q <= dataadd[i].Question[j].Max_Marks_Question; q++)//q+= 0.5//dataadd[i].Question[j].Question_No
+                                        {
+                                            marktable += "<option value='" + q + "'>" + q + "</option>";
+                                        }
+                                        marktable += "</select>";
+
+
+
+                                        marktable += "</td>";
+                                    }//data[i].Question[j].QuestionNo
+                                    marktable += "<td><button type='button' class='savestudent btn btn-primary' onClick='SaveStudent(this)'>Save</button></td>";
+                                    marktable += "</tr>";
+
+                                }
+                                $(".marktable thead").html(headingonruntime);
+                                $(".marktable tbody").html(marktable);
+
+                                /**TABLE GENRATION***/
+                                $(".total_mark_Paper").text(rowquestionTotalmarks);
+                                var totalstudentcount = $(".marktable tbody tr").length - 1;
+                                var printcount = "<h3>Total Student: " + totalstudentcount + "</h3>";
+                                $(".totalotherstudent").html(printcount);
+                                $(".totalotherlabelstudent").text(totalstudentcount);
+                                if ($("#erpwise_radio").is(':checked') == true) {
+                                    $(".roombox").text("");
+                                }
+                                else if ($("#roomwise_radio").is(':checked') == true) {
+                                    $(".erpbox").text("");
+                                }
+                            }
+
+                        },
+                        complete: function (result) {
+
+                            $(".overlay").hide();
+                        },
+                        error: function (err) {
+                            $(".overlay").hide();
+                            //console.log(JSON.stringify(err));
+
+                        }
+                    });
+
+                }
+            }
+            /**Save when update flag is 1**/
+
+
+            /**Update when update flag in 1**/
+            function updateflagzero() {
+                var alreadyt = "";
+                var data_on_url = "";
+                var currenturl = "";
+                var data_types = "";
+                var Question = [];
+                Question.length = 0
+                var dataadd = [];
+                dataadd.length = 0;
+                //var dataadd = "";
+                if (onlytthreefieldvali() == false) {
+                    //$(".Subject_list").val("");
+                    return;
+                }
+                else {
+                    //Session_Id: 12, Employee_Id: 34185, Class_Id: 11, Subject_Id: 163
+                    // data: { Session_Id: 12, Employee_Id: 34185, Class_Id: 11, Subject_Id: 163 },
+
+                    if ($("#erpwise_radio").is(':checked') == true) {//this.value == '1'
+                        currenturl = 'http://localhost:52673/api/Setup/FetchUpdateAllStudentbysessionsubclassempid';
+                        data_on_url = { Session_Id: AcademicYearListvalidation, Employee_Id: UserId, Class_Id: ClassListvalidation, Subject_Id: SubjectListvalidation };
+
+                    }
+                    else if ($("#roomwise_radio").is(':checked') == true) {
+                        currenturl = 'http://localhost:52673/api/Setup/SeatPlanAllocatedStudentsbyRoom';
+                        data_on_url = { Session_Id: AcademicYearListvalidation, TermGroup_Id: 1, Room_Id: 1 };
+                    }
+                    else {
+                        Swal.fire(
+                            'Kindly Check radio button',
+                            '',
+                            'error'
+                        )
+                        return;
+                    }
+
+
+
+
+                    var marktable = "";
+                    var headingonruntime = "";
+                    $.ajax({
+                        type: 'GET',
+                        //data: { Session_Id: AcademicYearListvalidation, Employee_Id: UserId, Class_Id: ClassListvalidation, Subject_Id: SubjectListvalidation },
+                        //url: 'http://localhost:52673/api/Setup/AllStudentbysessionsubclassempid',
+                        data: data_on_url,
+                        url: currenturl,
+
+
+                        success: function (result) {
+                            //console.log("Result"+JSON.stringify(result));
+                            if (result == null || result == "" || result == " ") {
+                                Swal.fire(
+                                    'No Data',
+                                    '',
+                                    'error'
+                                )
+                            }
+                            else {
+                                for (var tr = 0; tr < result.length; tr++) {
+
+
+                                    if (alreadyt != result[tr].Student_Id) {
+                                        /**FIRST tIME USER**/
+                                        if (alreadyt == "") {
+                                            Question.push({
+                                                Question_No: result[tr].Question_No,
+                                                Question_Parts: result[tr].Question_Parts,
+                                                Max_Marks_Question: result[tr].Max_Marks_Question,
+                                                Objective_Id: result[tr].Objective_Id,
+                                                Objective_Name: result[tr].Objective_Name
+
+                                            });
+
+                                            dataadd.push({
+                                                Student_Id: result[tr].Student_Id,
+                                                Student_Name: result[tr].First_Name,
+                                                Center_Id: result[tr].Center_Id,
+                                                Center_Name: result[tr].Center_Name,
+                                                Class_Name: result[tr].Class_Name,
+                                                Max_Paper_Marks: result[tr].Max_Paper_Marks,
+
+                                                Question: Question
+                                            });
+                                            alreadyt = result[tr].Student_Id;
+                                        }
+                                        /**FIRST tIME USER**/
+
+                                        else {
+                                            Question = [];
+                                            Question.push({
+                                                Question_No: result[tr].Question_No,
+                                                Question_Parts: result[tr].Question_Parts,
+                                                Max_Marks_Question: result[tr].Max_Marks_Question,
+                                                Objective_Id: result[tr].Objective_Id,
+                                                Objective_Name: result[tr].Objective_Name
+                                            });
+
+                                            dataadd.push({
+                                                Student_Id: result[tr].Student_Id,
+                                                Student_Name: result[tr].First_Name,
+                                                Center_Id: result[tr].Center_Id,
+                                                Center_Name: result[tr].Center_Name,
+                                                Class_Name: result[tr].Class_Name,
+                                                Max_Paper_Marks: result[tr].Max_Paper_Marks,
+                                                Question: Question
+                                            });
+                                            alreadyt = result[tr].Student_Id;
+                                        }
+                                    }
+                                    else {
+                                        Question.push({
+                                            Question_No: result[tr].Question_No,
+                                            Question_Parts: result[tr].Question_Parts,
+                                            Max_Marks_Question: result[tr].Max_Marks_Question,
+                                            Objective_Id: result[tr].Objective_Id,
+                                            Objective_Name: result[tr].Objective_Name
+
+                                        });
+                                    }
+                                    //console.log("niche wala" + datadd);
+                                }
+                                /************TRY */
+                                /***TABLE GENRATION***/
+                                headingonruntime += "<tr><th>Unified Exam Not Taken</th><th>Roll No</th><th>Attendence</th><th>Total Marks</th>";
+
+
+                                var rowquestionTotalmarks = 0;
+                                marktable += "<tr class='marks_row'>";
+                                marktable += "<td></td><td></td><td></td><td><span class='total_mark_Paper'></span></td>";//dataadd[0].Max_Paper_Marks
+                                //for (var ti = 0; ti < data.length; ti++) {
+                                for (var tj = 0; tj < dataadd[0].Question.length; tj++) {
+                                    marktable += "<td class='maxquestion_nr'>";
+
+                                    marktable += "<span>" + dataadd[0].Question[tj].Max_Marks_Question + "</span>";
+                                    rowquestionTotalmarks += parseInt(dataadd[0].Question[tj].Max_Marks_Question);
+                                    marktable += "</td>";
+                                    var questionparts = (dataadd[0].Question[tj].Question_Parts == null || dataadd[0].Question[tj].Question_Parts == "" || dataadd[0].Question[tj].Question_Parts == " ") ? "" : dataadd[0].Question[tj].Question_Parts;
+                                    headingonruntime += "<th>Q" + dataadd[0].Question[tj].Question_No + " " + questionparts + "</th>";
+                                }
+                                // }
+                                marktable += "</tr>";
+                                headingonruntime += "<th>Action</th>";
+                                headingonruntime += "</tr>";
+                                // var sno = 0;
+                                for (var i = 0; i < dataadd.length; i++) {
+                                    //console.log("dataa" + JSON.stringify(dataadd));
+                                    // sno += 1;
+                                    marktable += "<tr class='orignaltr'>";
+                                    // marktable += "<td>"+sno+"</td>";
+                                    marktable += "<td class='visibilityhidden'><span class='trmasknumber'>" + dataadd[i].StudentMaskNo + "</span><span class='trstudentname'>" + dataadd[i].Student_Name + "</span><span class='trcenterid'>" + dataadd[i].Center_Id + "</span><span class='trcentername'>" + dataadd[i].Center_Name + "</span><span class='trclassname'>" + dataadd[i].Class_Name + "</span>";
+                                    marktable += "</td>";
+                                    marktable += "<td><input type='checkbox' class='markbox' id='markbox' onclick='hidecheckbox(this)' ></td>";
+                                    marktable += "<td class='student_rollno'><span class='student_rollnospan'>" + dataadd[i].Student_Id + "</span></td>";
+                                    marktable += "<td><select class='form-control attendence' onchange='hideattendence(this)'>";
+                                    marktable += "<option value='1'>Present</option>";
+                                    marktable += "<option value='2'>Absent</option>";
+                                    marktable += "</td>";
+                                    marktable += "<td class='student_totalmarks'><input type='number' class='form-control student_totalmarksvalidation' placeholder='Enter Total Marks' onchange='student_totalmarks(this)' onkeydown='student_totalmarks(this)' onkeyup='student_totalmarks(this)'><p class='error-message'>* Total Mark Excessed</p></td>";//
+                                    for (var j = 0; j < dataadd[i].Question.length; j++) {
+                                        marktable += "<td class='nr'>";
+                                        marktable += "<span class='question_id visibilityhidden'>" + dataadd[i].Question[j].Question_No + "</span>";
+                                        marktable += "<span class='objective_id visibilityhidden'>" + dataadd[i].Question[j].Objective_Id + "</span>";
+                                        marktable += "<span class='objective_name visibilityhidden'>" + dataadd[i].Question[j].Objective_Name + "</span>";
+                                        marktable += "<select class='form-control maxmarkofquestion' >";
+                                        for (var q = 0; q <= dataadd[i].Question[j].Max_Marks_Question; q++)//q+= 0.5//dataadd[i].Question[j].Question_No
+                                        {
+                                            var questionobtainedmarkcheck = (dataadd[i].Question[j].Obtained_Marks == null || dataadd[i].Question[j].Obtained_Marks == "" || dataadd[i].Question[j].Obtained_Marks == " ") ? 0 : dataadd[i].Question[j].Obtained_Marks;
+
+                                            if (q == parseInt(questionobtainedmarkcheck)) { marktable += "<option value='" + q + "' selected='selected'>" + q + "</option>"; }
+                                            else { marktable += "<option value='" + q + "'>" + q + "</option>"; }
+
+                                        }
+                                        marktable += "</select>";
+
+                                        //$(".maxmarkofquestion").val(questionobtainedmarkcheck).change();
+
+                                        marktable += "</td>";
+                                    }//data[i].Question[j].QuestionNo
+                                    marktable += "<td><button type='button' class='savestudent btn btn-primary' onClick='SaveStudent(this)'>Update</button></td>";
+                                    marktable += "</tr>";
+
+                                }
+                                $(".marktable thead").html(headingonruntime);
+                                $(".marktable tbody").html(marktable);
+
+                                /**TABLE GENRATION***/
+                                $(".total_mark_Paper").text(rowquestionTotalmarks);
+                                var totalstudentcount = $(".marktable tbody tr").length - 1;
+                                var printcount = "<h3>Total Student: " + totalstudentcount + "</h3>";
+                                $(".totalotherstudent").html(printcount);
+                                $(".totalotherlabelstudent").text(totalstudentcount);
+                            }
+
+                        }
+                    });
+
+                }
+            }
+            /**Update when update flag is 1**/
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+            //$('.savestudent').click(function () {
+            function SaveStudent(items) {
+                var $row = $(items).closest("tr");
+
+                /****VALIDATION ****/
+                var studentmarkvalidation = $row.find(".student_totalmarksvalidation").val();
+                var stu = $row.find(".student_totalmarksvalidation");
+
+                if (studentmarkvalidation == null || studentmarkvalidation == "" || studentmarkvalidation == " ") {
+                    $(stu).next(".error-message").text("* Total Mark Required");
+                    $(stu).next(".error-message").show();
+                    $(stu).css('border', '1px solid red');
+                    $(stu).css('background', '#fff');
+                    $(stu).focus();
+                    return;
+                }
+                else {
+                    var rowquestiontotal = 0;
+                    var rowquestion = $row.find(".nr select");
+                    //var weightage = [];
+                    //weightage.length = 0;
+                    var commentarray = [];
+                    //int commentarray = new Array();
+                    //commentarray.length = 0;
+                    for (var qi = 0; qi < rowquestion.length; qi++) {
+                        var everyquestionmarks = $row.find(".nr:eq(" + qi + ") select").val();
+                        var everyquestiontotalmarks = $(".marks_row").find(".maxquestion_nr:eq(" + qi + ") span").text();
+                        //alert("Row Child value" + parseInt($(this).find(".nr:nth-child(" + qi + ") select").val()));
+                        //alert("Question Mark"+everyquestionmarks+"Question Total Marks"+everyquestiontotalmarks);
+                        rowquestiontotal += parseInt(everyquestionmarks);
+                        //var weightage_perctage = (everyquestionmarks / everyquestiontotalmarks)*100;
+                        //weightage.push({
+                        //    quetsionweightage:weightage_perctage.toFixed(2)
+                        //});
+                        commentarray.push(parseInt(everyquestionmarks));
+
+
+                    }
+                    /*GOOD COMMENT***/
+                    var good_comment1_index = 0;
+                    var good_comment2_index = 0;
+                    var bad_comment1_index = 0;
+                    var bad_comment2_index = 0;
+                    /*Largest and second largest**/
+                    var secondMax = function (commentarray) {
+                        var max = Math.max.apply(null, commentarray); // get the max of the array
+                        good_comment1_index = commentarray.indexOf(max);
+                        commentarray.splice(commentarray.indexOf(max), 1); // remove max from the array
+                        return Math.max.apply(null, commentarray); // get the 2nd max
+                    };
+                    var max2 = secondMax(commentarray);
+                    good_comment2_index = commentarray.indexOf(max2);
+                    /*Largest and second largest**/
+                    /*Minimum and second minimum**/
+                    var secondMin = function (commentarray) {
+                        var min = Math.min.apply(null, commentarray); // get the max of the array
+                        bad_comment1_index = commentarray.indexOf(min);
+                        commentarray.splice(commentarray.indexOf(min), 1); // remove max from the array
+                        return Math.min.apply(null, commentarray); // get the 2nd max
+                    };
+                    var min2 = secondMin(commentarray);
+                    bad_comment2_index = commentarray.indexOf(min2);
+                    /*Minimum and second minimum**/
+
+
+
+
+
+
+                    var GoodComment1 = "";
+                    var GoodComment2 = "";
+                    var BadComment1 = "";
+                    var BadComment2 = "";
+                    for (var ci = 0; ci < rowquestion.length; ci++) {
+                        GoodComment1 = $row.find(".nr:eq(" + good_comment1_index + ") .objective_name").text();
+                        GoodComment2 = $row.find(".nr:eq(" + good_comment2_index + ") .objective_name").text();
+                        BadComment1 = $row.find(".nr:eq(" + bad_comment1_index + ") .objective_name").text();
+                        BadComment2 = $row.find(".nr:eq(" + bad_comment2_index + ") .objective_name").text();
+                    }
+
+                    /***GOOD COMMENT***/
+
+                    //alert("Row Total value" + rowquestiontotal);
+                    if (rowquestiontotal != studentmarkvalidation) {
+                        //alert("Question Mark Not Equal to Total Marks");
+                        Swal.fire(
+                            'Question Mark Not Equal to Total Marks!',
+                            '',
+                            'error'
+                        )
+                        return;
+                    }
+
+                    /**WEIGHTAGE BASED COMMENT OF QUESTION***/
+
+                    /**WEIGHTAGE BASED COMMENT OF QUESTION***/
+
+                }
+                /***VALIDATION ****/
+                //console.log("Weightage" + JSON.stringify(weightage));
+                //console.log("GOOD COMMENT1" + GoodComment1 + "<br>GOOD COMMENT2" + GoodComment2);
+                //console.log("Bad COMMENT1" + BadComment1 + "<br>Bad COMMENT2"+BadComment2);
+
+
+
+                var student_rollNo = $row.find(".student_rollnospan").text();//$row.find(".student_rollno").text();
+                var student_attendence = $row.find(".attendence").val();
+                var student_totalmarksvalidation = $row.find(".student_totalmarksvalidation").val();
+                var student_question = $row.find(".nr");
+                var studenteveryquestionmarks = [];
+                studenteveryquestionmarks.length = 0;
+                for (var qi = 0; qi < student_question.length; qi++) {
+
+
+                    studenteveryquestionmarks.push({
+                        Obtained_Marks: $row.find(".nr:eq(" + qi + ") select").val(),
+
+                        Total_Marks: $(".marks_row").find(".maxquestion_nr:eq(" + qi + ") span").text(),//$row.find(".student_totalmarksvalidation").val(),
+                        Subject_Id: $('.Subject_list').val(),
+                        SubjectTeacher_ID: UserId,
+                        Question_Id: $row.find(".nr:eq(" + qi + ") .question_id").text(),
+                        Objective_Id: $row.find(".nr:eq(" + qi + ") .objective_id").text(),
+                    });
+
+                }
+
+                /**CALCULATE PERCENTAGE ***/
+
+                var student_percentage = (student_totalmarksvalidation / parseInt($('.total_mark_Paper').text())) * 100;
+
+                /**CALCULATE PERCENTAGE ***/
+
+                var master = JSON.stringify({
+                    Student_Id: student_rollNo,
+                    Mask_Number: $row.find(".trmasknumber").text(),
+                    Student_Name: $row.find(".trstudentname").text(),
+                    Center_Id: $row.find(".trcenterid").text(),
+                    Center_Name: $row.find(".trcentername").text(),
+                    Class_Name: $row.find(".trclassname").text(),
+                    Session_Id: $(".AcademicYearList").val(),
+                    TermGroup_Id: $(".Term_list").val(),
+                    Class_Id: $('.Class_list').val(),
+                    Objective_Good_Comment1: GoodComment1,
+                    Objective_Good_Comment2: GoodComment2,
+                    Objective_Bad_Comment1: BadComment1,
+                    Objective_Bad_Comment2: BadComment2,
+                    Status: student_attendence,
+
+                    Percentage: student_percentage.toFixed(2),
+
+                    MarksEntryDetails: studenteveryquestionmarks
+
+
+
+                });
+                $.when(saveOrder(master)).then(function (response) {
+                    // console.log("RESPONSESSS" + response);
+                }).fail(function (err) {
+                    alert("ERORRRR" + err);
+                });
+            }
+
+
+
+            function saveOrder(master) {
+                //console.log("master" + master);
+                  $(".overlay").show();
+                return $.ajax({
+                    contentType: 'application/json; charset=utf-8',
+                    type: 'POST',
+                    data: master,
+                    dataType: 'json',
+
+                    url: 'http://localhost:52673/api/Setup/CreatePaperMarksEntry',
+                    success: function (result) {
+                        //alert("save");
+                        Swal.fire(
+                            'Save Successfuly!',
+                            '',
+                            'success'
+                        ).then(function () {
+                            resetaddmodel();
+                            //fabrictable();
+                            // location.reload();
+                        });
+                        //alert("Save");
+
+                    },
+                    complete: function () {
+                        // $('.loading').hide();
+                          $(".overlay").hide();
+                    },
+                    error: function (err) {
+                        alert("error");
+                        $(".overlay").hide();
+                    }
+                });
+            }
+
+
+
+
+
+            //$(".markbox").click(function () {
+            //    alert("sss");
+
+            //    var $item = $(this).closest("tr");
+
+            //    if ($(this).prop('checked') == true) {
+            //        $item.find(".nr").hide();
+            //    }
+            //    else {
+            //        $item.find(".nr").show();
+            //    }
+
+
+            //});
+
+            $(".Entry_list").change(function () {
+                var option = $(this).val();
+                if (option == 1) {
+                    $(".marktable").find(".nr").hide();
+                    $(".marktable").find(".student_rollno").show();
+                    $(".marktable").find(".student_totalmarks").show();
+                    $(".Room_marktable").find(".nr").hide();
+                    $(".Room_marktable").find(".student_rollno").show();
+                    $(".Room_marktable").find(".student_totalmarks").show();
+
+
+                }
+                else if (option == 2) {
+
+                    $(".marktable").find(".student_rollno").hide();
+                    $(".marktable").find(".student_totalmarks").hide();
+                    $(".marktable").find(".nr").show();
+
+                    $(".Room_marktable").find(".student_rollno").hide();
+                    $(".Room_marktable").find(".student_totalmarks").hide();
+                    $(".Room_marktable").find(".nr").show();
+                }
+                else {
+                    $(".marktable").find(".student_rollno").show();
+                    $(".marktable").find(".student_totalmarks").show();
+                    $(".marktable").find(".nr").show();
+
+                    $(".Room_marktable").find(".student_rollno").show();
+                    $(".Room_marktable").find(".student_totalmarks").show();
+                    $(".Room_marktable").find(".nr").show();
+
+                }
+
+            });
+
+            //$(".attendence").change(function () {
+            //    var student_option = $(this).val();
+            //    var student_item = $(this).closest("tr");
+            //    if (student_option == 2) {
+            //        student_item.find(".nr select").prop("disabled", true);
+            //    }
+            //    else {
+            //        student_item.find(".nr select").prop("disabled", false);
+            //    }
+            //});
+
+
+
+
+
+            //$('.student_totalmarksvalidation').on('keyup keydown change', function (e) {
+            //    alert("ss");
+            //    var total_mark_Papers = $(".total_mark_Paper").text();
+            //    if ($(this).val() > parseInt(total_mark_Papers)
+            //        && e.keyCode !== 46
+            //        && e.keyCode !== 8
+            //    ) {
+            //        e.preventDefault();
+            //        $(this).val("");
+            //        $(this).next(".error-message").text("* Total Mark Excessed");
+            //        $(this).next(".error-message").show();
+            //        $(this).css('border', '1px solid red');
+            //        $(this).css('background', '#fff');
+            //        $(this).focus();
+            //        return;
+            //    }
+            //    else {
+            //        $(this).next(".error-message").hide();
+            //        $(this).css('border', 'none');
+            //        $(this).css('background', '#d8f9d8');
+            //    }
+            //});
+
+
+
+
+
+            //});
+            function hidecheckbox(itemss) {
+
+                //var checkbox = $(this).parent('tr').children('td:first').hide();
+                var $item = $(itemss).closest("tr");   // Finds the closest row <tr>
+                //.find(".nr")     // Gets a descendent with class="nr"
+                //.text();
+
+                //if(checkbox.length > 0 && checkbox.is(":checked")) alert('checked!');
+                if ($(itemss).prop('checked') == true) {
+                    $item.find(".nr").hide();
+                }
+                else {
+                    $item.find(".nr").show();
+                }
+
+            }
+
+
+
+            // $(".attendence").change(function ()
+            function hideattendence(itr) {
+                var student_option = $(itr).val();
+                var student_item = $(itr).closest("tr");
+                if (student_option == 2) {
+                    student_item.find(".nr select").prop("disabled", true);
+                    //student_item.find(".savestudent").prop("disabled", true);
+                }
+                else {
+                    student_item.find(".nr select").prop("disabled", false);
+                    //student_item.find(".savestudent").prop("disabled", false);
+                }
+            }//)
+
+
+
+            //$('.student_totalmarksvalidation').on('keyup keydown change', function (e) {
+            function student_totalmarks(itemu) {
+
+                var total_mark_Papers = $(".total_mark_Paper").text();
+                if ($(itemu).val() > parseInt(total_mark_Papers))
+                //&& e.keyCode !== 46
+                //&& e.keyCode !== 8
+                {
+                    //preventDefault();
+                    $(itemu).val("");
+                    $(itemu).next(".error-message").text("* Total Mark Excessed");
+                    $(itemu).next(".error-message").show();
+                    $(itemu).css('border', '1px solid red');
+                    $(itemu).css('background', '#fff');
+                    $(itemu).focus();
+                    return;
+                }
+                if ($(itemu).val() < 0)
+                //&& e.keyCode !== 46
+                //&& e.keyCode !== 8
+                {
+                    //preventDefault();
+                    $(itemu).val("");
+                    $(itemu).next(".error-message").text("* Total Mark Not Less Than Zero");
+                    $(itemu).next(".error-message").show();
+                    $(itemu).css('border', '1px solid red');
+                    $(itemu).css('background', '#fff');
+                    $(itemu).focus();
+                    return;
+                }
+                else {
+                    $(itemu).next(".error-message").hide();
+                    $(itemu).css('border', 'none');
+                    $(itemu).css('background', '#d8f9d8');
+                }
+                return;
+            }//);
+
+
+            function resetaddmodel() {
+                $(".marks_form input").val("");
+                $(".marks_form input").css("border:1px solid #ced4da;background:#fff;");
+                $(".marks_form select").val("");
+                $(".marks_form select").css("border:1px solid #ced4da;background:#fff;");
+
+                // $(".saveunit").text("Save");
+                //updateflag = 0;
+                $(".marktable tbody").html("");
+                $(".boxtext").text("");
+                $(".totalotherlabelstudent").text("");
+                $(".marks_show").prop('checked', false);
+
+            }
+
+            $(".updatecheck").click(function () {
+
+                $(".marktable tbody").html("");
+                $(".boxtext").text("");
+                $(".totalotherlabelstudent").text("");
+                if ($(this).prop('checked') == true) {
+                    $(".savestudent").text("Update");
+                    updateflag = 1;
+                }
+                else {
+                    $(".savestudent").text("Update");
+                    updateflag = 0;
+                }
+
+            });
+
+
+            function SaveNormalStudent(items) {
+                var $normalrow = $(items).closest("tr");
+               
+               // var normal_Main_Organisation_Id = 1;
+               // var normal_Evaluation_Criteria_Id = $(".NormalEvaluationCriteriaList").val();
+               //  var normal_Section_Subject_Id = $(".NormalSubjectList").val();
+               // var normal_Criteria = $(".NormalEvaluationCriteriaList option:selected").text();
+               
+               // var normal_Total_Marks = $normalrow.find(".normaltotalmarks").val();
+               // var normal_Evaluation_Criteria_Type_Id=$(".NormalTermList").val();
+               //var normal_Evaluation_Type_Id = $(".NormalEvaluationTypeList").val();
+
+
+                
+
+                //var normal_studentid = $normalrow.find(".normal_studentid").text();
+                //var normal_sess_id= $normalrow.find(".normal_sess_id").text();
+                //var normal_empid = $normalrow.find(".normal_empid").text();
+                //var normal_subid = $normalrow.find(".normal_subid").text();
+
+                //var normal_section_subject_id = $normalrow.find(".normal_stusecsubid").text();
+                var normal_student_section_subject_id= $normalrow.find(".normal_stusecsubid").text();
+                 var normal_Total_Marks = $normalrow.find(".normaltotalmarks").val();
+
+                //var normal_teachername = $normalrow.find(".normal_teachername").text();
+                //var normal_studentname = $normalrow.find(".normal_studentname").text();
+                //var normal_subjectname = $normalrow.find(".normal_subjectname").text();
+
+
+
+                //console.log("Normal Entry" + normaltotalmarks + "Teacher name" + normal_teachername + "Student name" + normal_studentname + "Subject name" + normal_subjectname);
+
+                //console.log("normal_studentid" + normal_studentid + "normal_empid" + normal_empid + "normal_subid" + normal_subid);
+
+
+                var normaltotalmarksclass = $normalrow.find(".normaltotalmarks");
+
+                if (normal_Total_Marks == null || normal_Total_Marks == "" || normal_Total_Marks == " ") {
+                    $(normaltotalmarksclass).next(".error-message").text("* Total Mark Required");
+                    $(normaltotalmarksclass).next(".error-message").show();
+                    $(normaltotalmarksclass).css('border', '1px solid red');
+                    $(normaltotalmarksclass).css('background', '#fff');
+                    $(normaltotalmarksclass).focus();
+                    return;
+                }
+                else {
+                /**CHECK SSEID ****/
+                    $.ajax({
+                        type: 'GET',
+                        async: false,
+                        data: { SSEC_Id: SSECID, Student_Section_Subject_Id: normal_student_section_subject_id},
+                        url: 'http://localhost:52673/api/Setup/MarkNormalCheckCriteria',
+                        success: function (result)
+                        {
+                            
+                                if (result == "" || result == null)
+                                {
+                                    var dataaddnormal = JSON.stringify({
+                                        SSEC_Id:SSECID,
+                                        Student_Section_Subject_Id: normal_student_section_subject_id,
+                                        Marks_Obtained: normal_Total_Marks,
+                                        //Lock_Mark: 0,
+                                        //Status_Id: 1,
+                                        BackUpMarks: normal_Total_Marks
+                                    });
+
+                                      $.when(savenormalOrder(dataaddnormal)).then(function (response) {
+                                            //console.log("RESPONSESSS" + response);
+                                        }).fail(function (err) {
+                                            //alert("already exitss" + err);
+                                        });
+                                }
+                                else
+                                {
+                                    
+                                     $(".overlay").show();
+                                    $.ajax({
+                                        type: 'GET',
+                                        async: false,
+                                        data: {Marks_Obtained:normal_Total_Marks,BackUpMarks:normal_Total_Marks,SSEC_Id:SSECID, Student_Section_Subject_Id: normal_student_section_subject_id },
+                                        url: 'http://localhost:52673/api/Setup/MarkNormalUpdateCriteria',
+                                        success: function (result)
+                                        {
+                                            Swal.fire(
+                                                'Update Successfuly!',
+                                                '',
+                                                'success'
+                                            ).then(function () {
+                                                //sresetaddmodel();
+                                                //fabrictable();
+                                                // location.reload();
+                                            });
+                                        },
+                                            complete: function () {
+                                                   $(".overlay").hide();
+                                                },
+                                        error: function (err)
+                                        {
+                                                    alert(err);
+                                                    $(".overlay").hide();
+                                                }
+                                    });
+                                    
+                                }
+                        },
+                        complete: function () {
+                                // $('.loading').hide();
+                            },
+                        error: function (err) {
+                            alert(JSON.stringify(err));
+                                
+                            }
+                    });
+                   
+                /***CHECK SSEID ***/
+                }
+            }
+
+            function normalstudent_totalmarks(itemi) {
+                //var total_mark_Papers = $(".total_mark_Paper").text();
+                if ($(itemi).val() > 100)
+                //&& e.keyCode !== 46
+                //&& e.keyCode !== 8
+                {
+                    //preventDefault();
+                    $(itemi).val("");
+                    $(itemi).next(".error-message").text("* Mark Excessed");
+                    $(itemi).next(".error-message").show();
+                    $(itemi).css('border', '1px solid red');
+                    $(itemi).css('background', '#fff');
+                    $(itemi).focus();
+                    return;
+                }
+
+                else {
+                    $(itemi).next(".error-message").hide();
+                    $(itemi).css('border', 'none');
+                    $(itemi).css('background', '#d8f9d8');
+                }
+            }
+
+
+            function savenormalOrder(dataaddnormal) {
+                        console.table("dataaddnormal" + dataaddnormal);
+               
+
+                        return $.ajax({
+                            contentType: 'application/json; charset=utf-8',
+                            type: 'POST',
+                            data: dataaddnormal,
+                            dataType: 'json',
+
+                            //url: 'http://localhost:52673/api/Setup/MarkNormalSave',
+                            url: 'http://localhost:52673/api/Setup/MarkNormalSaveCriteria',
+                            success: function (result) {
+                                //alert("save");
+                                Swal.fire(
+                                    'Save Successfuly!',
+                                    '',
+                                    'success'
+                                ).then(function () {
+                                    resetaddmodel();
+                                    //fabrictable();
+                                    // location.reload();
+                                });
+                                //alert("Save");
+
+                            },
+                            complete: function () {
+                                // $('.loading').hide();
+                            },
+                            error: function (err) {
+                                alert(err);
+                                
+                            }
+                        });
+                    }
+
+
+            /***NORMAL DROPDOWN***/
+                 var NormalClassSectionList = "";
+            $.ajax({
+                type: 'GET',
+                data: {Employee_Id:UserId},
+                url: 'http://localhost:52673/api/Setup/Class_SectionByEmployeeId',//sURLVariableswithurl[0]+"?",//getsearchedpatient
+                success: function (result) {
+                    NormalClassSectionList += '<option selected="true" disabled="disabled" value="">---Select---</option>';
+
+                    for (var i = 0; i < result.length; i++) {
+
+
+                        NormalClassSectionList += '<option value="' + result[i].Section_Id + '">' + result[i].FullClassSection + '</option>';
+
+
+                    }
+                    $(".NormalClassSectionList").html(NormalClassSectionList);
+
+                },
+                complete: function (result) {
+
+                    $(".overlay").hide();
+                },
+                error: function (err) {
+
+                    //console.log(JSON.stringify(err));
+
+                }
+            });
+           
+            $(".NormalClassSectionList").change(function () {
+                var NormalSectionId=$(this).val();
+                var NormalSubjectList = "";
+                $.ajax({
+                    type: 'GET',
+                    data: { Employee_Id: UserId, Section_Id:NormalSectionId },
+                    url: 'http://localhost:52673/api/Setup/SectionSubjectSelectByEvaluationCriteria',//sURLVariableswithurl[0]+"?",//getsearchedpatient
+                    success: function (result) {
+                        NormalSubjectList += '<option selected="true" disabled="disabled" value="">---Select---</option>';
+
+                        for (var i = 0; i < result.length; i++) {
+
+
+                            NormalSubjectList += '<option value="' + result[i].Section_Subject_Id + '">' + result[i].Subject_Name + '</option>';
+
+
+                        }
+                        $(".NormalSubjectList").html(NormalSubjectList);
+
+                    },
+                    complete: function (result) {
+
+                        $(".overlay").hide();
+                    },
+                    error: function (err) {
+
+                        //console.log(JSON.stringify(err));
+
+                    }
+                });
+
+                var NormalTermList = "";
+                $.ajax({
+                    type: 'GET',
+                    data: { Org_Id: Org_Id, Section_Id:NormalSectionId },
+                    url: 'http://localhost:52673/api/Setup/Evaluation_Criteria_TypeBySectionId',
+                    success: function (result) {
+                        NormalTermList += '<option selected="true" disabled="disabled" value="">---Select---</option>';
+
+                        for (var i = 0; i < result.length; i++) {
+
+
+                            NormalTermList += '<option value="' + result[i].Id + '">' + result[i].Type + '</option>';
+
+
+                        }
+                        $(".NormalTermList").html(NormalTermList);
+
+                    },
+                    complete: function (result) {
+
+                        $(".overlay").hide();
+                    },
+                    error: function (err) {
+
+                        //console.log(JSON.stringify(err));
+
+                    }
+                });
+
+                var NormalEvaluationTypeList = "";
+                $.ajax({
+                    type: 'GET',
+                    data: { Org_Id: Org_Id },
+                    url: 'http://localhost:52673/api/Setup/Evaluation_TypeSelect',
+                    success: function (result) {
+                        NormalEvaluationTypeList += '<option selected="true" disabled="disabled" value="">---Select---</option>';
+
+                        for (var i = 0; i < result.length; i++) {
+                            
+				
+
+                           NormalEvaluationTypeList += '<option value="' + result[i].Evaluation_Type_Id + '">' + result[i].Name + '</option>';
+
+
+                        }
+                        $(".NormalEvaluationTypeList").html(NormalEvaluationTypeList);
+
+                    },
+                    complete: function (result) {
+
+                        $(".overlay").hide();
+                    },
+                    error: function (err) {
+
+                        //console.log(JSON.stringify(err));
+
+                    }
+                });
+                
+            });
+
+            $(".NormalSubjectList").change(function () {
+                var NormalSectionSubjectId=$(this).val();
+                var NormalStudentList = "";
+                $.ajax({
+                    type: 'GET',
+                    data: { Section_Subject_Id:NormalSectionSubjectId  },
+                    url: 'http://localhost:52673/api/Setup/StudentBySectionSubjectId',
+                    success: function (result) {
+                        NormalStudentList += '<option selected="true"  value="0">---Select---</option>';
+
+                        for (var i = 0; i < result.length; i++) {
+
+
+
+                            NormalStudentList += '<option value="' + result[i].Student_Id + '">' + result[i].FullStudentName + '</option>';
+
+
+                        }
+                        $(".NormalStudentList").html(NormalStudentList);
+
+                    },
+                    complete: function (result) {
+
+                        $(".overlay").hide();
+                    },
+                    error: function (err) {
+
+                        //console.log(JSON.stringify(err));
+
+                    }
+                });
+
+            });
+
+
+            $(".NormalEvaluationTypeList").change(function () {
+                
+                var NormalEvaluationTypeId = $(this).val();
+                var NormalTermId = $(".NormalTermList").val();
+                var NormalSubjectId = $(".NormalSubjectList").val();
+                var NormalEvaluationCriteriaList = "";
+                $.ajax({
+                    type: 'GET',
+                    data: { Evaluation_Criteria_Type_Id:NormalTermId,Section_Subject_Id:NormalSubjectId,Evaluation_Type_Id:NormalEvaluationTypeId},
+                    url: 'http://localhost:52673/api/Setup/Evaluation_Criteria_BySectionIdSubjectEvlId',
+                    success: function (result) {
+                        NormalEvaluationCriteriaList += '<option selected="true" disabled="disabled" value="">---Select---</option>';
+
+                        for (var i = 0; i < result.length; i++) {
+                            NormalEvaluationCriteriaList += '<option value="' + result[i].Evaluation_Criteria_Id + '">' + result[i].Criteria + '</option>';
+                        }
+                        $(".NormalEvaluationCriteriaList").html(NormalEvaluationCriteriaList);
+
+                    },
+                    complete: function (result) {
+
+                        $(".overlay").hide();
+                    },
+                    error: function (err) {
+
+                        //console.log(JSON.stringify(err));
+
+                    }
+                });
+            });
+             /***NORMAL DROPDOWN***/
+
+            $("#test").click(function () {
+                $.ajax({
+                    type: "POST",
+                    url: "Mark_Entry.aspx.cs/doSomething",
+                    data: "{'id':'1'}",
+                    dataType: "json",
+                    contentType: "application/json; charset=utf-8",
+                    success: function (data) {
+                        var returnedstring = data.d;
+                        var jsondata = $.parseJSON(data.d);//if you want your data in json
+                        console.log("JSON DATA" + jsondata);
+                    }
+                });
+            });
+
+
+        </script>
+        <style>
+            /*.normalshow {
+                display: none;
+            }*/
+        </style>
+        <!--Body-->
+        <hr />
+        <footer>
+            <p>&copy; 2021 - The City School</p>
+        </footer>
+    </div>
+
+
+    <script src="Content/sweetalert2.min.js"></script>
+
+
+</body>
+<style>
+
+
+
+.tab-wrapper {
+  text-align: center;
+  display: block;
+  margin: auto;
+  max-width: 500px;
+}
+
+.tabs {
+  margin: 0;
+  padding: 0;
+  display: flex;
+  justify-content: center;
+}
+
+.tab-link {
+  margin: 0 1%;
+  list-style: none;
+  padding: 10px 40px;
+  color: #aaa;
+  cursor: pointer;
+  font-weight: 700;
+  transition: all ease 0.5s;
+  border-bottom: solid 3px rgba(255, 255, 255, 0);
+  letter-spacing: 1px;
+}
+
+.tab-link:hover {
+  color: #999;
+  border-color: #999;
+}
+
+.tab-link.active {
+  color: #333;
+  border-color: #333;
+}
+
+.tab-link:nth-of-type(1).active {
+  color: #EE6534;
+  border-color: #EE6534;
+}
+
+.tab-link:nth-of-type(2).active {
+  color: #1790D2;
+  border-color: #1790D2;
+}
+
+.tab-link:nth-of-type(3).active {
+  color: #EEC63B;
+  border-color: #EEC63B;
+}
+
+.content-wrapper {
+  padding: 40px 0px;
+}
+
+.tab-content {
+  display: none;
+
+ 
+
+
+  opacity: 0;
+  transform: translateY(15px);
+  animation: fadeIn 0.5s ease 1 forwards;
+}
+
+.tab-content.active {
+  display: block;
+}
+
+@keyframes fadeIn {
+  100% {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+    .normaltable {
+    margin-top:10px;
+    }
+</style>
+<script type="text/javascript">
+    $('.tab-link').click( function() {
+	
+	var tabID = $(this).attr('data-tab');
+	
+	$(this).addClass('active').siblings().removeClass('active');
+	
+	$('#tab-'+tabID).addClass('active').siblings().removeClass('active');
+});
+</script>
+</html>

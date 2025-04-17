@@ -1,0 +1,1052 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Curriculam Objective</title>
+    <link rel="icon" type="image/x-icon" href="assets/images/favicon.ico">
+    <link rel="stylesheet" href="assets/vendor/Fonts.css" />
+    <link rel="stylesheet" href="assets/vendor/CustomStyle.css" />
+    <link rel="stylesheet" href="assets/vendor/toastr.css" />
+    <link rel="stylesheet" href="assets/vendor/bootstrap/css/bootstrap.css" />
+    <link rel="stylesheet" href="assets/vendor/font-awesome/css/font-awesome.css" />
+    <link href="assets/vendor/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="Content/jquery.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <!-- <script src="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script> -->
+    <link rel="stylesheet" href="node_modules/ng-select/ng-select/themes/default.theme.css">
+   
+    <!--Datatables-->
+
+    <link rel="stylesheet" href="Content/DataTables/datatables.min.css" />
+    <link href="Content/DataTables/Buttons-1.6.3/css/buttons.dataTables.min.css" rel="stylesheet" />
+
+
+    <script src="Content/DataTables/Buttons-1.6.3/js/dataTables.buttons.min.js"></script>
+    <script src="Content/DataTables/datatables.min.js"></script>
+    
+
+    <!--Datatables-->
+    
+ <link rel="stylesheet" href="node_modules/pnotify/core/dist/PNotify.css">
+    <link rel="stylesheet" href="node_modules/pnotify/core/BrightTheme.css">
+    <link href="Content/Header_Component.css" rel="stylesheet" />
+
+    <link href="Content/Site.css" rel="stylesheet" />
+    <link href="Content/sweetalert2.min.css" rel="stylesheet" />
+    <script src="Content/jquery.limitText.js"></script>
+</head>
+
+<body>
+   
+    <!--HEADER COMPONENT-->
+    <div class='overlay'></div>
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 BackgroundBlue">
+                <div class="Gap"></div>
+                <div class="row">
+                    <div class="col-lg-2 col-md-2 col-sm-12 col-xs-12">
+                        <img src="assets/images/logo1.png" class="ImageLayoutCenter" />
+                    </div>
+                    <div class="col-lg-10 col-md-10 col-sm-12 col-xs-12">
+                        <div class="Gap"></div>
+                        <div class="Gap"></div>
+                        <p class="HeaderHeadingAMISPlus text-lg-left text-md-left text-sm-left text-xs-left text-center">The City School:	Southern Region</p>
+                        <div class="row">
+                            <nav class="navbar navbar-light navbar-expand-lg mainmenu">
+                                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                                    <span class="navbar-toggler-icon"></span>
+                                </button>
+                                <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                                    <ul class="navbar-nav mr-auto">
+                                        <li><a href="#">Home <span class="sr-only">(current)</span></a></li>
+                                        <li class="dropdown">
+                                            <a class="dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Results</a>
+                                            <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                                <li><a href="#">Result Card</a></li>
+                                            </ul>
+                                        </li>
+                                        <li class="dropdown">
+                                            <a class="dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">TCS Reports</a>
+                                            <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                                <li class="dropdown">
+                                                    <a class="dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Non Academic Reports</a>
+                                                    <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                                        <li><a href="#">Non Academic Reports(RO)</a></li>
+                                                        <li><a href="#">Non Academic Reports(CO)</a></li>
+                                                    </ul>
+                                                </li>
+                                                <li class="dropdown">
+                                                    <a class="dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Academic Reports</a>
+                                                    <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                                        <li><a href="#">Academic Reports(CO)</a></li>
+                                                        <li><a href="#">Academic Reports(RO)</a></li>
+                                                    </ul>
+                                                </li>
+                                            </ul>
+                                        </li>
+
+                                        <li class="dropdown">
+                                            <a class="dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Component Marks Setup</a>
+                                            <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                                <li><a href="Unit_Setup.html">Unit/Sub Unit Setup</a></li>
+                                                <li><a href="Curriculum_Objectives.html">Curriculum Objectives Setup</a></li>
+                                                <li><a href="Cl_Exam.html">CL Exam Setup</a></li>
+                                                <li><a href="Comments.html">Comments</a></li>
+
+                                            </ul>
+                                        </li>
+
+                                        <li class="dropdown">
+                                            <a class="dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Exam Module</a>
+                                            <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                                <li><a href="Mark_Entry.aspx">Marks Entry</a></li>
+                                                <li><a href="Progress_Report.html">Subject Progress Report</a></li>
+                                                <li><a href="Progress_Report_Class.html">Class Progress Report</a></li>
+                                                <li><a href="ExamDate.html">Exam DateSheet</a></li>
+                                                <li><a href="Reports.aspx">Reports</a></li>
+                                                <li><a href="Printlog.html">Print Log</a></li>
+                                            </ul>
+                                        </li>
+
+
+                                        <!-- <li><a href="#">Service</a></li> -->
+                                    </ul>
+                                </div>
+                            </nav>
+                        </div>
+                    </div>
+                    <!--<div class="col-lg-3 col-md-3 col-sm-12 col-xs-12 ">
+                        <div class="Gap"></div>
+                        <div class="Gap"></div>
+                        <p class="HeaderHeadingSubmenu text-lg-right text-md-right text-center">
+                            <a href="" class="LogoutButton">
+                                Logout &nbsp;&nbsp;&nbsp;<i class="fa fa-sign-out" aria-hidden="true"></i>
+                            </a>
+                        </p>
+                        <div class="Gap"></div>
+                        <p class="HeaderHeadingSubmenu text-lg-right text-md-right text-center">
+                            Logged in as: <span class="LoginAs"> Sr Exams</span>
+                        </p>
+                    </div>-->
+                </div>
+                <div class="Gap"></div>
+            </div>
+        </div>
+    </div>
+    <!--HEADER COMPONENT-->
+
+    <div class="container body-content">
+       <!--Body-->
+<div class="row">
+    <div class="col-lg-12 col-md-12 col-xs-12 col-sm-12" style="box-shadow: 0px 2px 4px -1px #00006a;padding: 7px 40px 40px 40px;">
+        <p class="PageMainHeading"><i class="glyphicon glyphicon-folder-open" style="color: #00006a;"></i>Curriculum Objectives Setup</p>
+        <div style="background-color: #00006a;" class="Gap"></div>
+        <ngx-spinner></ngx-spinner>
+        <form class="form-horizontal product-setup-form custom-form circulam-form" autocomplete="off">
+            <p class="PageMainHeading"><span class="PageMainHeadingBorder"> <i class="glyphicon glyphicon-tags" style="color: #00006a;"></i>Header Setup</span> </p>
+            <!-- unitHeaderSetup Start -->
+            <div [formGroup]="unitGroup">
+                <div class="row">
+                    <div class="col-lg-3 col-md-3 col-sm-12 col-xs-12">
+                        <span class="CustomLabel">Academic Year</span> <span class="RequiredLbl"> * </span><br>
+                      
+                        <input type="text" class="form-control setobjectiveid visibilityhidden" />
+                        <select class="AcademicYearList form-control">
+                        </select>
+                        <p class="error-message">* Academic Year Required</p>
+                      
+                    </div>
+
+                    <div class="col-lg-3 col-md-3 col-sm-12 col-xs-12">
+                        <span class="CustomLabel">Term</span> <span class="RequiredLbl"> * </span><br>
+                   
+                        <select class="Term_list form-control">
+                            <option value="">---Select---</option>
+                            <option value="1">First Term</option>
+                            <option value="2">Second Term</option>
+
+
+                        </select>
+                        <p class="error-message">* Term Required</p>
+                    </div>
+
+                    <div class="col-lg-3 col-md-3 col-sm-12 col-xs-12">
+                
+                        <span class="CustomLabel">Class</span> <span class="RequiredLbl"> * </span>
+                        <select class="Class_list form-control">
+                        </select>
+                        <p class="error-message">* Class Required</p>
+                    </div>
+
+                    <div class="col-lg-3 col-md-3 col-sm-12 col-xs-12">
+                        <span class="CustomLabel">Subject</span> <span class="RequiredLbl"> * </span><br>
+               
+                        <select class="Subject_list form-control">
+                        </select>
+                        <p class="error-message">* Subject Required</p>
+                    </div>
+                </div>
+
+                <div class="row">
+
+                    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                        <p class="PageMainHeading visibilityhidden"><span class="PageMainHeadingBorder"> <i class="glyphicon glyphicon-tags" style="color: #00006a;"></i>Comments</span> </p>
+                        <textarea id="myTextArea" rows="5" data-status-message="#counter" class="form-control myTextArea visibilityhidden"></textarea>
+                        <p class="error-message">* Comment Required</p>
+                       
+                        </div>
+
+                    </div>
+                </div>
+
+                <div class="row">
+                    <p class="PageMainHeading col-lg-12 col-md-12 col-xs-12 col-sm-12"><span class="PageMainHeadingBorder"> <i class="glyphicon glyphicon-tags" style="color: #00006a;"></i>Unit / Sub Unit Setup</span> </p>
+                   
+                    <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
+                        <span class="CustomLabel">Chapter Name</span> <span class="RequiredLbl"> * </span><br>
+                                                                                                          <select class="Chapter_list form-control" onchange="chaponchange(this)">
+                                                                                                              <!--onchange="chaponchange(this)"-->
+                                                                                                          </select>
+                        <p class="error-message">* Chapter Required</p>
+                    </div>
+                    <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
+                        <span class="CustomLabel">Sub Unit</span> <span class="RequiredLbl"> * </span><br>
+                        <select class="SubUnit_list form-control">
+                        </select>
+                        <p class="error-message">* SubUnit Required</p>
+                    </div>
+                 
+
+
+
+           
+                </div>
+
+                <div class="row">
+
+                    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                        <p class="PageMainHeading"><span class="PageMainHeadingBorder"> <i class="glyphicon glyphicon-tags" style="color: #00006a;"></i>Curriculum Objectives Setup</span> </p>
+                        <span class="CustomLabel"> Objective </span> <span class="RequiredLbl"> * </span><br>
+                                                                                                         <div class="inner-addon left-addon">
+                                                                                                             <i class="glyphicon glyphicon-book" style="color: #00006a;"></i>
+                                                                                                             <!-- <input type="text" class="form-control" placeholder="Please enter" pattern="[a-zA-Z ]+" maxlength="20" formControlName="Topic_Name"/> -->
+                                                                                                             <input type="text" class="form-control unitname objectivelimit" placeholder="Please enter" data-status-message="#counter" />
+                                                                                                             <p class="error-message">* Objective Required</p>
+                                                                                                             <div id="counter" class="text-right"> </div>
+                                                                                                                 <input type="checkbox" class="addunitcheck visibilityhidden" /><label class="checkboxposition visibilityhidden">Add New Objective</label>
+
+                                                                                                            
+                                                                                                         </div>
+            
+
+
+                </div>
+                    </div>
+
+            
+
+                <!-- unitGroup Start -->
+                <div class="row">
+
+                  
+
+                    <div class="col-sm-12 rowsavebtn">
+
+
+                        <button type="button" class=" btn  btn-primary saveunit savebtn" id="saveunit">Save</button>
+
+
+
+
+                    </div>
+
+                    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 detaildiv">
+                        <table class="table table-striped  table-bordered table-sm row-border hover grid_table fabricbuyingtable customdatatablestyle table_withoutscroll objective_Update_Table">
+                            <thead>
+                                <th class="visibilityhidden">Objective Id</th>
+                                <th>Objective</th>
+                                
+                                <th class="visibilityhidden">Topic Name</th>
+                                <th class="visibilityhidden">Sub Topic Name</th>
+                                <th>Action</th>
+                            </thead>
+                            <tbody>
+
+                            </tbody>
+                        </table>
+                    </div>
+
+
+                </div>
+            </div>
+
+
+    </div>
+
+
+
+
+
+
+
+<!-- Main Page End   -->
+<script>
+    $('.objectivelimit').limitText({
+  limit: 250,// default: 200
+});
+    var updateflag = 0;
+            $(".overlay").show();
+    /********DROPDOWN*****/
+
+    var AcademicYearList = "";
+    $.ajax({
+        type: 'GET',
+        //data:,
+        url: 'http://localhost:52673/api/Setup/AcademicYearDropDown',//sURLVariableswithurl[0]+"?",//getsearchedpatient
+        success: function (result) {
+            AcademicYearList += '<option selected="true" disabled="disabled" value="">---Select---</option>';
+            
+            for (var i = 0; i < result.length; i++) {
+                
+
+                AcademicYearList += '<option value="'+result[i].Session_Id+'">' + result[i].Description + '</option>';
+                            
+                      
+            }
+            $(".AcademicYearList").html(AcademicYearList);
+        
+        },
+        complete: function (result) {
+              
+            $(".overlay").hide();
+            },
+            error: function (err) {
+
+                //console.log(JSON.stringify(err));
+
+            }
+    });
+
+    
+    var Class_list = "";
+        $(".overlay").show();
+    $.ajax({
+        type: 'GET',
+        //data:,
+        url: 'http://localhost:52673/api/Setup/ClassDropDown',//sURLVariableswithurl[0]+"?",//getsearchedpatient
+        success: function (result) {
+            Class_list += '<option selected="true" disabled="disabled" value="">---Select---</option>';
+            for (var i = 0; i < result.length; i++) {
+                Class_list += '<option value="'+result[i].Class_Id+'">' + result[i].Class_Name + '</option>';      
+            }
+            $(".Class_list").html(Class_list);
+        
+        },
+        complete: function (result) {
+              
+            $(".overlay").hide();
+            },
+            error: function (err) {
+
+                //console.log(JSON.stringify(err));
+
+            }
+    });
+
+    $(".Class_list").change(function(){
+           $(".overlay").show();
+
+        var classId = $(this).val();
+        
+        var Subject_list = "";
+                    $.ajax({
+                        type: 'GET',
+                        data: {classId:classId},
+                        url: 'http://localhost:52673/api/Setup/SubjectByClassIdDropDown',//sURLVariableswithurl[0]+"?",//getsearchedpatient
+                        success: function (result) {
+                            Subject_list += '<option selected="true" disabled="disabled" value="">---Select---</option>';
+                            for (var i = 0; i < result.length; i++) {
+                                Subject_list += '<option value="'+result[i].Subject_Id+'">' + result[i].Subject_Name + '</option>';      
+                            }
+                            $(".Subject_list").html(Subject_list);
+        
+                        },
+        complete: function (result) {
+              
+            $(".overlay").hide();
+            },
+            error: function (err) {
+
+                //console.log(JSON.stringify(err));
+
+            }
+                    });
+    });
+
+
+  
+    //   var Chapter_list = "";
+    //$.ajax({
+    //    type: 'GET',
+    //    //data:,
+    //    url: '  http://localhost:52673/api/Setup/TopicDropdown',//sURLVariableswithurl[0]+"?",//getsearchedpatient
+    //    success: function (result) {
+    //        Chapter_list += '<option selected="true" disabled="disabled" value="">---Select---</option>';
+    //        for (var i = 0; i < result.length; i++) {
+    //            Chapter_list += '<option value="'+result[i].Sys_TopicSno+'">' + result[i].Topic_Name + '</option>';      
+    //        }
+    //        $(".Chapter_list").html(Chapter_list);
+        
+    //    }
+    //});
+  
+    /********DROPDOWN*****/
+
+      /****UPDATE FILLING */
+    $(".Subject_list").change(function () {
+
+
+        if (onlytthreefieldvali() == false) {
+           
+            $(".Subject_list").val("");
+            return;
+        }
+        else {
+               $(".overlay").show();
+            var subj = $(this).val();
+             $.ajax({
+                        type: 'GET',
+                        data: { Session_Id: AcademicYearListvalidation, Class_Id: ClassListvalidation, Subject_Id: subj},
+                       //url: 'http://localhost:52673/api/Setup/UnitSetupById',
+                       //url: 'http://localhost:52673/api/Setup/ObjectiveDropDownBysubjectsessionclassid',
+                        url: 'http://localhost:52673/api/Setup/UnitSetupBysessionclasssub',
+                 success: function (result) {
+                     //console.log("Resultss" + JSON.stringify(result));
+                            if (result == null || result == "" || result == " ") {
+                               
+                                
+                                //alert("null value");
+                                 $(".saveunit").text("Save");
+                                $(".Chapter_list").val("");
+                                $(".SubUnit_list").val("");
+                                //$(".maxmark").val("");
+                               $("#myTextArea").val("");
+                                $(".objective_Update_Table tbody").html("");
+                                $(".Chapter_list").html('<option selected="true" disabled="disabled" value="">---Select---</option>');
+                                $(".SubUnit_list").html('<option selected="true" disabled="disabled" value="">---Select---</option>');
+                                $(".setobjectiveid").val("");
+                                updateflag = 0;
+                                $(".unitname").val("");
+                           
+                            }
+                        else if ((result != null || result != "" || result != " ") && $(".addunitcheck").prop('checked') == true)
+                    {
+                           $(".saveunit").text("Save");
+                                $(".Chapter_list").val("");
+                                $(".SubUnit_list").val("");
+                                //$(".maxmark").val("");
+                               $("#myTextArea").val("");
+                                $(".objective_Update_Table tbody").html("");
+                                $(".Chapter_list").html('<option selected="true" disabled="disabled" value="">---Select---</option>');
+                                $(".SubUnit_list").html('<option selected="true" disabled="disabled" value="">---Select---</option>');
+                                $(".setobjectiveid").val("");
+                                updateflag = 0;
+                                $(".unitname").val("");
+                    }
+                            else
+                            {
+                                //alert("not null value");
+                                $(".error-message").hide();
+                                $("input").css("border:1px solid #ced4da");
+                                $("select").css("border:1px solid #ced4da");
+                             
+                                //var SubUnit_list = "";
+                                    
+                                //            SubUnit_list += '<option selected="true" disabled="disabled" value="">---Select---</option>';
+                                //            for (var i = 0; i < result.length; i++) {
+                                //                SubUnit_list += '<option value="' + result[i].sys_SubTopicSno + '">' + result[i].sys_SubTopicSno + '</option>';
+                                //            }
+                                //            $(".SubUnit_list").html(SubUnit_list);
+
+                                    
+                                      var Chapter_list = "";
+                                      
+                                                Chapter_list += '<option selected="true" disabled="disabled" value="">---Select---</option>';
+                                                for (var i = 0; i < result.length; i++) {
+                                                    Chapter_list += '<option value="'+result[i].Sys_TopicSno+'">' + result[i].Topic_Name + '</option>';      
+                                                }
+                                                $(".Chapter_list").html(Chapter_list);
+        
+                                       
+
+
+                               //$(".SubUnit_list").val(result[0].sys_SubTopicSno);
+                               //updateflag = 1;
+                            
+                              
+                                   
+                            }
+        
+                        },
+                        complete: function (result) {
+              
+                            $(".overlay").hide();
+                            },
+                            error: function (err) {
+
+                                //console.log(JSON.stringify(err));
+
+                            }
+                    });
+        }
+    });
+
+
+
+    
+    /****SUBUNIT CHANGE */
+   
+    var unit_Name_Update = "";
+    var subunitid = "";
+      $(".SubUnit_list").change(function () {
+
+          if (updateflag == 0) {
+              if (onlytthreefieldvali() == false) {
+
+                  //$(".Subject_list").val("");
+                  //$(".SubUnit_list").val("");
+                  // $(".Chapter_list").val("");
+                  $(".objective_Update_Table tbody").html("");
+                  return;
+              }
+              else {
+                   $(".overlay").show();
+                  subunitid = $(this).val();
+                  unit_Name_Update = $(".Chapter_list").val();
+                  /***GRID**/
+                  UpdateGrid();
+                  /**GRID**/
+              }
+          }
+      });
+    
+    //$(".selectobjective").click(function () {
+    function selectobjective(items)
+    {
+        updateflag = 1;
+        $(".saveunit").text("Update");
+    var $row = $(items).closest("tr");
+
+                    /****VALIDATION ****/
+                    var myTextAreaselect = $row.find(".myTextAreaupdate").text();
+                    //var maxmarkselect = $row.find(".maxmarkupdate").val();
+        var unitnameselect = $row.find(".unitnameupdate").text();
+        var Chapter_listselect = $row.find(".Chapter_listupdate").text();
+          var SubUnit_listselect = $row.find(".SubUnit_listupdate").text();
+        var setobjectiveselect = $row.find(".setobjectiveidupdate").text();
+                    $(".myTextArea").val(myTextAreaselect);
+                    //$(".maxmark").val(maxmarkselect);
+        $(".unitname").val(unitnameselect);
+        $(".setobjectiveid").val(setobjectiveselect);
+        $(".Chapter_list").val(Chapter_listselect);
+         $(".SubUnit_list").val(SubUnit_listselect);
+    }
+    /****SUBUNIT CHANGE */
+      
+       //var maxmark_list = "";
+  
+       //     maxmark_list += '<option selected="true" disabled="disabled" value="">---Select---</option>';
+       //     for (var i = 1; i <= 100; i++) {
+       //         maxmark_list += '<option value="'+i+'">' + i + '</option>';      
+       //     }
+       //     $(".maxmark").html(maxmark_list);
+        
+    
+
+   
+    
+         //****VALIDATION**/
+        var AcademicYearListvalidation;
+            //var MaxMark;
+            var TermListvalidation;
+            var ClassListvalidation;
+    var SubjectListvalidation;
+    var Chapter_listvalidation;
+    var SubUnit_listvalidation;
+    var ObjectiveNamevalidation;
+    var Commentvalidation;
+      function onlytthreefieldvali()
+    {
+         AcademicYearListvalidation = $('.AcademicYearList').val();
+        TermListvalidation = $('.Term_list').val();
+        ClassListvalidation = $('.Class_list').val();
+
+         $('.AcademicYearList').change("select", function () {
+            $('.AcademicYearList').next(".error-message").hide();
+            $('.AcademicYearList').css('border', 'none');
+            $('.AcademicYearList').css('background', '#d8f9d8');
+        });
+        if (AcademicYearListvalidation == null || AcademicYearListvalidation == undefined || AcademicYearListvalidation == "" || AcademicYearListvalidation == " ") {
+            $('.AcademicYearList').next(".error-message").text("* Academic Year Required");
+            $('.AcademicYearList').next(".error-message").show();
+            $('.AcademicYearList').css('border', '1px solid red');
+            $('.AcademicYearList').css('background', '#fff');
+            $('.AcademicYearList').focus();
+            return false;
+        }
+          $('.Term_list').change("select", function () {
+            $('.Term_list').next(".error-message").hide();
+            $('.Term_list').css('border', 'none');
+            $('.Term_list').css('background', '#d8f9d8');
+        });
+        if (TermListvalidation == null || TermListvalidation == undefined || TermListvalidation == "" || TermListvalidation == " ") {
+            $('.Term_list').next(".error-message").text("* Term Required");
+            $('.Term_list').next(".error-message").show();
+            $('.Term_list').css('border', '1px solid red');
+            $('.Term_list').css('background', '#fff');
+            $('.Term_list').focus();
+            return false;
+        }
+            $('.Class_list').change("select", function () {
+            $('.Class_list').next(".error-message").hide();
+            $('.Class_list').css('border', 'none');
+            $('.Class_list').css('background', '#d8f9d8');
+        });
+        if (ClassListvalidation == null || ClassListvalidation == undefined || ClassListvalidation == "" || ClassListvalidation == " ") {
+            $('.Class_list').next(".error-message").text("* Class Required");
+            $('.Class_list').next(".error-message").show();
+            $('.Class_list').css('border', '1px solid red');
+            $('.Class_list').css('background', '#fff');
+            $('.Class_list').focus();
+            return false;
+          }
+
+       
+
+    }
+
+
+        function validation() {
+            AcademicYearListvalidation = $('.AcademicYearList').val();
+            //MaxMark = $('.maxmark').val();
+            TermListvalidation = $('.Term_list').val();
+            ClassListvalidation = $('.Class_list').val();
+            SubjectListvalidation = $('.Subject_list').val();
+            Chapter_listvalidation = $('.Chapter_list').val();
+            SubUnit_listvalidation = $('.SubUnit_list').val();
+            ObjectiveNamevalidation = $('.unitname').val();
+            Commentvalidation = $(".myTextArea").val();
+            //var YarnPly = $(currentclass + ' .YarnPly').val();
+            //var quantityval = $(currentclass + ' .quantityval').val();
+            //var askprice = $(currentclass + ' .askprice').val();
+            $('.AcademicYearList').change("select", function () {
+                $('.AcademicYearList').next(".error-message").hide();
+                $('.AcademicYearList').css('border', 'none');
+                $('.AcademicYearList').css('background', '#d8f9d8');
+            });
+            if (AcademicYearListvalidation == null || AcademicYearListvalidation == undefined || AcademicYearListvalidation == "" || AcademicYearListvalidation == " ") {
+                $('.AcademicYearList').next(".error-message").text("* Academic Year Required");
+                $('.AcademicYearList').next(".error-message").show();
+                $('.AcademicYearList').css('border', '1px solid red');
+                $('.AcademicYearList').css('background', '#fff');
+                $('.AcademicYearList').focus();
+                return false;
+            }
+            $('.Term_list').change("select", function () {
+                $('.Term_list').next(".error-message").hide();
+                $('.Term_list').css('border', 'none');
+                $('.Term_list').css('background', '#d8f9d8');
+            });
+            if (TermListvalidation == null || TermListvalidation == undefined || TermListvalidation == "" || TermListvalidation == " ") {
+                $('.Term_list').next(".error-message").text("* Term Required");
+                $('.Term_list').next(".error-message").show();
+                $('.Term_list').css('border', '1px solid red');
+                $('.Term_list').css('background', '#fff');
+                $('.Term_list').focus();
+                return false;
+            }
+            $('.Class_list').change("select", function () {
+                $('.Class_list').next(".error-message").hide();
+                $('.Class_list').css('border', 'none');
+                $('.Class_list').css('background', '#d8f9d8');
+            });
+            if (ClassListvalidation == null || ClassListvalidation == undefined || ClassListvalidation == "" || ClassListvalidation == " ") {
+                $('.Class_list').next(".error-message").text("* Class Required");
+                $('.Class_list').next(".error-message").show();
+                $('.Class_list').css('border', '1px solid red');
+                $('.Class_list').css('background', '#fff');
+                $('.Class_list').focus();
+                return false;
+            }
+            $('.Subject_list').on("input", function () {
+                $('.Subject_list').next(".error-message").hide();
+                $('.Subject_list').css('border', 'none');
+                $('.Subject_list').css('background', '#d8f9d8');
+            });
+            if (SubjectListvalidation == null || SubjectListvalidation == undefined || SubjectListvalidation == "" || SubjectListvalidation == " ") {
+                $('.Subject_list').next(".error-message").text("* Subject Required");
+                $('.Subject_list').next(".error-message").show();
+                $('.Subject_list').css('border', '1px solid red');
+                $('.Subject_list').css('background', '#fff');
+                $('.Subject_list').focus();
+                return false;
+            }
+            
+
+            //     $('.myTextArea').on("textarea", function () {
+            //    $('.myTextArea').next(".error-message").hide();
+            //    $('.myTextArea').css('border', 'none');
+            //    $('.myTextArea').css('background', '#d8f9d8');
+            //});
+            //if (Commentvalidation == null || Commentvalidation == undefined || Commentvalidation == "" || Commentvalidation == " ") {
+            //    $('.myTextArea').next(".error-message").text("* Comment Required");
+            //    $('.myTextArea').next(".error-message").show();
+            //    $('.myTextArea').css('border', '1px solid red');
+            //    $('.myTextArea').css('background', '#fff');
+            //    $('.myTextArea').focus();
+            //    return false;
+            //}
+
+              $('.Chapter_list').on("input", function () {
+                $('.Chapter_list').next(".error-message").hide();
+                $('.Chapter_list').css('border', 'none');
+                $('.Chapter_list').css('background', '#d8f9d8');
+            });
+            if (Chapter_listvalidation == null || Chapter_listvalidation == undefined || Chapter_listvalidation == "" || Chapter_listvalidation == " ") {
+                $('.Chapter_list').next(".error-message").text("* Chapter Required");
+                $('.Chapter_list').next(".error-message").show();
+                $('.Chapter_list').css('border', '1px solid red');
+                $('.Chapter_list').css('background', '#fff');
+                $('.Chapter_list').focus();
+                return false;
+            }
+
+              $('.SubUnit_list').on("input", function () {
+                $('.SubUnit_list').next(".error-message").hide();
+                $('.SubUnit_list').css('border', 'none');
+                $('.SubUnit_list').css('background', '#d8f9d8');
+            });
+            if (SubUnit_listvalidation == null || SubUnit_listvalidation == undefined || SubUnit_listvalidation == "" || SubUnit_listvalidation == " ") {
+                $('.SubUnit_list').next(".error-message").text("* Sub Unit Required");
+                $('.SubUnit_list').next(".error-message").show();
+                $('.SubUnit_list').css('border', '1px solid red');
+                $('.SubUnit_list').css('background', '#fff');
+                $('.SubUnit_list').focus();
+                return false;
+            }
+
+            //  $('.maxmark').on("input", function () {
+            //    $('.maxmark').next(".error-message").hide();
+            //    $('.maxmark').css('border', 'none');
+            //    $('.maxmark').css('background', '#d8f9d8');
+            //});
+            //if (MaxMark == null || MaxMark == undefined || MaxMark == "" || MaxMark == " ") {
+            //    $('.maxmark').next(".error-message").text("* Max Mark Required");
+            //    $('.maxmark').next(".error-message").show();
+            //    $('.maxmark').css('border', '1px solid red');
+            //    $('.maxmark').css('background', '#fff');
+            //    $('.maxmark').focus();
+            //    return false;
+            //}
+                  $('.unitname').on("input", function () {
+                $('.unitname').next(".error-message").hide();
+                $('.unitname').css('border', 'none');
+                $('.unitname').css('background', '#d8f9d8');
+            });
+            if (ObjectiveNamevalidation == null ||  ObjectiveNamevalidation == undefined ||  ObjectiveNamevalidation == "" ||  ObjectiveNamevalidation == " ") {
+                $('.unitname').next(".error-message").text("* Objective Required");
+                $('.unitname').next(".error-message").show();
+                $('.unitname').css('border', '1px solid red');
+                $('.unitname').css('background', '#fff');
+                $('.unitname').focus();
+                return false;
+            }
+           
+
+        }
+        //****VALIDATION**/
+    $("#saveunit").click(function () {
+        
+        if (validation() == false) {
+             
+            return;
+        }
+         else {
+ 
+        var dataadd = JSON.stringify({
+
+            Objective_Name:ObjectiveNamevalidation,
+            sys_SubTopicSno:SubUnit_listvalidation,
+            //Max_Marks_Paper: MaxMark,
+            Sys_TopicSno:Chapter_listvalidation,
+             Subject_Id: SubjectListvalidation,
+             Class_Id: ClassListvalidation,
+            Session_Id: AcademicYearListvalidation,
+            Obj_Comment:$(".myTextArea").val()
+            
+        });
+        
+                var dataupdate = JSON.stringify({
+
+                    Objective_Id : $(".setobjectiveid").val(),
+                         Objective_Name:ObjectiveNamevalidation,
+                        sys_SubTopicSno:SubUnit_listvalidation,
+                        //Max_Marks_Paper: MaxMark,
+                        Sys_TopicSno:Chapter_listvalidation,
+                         Subject_Id: SubjectListvalidation,
+                         Class_Id: ClassListvalidation,
+                    Session_Id: AcademicYearListvalidation,
+                    Obj_Comment:$(".myTextArea").val()
+                });
+   
+            if (updateflag == 0) {
+                $.when(saveOrder(dataadd)).then(function (response) {
+                    //console.log("RESPONSESSS" + response);
+                }).fail(function (err) {
+                    alert("ERORRRR" + err);
+                });
+            }
+            else
+            {
+                 $.when(updateOrder(dataupdate)).then(function (response) {
+                    //console.log("RESPONSESSS" + response);
+                }).fail(function (err) {
+                    alert("ERORRRR" + err);
+                });
+            }
+      function saveOrder(dataadd) {
+            //console.table("SAVE DATA" + dataadd);
+          //exit();
+         $('.overlay').show();
+            return $.ajax({
+                contentType: 'application/json; charset=utf-8',
+                type: 'POST',
+                data: dataadd,
+                dataType: 'json',
+
+                url: 'http://localhost:52673/api/Setup/CreateCurriculumObjective',
+                success: function (result) {
+                    //alert("save");
+                    Swal.fire(
+                        'Save Successfuly!',
+                        '',
+                        'success'
+                    ).then(function () {
+                        //resetaddmodel();
+                        //fabrictable();
+                        // location.reload();
+                    });
+                    //alert("Save");
+
+                },
+                complete: function () {
+                    $(".setobjectiveid").val("");
+                    UpdateGrid();
+                    $('.overlay').hide();
+                },
+                error: function () {
+                    alert("error");
+                }
+            });
+            }
+
+            
+        /************UPDATE**********/
+            function updateOrder(dataupdate) {
+           
+              $('.overlay').show();
+          
+                return $.ajax({
+                    contentType: 'application/json; charset=utf-8',
+                    type: 'PUT',
+                    data: dataupdate,
+                    
+                dataType: 'json',
+                
+                url: 'http://localhost:52673/api/Setup/UpdateCurriculumObjective',
+                success: function (result) {
+                    //alert("save");
+                    updateflag = 0;
+                    Swal.fire(
+                        'Update Successfuly!',
+                        '',
+                        'success'
+                    ).then(function () {
+                        //resetaddmodel();
+                        //fabrictable();
+                        // location.reload();
+                    });
+                    //alert("Save");
+
+                },
+                    complete: function () {
+                        $(".saveunit").text("Save");
+                    UpdateGrid();
+                    $('.overlay').hide();
+                },
+                error: function () {
+                    alert("error");
+                }
+            });
+        }
+        /**************UPDATE***************/
+        }
+        function resetaddmodel(){
+        $(".circulam-form input").val("");
+         $(".circulam-form input").css("border:1px solid #ced4da;background:#fff;");
+            $(".circulam-form select").val("");
+            $(".circulam-form textarea").val("");
+        $(".circulam-form select").css("border:1px solid #ced4da;background:#fff;");
+        //$("#detailTableadd tbody").html("");
+            $(".objective_Update_Table tbody").html("");
+  $(".saveunit").text("Save");
+        updateflag = 0;
+        
+    }
+    });
+
+      function chaponchange(item) {
+        
+      
+
+            var chapId = $(item).val();
+       
+            var SubUnit_list = "";
+            $.ajax({
+                type: 'GET',
+                data: { ID: chapId },
+                url: 'http://localhost:52673/api/Setup/SubTopicDropdown',
+                success: function (result) {
+                    SubUnit_list += '<option selected="true" disabled="disabled" value="">---Select---</option>';
+                    for (var i = 0; i < result.length; i++) {
+                        SubUnit_list += '<option value="' + result[i].Sys_SubTopicSno + '">' + result[i].Sub_TopicName + '</option>';
+                    }
+                    $(".SubUnit_list").html(SubUnit_list);
+
+                }
+            });
+    
+    }
+
+
+       $(".addunitcheck").click(function () {
+              $(".circulam-form input").val("");
+         $(".circulam-form input").css("border:1px solid #ced4da;background:#fff;");
+            $(".circulam-form select").val("");
+           $(".circulam-form textarea").val("");
+            $(".objective_Update_Table tbody").html("");
+        $(".circulam-form select").css("border:1px solid #ced4da;background:#fff;");
+        $(".saveunit").text("Save");
+        updateflag = 0;
+
+ 
+
+       });
+
+    /***Update Grid ****/
+    function UpdateGrid()
+    {
+        //alert(unit_Name_Update + "" + subunitid);
+           $.ajax({
+                      type: 'GET',
+                      data: { sys_TopicSno: unit_Name_Update, sys_SubTopicSno: subunitid },
+
+                      url: 'http://localhost:52673/api/Setup/GetObjectivebyunitandsubunit',
+                      success: function (result) {
+                          //console.log("Resultss" + JSON.stringify(result));
+                          if (result == null || result == "" || result == " ") {
+
+                              $(".objective_Update_Table tbody").html("");
+                              //alert("null value");
+                              $(".saveunit").text("Save");
+                              //$(".Chapter_list").val("");
+                              //$(".SubUnit_list").val("");
+                              //$(".maxmark").val("");
+                              //$(".myTextArea").val("");
+                              updateflag = 0;
+                              $(".objective_Update_Table tbody").html("");
+                              $(".setobjectiveid").val("");
+
+                          }
+                          else if ((result != null || result != "" || result != " ") && $(".addunitcheck").prop('checked') == true) {
+                              $(".objective_Update_Table tbody").html("");
+                              $(".saveunit").text("Save");
+                              //$(".Chapter_list").val("");
+                              //$(".SubUnit_list").val("");
+                              //$(".maxmark").val("");
+                              //$(".myTextArea").val("");
+                              updateflag = 0;
+                              $(".objective_Update_Table tbody").html("");
+                              $(".setobjectiveid").val("");
+                          }
+                          else {
+                              
+                              $(".error-message").hide();
+                              $("input").css("border:1px solid #ced4da");
+                              $("select").css("border:1px solid #ced4da");
+                             // $(".saveunit").text("Update");
+
+
+                              //$(".setobjectiveid").val(result[0].Objective_Id);
+                              //$(".unitname").val(result[0].Objective_Name);
+                              //$(".maxmark").val(result[0].Max_Marks_Paper);
+                              //$(".myTextArea").val(result[0].Obj_Comment);
+
+                              var objective_Update_Table = "";
+
+                              for (var tp = 0; tp < result.length; tp++) {
+                                  objective_Update_Table += "<tr>";
+                                  objective_Update_Table += "<td class='visibilityhidden setobjectiveidupdate'>" + result[tp].Objective_Id + "</td>";
+                                  objective_Update_Table += "<td class='unitnameupdate'>" + result[tp].Objective_Name + "</td>";
+                                  //objective_Update_Table += "<td> <input class='form-control maxmarkupdate' value='" + result[tp].Max_Marks_Paper + "'  disabled></td>";
+
+                                  //objective_Update_Table += "<td class='myTextAreaupdate'>" + result[tp].Obj_Comment + "</td>";
+
+                                  objective_Update_Table += "<td class='visibilityhidden Chapter_listupdate'>" + result[tp].Sys_TopicSno + "</td>";
+                                  objective_Update_Table += "<td class='visibilityhidden SubUnit_listupdate'>" + result[tp].sys_SubTopicSno + "</td>";
+
+                                  objective_Update_Table += "<td><button type='button' class='btn btn-primary selectobjective' onClick='selectobjective(this)'>Select</button></td>";
+                                  objective_Update_Table += "</tr>";
+
+                              }
+
+                              $(".objective_Update_Table tbody").html(objective_Update_Table);
+                              $('.objective_Update_Table').DataTable();
+                              //updateflag = 1;
+
+
+
+                          }
+
+                      },
+                        complete: function (result) {
+              
+                            $(".overlay").hide();
+                            },
+                            error: function (err) {
+
+                                //console.log(JSON.stringify(err));
+
+                            }
+                  });
+    }
+    /***Update Grid***/
+</script>
+       <!--Body-->
+        <hr />
+        <footer>
+            <p>&copy; 2021 - The City School</p>
+        </footer>
+    </div>
+
+   
+    <script src="Content/sweetalert2.min.js"></script>
+
+
+</body>
+</html>

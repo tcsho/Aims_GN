@@ -1,0 +1,175 @@
+﻿body {
+	font: 14px 'Verdana', 'sans-serif';
+	margin: 10px 25px;
+	color: #333;
+}
+
+h1 {
+	font-size: 1.75em;
+	font-weight: normal;
+	color: #C60;
+	margin: 0;
+}
+
+h2 {
+	font-size: 1.25em;
+	font-weight: normal;
+	color: #B20;
+	margin: 0;
+}
+
+a  {
+}
+
+	a:link, a:visited {
+		color: #36F;
+	}
+
+	a:hover, a:active {
+		color: #00C;
+	}
+
+p {
+	text-align: justify;
+}
+
+.promptfade{
+	  position: absolute;
+	  background-color: #333;
+}
+
+.results {
+	color: #009;
+	font-style: italic;
+	margin-top: 5px;
+}
+
+/*  Default prompt style  */
+div.prompt{
+	  width: 400px;
+	  font: 14px 'Verdana', 'Geneva', 'Arial', 'Helvetica', 'sans-serif';
+	  position: absolute;
+	  background-color: #FFF;
+	  font-size: 11px;
+	  text-align: left;
+	  border: solid 6px #949FB8;
+	  -moz-border-radius: 6px;
+	  -webkit-border-radius: 6px;
+}
+	div.prompt .promptcontainer{
+		  font-weight: bold;
+		  border: solid 1px #009;
+		  padding: 12px 6px 6px 6px;
+	}
+	div.prompt .promptclose{
+		  position: absolute;
+		  top: 4px; 
+		  right: 4px;
+		  padding: 0px 2px;
+		  text-align: center;
+		  cursor: pointer;
+		  color: #009;
+		  font-weight: bold;
+		  font-size: 13px;
+		  border: solid 1px #E0E0EE;
+		  background-color: #FAFAFF;
+}
+	div.prompt .promptmessage{
+		  padding: 10px;
+		  line-height: 20px;
+		  color: #009;
+		  font-weight: normal;
+		  font-size: 13px;
+	}
+	div.prompt .promptbuttons{
+		  text-align: right;
+		  padding: 5px 5px 5px 0;
+		  border: solid 1px #E0E0EE;
+		  background-color: #FAFAFF;
+	}
+	div.prompt button {
+		-moz-background-clip:border;
+		-moz-background-inline-policy:continuous;
+		-moz-background-origin:padding;
+		background:#FFF url(button_bg.jpg) repeat-x scroll left top;
+		border:1px solid #777;
+		font-size:12px;
+		margin: 0 0 0 5px;
+		padding: 2px 5px;
+		width:75px;
+	}
+		div.prompt button:hover {
+			border:1px solid #33C;
+			color: #33C;
+		}
+.promptwarning .prompt .promptbuttons{
+	  background-color: #BF5E26;
+}
+
+/*  Alternate prompt style  */
+.jqifade {
+      position: absolute;
+      background-color: #aaaaaa;
+}
+
+div.jqi {
+      width: 400px;
+      font-family: Verdana, Geneva, Arial, Helvetica, sans-serif;
+      position: absolute;
+      background-color: #ffffff;
+      font-size: 11px;
+      text-align: left;
+      border: solid 1px #eeeeee;
+      -moz-border-radius: 10px;
+      -webkit-border-radius: 10px;
+      padding: 7px;
+}
+
+	div.jqi .jqicontainer {
+		  font-weight: bold;
+	}
+
+	div.jqi .jqiclose {
+		  position: absolute;
+		  top: 4px; right: -2px;
+		  width: 18px;
+		  cursor: default;
+		  color: #bbbbbb;
+		  font-weight: bold;
+		  cursor: pointer;
+	}
+
+	div.jqi .jqimessage {
+		  padding: 10px;
+		  line-height: 20px;
+		  color: #444444;
+	}
+
+	div.jqi .jqibuttons {
+		  text-align: right;
+		  padding: 5px 0 5px 0;
+		  border: solid 1px #eeeeee;
+		  background-color: #f4f4f4;
+	}
+
+	div.jqi button {
+		  padding: 3px 10px;
+		  margin: 0 10px;
+		  background-color: #2F6073;
+		  border: solid 1px #f4f4f4;
+		  color: #ffffff;
+		  font-weight: bold;
+		  font-size: 12px;
+	}
+
+		div.jqi button:hover {
+			  background-color: #728A8C;
+		}
+
+		div.jqi button.jqidefaultbutton {
+			  background-color: #BF5E26;
+		}
+
+.jqiwarning .jqi .jqibuttons{
+      background-color: #BF5E26;
+}

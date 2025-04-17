@@ -1,0 +1,122 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<Menus>
+  
+  <Menu>
+    <Item command="Download" text="104" icon="download.png" isDefault="yes" parentPermissions="Download" />
+    <Item command="CompressAndDownload" text="105" icon="compressdownload.png" parentPermissions="Download" />
+    <Item command="OpenWith" text="106" icon="openwith.png">
+      <Menu>
+        <Item command="OpenWithWebBrowser" text="107" icon="webbrowser.png" parentPermissions="Download" />
+      </Menu>
+    </Item>
+    <Item command="[Separator]" />
+    <Item command="Compress" text="108" icon="compress.png" parentPermissions="Compress" />
+    <Item command="ExtractAll" text="109" icon="extractall.png" parentPermissions="Extract" />
+    <Item command="ExtractHere" text="110" icon="extractall.png" parentPermissions="Extract" />
+    <Item command="[Separator]" />
+    <Item command="Cut" text="111" icon="cut.png" parentPermissions="Cut" />
+    <Item command="Copy" text="112" icon="copy.png" parentPermissions="Copy" />
+    <Item command="[Separator]" />
+    <Item command="Delete" text="113" icon="delete.png" parentPermissions="Delete" />
+    <Item command="Rename" text="114" icon="rename.png" parentPermissions="Rename" />
+    <Item command="[Separator]" />
+    <Item command="InvertSelection" text="119" />
+  </Menu>
+  
+  <Menu>
+    <Item command="Explore" text="115" icon="explore.png" isDefault="yes" parentPermissions="Traverse" />
+    <Item command="CompressAndDownload" text="105" icon="compressdownload.png" parentPermissions="Download" permissions="Traverse,List" />
+    <Item command="Upload" text="103" icon="upload.png" permissions="Upload" />
+    <Item command="[Separator]" />
+    <Item command="Compress" text="108" icon="compress.png" parentPermissions="Compress" permissions="Traverse,List" />
+    <Item command="[Separator]" />
+    <Item command="Cut" text="111" icon="cut.png" parentPermissions="Cut" permissions="Traverse,List" />
+    <Item command="Copy" text="112" icon="copy.png" parentPermissions="Copy" permissions="Traverse,List" />
+    <Item command="Paste" text="116" icon="paste.png" permissions="Paste" />
+    <Item command="[Separator]" />
+    <Item command="Delete" text="113" icon="delete.png" parentPermissions="Delete" />
+    <Item command="Rename" text="114" icon="rename.png" parentPermissions="Rename" />
+    <Item command="[Separator]" />
+    <Item command="InvertSelection" text="119" />
+    <Item command="[Separator]" />
+    <Item command="New" text="120">
+      <Menu>
+        <Item command="NewFolder" text="121" icon="folder.png" permissions="Create" />
+      </Menu>
+    </Item>
+  </Menu>
+  
+  <Menu>
+    <Item command="CompressAndDownload" text="105" icon="compressdownload.png" parentPermissions="Download" permissions="Traverse,List" />
+    <Item command="[Separator]" />
+    <Item command="Compress" text="108" icon="compress.png" parentPermissions="Compress" permissions="Traverse,List" />
+    <Item command="[Separator]" />
+    <Item command="Cut" text="111" icon="cut.png" parentPermissions="Cut" permissions="Traverse,List" />
+    <Item command="Copy" text="112" icon="copy.png" parentPermissions="Copy" permissions="Traverse,List" />
+    <Item command="[Separator]" />
+    <Item command="Delete" text="113" icon="delete.png" parentPermissions="Delete" />
+    <Item command="[Separator]" />
+    <Item command="InvertSelection" text="119" />
+  </Menu>
+  
+  <Menu>
+    <Item command="Upload" text="103" icon="upload.png" permissions="Upload" />
+    <Item command="[Separator]" />
+    <Item command="Refresh" text="117" icon="refresh.png" />
+    <Item command="[Separator]" />
+    <Item command="SelectAll" text="118" />
+    <Item command="[Separator]" />
+    <Item command="Paste" text="116" icon="paste.png" permissions="Paste" />
+    <Item command="[Separator]" />
+    <Item command="New" text="120">
+      <Menu>
+        <Item command="NewFolder" text="121" icon="folder.png" permissions="Create" />
+      </Menu>
+    </Item>
+  </Menu>
+
+  <Menu>
+    <Item command="Expand" text="304" />
+    <Item command="Collapse" text="305" />
+    <Item command="[Separator]" />
+    <Item command="Explore" text="115" icon="explore.png" parentPermissions="Traverse" />
+    <Item command="CompressAndDownload" text="105" icon="compressdownload.png" parentPermissions="Download" permissions="Traverse,List" />
+    <Item command="Upload" text="103" icon="upload.png" permissions="Upload" />
+    <Item command="[Separator]" />
+    <Item command="Refresh" text="117" icon="refresh.png" />
+    <Item command="[Separator]" />
+    <Item command="Compress" text="108" icon="compress.png" parentPermissions="Compress" permissions="Traverse,List" />
+    <Item command="[Separator]" />
+    <Item command="Cut" text="111" icon="cut.png" parentPermissions="Cut" permissions="Traverse,List" />
+    <Item command="Copy" text="112" icon="copy.png" parentPermissions="Copy" permissions="Traverse,List" />
+    <Item command="Paste" text="116" icon="paste.png" permissions="Paste" />
+    <Item command="[Separator]" />
+    <Item command="Delete" text="113" icon="delete.png" parentPermissions="Delete" />
+    <Item command="Rename" text="114" icon="rename.png" parentPermissions="Rename" />
+    <Item command="[Separator]" />
+    <Item command="New" text="120">
+      <Menu>
+        <Item command="NewFolder" text="121" icon="folder.png" permissions="Create" />
+      </Menu>
+    </Item>
+  </Menu>
+
+  <Menu>
+    <Item command="Expand" text="304" />
+    <Item command="Collapse" text="305" />
+    <Item command="[Separator]" />
+    <Item command="Explore" text="115" icon="explore.png" permissions="Traverse" />
+    <Item command="Upload" text="103" icon="upload.png" permissions="Upload" />
+    <Item command="[Separator]" />
+    <Item command="Refresh" text="117" icon="refresh.png" />
+    <Item command="[Separator]" />
+    <Item command="Paste" text="116" icon="paste.png" permissions="Paste" />
+    <Item command="[Separator]" />
+    <Item command="New" text="120">
+      <Menu>
+        <Item command="NewFolder" text="121" icon="folder.png" permissions="Create" />
+      </Menu>
+    </Item>
+  </Menu>
+  
+</Menus>

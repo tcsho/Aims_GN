@@ -1,0 +1,1163 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Reports</title>
+    <link rel="icon" type="image/x-icon" href="assets/images/favicon.ico">
+    <link rel="stylesheet" href="assets/vendor/Fonts.css" />
+    <link rel="stylesheet" href="assets/vendor/CustomStyle.css" />
+    <link rel="stylesheet" href="assets/vendor/toastr.css" />
+    <link rel="stylesheet" href="assets/vendor/bootstrap/css/bootstrap.css" />
+    <link rel="stylesheet" href="assets/vendor/font-awesome/css/font-awesome.css" />
+    <link href="assets/vendor/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="Content/jquery.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <!-- <script src="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script> -->
+    <link rel="stylesheet" href="node_modules/ng-select/ng-select/themes/default.theme.css">
+
+    <!--Datatables-->
+
+    <link rel="stylesheet" href="Content/DataTables/datatables.min.css" />
+    <link href="Content/DataTables/Buttons-1.6.3/css/buttons.dataTables.min.css" rel="stylesheet" />
+    <link href="Content/DataTables/Select-1.3.1/css/select.dataTables.css" rel="stylesheet" />
+
+    <script src="Content/DataTables/Buttons-1.6.3/js/dataTables.buttons.min.js"></script>
+    <script src="Content/DataTables/datatables.min.js"></script>
+    <script src="Content/DataTables/Select-1.3.1/js/select.dataTables.js"></script>
+
+    <!--Datatables-->
+
+    <link rel="stylesheet" href="node_modules/pnotify/core/dist/PNotify.css">
+    <link rel="stylesheet" href="node_modules/pnotify/core/BrightTheme.css">
+    <link href="Content/Header_Component.css" rel="stylesheet" />
+
+    <link href="Content/Site.css" rel="stylesheet" />
+    <link href="Content/sweetalert2.min.css" rel="stylesheet" />
+    <script src="Content/jquery.limitText.js"></script>
+</head>
+
+<body>
+
+    <!--HEADER COMPONENT-->
+    <div class='overlay'></div>
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 BackgroundBlue">
+                <div class="Gap"></div>
+                <div class="row">
+                    <div class="col-lg-2 col-md-2 col-sm-12 col-xs-12">
+                        <img src="assets/images/logo1.png" class="ImageLayoutCenter" />
+                    </div>
+                    <div class="col-lg-10 col-md-10 col-sm-12 col-xs-12">
+                        <div class="Gap"></div>
+                        <div class="Gap"></div>
+                        <p class="HeaderHeadingAMISPlus text-lg-left text-md-left text-sm-left text-xs-left text-center">The City School:   Southern Region</p>
+                        <div class="row">
+                            <nav class="navbar navbar-light navbar-expand-lg mainmenu">
+                                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                                    <span class="navbar-toggler-icon"></span>
+                                </button>
+                                <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                                    <ul class="navbar-nav mr-auto">
+                                        <li><a href="#">Home <span class="sr-only">(current)</span></a></li>
+                                        <li class="dropdown">
+                                            <a class="dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Results</a>
+                                            <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                                <li><a href="#">Result Card</a></li>
+                                            </ul>
+                                        </li>
+                                        <li class="dropdown">
+                                            <a class="dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">TCS Reports</a>
+                                            <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                                <li class="dropdown">
+                                                    <a class="dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Non Academic Reports</a>
+                                                    <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                                        <li><a href="#">Non Academic Reports(RO)</a></li>
+                                                        <li><a href="#">Non Academic Reports(CO)</a></li>
+                                                    </ul>
+                                                </li>
+                                                <li class="dropdown">
+                                                    <a class="dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Academic Reports</a>
+                                                    <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                                        <li><a href="#">Academic Reports(CO)</a></li>
+                                                        <li><a href="#">Academic Reports(RO)</a></li>
+                                                    </ul>
+                                                </li>
+                                            </ul>
+                                        </li>
+
+                                        <li class="dropdown">
+                                            <a class="dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Component Marks Setup</a>
+                                            <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                                <li><a href="Unit_Setup.html">Unit/Sub Unit Setup</a></li>
+                                                <li><a href="Curriculum_Objectives.html">Curriculum Objectives Setup</a></li>
+                                                <li><a href="Cl_Exam.html">CL Exam Setup</a></li>
+                                                <li><a href="General_Comment_Section.html">Comments Setup</a></li>
+
+                                            </ul>
+                                        </li>
+
+                                        <li class="dropdown">
+                                            <a class="dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Exam Module</a>
+                                            <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                                <li><a href="Mark_Entry.aspx">Marks Entry</a></li>
+                                                <li><a href="Progress_Report.html">Subject Progress Report</a></li>
+                                                <li><a href="Progress_Report_Class.html">Class Progress Report</a></li>
+                                                <li><a href="ExamDate.html">Exam DateSheet</a></li>
+                                                <li><a href="Reports.aspx">Reports</a></li>
+                                            </ul>
+                                        </li>
+
+
+                                        <!-- <li><a href="#">Service</a></li> -->
+                                    </ul>
+                                </div>
+                            </nav>
+                        </div>
+                    </div>
+                    <!--<div class="col-lg-3 col-md-3 col-sm-12 col-xs-12 ">
+                        <div class="Gap"></div>
+                        <div class="Gap"></div>
+                        <p class="HeaderHeadingSubmenu text-lg-right text-md-right text-center">
+                            <a href="" class="LogoutButton">
+                                Logout &nbsp;&nbsp;&nbsp;<i class="fa fa-sign-out" aria-hidden="true"></i>
+                            </a>
+                        </p>
+                        <div class="Gap"></div>
+                        <p class="HeaderHeadingSubmenu text-lg-right text-md-right text-center">
+                            Logged in as: <span class="LoginAs"> Sr Exams</span>
+                        </p>
+                    </div>-->
+                </div>
+                <div class="Gap"></div>
+            </div>
+        </div>
+    </div>
+    <!--HEADER COMPONENT-->
+
+    <div class="container body-content">
+        <!--Body-->
+        <div class="row">
+            <div class="col-lg-12 col-md-12 col-xs-12 col-sm-12" style="box-shadow: 0px 2px 4px -1px #00006a;padding: 7px 40px 40px 40px;">
+                <p class="PageMainHeading"><i class="glyphicon glyphicon-folder-open" style="color: #00006a;"></i> &nbsp;&nbsp;Reports</p>
+                <div style="background-color: #00006a;" class="Gap"></div>
+
+                <form class="form-horizontal product-setup-form custom-form unit_subunitform" autocomplete="off">
+
+                    <!-- unitHeaderSetup Start -->
+                    <div>
+                        <div class="row">
+
+                            <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12">
+                                <span class="CustomLabel">Academic Year</span> <span class="RequiredLbl"> * </span><br>
+
+                                <input type="text" class="form-control systopicsno visibilityhidden" />
+                                <select class="AcademicYearList form-control">
+                                </select>
+                                <p class="error-message">* Academic Year Required</p>
+
+                            </div>
+
+                            <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12">
+                                <span class="CustomLabel">Term</span> <span class="RequiredLbl"> * </span><br>
+
+                                <select class="Term_list form-control">
+                                    <option selected="true" disabled="disabled" value="">---Select---</option>
+                                    <option value="1">First Term</option>
+                                    <option value="2">Second Term</option>
+
+                                </select>
+                                <p class="error-message">* Term Required</p>
+                            </div>
+
+                            <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12">
+
+                                <span class="CustomLabel">Class</span> <span class="RequiredLbl"> * </span>
+                                <select class="Class_list form-control">
+                                </select>
+                                <p class="error-message">* Class Required</p>
+                            </div>
+
+                            <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12">
+                                <span class="CustomLabel">Section</span> <span class="RequiredLbl"> * </span><br>
+
+                                <select class="Section_list form-control">
+                                </select>
+                                <p class="error-message">* Section Required</p>
+                            </div>
+
+
+                            <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12">
+                                <span class="CustomLabel">Room</span> <span class="RequiredLbl"> * </span><br>
+                                <select class="Room_list form-control">
+                                    <option value="">---Select---</option>
+
+                                </select>
+                                <p class="error-message">* Room Required</p>
+                            </div>
+
+                            <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12">
+                                <span class="CustomLabel">Center</span> <span class="RequiredLbl"> * </span><br>
+
+                                <!--<select class="Center_list form-control">
+                        <option value="">---Select---</option>
+
+                    </select>-->
+                                <input type="text" class="Center_list form-control" disabled="disabled" />
+                                <p class="error-message">* Center Required</p>
+                            </div>
+
+                            <!--<div class="col-lg-3 col-md-3 col-sm-12 col-xs-12">
+                    <span class="CustomLabel">Duration (Min)</span> <span class="RequiredLbl"> * </span><br>
+
+
+                    <input type='number' class='form-control tilltime' placeholder='Duration(Min)' onchange='student_totalmarks(this)' onkeydown='student_totalmarks(this)' onkeyup='student_totalmarks(this)'>
+                    <p class="error-message">* Duration Required</p>
+                </div>-->
+
+                            <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12">
+                                <span class="CustomLabel">Block</span> <span class="RequiredLbl"> * </span><br>
+                                <select class="Block_list form-control">
+                                    <option value="">---Select---</option>
+
+                                </select>
+                                <p class="error-message">* Block Required</p>
+                            </div>
+
+                        </div>
+
+
+
+
+
+
+                        <!-- unitGroup Start -->
+                        <div class="row">
+
+
+
+                            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                                <button type="button" class=" btn  btn-primary Admission_Reportbtn savebtn col-lg-3 col-md-3 col-sm-12 col-xs-12">Admission Report</button>
+                                <button type="button" class=" btn  btn-primary Classwise_Reportbtn  savebtn col-lg-3 col-md-3 col-sm-12 col-xs-12">Class Wise Report</button>
+                                <button type="button" class=" btn  btn-primary Floorwise_Reportbtn savebtn col-lg-3 col-md-3 col-sm-12 col-xs-12">Floor Plan Report</button>
+                                <button type="button" class=" btn  btn-primary StudentAttendence_Reportbtn savebtn col-lg-3 col-md-3 col-sm-12 col-xs-12">Student Attendence Report</button>
+
+
+                            </div>
+
+                        </div>
+                    </div>
+                </form>
+                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 nopadding text-center">
+                    <button type="button" class=" btn  btn-primary showallreport savebtn"><i class="fa fa-print" aria-hidden="true"></i> Print All</button>
+                </div>
+                
+              <!--onClick="check_uncheck_checkbox(this.checked)"-->
+                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 nopadding margintop">
+                    <table class="table detail-list" id="detail-list">
+                        <thead>
+                        <th><input type="checkbox" name="checkall" id="example-select-all" /></th><!--"check_uncheck_checkbox(this.checked)"-->
+                        <th>Name</th>
+                        <th>ERP</th>
+                        <th>Roll No</th>
+                        <th>Class</th>
+                       
+                        </thead>
+                        <tbody>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+
+
+
+
+        <!-- Main Page End   -->
+        
+
+      
+        <script>
+            let myTable;
+    var classId = "";
+    var Term_Id = "";
+    var Acadmic_Id = "";
+            var cenid = "";
+            var secid = "";
+            var blockid = "";
+            /**GET PARAMETER**/
+            var uri = window.location.href;
+  var enc = encodeURIComponent(uri).replace('%27','+');
+  var dec = decodeURIComponent(enc);
+        var sURLVariableswithurl="";
+        function GetUrlParameter(sParam) {
+            var sPageURL = dec;//window.location.search.substring(1);
+
+            sURLVariableswithurl = sPageURL.split('?');
+            var sURLVariables = sURLVariableswithurl[1].split('&');
+
+            for (var i = 0; i < sURLVariables.length; i++) {
+                var sParameterName = sURLVariables[i].split('=');
+
+                if (sParameterName[0] == sParam) {
+                    return sParameterName[1];
+                }
+            }
+        }
+
+        
+       
+
+   
+            cenid = GetUrlParameter('Center_ID');
+             /**GET PARAMETER**/
+    /********DROPDOWN*****/
+         $(".overlay").show();
+    var AcademicYearList = "";
+    $.ajax({
+        type: 'GET',
+        //data:,
+        url: 'http://democity3.csn.edu.pk/api/Setup/AcademicYearDropDown',//sURLVariableswithurl[0]+"?",//getsearchedpatient
+        success: function (result) {
+            AcademicYearList += '<option selected="true" disabled="disabled" value="">---Select---</option>';
+
+            for (var i = 0; i < result.length; i++) {
+
+
+                AcademicYearList += '<option value="' + result[i].Session_Id + '">' + result[i].Description + '</option>';
+
+
+            }
+
+
+            $(".AcademicYearList").html(AcademicYearList);
+
+        },
+        complete: function (result) {
+
+            $(".overlay").hide();
+            },
+            error: function (err) {
+
+                //console.log(JSON.stringify(err));
+
+            }
+    });
+
+
+    var Class_list = "";
+      $(".overlay").show();
+    $.ajax({
+        type: 'GET',
+        //data:,
+        url: 'http://democity3.csn.edu.pk/api/Setup/ClassDropDown',//sURLVariableswithurl[0]+"?",//getsearchedpatient
+        success: function (result) {
+            Class_list += '<option selected="true" disabled="disabled" value="">---Select---</option>';
+            for (var i = 0; i < result.length; i++) {
+                Class_list += '<option value="' + result[i].Class_Id + '">' + result[i].Class_Name + '</option>';
+            }
+            $(".Class_list").html(Class_list);
+
+        },
+        complete: function (result) {
+
+            $(".overlay").hide();
+            },
+            error: function (err) {
+
+                //console.log(JSON.stringify(err));
+
+            }
+    });
+
+    $(".Class_list").change(function () {
+             $(".overlay").show();
+        $(".viewreport").show();
+       classId = $(this).val();
+        Term_Id = $(".Term_list").val();
+        Acadmic_Id = $(".AcademicYearList").val();
+       
+        var Section_list = "";
+      $(".overlay").show();
+            $.ajax({
+                type: 'GET',
+                data: {Class_Id:classId,Center_Id: cenid},
+        url: 'http://democity3.csn.edu.pk/api/Setup/GetSection',
+        success: function (result) {
+            Section_list += '<option selected="true" disabled="disabled" value="">---Select---</option>';
+            for (var i = 0; i < result.length; i++) {
+                Section_list += '<option value="' + result[i].Section_Id + '">' + result[i].Section_Name + '</option>';
+            }
+            $(".Section_list").html(Section_list);
+
+        },
+        complete: function (result) {
+
+            $(".overlay").hide();
+            },
+            error: function (err) {
+
+                //console.log(JSON.stringify(err));
+
+            }
+    });
+  
+
+    });
+
+
+    //         var Center_list = "";
+    //  $(".overlay").show();
+    //$.ajax({
+    //    type: 'GET',
+    //    //data:,
+    //    url: 'http://democity3.csn.edu.pk/api/Setup/GetCenter',
+    //    success: function (result) {
+    //        Center_list += '<option selected="true" disabled="disabled" value="">---Select---</option>';
+    //        for (var i = 0; i < result.length; i++) {
+    //            Center_list += '<option value="' + result[i].Center_Id + '">' + result[i].Center_Name + '</option>';
+    //        }
+    //        $(".Center_list").html(Center_list);
+
+    //    },
+    //    complete: function (result) {
+
+    //        $(".overlay").hide();
+    //        },
+    //        error: function (err) {
+
+               
+
+    //        }
+    //});
+
+
+                       var Room_list = "";
+      $(".overlay").show();
+    $.ajax({
+        type: 'GET',
+        //data:,
+        url: 'http://democity3.csn.edu.pk/api/Setup/GetRoom',//sURLVariableswithurl[0]+"?",//getsearchedpatient
+        success: function (result) {
+            Room_list += '<option selected="true" disabled="disabled" value="">---Select---</option>';
+            for (var i = 0; i < result.length; i++) {
+                Room_list += '<option value="' + result[i].Room_Id + '">' + result[i].RoomName + '</option>';
+            }
+            $(".Room_list").html(Room_list);
+
+        },
+        complete: function (result) {
+
+            $(".overlay").hide();
+            },
+            error: function (err) {
+
+                //console.log(JSON.stringify(err));
+
+            }
+    });
+
+     
+
+            var BlockList = "";
+        $(".overlay").show();
+                $.ajax({
+                    type: 'GET',
+                    //data:,
+                    url: 'http://democity3.csn.edu.pk/api/Setup/GetBlock',//sURLVariableswithurl[0]+"?",//getsearchedpatient
+                    success: function (result) {
+                        BlockList += '<option selected="true" disabled="disabled" value="">---Select---</option>';
+
+                        for (var i = 0; i < result.length; i++) {
+
+
+                             BlockList += '<option value="' + result[i].Block_Id + '">' + result[i].Block_Name + '</option>';
+
+
+                        }
+                        $(".Block_list").html(BlockList);
+
+                    },
+        complete: function (result) {
+              
+            $(".overlay").hide();
+            },
+            error: function (err) {
+
+                //console.log(JSON.stringify(err));
+
+            }
+                });
+
+
+
+    /********DROPDOWN*****/
+
+  
+    $(".Center_list").val(cenid);
+
+    $(".StudentAttendence_Reportbtn").click(function () {
+        centerId = $(".Center_list").val();
+        Term_Id = $(".Term_list").val();
+        blockid=$(".Block_list").val();
+                Acadmic_Id = $(".AcademicYearList").val();
+                Rm_id = $(".Room_list").val();
+                  $('.AcademicYearList').change("select", function () {
+            $('.AcademicYearList').next(".error-message").hide();
+            $('.AcademicYearList').css('border', 'none');
+            $('.AcademicYearList').css('background', '#d8f9d8');
+        });
+        if (Acadmic_Id == null || Acadmic_Id == undefined || Acadmic_Id == "" || Acadmic_Id == " ") {
+            $('.AcademicYearList').next(".error-message").text("* Academic Year Required");
+            $('.AcademicYearList').next(".error-message").show();
+            $('.AcademicYearList').css('border', '1px solid red');
+            $('.AcademicYearList').css('background', '#fff');
+            $('.AcademicYearList').focus();
+            return false;
+        }
+        $('.Term_list').change("select", function () {
+            $('.Term_list').next(".error-message").hide();
+            $('.Term_list').css('border', 'none');
+            $('.Term_list').css('background', '#d8f9d8');
+        });
+        if (Term_Id == null || Term_Id == undefined || Term_Id == "" || Term_Id == " ") {
+            $('.Term_list').next(".error-message").text("* Term Required");
+            $('.Term_list').next(".error-message").show();
+            $('.Term_list').css('border', '1px solid red');
+            $('.Term_list').css('background', '#fff');
+            $('.Term_list').focus();
+            return false;
+        }
+        //$('.Class_list').change("select", function () {
+        //    $('.Class_list').next(".error-message").hide();
+        //    $('.Class_list').css('border', 'none');
+        //    $('.Class_list').css('background', '#d8f9d8');
+        //});
+        //if (classId == null || classId == undefined || classId == "" || classId == " ") {
+        //    $('.Class_list').next(".error-message").text("* Class Required");
+        //    $('.Class_list').next(".error-message").show();
+        //    $('.Class_list').css('border', '1px solid red');
+        //    $('.Class_list').css('background', '#fff');
+        //    $('.Class_list').focus();
+        //    return false;
+        //        }
+
+                $('.Room_list').change("select", function () {
+            $('.Room_list').next(".error-message").hide();
+            $('.Room_list').css('border', 'none');
+            $('.Room_list').css('background', '#d8f9d8');
+        });
+        if (Rm_id == null || Rm_id == undefined || Rm_id == "" || Rm_id == " ") {
+            $('.Room_list').next(".error-message").text("* Room Required");
+            $('.Room_list').next(".error-message").show();
+            $('.Room_list').css('border', '1px solid red');
+            $('.Room_list').css('background', '#fff');
+            $('.Room_list').focus();
+            return false;
+        }
+
+         $('.Block_list').on("input", function () {
+                                    $('.Block_list').next(".error-message").hide();
+                                    $('.Block_list').css('border', 'none');
+                                    $('.Block_list').css('background', '#d8f9d8');
+                                });
+                                if (blockid == null || blockid == undefined || blockid == "" || blockid == " ") {
+                                    $('.Block_list').next(".error-message").text("* Block Required");
+                                    $('.Block_list').next(".error-message").show();
+                                    $('.Block_list').css('border', '1px solid red');
+                                    $('.Block_list').css('background', '#fff');
+                                    $('.Block_list').focus();
+                                    return;
+                            }
+        //window.location.href = "http://democity3.csn.edu.pk/ReportCard/StudentAttendence.html?Session_Id=" + Acadmic_Id + "&Class_Id=" + classId + "&TermGroup_Id=" + Term_Id + "&Room_Id=" + Rm_id;
+
+         window.open("http://democity3.csn.edu.pk/ReportCard/StudentAttendence.html?Session_Id=" + Acadmic_Id + "&Center_Id=" + centerId + "&TermGroup_Id=" + Term_Id + "&Room_Id=" + Rm_id+ "&Block_Id=" + blockid, '_blank');
+    });
+
+    $(".Floorwise_Reportbtn").click(function () {
+        centerId = $(".Center_list").val();
+        Term_Id = $(".Term_list").val();
+                Acadmic_Id = $(".AcademicYearList").val();
+             blockid=$(".Block_list").val();
+                  $('.AcademicYearList').change("select", function () {
+            $('.AcademicYearList').next(".error-message").hide();
+            $('.AcademicYearList').css('border', 'none');
+            $('.AcademicYearList').css('background', '#d8f9d8');
+        });
+        if (Acadmic_Id == null || Acadmic_Id == undefined || Acadmic_Id == "" || Acadmic_Id == " ") {
+            $('.AcademicYearList').next(".error-message").text("* Academic Year Required");
+            $('.AcademicYearList').next(".error-message").show();
+            $('.AcademicYearList').css('border', '1px solid red');
+            $('.AcademicYearList').css('background', '#fff');
+            $('.AcademicYearList').focus();
+            return false;
+        }
+        $('.Term_list').change("select", function () {
+            $('.Term_list').next(".error-message").hide();
+            $('.Term_list').css('border', 'none');
+            $('.Term_list').css('background', '#d8f9d8');
+        });
+        if (Term_Id == null || Term_Id == undefined || Term_Id == "" || Term_Id == " ") {
+            $('.Term_list').next(".error-message").text("* Term Required");
+            $('.Term_list').next(".error-message").show();
+            $('.Term_list').css('border', '1px solid red');
+            $('.Term_list').css('background', '#fff');
+            $('.Term_list').focus();
+            return false;
+        }
+        //$('.Center_list').change("select", function () {
+        //    $('.Center_list').next(".error-message").hide();
+        //    $('.Center_list').css('border', 'none');
+        //    $('.Center_list').css('background', '#d8f9d8');
+        //});
+        if (centerId == null || centerId == undefined || centerId == "" || centerId == " ") {
+            $('.Center_list').next(".error-message").text("* Center Required");
+            $('.Center_list').next(".error-message").show();
+            $('.Center_list').css('border', '1px solid red');
+            $('.Center_list').css('background', '#fff');
+            $('.Center_list').focus();
+            return false;
+                }
+         $('.Block_list').on("input", function () {
+                                    $('.Block_list').next(".error-message").hide();
+                                    $('.Block_list').css('border', 'none');
+                                    $('.Block_list').css('background', '#d8f9d8');
+                                });
+                                if (blockid == null || blockid == undefined || blockid == "" || blockid == " ") {
+                                    $('.Block_list').next(".error-message").text("* Block Required");
+                                    $('.Block_list').next(".error-message").show();
+                                    $('.Block_list').css('border', '1px solid red');
+                                    $('.Block_list').css('background', '#fff');
+                                    $('.Block_list').focus();
+                                    return;
+                            }
+        
+        
+        //window.location.href = "http://democity3.csn.edu.pk/ReportCard/FloorPlan.html?Session_Id=" + Acadmic_Id + "&Center_Id=" + centerId + "&TermGroup_Id=" + Term_Id;
+        window.open("http://democity3.csn.edu.pk/ReportCard/FloorPlan.html?Session_Id=" + Acadmic_Id + "&Center_Id=" + centerId + "&TermGroup_Id=" + Term_Id+ "&Block_Id=" + blockid, '_blank');
+    });
+
+             $(".Classwise_Reportbtn").click(function () {
+        centerId = $(".Center_list").val();
+        Term_Id = $(".Term_list").val();
+                Acadmic_Id = $(".AcademicYearList").val();
+                 classId = $(".Class_list").val();
+                 //secid = $(".Section_list").val();
+                 blockid=$(".Block_list").val();
+                  $('.AcademicYearList').change("select", function () {
+            $('.AcademicYearList').next(".error-message").hide();
+            $('.AcademicYearList').css('border', 'none');
+            $('.AcademicYearList').css('background', '#d8f9d8');
+        });
+        if (Acadmic_Id == null || Acadmic_Id == undefined || Acadmic_Id == "" || Acadmic_Id == " ") {
+            $('.AcademicYearList').next(".error-message").text("* Academic Year Required");
+            $('.AcademicYearList').next(".error-message").show();
+            $('.AcademicYearList').css('border', '1px solid red');
+            $('.AcademicYearList').css('background', '#fff');
+            $('.AcademicYearList').focus();
+            return false;
+        }
+        $('.Term_list').change("select", function () {
+            $('.Term_list').next(".error-message").hide();
+            $('.Term_list').css('border', 'none');
+            $('.Term_list').css('background', '#d8f9d8');
+        });
+        if (Term_Id == null || Term_Id == undefined || Term_Id == "" || Term_Id == " ") {
+            $('.Term_list').next(".error-message").text("* Term Required");
+            $('.Term_list').next(".error-message").show();
+            $('.Term_list').css('border', '1px solid red');
+            $('.Term_list').css('background', '#fff');
+            $('.Term_list').focus();
+            return false;
+        }
+        //$('.Center_list').change("select", function () {
+        //    $('.Center_list').next(".error-message").hide();
+        //    $('.Center_list').css('border', 'none');
+        //    $('.Center_list').css('background', '#d8f9d8');
+        //});
+        if (centerId == null || centerId == undefined || centerId == "" || centerId == " ") {
+            $('.Center_list').next(".error-message").text("* Center Required");
+            $('.Center_list').next(".error-message").show();
+            $('.Center_list').css('border', '1px solid red');
+            $('.Center_list').css('background', '#fff');
+            $('.Center_list').focus();
+            return false;
+                 }
+        $('.Class_list').change("select", function () {
+            $('.Class_list').next(".error-message").hide();
+            $('.Class_list').css('border', 'none');
+            $('.Class_list').css('background', '#d8f9d8');
+        });
+                 if (classId == null || classId == undefined || classId == "" || classId == " ") {
+                     $('.Class_list').next(".error-message").text("* Class Required");
+                     $('.Class_list').next(".error-message").show();
+                     $('.Class_list').css('border', '1px solid red');
+                     $('.Class_list').css('background', '#fff');
+                     $('.Class_list').focus();
+                     return false;
+                 }
+        //$('.Section_list').change("select", function () {
+        //    $('.Section_list').next(".error-message").hide();
+        //    $('.Section_list').css('border', 'none');
+        //    $('.Section_list').css('background', '#d8f9d8');
+        //});
+        //if (secid == null || secid == undefined || secid == "" || secid == " ") {
+        //    $('.Section_list').next(".error-message").text("* Section Required");
+        //    $('.Section_list').next(".error-message").show();
+        //    $('.Section_list').css('border', '1px solid red');
+        //    $('.Section_list').css('background', '#fff');
+        //    $('.Section_list').focus();
+        //    return false;
+        //         }
+         $('.Block_list').on("input", function () {
+                                    $('.Block_list').next(".error-message").hide();
+                                    $('.Block_list').css('border', 'none');
+                                    $('.Block_list').css('background', '#d8f9d8');
+                                });
+                                if (blockid == null || blockid == undefined || blockid == "" || blockid == " ") {
+                                    $('.Block_list').next(".error-message").text("* Block Required");
+                                    $('.Block_list').next(".error-message").show();
+                                    $('.Block_list').css('border', '1px solid red');
+                                    $('.Block_list').css('background', '#fff');
+                                    $('.Block_list').focus();
+                                    return;
+                            }
+        
+                // window.location.href = "http://democity3.csn.edu.pk/ReportCard/ClassWise.html?Center_Id=" + centerId + "&Session_Id=" + Acadmic_Id + "&TermGroup_Id=" + Term_Id + "&Class_Id=" + classId + "&Section_Id=" + secid;
+                 //window.location.href
+                 window.open("http://democity3.csn.edu.pk/ReportCard/ClassWise.html?Center_Id=" + centerId + "&Session_Id=" + Acadmic_Id + "&TermGroup_Id=" + Term_Id + "&Class_Id=" + classId + "&Block_Id=" +blockid,'_blank');
+    });
+
+    $(".Admission_Reportbtn").click(function () {
+        classId = $(".Class_list").val();
+                Term_Id = $(".Term_list").val();
+                secid = $(".Section_list").val();
+                Acadmic_Id = $(".AcademicYearList").val();
+                 blockid=$(".Block_list").val();
+                  $('.AcademicYearList').change("select", function () {
+            $('.AcademicYearList').next(".error-message").hide();
+            $('.AcademicYearList').css('border', 'none');
+            $('.AcademicYearList').css('background', '#d8f9d8');
+        });
+        if (Acadmic_Id == null || Acadmic_Id == undefined || Acadmic_Id == "" || Acadmic_Id == " ") {
+            $('.AcademicYearList').next(".error-message").text("* Academic Year Required");
+            $('.AcademicYearList').next(".error-message").show();
+            $('.AcademicYearList').css('border', '1px solid red');
+            $('.AcademicYearList').css('background', '#fff');
+            $('.AcademicYearList').focus();
+            return false;
+        }
+        $('.Term_list').change("select", function () {
+            $('.Term_list').next(".error-message").hide();
+            $('.Term_list').css('border', 'none');
+            $('.Term_list').css('background', '#d8f9d8');
+        });
+        if (Term_Id == null || Term_Id == undefined || Term_Id == "" || Term_Id == " ") {
+            $('.Term_list').next(".error-message").text("* Term Required");
+            $('.Term_list').next(".error-message").show();
+            $('.Term_list').css('border', '1px solid red');
+            $('.Term_list').css('background', '#fff');
+            $('.Term_list').focus();
+            return false;
+        }
+        $('.Class_list').change("select", function () {
+            $('.Class_list').next(".error-message").hide();
+            $('.Class_list').css('border', 'none');
+            $('.Class_list').css('background', '#d8f9d8');
+        });
+        if (classId == null || classId == undefined || classId == "" || classId == " ") {
+            $('.Class_list').next(".error-message").text("* Class Required");
+            $('.Class_list').next(".error-message").show();
+            $('.Class_list').css('border', '1px solid red');
+            $('.Class_list').css('background', '#fff');
+            $('.Class_list').focus();
+            return false;
+                }
+                $('.Section_list').change("select", function () {
+            $('.Section_list').next(".error-message").hide();
+            $('.Section_list').css('border', 'none');
+            $('.Section_list').css('background', '#d8f9d8');
+        });
+        if (secid == null || secid == undefined || secid == "" || secid == " ") {
+            $('.Section_list').next(".error-message").text("* Section Required");
+            $('.Section_list').next(".error-message").show();
+            $('.Section_list').css('border', '1px solid red');
+            $('.Section_list').css('background', '#fff');
+            $('.Section_list').focus();
+            return false;
+        }
+       $('.Block_list').on("input", function () {
+                                    $('.Block_list').next(".error-message").hide();
+                                    $('.Block_list').css('border', 'none');
+                                    $('.Block_list').css('background', '#d8f9d8');
+                                });
+                                if (blockid == null || blockid == undefined || blockid == "" || blockid == " ") {
+                                    $('.Block_list').next(".error-message").text("* Block Required");
+                                    $('.Block_list').next(".error-message").show();
+                                    $('.Block_list').css('border', '1px solid red');
+                                    $('.Block_list').css('background', '#fff');
+                                    $('.Block_list').focus();
+                                    return;
+                            }
+        
+                             /****GRID TABLE */
+        console.log("sess" + Acadmic_Id + "Term" + Term_Id + "class" + classId + "sec" + secid);
+                var topic_list = "";
+                var alreadyt = "";
+                 var ERP = [];
+                ERP.length = 0
+                var dataadd = [];
+        dataadd.length = 0;
+        $(".detail-list tbody").html("");
+         $.ajax({
+            type: 'GET',
+            data: { Session_Id: Acadmic_Id,TermGroup_Id:Term_Id,Class_Id:classId,Section_Id:secid,Block_Id:blockid},
+            url: 'http://democity3.csn.edu.pk/api/Setup/StudentAdmissionSheetReportGrid',//sURLVariableswithurl[0]+"?",//getsearchedpatient
+             success: function (result) {
+
+             /***RESPONSE**/
+                 for (var i = 0; i < result.length; i++) {
+                     if (alreadyt != result[i].StudentERPNo) {
+                         /**FIRST tIME USER**/
+                         if (alreadyt == "") {
+                             ERP.push({
+                                 First_Name: result[i].First_Name,
+                                 StudentERPNo: result[i].StudentERPNo,
+                                 StudentMaskNo: result[i].StudentMaskNo,
+                                 Class_Name: result[i].Class_Name
+                                 
+
+                             });
+
+                             dataadd.push({
+                                ERP:ERP,
+                             });
+                             alreadyt = result[i].StudentERPNo;
+                         }
+                         /**FIRST tIME USER**/
+
+                         else {
+                             ERP = [];
+                            ERP.push({
+                                 First_Name: result[i].First_Name,
+                                 StudentERPNo: result[i].StudentERPNo,
+                                 StudentMaskNo: result[i].StudentMaskNo,
+                                 Class_Name: result[i].Class_Name
+                                 
+
+                             });
+
+                             dataadd.push({
+                           
+                                ERP:ERP,
+
+                             });
+                             alreadyt = result[i].StudentERPNo;
+                         }
+                     }
+                     else {
+                         ERP.push({
+                                 First_Name: result[i].First_Name,
+                                 StudentERPNo: result[i].StudentERPNo,
+                                 StudentMaskNo: result[i].StudentMaskNo,
+                                 Class_Name: result[i].Class_Name
+                                 
+
+                             });
+                     }
+                 }
+                 /**RESPONSE**/
+
+                 //console.log("Data" + JSON.stringify(dataadd));
+                 
+                for (var i = 0; i < dataadd.length; i++) {
+
+
+
+                    topic_list += '<tr>';
+                    topic_list += '<td><input type="checkbox" class="admission_check"></td>';/*<input type="checkbox" class="admission_check">*/
+                    topic_list += '<td class="StudentName">' + dataadd[i].ERP[0].First_Name + '</td>';
+                                    topic_list += '<td class="StudentERP">' + dataadd[i].ERP[0].StudentERPNo + '</td>';
+                                    topic_list += '<td class="StudentMask">' + dataadd[i].ERP[0].StudentMaskNo + '</td>';
+                                    topic_list += '<td class="StudentClass">' + dataadd[i].ERP[0].Class_Name + '</td>';
+                                    //topic_list += '<td><button type="button" class="Admission_printout btn btn-primary" onClick="StudentSlip(this)">Report View</button></td>';
+                                    
+                                    topic_list += '</tr>';
+                                }
+                                $(".detail-list tbody").html(topic_list);
+                myTable=$('.detail-list').DataTable({
+                                    "dom": 'Blfrtip',
+                                    "bPaginate": true,
+                                    "bLengthChange": true,
+                                    "bFilter": true,
+                                    "bInfo": true,
+                                    "buttons": [
+                                   "copy", "excel"
+                                ],
+                    "lengthMenu": [[10, 25, 50, -1], [10, 25, 50, "All"]],
+ //"columnDefs": [{
+ //           orderable: false,
+ //           className: 'select-checkbox',
+ //           targets: 0,
+ //       }],
+        "select": {
+            style: 'os', // 'single', 'multi', 'os', 'multi+shift'
+            selector: 'td:first-child',
+        },
+        "order": [
+            [1, 'asc'],
+        ]
+
+                                });
+             
+
+            },
+        complete: function (result) {
+
+            $(".overlay").hide();
+            $(".showallreport").show();
+            },
+            error: function (err) {
+
+                //console.log(JSON.stringify(err));
+
+            }
+         });
+
+
+                        /****GRID TABLE */
+    });
+
+            //$(".Admission_printout").click(function () {
+            function StudentSlip(item) {
+                 var $row = $(item).closest("tr");
+               
+                    /****VALIDATION ****/
+                    var StudentERP = $row.find(".StudentERP").text();
+
+                //window.location.href = "http://democity3.csn.edu.pk/ReportCard/AdmissionSheet.html?Session_Id=" + Acadmic_Id + "&TermGroup_Id=" +Term_Id+ "&Class_Id=" + classId + "&Room_Id=" + Rm_id+ "&StudentERPNo=" + StudentERP;
+                  window.open("http://democity3.csn.edu.pk/ReportCard/AdmissionSheet.html?Session_Id=" + Acadmic_Id + "&TermGroup_Id=" +Term_Id+ "&Class_Id=" + classId + "&Section_Id=" + secid+ "&StudentERPNo=" + StudentERP+ "&Block_Id=" + blockid, '_blank');
+            }
+
+                function minsplit(vmins) {
+
+  var min_res = vmins.split(":");
+                return min_res[1];
+    }
+
+
+    function student_totalmarks(itemu) {
+
+                    var total_mark_Papers = 300;
+                    if ($(itemu).val() > parseInt(total_mark_Papers))
+                        //&& e.keyCode !== 46
+                        //&& e.keyCode !== 8
+                     {
+                        //preventDefault();
+                        $(itemu).val("");
+                        $(itemu).next(".error-message").text("* Duration Excessed");
+                        $(itemu).next(".error-message").show();
+                        $(itemu).css('border', '1px solid red');
+                        $(itemu).css('background', '#fff');
+                        $(itemu).focus();
+                        return;
+                    }
+                 if ($(itemu).val() < 1)
+                        //&& e.keyCode !== 46
+                        //&& e.keyCode !== 8
+                     {
+                        //preventDefault();
+                        $(itemu).val("");
+                        $(itemu).next(".error-message").text("* Duration Not Less Than 1");
+                        $(itemu).next(".error-message").show();
+                        $(itemu).css('border', '1px solid red');
+                        $(itemu).css('background', '#fff');
+                        $(itemu).focus();
+                        return;
+                    }
+                    else {
+                        $(itemu).next(".error-message").hide();
+                        $(itemu).css('border', 'none');
+                        $(itemu).css('background', '#d8f9d8');
+                }
+                return;
+            }
+
+            $(".showallreport").click(function () {
+
+            /*******ShowAll***************/
+                classId = $(".Class_list").val();
+                Term_Id = $(".Term_list").val();
+                secid = $(".Section_list").val();
+                Acadmic_Id = $(".AcademicYearList").val();
+                 blockid=$(".Block_list").val();
+                  $('.AcademicYearList').change("select", function () {
+            $('.AcademicYearList').next(".error-message").hide();
+            $('.AcademicYearList').css('border', 'none');
+            $('.AcademicYearList').css('background', '#d8f9d8');
+        });
+        if (Acadmic_Id == null || Acadmic_Id == undefined || Acadmic_Id == "" || Acadmic_Id == " ") {
+            $('.AcademicYearList').next(".error-message").text("* Academic Year Required");
+            $('.AcademicYearList').next(".error-message").show();
+            $('.AcademicYearList').css('border', '1px solid red');
+            $('.AcademicYearList').css('background', '#fff');
+            $('.AcademicYearList').focus();
+            return false;
+        }
+        $('.Term_list').change("select", function () {
+            $('.Term_list').next(".error-message").hide();
+            $('.Term_list').css('border', 'none');
+            $('.Term_list').css('background', '#d8f9d8');
+        });
+        if (Term_Id == null || Term_Id == undefined || Term_Id == "" || Term_Id == " ") {
+            $('.Term_list').next(".error-message").text("* Term Required");
+            $('.Term_list').next(".error-message").show();
+            $('.Term_list').css('border', '1px solid red');
+            $('.Term_list').css('background', '#fff');
+            $('.Term_list').focus();
+            return false;
+        }
+        $('.Class_list').change("select", function () {
+            $('.Class_list').next(".error-message").hide();
+            $('.Class_list').css('border', 'none');
+            $('.Class_list').css('background', '#d8f9d8');
+        });
+        if (classId == null || classId == undefined || classId == "" || classId == " ") {
+            $('.Class_list').next(".error-message").text("* Class Required");
+            $('.Class_list').next(".error-message").show();
+            $('.Class_list').css('border', '1px solid red');
+            $('.Class_list').css('background', '#fff');
+            $('.Class_list').focus();
+            return false;
+                }
+                $('.Section_list').change("select", function () {
+            $('.Section_list').next(".error-message").hide();
+            $('.Section_list').css('border', 'none');
+            $('.Section_list').css('background', '#d8f9d8');
+        });
+        if (secid == null || secid == undefined || secid == "" || secid == " ") {
+            $('.Section_list').next(".error-message").text("* Section Required");
+            $('.Section_list').next(".error-message").show();
+            $('.Section_list').css('border', '1px solid red');
+            $('.Section_list').css('background', '#fff');
+            $('.Section_list').focus();
+            return false;
+        }
+       $('.Block_list').on("input", function () {
+                                    $('.Block_list').next(".error-message").hide();
+                                    $('.Block_list').css('border', 'none');
+                                    $('.Block_list').css('background', '#d8f9d8');
+                                });
+                                if (blockid == null || blockid == undefined || blockid == "" || blockid == " ") {
+                                    $('.Block_list').next(".error-message").text("* Block Required");
+                                    $('.Block_list').next(".error-message").show();
+                                    $('.Block_list').css('border', '1px solid red');
+                                    $('.Block_list').css('background', '#fff');
+                                    $('.Block_list').focus();
+                                    return;
+                            }
+        
+                /*********SHOW ALL*************/
+                var e_row = [];
+                e_row.length = 0;
+               
+                var clause = "";
+                //Where Session_Id=11 AND TermGroup_Id=1 AND Class_Id=9 AND Section_Id=24 AND Block_Id=1 AND 
+                //SR.StudentERPNo IN('262430','265941')
+                //clause += "(";
+                //$("#detail-list input[type=checkbox]:checked").each(function () {
+  
+
+
+                //$("#detail-list .admission_check:checked").each(function () {
+                  myTable.$('input:checked').each(function () {
+                    //clause += "'"+$(this).closest("tr").find('.StudentERP').text()+"'" + ",";
+                      clause +=$(this).closest("tr").find('.StudentERP').text() + ",";
+                });
+                clause=removelastcomma(clause);
+                //clause += ")";
+                
+                 window.open("http://democity3.csn.edu.pk/ReportCard/AdmissionSheet.html?Session_Id=" + Acadmic_Id + "&TermGroup_Id=" +Term_Id+ "&Class_Id=" + classId + "&Section_Id=" + secid+ "&Filter=" +clause+ "&Block_Id=" + blockid, '_blank');
+            });
+
+              function removelastcomma(comma)
+            {
+                return comma.substring(0,comma.length-1)
+            }
+               /***FUNCTION*****/
+           $('#example-select-all').on('click', function(){
+              // Check/uncheck all checkboxes in the table
+              var rows = myTable.rows({ 'search': 'applied' }).nodes();
+              $('input[type="checkbox"]', rows).prop('checked', this.checked);
+                });
+            /***FUNCTION*****/
+
+  //         function check_uncheck_checkbox(isChecked) {
+        //  if(isChecked) {
+        //      $('.admission_check').each(function() { 
+        //          this.checked = true; 
+        //      });
+        //  } else {
+        //      $('.admission_check').each(function() {
+        //          this.checked = false;
+        //      });
+        //  }
+        //}
+       //function check_uncheck_checkbox(isChecked) {
+           
+           
+       //         if(isChecked==true) {
+
+       //             $("#detail-list .admission_check").each(function () {
+       //                 $(".admission_check").prop("checked", true);
+       //                 $(this).prop("checked", true);
+       //             });
+       //         }
+       //         else {
+       //             $("#detail-list .admission_check").each(function () {
+       //                 $(".admission_check").prop("checked", false);
+       //                 $(this).prop("checked", false);
+       //             });
+       //         }
+       //     }
+
+
+         
+            
+        </script>
+        <style>
+            .viewreport {
+                display: none;
+            }
+
+            .margintop {
+                margin-top: 10px;
+            }
+
+            .floatright {
+                float: right;
+            }
+            .btn-primary {
+                border-color: #ffffff !important;
+            }
+            .showallreport {
+            display:none;
+            }
+        </style>
+        <!--Body-->
+        <hr />
+        <footer>
+            <p>&copy; 2021 - The City School</p>
+        </footer>
+    </div>
+
+
+    <script src="Content/sweetalert2.min.js"></script>
+
+
+</body>
+</html>

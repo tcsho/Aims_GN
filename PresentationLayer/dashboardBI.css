@@ -1,0 +1,105 @@
+﻿.dropdown {
+    width: 311px;
+    padding: 10px;
+    background-color: #fff;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+}
+
+label {
+    display: block;
+    font-weight: bold;
+    margin-bottom: 10px;
+}
+
+    label.heading {
+        display: block;
+        font-weight: bold;
+        margin-bottom: 10px;
+        color: blue;
+        font-size: 16px;
+    }
+
+select {
+    width: 100%;
+    padding: 8px;
+    font-size: 16px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+    select:focus {
+        outline: none;
+        border-color: #007bff; /* Change color on focus */
+    }
+
+.row {
+    margin-left: 0px !important;
+}
+
+.arrowDown {
+    display: inline-block; /* Ensures the span takes up only as much width as necessary */
+    width: 20px; /* Adjust width and height as per your image dimensions */
+    height: 20px;
+    background-image: url('arrowDown.png');
+    background-size: cover; /* Ensures the image covers the entire span */
+    background-position: center; /* Centers the image within the span */
+}
+
+.arrowUp {
+    display: inline-block; /* Ensures the span takes up only as much width as necessary */
+    width: 20px; /* Adjust width and height as per your image dimensions */
+    height: 20px;
+    background-image: url('arrowUp.png');
+    background-size: cover; /* Ensures the image covers the entire span */
+    background-position: center; /* Centers the image within the span */
+}
+
+h2 {
+    font-size: 15px; /* Adjust font size as needed */
+    font-weight: bold; /* Makes the text bold */
+    color: blue; /* Sets the text color */
+    margin-bottom: 10px; /* Adds some bottom margin for spacing */
+    margin-top: 10px; /* Adds some bottom margin for spacing */
+    /* Add more styles as per your design needs */
+}
+
+p {
+    font-size: 25px; /* Adjust font size as needed */
+    font-weight: bold; /* Makes the text bold */
+    color: black; /* Sets the text color */
+    margin-bottom: 10px; /* Adds some bottom margin for spacing */
+    margin-top: 10px; /* Adds some bottom margin for spacing */
+}
+
+#myTable {
+    width: 100%;
+    border-collapse: collapse;
+    border: 1px solid #ccc;
+}
+
+    #myTable th, #myTable td {
+        border: 1px solid #ccc;
+        padding: 8px;
+        text-align: center;
+    }
+
+    #myTable th {
+        background-color: black;
+        font-weight: bold;
+        color: white;
+    }
+    /* Define grid layout */
+    #myTable tr {
+        display: grid;
+        grid-template-columns: repeat(13, 1fr); /* 11 columns with equal width */
+    }
+
+        #myTable tr:nth-child(even) {
+            background-color: #f9f9f9; /* Lighter alternate row background */
+        }
+
+        #myTable tr:nth-child(odd) {
+            background-color: #ffffff; /* Default row background */
+        }

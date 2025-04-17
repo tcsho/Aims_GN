@@ -1,0 +1,409 @@
+﻿using System;
+using System.Data;
+using System.Configuration;
+using System.Collections;
+using System.Web;
+using System.Web.Security;
+using System.Web.UI;
+using System.Web.UI.WebControls;
+using System.Web.UI.WebControls.WebParts;
+using System.Web.UI.HtmlControls;
+using System.IO;
+
+public partial class Trns_DocumentsUploader : System.Web.UI.Page
+{
+    Hashtable hTable = new Hashtable();
+    protected void Page_Load(object sender, EventArgs e)
+    {
+        hTable = (Hashtable)Session["hTable"];
+        if (!IsPostBack)
+        {
+            Session["INFO"] = "Documents Uploading";
+            this.FormSettings();
+            ViewState["tMood"] = "check";
+            this.txtBackLogDate.Text = System.DateTime.Now.ToString("MM/dd/yyyy");
+
+
+        }
+
+
+        if (hTable.ContainsValue("AllowBackLogClearance") == false)
+        {
+
+            trBkLog.Visible = false;
+        }
+        ////else
+        ////{
+
+        ////    trBkLog.Visible = true;
+        ////}
+
+
+        LoadUserEnableForwardDelete(Session["UserID"].ToString(), ddlcategory.SelectedValue.ToString().Trim());
+
+
+        ///////if ((ddlcategory.SelectedValue.ToString().Trim() == "1") || (ddlcategory.SelectedValue.ToString().Trim() == ""))
+        /////////////// Commercial department working for All Invoicing categories on request Ali Khurram 18 nov 2022 
+        if ((ddlcategory.SelectedValue.ToString().Trim() == "1") || (ddlcategory.SelectedValue.ToString().Trim() == "2") || (ddlcategory.SelectedValue.ToString().Trim() == "3") || (ddlcategory.SelectedValue.ToString().Trim() == "4") || (ddlcategory.SelectedValue.ToString().Trim() == "5") || (ddlcategory.SelectedValue.ToString().Trim() == "6") || (ddlcategory.SelectedValue.ToString().Trim() == "7") || (ddlcategory.SelectedValue.ToString().Trim() == "8") || (ddlcategory.SelectedValue.ToString().Trim() == "9") || (ddlcategory.SelectedValue.ToString().Trim() == "10") || (ddlcategory.SelectedValue.ToString().Trim() == "11") || (ddlcategory.SelectedValue.ToString().Trim() == "12") || (ddlcategory.SelectedValue.ToString().Trim() == "13") || (ddlcategory.SelectedValue.ToString().Trim() == "14") || (ddlcategory.SelectedValue.ToString().Trim() == "15") || (ddlcategory.SelectedValue.ToString().Trim() == "16") || (ddlcategory.SelectedValue.ToString().Trim() == "35") || (ddlcategory.SelectedValue.ToString().Trim() == "36") || (ddlcategory.SelectedValue.ToString().Trim() == "37") || (ddlcategory.SelectedValue.ToString().Trim() == "41") || (ddlcategory.SelectedValue.ToString().Trim() == "42") || (ddlcategory.SelectedValue.ToString().Trim() == "43") || (ddlcategory.SelectedValue.ToString().Trim() == "48"))
+        {
+
+            trDocCate.Visible = true;
+        }
+        else
+        {
+
+            trDocCate.Visible = false;
+        }
+
+
+        ///////// comment for category wise role assignment
+        ////////if (hTable.ContainsValue("AllowDeleteDoc") == false)
+        ////////{
+        ////////    gvLst.Columns[5].Visible = false;
+        ////////}
+
+        ////////if (hTable.ContainsValue("AllowForwardDoc") == false)
+        ////////{
+        ////////    btnForward.Visible = false;
+        ////////    gvLst.Columns[6].Visible = false;
+        ////////}
+
+        ////////////if ((ddlcategory.SelectedValue.ToString().Trim() == "33")|| (ddlcategory.SelectedValue.ToString().Trim() == "40"))
+        ////////////{
+
+        ////////////    btnForward.Visible = false;
+        ////////////}
+        ////////////else
+        ////////////{
+
+        ////////////    btnForward.Visible = true;
+        ////////////}
+
+
+
+    }
+
+
+    protected void btnSave_Click(object sender, EventArgs e)
+    {
+        if (FileUpload1.HasFile)
+        {
+            if (this.txtName.Text == "")
+            {
+                lblErrMsg.Text = "Please Enter Document Name...";
+                return;
+            }
+        }
+        else
+        {
+            lblErrMsg.Text = "Please attach document...";
+            return;
+        }
+        //if (File.Exists(base.Server.MapPath("~\\pelshare\\ScannedDocuments\\" + txtName.Text.ToString().Trim())))
+        //if (File.Exists(base.Server.MapPath(@"\\192.168.0.80\ScannedDocuments\" + txtName.Text.ToString().Trim())))
+        if (File.Exists(base.Server.MapPath("~\\ScannedDocuments\\" + txtName.Text.ToString().Trim())))
+        {
+            this.lblErrMsg.Text = "Document Name alreay Exist...";
+            return;
+        }
+        HttpPostedFile postedFile = this.FileUpload1.PostedFile;
+
+
+        if (Path.GetExtension(postedFile.FileName).ToLower() == ".doc" || Path.GetExtension(postedFile.FileName).ToLower() == ".jpg" || Path.GetExtension(postedFile.FileName).ToLower() == ".jpeg" || Path.GetExtension(postedFile.FileName).ToLower() == ".docx" || Path.GetExtension(postedFile.FileName).ToLower() == ".xls" || Path.GetExtension(postedFile.FileName).ToLower() == ".xlsx")
+        {
+            this.lblErrMsg.Text = "Attached Document is not valid...";
+            return;
+        }
+
+
+        if (Path.GetExtension(postedFile.FileName).ToLower() == ".pdf")
+        {
+            this.lblErrMsg.Text = "";
+        }
+        else
+        {
+            this.lblErrMsg.Text = "Files Other then extension .pdf Cannot be Uploaded";
+            return;
+
+        }
+        //}
+
+        string MaxId;
+        int contentLength = postedFile.ContentLength;
+        byte[] buffer = new byte[contentLength];
+        postedFile.InputStream.Read(buffer, 0, contentLength);
+        string fileName = FileUpload1.PostedFile.FileName.ToString();
+
+
+        BLL.FileUploadBL BL = new BLL.FileUploadBL();
+        DataTable dtmx = new DataTable();
+        dtmx = (DataTable)BL.GetMaxIdForUpload();
+        if (dtmx == null)
+        {
+            MaxId = "None";
+
+        }
+        ////Page.DataBind();
+
+        MaxId = dtmx.Rows[0]["MaxID"].ToString();
+
+        string fName;
+
+        if (hTable.ContainsValue("AllowBackLogClearance") == false)
+        {
+
+            fName = DateTime.Now.Year.ToString().PadLeft(4, '0') + DateTime.Now.Month.ToString().PadLeft(2, '0') + DateTime.Now.Day.ToString().PadLeft(2, '0') + "_" + this.ddlcategory.SelectedValue.ToString().Trim() + "_" + MaxId + "_";
+            fName += txtName.Text.ToString().Trim();
+
+        }
+        else
+        {
+
+            fName = Convert.ToDateTime(txtBackLogDate.Text.ToString()).Year.ToString().PadLeft(4, '0') + Convert.ToDateTime(txtBackLogDate.Text.ToString()).Month.ToString().PadLeft(2, '0') + Convert.ToDateTime(txtBackLogDate.Text.ToString()).Day.ToString().PadLeft(2, '0') + "_" + this.ddlcategory.SelectedValue.ToString().Trim() + "_" + MaxId + "_";
+            fName += txtName.Text.ToString().Trim();
+
+        }
+
+
+
+        FileStream stream = new FileStream(base.Server.MapPath("~\\ScannedDocuments\\" + fName + Path.GetExtension(postedFile.FileName).ToLower()), FileMode.Create);
+
+        stream.Write(buffer, 0, buffer.Length);
+        stream.Close();
+        string addstamp;
+
+        if (hTable.ContainsValue("AllowBackLogClearance") == false)
+        {
+
+            addstamp = DateTime.Now.ToString();
+        }
+        else
+        {
+
+            addstamp = txtBackLogDate.Text.ToString();
+        }
+
+        string Status;
+        string DocCat;
+
+        //if (ddlcategory.SelectedValue.ToString().Trim() == "1")
+        /////////////// Commercial department working for All Invoicing categories on request Ali Khurram 18 nov 2022 
+        if ((ddlcategory.SelectedValue.ToString().Trim() == "1") || (ddlcategory.SelectedValue.ToString().Trim() == "2") || (ddlcategory.SelectedValue.ToString().Trim() == "3") || (ddlcategory.SelectedValue.ToString().Trim() == "4") || (ddlcategory.SelectedValue.ToString().Trim() == "5") || (ddlcategory.SelectedValue.ToString().Trim() == "6") || (ddlcategory.SelectedValue.ToString().Trim() == "7") || (ddlcategory.SelectedValue.ToString().Trim() == "8") || (ddlcategory.SelectedValue.ToString().Trim() == "9") || (ddlcategory.SelectedValue.ToString().Trim() == "10") || (ddlcategory.SelectedValue.ToString().Trim() == "11") || (ddlcategory.SelectedValue.ToString().Trim() == "12") || (ddlcategory.SelectedValue.ToString().Trim() == "13") || (ddlcategory.SelectedValue.ToString().Trim() == "14") || (ddlcategory.SelectedValue.ToString().Trim() == "15") || (ddlcategory.SelectedValue.ToString().Trim() == "16") || (ddlcategory.SelectedValue.ToString().Trim() == "35") || (ddlcategory.SelectedValue.ToString().Trim() == "36") || (ddlcategory.SelectedValue.ToString().Trim() == "37") || (ddlcategory.SelectedValue.ToString().Trim() == "41") || (ddlcategory.SelectedValue.ToString().Trim() == "42") || (ddlcategory.SelectedValue.ToString().Trim() == "43") || (ddlcategory.SelectedValue.ToString().Trim() == "48"))
+
+        {
+            //////Status = "FORWARDED";
+            DocCat = ddlDocCategory.SelectedValue.ToString().Trim();
+            if (DocCat == "SALE TAX")
+            {
+                Status = "FORWARDED";
+            }
+            else
+            {
+                Status = "VERIFIED";
+            }
+        }
+
+        else
+        {
+            Status = "VERIFIED";
+            DocCat = "NONE";
+        }
+
+        BLL.FileUploadBL DCBL = new BLL.FileUploadBL();
+        ////////DCBL.Add(ddlcategory.SelectedValue.ToString().Trim().ToString(), fName.ToString().Trim(), "~\\ScannedDocuments\\" + fName + Path.GetExtension(postedFile.FileName).ToLower(), "", "000000", DateTime.Now.ToString(), Session["UserName"].ToString(), DateTime.Now.ToString(), Session["UserName"].ToString(), DateTime.Now.ToString());
+
+        DCBL.Add(ddlcategory.SelectedValue.ToString().Trim(), fName.ToString().Trim(), "~\\ScannedDocuments\\" + fName + Path.GetExtension(postedFile.FileName).ToLower(), "", "000000", DateTime.Now.ToString(), Session["UserName"].ToString(), addstamp, Session["UserName"].ToString(), DateTime.Now.ToString(), Status.ToString().Trim(), DocCat.ToString().Trim());
+
+
+
+
+
+        lblErrMsg.Text = "Document Uploaded successfully";
+        lblErrMsg.ForeColor = System.Drawing.Color.Green;
+        lblErrMsg.Visible = true;
+        gvLst.DataBind();
+
+
+
+
+
+
+    }
+
+
+
+    protected void lnk_open(object sender, EventArgs e)
+    {
+        ImageButton lbt = (ImageButton)sender;
+        Response.Redirect("~/frmLoadDoc.aspx?Doc=" + lbt.ToolTip);
+
+        //string pth = "../frmLoadDoc.aspx?Doc=" + lbt.ToolTip;
+        //ScriptManager.RegisterStartupScript(Page, typeof(Page), "OpenWindow", "window.open('" + pth + "');", true);
+        //ScriptManager.RegisterStartupScript(Page, typeof(Page), "OpenWindow", "window.open('../frmLoadDoc.aspx?Doc=~/Uploads/Carona.pdf');", true);
+    }
+
+
+
+    protected void gvLst_RowDataBound(object sender, GridViewRowEventArgs e)
+    {
+        foreach (TableCell tc in e.Row.Cells)
+        {
+            tc.Attributes["style"] = "border-color: #c3cecc";
+        }
+    }
+
+    protected void FormSettings()
+    {
+        this.lblErrMsg.ForeColor = System.Drawing.Color.Maroon;
+        this.lblErrMsg.Font.Name = "Calibri";
+        this.lblErrMsg.Font.Size = 11;
+        this.lblErrMsg.Text = "";
+    }
+
+    protected void gvLst_DataBound(object sender, EventArgs e)
+    {
+
+
+    }
+
+
+
+    protected void lnk_Del(object sender, EventArgs e)
+    {
+        LinkButton btn = (LinkButton)sender;
+
+        string id = btn.ToolTip.Trim();
+        string Code = btn.CommandArgument;
+
+        BLL.FileUploadBL BLDL = new BLL.FileUploadBL();
+        BLDL.Delete(id);
+
+        //string path = "~\\Docs\\" + id;
+
+        string path = Code;
+
+        File.Delete(base.Server.MapPath(path));
+
+
+        gvLst.DataBind();
+    }
+    protected void gvLst_RowCommand(object sender, GridViewCommandEventArgs e)
+    {
+        if (e.CommandName == "toggleCheck")
+        {
+            CheckBox cb = null;
+            string mood = ViewState["tMood"].ToString();
+
+            foreach (GridViewRow gvr in gvLst.Rows)
+            {
+                cb = (CheckBox)gvr.FindControl("chkAllocate");
+
+                if (mood == "" || mood == "check")
+                {
+                    cb.Checked = true;
+                    ViewState["tMood"] = "uncheck";
+                }
+                else
+                {
+                    cb.Checked = false;
+                    ViewState["tMood"] = "check";
+                }
+
+            }
+
+        }
+    }
+    protected void btnForward_Click(object sender, EventArgs e)
+    {
+        CheckBox cb = null;
+        for (int i = 0; i < this.gvLst.Rows.Count; i++)
+        {
+            cb = (CheckBox)gvLst.Rows[i].FindControl("chkAllocate");
+            if (cb.Checked)
+            {
+                LinkButton Doc = (LinkButton)gvLst.Rows[i].FindControl("LinkButton1");
+
+                //string DocId = Doc.ToolTip;
+                string DocId = cb.ToolTip;
+
+                BLL.FileUploadBL pbkf = new BLL.FileUploadBL();
+                pbkf.ForwardDocument(DocId, Session["UserName"].ToString(), DateTime.Now.ToString(), "");
+                pbkf = null;
+            }
+        }
+
+        this.gvLst.DataBind();
+    }
+    protected void ddlcategory_SelectedIndexChanged(object sender, EventArgs e)
+    {
+        LoadUserEnableForwardDelete(Session["UserID"].ToString(), ddlcategory.SelectedValue.ToString().Trim());
+
+        //if ((ddlcategory.SelectedValue.ToString().Trim() == "1"))
+        /////////////// Commercial department working for All Invoicing categories on request Ali Khurram 18 nov 2022 
+        if ((ddlcategory.SelectedValue.ToString().Trim() == "1") || (ddlcategory.SelectedValue.ToString().Trim() == "2") || (ddlcategory.SelectedValue.ToString().Trim() == "3") || (ddlcategory.SelectedValue.ToString().Trim() == "4") || (ddlcategory.SelectedValue.ToString().Trim() == "5") || (ddlcategory.SelectedValue.ToString().Trim() == "6") || (ddlcategory.SelectedValue.ToString().Trim() == "7") || (ddlcategory.SelectedValue.ToString().Trim() == "8") || (ddlcategory.SelectedValue.ToString().Trim() == "9") || (ddlcategory.SelectedValue.ToString().Trim() == "10") || (ddlcategory.SelectedValue.ToString().Trim() == "11") || (ddlcategory.SelectedValue.ToString().Trim() == "12") || (ddlcategory.SelectedValue.ToString().Trim() == "13") || (ddlcategory.SelectedValue.ToString().Trim() == "14") || (ddlcategory.SelectedValue.ToString().Trim() == "15") || (ddlcategory.SelectedValue.ToString().Trim() == "16") || (ddlcategory.SelectedValue.ToString().Trim() == "35") || (ddlcategory.SelectedValue.ToString().Trim() == "36") || (ddlcategory.SelectedValue.ToString().Trim() == "37") || (ddlcategory.SelectedValue.ToString().Trim() == "41") || (ddlcategory.SelectedValue.ToString().Trim() == "42") || (ddlcategory.SelectedValue.ToString().Trim() == "43") || (ddlcategory.SelectedValue.ToString().Trim() == "48"))
+
+        {
+
+            trDocCate.Visible = true;
+        }
+        else
+        {
+
+            trDocCate.Visible = false;
+        }
+
+    }
+
+    protected void LoadUserEnableForwardDelete(string UserId, string CategoryId)
+    {
+
+        BLL.FileUploadBL BL = new BLL.FileUploadBL();
+        DataTable dt = new DataTable();
+        dt = (DataTable)BL.GetAssignForwardDeleteRole(UserId, CategoryId);
+        if (dt == null)
+        {
+            ////////this.lblErrMsg.Text = "No Category  assigned....";           
+            btnForward.Visible = false;
+            return;
+
+        }
+        ////Page.DataBind();
+
+        bool fwd = Convert.ToBoolean(dt.Rows[0]["UCM_ENABLE_FORWARD"].ToString());
+        bool del = Convert.ToBoolean(dt.Rows[0]["UCM_ENABLE_DELETE"].ToString());
+
+        btnForward.Visible = fwd;
+        gvLst.Columns[6].Visible = fwd;
+        gvLst.Columns[5].Visible = del;
+
+
+        //if (del == false)
+        //{
+        //    gvLst.Columns[5].Visible = false;
+        //}
+
+        //if (fwd == false)
+        //{
+        //    btnForward.Visible = false;
+        //    gvLst.Columns[6].Visible = false;
+        //}
+
+    }
+
+    protected void ddlcategory_OnDataBound(object sender, EventArgs e)
+    {
+        //if ((ddlcategory.SelectedValue.ToString().Trim() == "1"))
+        /////////////// Commercial department working for All Invoicing categories on request Ali Khurram 18 nov 2022 
+        if ((ddlcategory.SelectedValue.ToString().Trim() == "1") || (ddlcategory.SelectedValue.ToString().Trim() == "2") || (ddlcategory.SelectedValue.ToString().Trim() == "3") || (ddlcategory.SelectedValue.ToString().Trim() == "4") || (ddlcategory.SelectedValue.ToString().Trim() == "5") || (ddlcategory.SelectedValue.ToString().Trim() == "6") || (ddlcategory.SelectedValue.ToString().Trim() == "7") || (ddlcategory.SelectedValue.ToString().Trim() == "8") || (ddlcategory.SelectedValue.ToString().Trim() == "9") || (ddlcategory.SelectedValue.ToString().Trim() == "10") || (ddlcategory.SelectedValue.ToString().Trim() == "11") || (ddlcategory.SelectedValue.ToString().Trim() == "12") || (ddlcategory.SelectedValue.ToString().Trim() == "13") || (ddlcategory.SelectedValue.ToString().Trim() == "14") || (ddlcategory.SelectedValue.ToString().Trim() == "15") || (ddlcategory.SelectedValue.ToString().Trim() == "16") || (ddlcategory.SelectedValue.ToString().Trim() == "35") || (ddlcategory.SelectedValue.ToString().Trim() == "36") || (ddlcategory.SelectedValue.ToString().Trim() == "37") || (ddlcategory.SelectedValue.ToString().Trim() == "41") || (ddlcategory.SelectedValue.ToString().Trim() == "42") || (ddlcategory.SelectedValue.ToString().Trim() == "43") || (ddlcategory.SelectedValue.ToString().Trim() == "48"))
+
+        {
+
+            trDocCate.Visible = true;
+        }
+        else
+        {
+
+            trDocCate.Visible = false;
+        }
+    }
+}

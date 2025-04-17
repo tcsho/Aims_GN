@@ -1,0 +1,721 @@
+﻿
+<!DOCTYPE html>
+<html>
+<head>
+    <!--<script src="jquery-1.10.2.js" type="text/JavaScript" language="javascript"></script>-->
+    <title>Admission Sheet Report</title>
+    <!--PWA-->
+    <link rel="manifest" href="./Content/manifest.json">
+    <link rel="shortcut icon" href="./Content/favicon.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="./Content/images/icons/favicon-16x16.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="./Content/images/icons/favicon-32x32.png">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="default">
+    <meta name="apple-mobile-web-app-title" content="PWA Splash">
+    <link rel="apple-touch-startup-image" href="./Content/images/splash/launch-640x1136.png" media="(device-width: 320px) and (device-height: 568px) and (-webkit-device-pixel-ratio: 2) and (orientation: portrait)">
+    <link rel="apple-touch-startup-image" href="./Content/images/splash/launch-750x1294.png" media="(device-width: 375px) and (device-height: 667px) and (-webkit-device-pixel-ratio: 2) and (orientation: portrait)">
+    <link rel="apple-touch-startup-image" href="./Content/images/splash/launch-1242x2148.png" media="(device-width: 414px) and (device-height: 736px) and (-webkit-device-pixel-ratio: 3) and (orientation: portrait)">
+    <link rel="apple-touch-startup-image" href="./Content/images/splash/launch-1125x2436.png" media="(device-width: 375px) and (device-height: 812px) and (-webkit-device-pixel-ratio: 3) and (orientation: portrait)">
+    <link rel="apple-touch-startup-image" href="./Content/images/splash/launch-1536x2048.png" media="(min-device-width: 768px) and (max-device-width: 1024px) and (-webkit-min-device-pixel-ratio: 2) and (orientation: portrait)">
+    <link rel="apple-touch-startup-image" href="./Content/images/splash/launch-1668x2224.png" media="(min-device-width: 834px) and (max-device-width: 834px) and (-webkit-min-device-pixel-ratio: 2) and (orientation: portrait)">
+    <link rel="apple-touch-startup-image" href="./Content/images/splash/launch-2048x2732.png" media="(min-device-width: 1024px) and (max-device-width: 1024px) and (-webkit-min-device-pixel-ratio: 2) and (orientation: portrait)">
+    <link rel="apple-touch-icon" sizes="180x180" href="./Content/images/icons/apple-touch-icon.png">
+    <link rel="mask-icon" href="./Content/images/icons/safari-pinned-tab.svg" color="#6F6F6F">
+    <!--PWA-->
+
+    <script src="jquery-3.3.1.min.js" type="text/JavaScript" language="javascript"></script>
+    <script src="jquery-ui-1.10.4.custom.js"></script>
+    <script src="jquery.PrintArea.js" type="text/JavaScript" language="javascript"></script>
+
+    <link type="text/css" rel="stylesheet" href="css/ui-lightness/jquery-ui-1.10.4.custom.css" />
+
+    <link type="text/css" rel="stylesheet" href="PrintArea3.css" />                <!-- Y : rel is stylesheet and media is in [all,print,empty,undefined] -->
+    <link type="text/css" rel="stylesheet" href="media_all.css" media="all" />   <!-- Y : rel is stylesheet and media is in [all,print,empty,undefined] -->
+    <link type="text/css" rel="" href="empty.css" />                    <!-- N : rel is not stylesheet -->
+    <link type="text/css" rel="noPrint" href="noPrint.css" />                  <!-- N : rel is not stylesheet -->
+    <link type="text/css" rel="stylesheet" href="media_none.css" media="xyz" />   <!-- N : media not in [all,print,empty,undefined] -->
+    <link type="text/css" href="no_rel.css" media="print" /> <!-- N : no rel attribute -->
+    <link type="text/css" href="no_rel_no_media.css" /> <!-- N : no rel, no media attributes -->
+    <link rel="stylesheet" type="text/css" href="bootstrap/css/bootstrap.min.css">
+    <!--<link rel="stylesheet" type="text/css"  href="bootstrap/css/bootstrap.css.map">-->
+
+    <link rel="stylesheet" type="text/css" href="fonts/font-awesome-4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" type="text/css" href="sweetalert2.min.css">
+    <script type="text/javascript" src="sweetalert2.min.js"></script>
+    <script type="text/javascript" src="qr-code.js"></script>
+
+    <script type="text/javascript" src="jquery.tablesorter.min.js"></script>
+</head>
+<body>
+    <div class="container">
+        <div class="overlay"></div>
+        <div class="row printview">
+            <div class="button b1 btn btn-primary  tooltip "><i class="fa fa-print" data-toggle="tooltip" data-placement="bottom" title="Print"></i><span class="tooltiptext">Print</span></div>
+        </div>
+
+
+        <div class="PrintArea area1 all" id="Retain">
+            <!--boostrap-->
+
+            <div class="container" id="printtable">
+                <!--noticeborder style="border:none !important;border-left:1px solid #000 !important;border-right:1px solid #000 !important;"-->
+                <!--serachprinttable-->
+                <!--container-->
+                <!--<div id="qrcode"></div>-->
+                <!--<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 no-padding">
+
+                    <div class="dynamic_div">
+
+                    </div>
+                </div>-->
+
+
+
+
+            </div>
+        </div>
+
+        <!--bootsrap-->
+    </div>
+
+
+
+    <!--</div>-->
+
+
+
+    <div style="border: solid 2px #999fff; float: left; margin-left: 20px;" class="SettingsBox">
+        <div style="width: 400px; padding: 20px;">
+            <div style="padding: 0 10px 10px;" class="buttonBar">
+                <div class="button b1">Print</div>
+                <div class="toggleDialog">open dialog</div>
+            </div>
+
+            <div style="font-weight: bold; border-top: solid 1px #999fff; padding-top: 10px;">Settings</div>
+            <table>
+                <tbody>
+                    <tr>
+                        <td><input value="popup" name="mode" id="popup" checked="" type="radio"> Popup</td>
+                    </tr>
+                    <tr>
+                        <td style="padding-left: 20px;"><input value="popup" name="popup" id="closePop" type="checkbox"> Close popup</td>
+                    </tr>
+                    <tr>
+                        <td><input value="iframe" name="mode" id="iFrame" type="radio"> IFrame</td>
+                    </tr>
+                    <tr>
+                        <td>Extra css: <input type="text" name="extraCss" size="50" /></td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <div class="settingName">Print area:</div>
+                            <div class="settingVals">
+                                <input type="checkbox" class="selPA" value="area1" checked /> Area 1<br>
+                                <input type="checkbox" class="selPA" value="area2" checked /> Area 2<br>
+                                <input type="checkbox" class="selPA" value="area3" checked /> Area 3<br>
+                            </div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <div class="settingName">Retain Attributes:</div>
+                            <div class="settingVals">
+                                <input type="checkbox" checked name="retainCss" id="retainCss" class="chkAttr" value="class" /> Class
+                                <br>
+                                <input type="checkbox" checked name="retainId" id="retainId" class="chkAttr" value="id" /> ID
+                                <br>
+                                <input type="checkbox" checked name="retainStyle" id="retainId" class="chkAttr" value="style" /> Style
+                            </div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <div style="padding: 3px; border: solid 1px #ddd;">
+                                Add to head :
+                                <input type="checkbox" checked name="addElements" id="addElements" class="chkAttr" />
+                                <pre>&lt;meta charset="utf-8" /&gt;<br>&lt;http-equiv="X-UA-Compatible" content="IE=edge"/&gt;</pre>
+                            </div>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+
+
+        <footer>okss</footer>
+    </div>
+
+    <script>
+
+        /****Disabled f12 and right click key***/
+
+        //$(document).keydown(function(event){
+        //        if(event.keyCode==123){
+        //            return false;
+        //        }
+        //        else if (event.ctrlKey && event.shiftKey && event.keyCode==73){
+        //                 return false;
+        //        }
+        //    });
+
+        //    $(document).on("contextmenu",function(e){
+        //       e.preventDefault();
+        //    });
+        /****Disabled f12 and right click key***/
+
+        $(document).ready(function () {
+            $(".overlay").show();
+            $('[data-toggle="tooltip"]').tooltip();
+            var dialog = $("div.testDialog").dialog({ position: { my: "left top", at: "left bottom+50", of: ".SettingsBox" }, width: "1000", title: "Print Dialog Box Contents" });
+
+            $(".toggleDialog").click(function () {
+                dialog.dialog("open");
+            });
+
+            $("div.b1").click(function () {
+
+                var mode = $("input[name='mode']:checked").val();
+                var close = mode == "popup" && $("input#closePop").is(":checked");
+                var extraCss = $("input[name='extraCss']").val();
+
+                var print = "";
+                $("input.selPA:checked").each(function () {
+                    print += (print.length > 0 ? "," : "") + "div.PrintArea." + $(this).val();
+                });
+
+                var keepAttr = [];
+                $(".chkAttr").each(function () {
+                    if ($(this).is(":checked") == false)
+                        return;
+
+                    keepAttr.push($(this).val());
+                });
+
+                var headElements = $("input#addElements").is(":checked") ? '<meta charset="utf-8" />,<meta http-equiv="X-UA-Compatible" content="IE=edge"/>' : '';
+
+                var options = { mode: mode, popClose: close, extraCss: extraCss, retainAttr: keepAttr, extraHead: headElements };
+
+                $(print).printArea(options);
+
+
+
+
+            });
+
+            var uri = window.location.href;
+            var enc = encodeURIComponent(uri).replace('%27', '+');
+            var dec = decodeURIComponent(enc);
+            var sURLVariableswithurl = "";
+            function GetUrlParameter(sParam) {
+                var sPageURL = dec;//window.location.search.substring(1);
+
+                sURLVariableswithurl = sPageURL.split('?');
+                var sURLVariables = sURLVariableswithurl[1].split('&');
+
+                for (var i = 0; i < sURLVariables.length; i++) {
+                    var sParameterName = sURLVariables[i].split('=');
+
+                    if (sParameterName[0] == sParam) {
+                        return sParameterName[1];
+                    }
+                }
+            }
+
+
+            var Session_Id = GetUrlParameter('Session_Id');
+            var TermGroup_Id = GetUrlParameter('TermGroup_Id');
+            var Class_Id = GetUrlParameter('Class_Id');
+            //var  Room_Id= GetUrlParameter('Room_Id');
+            //var StudentERPNo = GetUrlParameter('StudentERPNo');
+            var Section_Id = GetUrlParameter('Section_Id');
+            var Block_Id = GetUrlParameter('Block_Id');
+              var Filter = GetUrlParameter('Filter');
+            //console.log("s" + Session_Id + "T" + TermGroup_Id + "" + Class_Id + "" + Section_Id + "" + Filter);
+            //exit();
+            const months = ["January", "February", "March", "April", "May", "June",
+                "July", "August", "September", "October", "November", "December"
+            ];
+
+
+            var date_list = "";
+
+            var alreadyt = "";
+
+            var ExamDatearray = [];
+            ExamDatearray.length = 0;
+            var datademo = [];
+            datademo.length = 0;
+
+            $.ajax({
+                type: 'GET',
+                data: { Session_Id: Session_Id, TermGroup_Id: TermGroup_Id, Class_Id: Class_Id, Section_Id: Section_Id, Filter: Filter, Block_Id: Block_Id },
+                url: 'http://localhost:52673/api/Setup/StudentAdmissionSheetReport_AllStudent',//sURLVariableswithurl[0]+"?",//getsearchedpatient
+                success: function (result) {
+
+                    if (result == null || result == "" || result == " ") {
+                        Swal.fire(
+                            'No Data',
+                            '',
+                            'error'
+                        )
+                        return;
+                    }
+
+
+                    /****TRY****/
+
+                    //console.log(JSON.stringify(result));
+                    for (var tr = 0; tr < result.length; tr++) {
+                        if (alreadyt != result[tr].StudentERPNo) {
+                            /**FIRST tIME USER**/
+                            if (alreadyt == "") {
+                                ExamDatearray.push({
+
+                                    ExamDate: result[tr].ExamDate,
+                                    Subject_Name: result[tr].Subject_Name,
+                                    TimeFrom: result[tr].TimeFrom,
+                                    TimeTill: result[tr].TimeTill
+                                });
+
+                                datademo.push({
+
+                                    StudentERPNo: result[tr].StudentERPNo,
+                                    First_Name: result[tr].First_Name,
+                                    StudentMaskNo: result[tr].StudentMaskNo,
+                                    Class_Id: result[tr].Class_Id,
+                                    Room_Id: result[tr].Room_Id,
+                                    Class_Name: result[tr].Class_Name,
+                                    Block_Id: result[tr].Block_Id,
+                                    Block_Name: result[tr].BlockName,
+                                    GenderName:result[tr].GenderName,
+                                    Center_Name: result[tr].Center_Name,
+                                     Section_Name:result[tr].Section_Name,
+                                    ExamDate_Subjects: ExamDatearray,
+
+                                });
+                                alreadyt = result[tr].StudentERPNo;
+                            }
+                            /**FIRST tIME USER**/
+
+                            else {
+                                ExamDatearray = [];
+                                ExamDatearray.push({
+
+                                    ExamDate: result[tr].ExamDate,
+                                    Subject_Name: result[tr].Subject_Name,
+                                    TimeFrom: result[tr].TimeFrom,
+                                    TimeTill: result[tr].TimeTill
+
+                                });
+
+                                datademo.push({
+
+                                    StudentERPNo: result[tr].StudentERPNo,
+                                    First_Name: result[tr].First_Name,
+                                    StudentMaskNo: result[tr].StudentMaskNo,
+                                    Class_Id: result[tr].Class_Id,
+                                    Room_Id: result[tr].Room_Id,
+                                    Class_Name: result[tr].Class_Name,
+                                    Block_Id: result[tr].Block_Id,
+                                    Block_Name: result[tr].BlockName,
+                                    GenderName:result[tr].GenderName,
+                                    Center_Name: result[tr].Center_Name,
+                                   Section_Name:result[tr].Section_Name,
+                                    ExamDate_Subjects: ExamDatearray
+
+                                });
+                                alreadyt = result[tr].StudentERPNo;
+                            }
+                        }
+                        else {
+                            ExamDatearray.push({
+
+                                ExamDate: result[tr].ExamDate,
+                                Subject_Name: result[tr].Subject_Name,
+                                TimeFrom: result[tr].TimeFrom,
+                                TimeTill: result[tr].TimeTill
+
+                            });
+                        }
+                    }
+                    //console.log("dataadd" + JSON.stringify(dataadd));
+
+                    //var datademo = [
+                    //    {
+                    //        "StudentERPNo": 262430,
+                    //        "First_Name": "SARINA ZAFAR",
+                    //        "StudentMaskNo": "5008",
+                    //        "Class_Id": 9,
+                    //        "Room_Id": 1,
+                    //        "Class_Name": "Class 5",
+                    //        "Block_Id": 1,
+                    //        "Block_Name": "Block A",
+                    //        "Center_Name": "S004- Darakhshan Campus Karachi",
+                    //         "Section_Name":"T",
+                    //        "ExamDate_Subjects": [
+                    //            {
+                    //                "ExamDate": "12/16/2019",
+                    //                "Subject_Name": "Mathematics",
+                    //                "TimeFrom": "08:30",
+                    //                "TimeTill": "90"
+                    //            },
+                    //            {
+                    //                "ExamDate": "12/17/2019",
+                    //                "Subject_Name": "Urdu",
+                    //                "TimeFrom": "08:30",
+                    //                "TimeTill": "90"
+                    //            },
+                    //            {
+                    //                "ExamDate": "03/11/2021",
+                    //                "Subject_Name": "Computing",
+                    //                "TimeFrom": "08:30",
+                    //                "TimeTill": "100"
+                    //            },
+                    //            {
+                    //                "ExamDate": "03/20/2021",
+                    //                "Subject_Name": "English",
+                    //                "TimeFrom": "08:30",
+                    //                "TimeTill": "90"
+                    //            },
+                    //            {
+                    //                "ExamDate": "12/18/2019",
+                    //                "Subject_Name": "Science",
+                    //                "TimeFrom": "08:30",
+                    //                "TimeTill": "90"
+                    //            }
+                    //        ]
+                    //    },
+                    //    {
+                    //        "StudentERPNo": 262430,
+                    //        "First_Name": "Raja Chohan",
+                    //        "StudentMaskNo": "5008",
+                    //        "Class_Id": 9,
+                    //        "Room_Id": 1,
+                    //        "Class_Name": "Class 4",
+                    //        "Block_Id": 1,
+                    //        "Block_Name": "Block A",
+                    //        "Center_Name": "S004- Darakhshan Campus Karachi",
+                    //        "Section_Name":"S",
+                    //        "ExamDate_Subjects": [
+                    //            {
+                    //                "ExamDate": "12/16/2019",
+                    //                "Subject_Name": "Mathematics",
+                    //                "TimeFrom": "08:30",
+                    //                "TimeTill": "90"
+                    //            },
+                    //            {
+                    //                "ExamDate": "12/17/2019",
+                    //                "Subject_Name": "Urdu",
+                    //                "TimeFrom": "08:30",
+                    //                "TimeTill": "90"
+                    //            },
+                    //            {
+                    //                "ExamDate": "03/11/2021",
+                    //                "Subject_Name": "Computing",
+                    //                "TimeFrom": "08:30",
+                    //                "TimeTill": "100"
+                    //            },
+                    //            {
+                    //                "ExamDate": "03/20/2021",
+                    //                "Subject_Name": "English",
+                    //                "TimeFrom": "08:30",
+                    //                "TimeTill": "90"
+                    //            },
+                    //            {
+                    //                "ExamDate": "12/18/2019",
+                    //                "Subject_Name": "Science",
+                    //                "TimeFrom": "08:30",
+                    //                "TimeTill": "90"
+                    //            }
+                    //        ]
+                    //    }
+                    //];
+
+                    //console.log(JSON.stringify(datademo));
+
+
+                    for (var dt = 0; dt < datademo.length; dt++) {
+                    /****DATA****/
+                       date_list += '<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 no-padding innerdiv">';
+                        date_list += '<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 sec1 article noticesec1">';
+                        date_list += '<div class="row rowdisplayflex headerwithlogo">';
+                            date_list += '<div class="col-lg-3 col-md-3 col-sm-3 col-xs-3 visiblity-hidden_mediaclass">';
+
+                            date_list += '</div>';
+                            date_list += '<div class="col-lg-6 col-md-6 col-sm-6 col-xs-6 text-mediaalign">';
+                                date_list += '<h4 class="visiblity-hidden_mediaclass">Report Card2020-2021</h4>';
+                                date_list += '<h2 class="schoolname">The City School</h2>';
+                                date_list += '<h6>Southern Region</h6>';
+                                date_list += '<h5>Admit Card</h5>';
+                            date_list += '</div>';
+                            date_list += '<div class="col-lg-3 col-md-3 col-sm-3 col-xs-3 text-right schoollogo">';
+                                date_list += '<img src="images/logo.png" style="margin-top: 25px" />';
+                            date_list += '</div>';
+                        date_list += '</div>';
+                    date_list += '</div>';
+                  
+                 
+
+                    date_list += '<div class="row adarticle noticesec2 attendesec1 no-padding">';
+                        date_list += '<div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 inputflex">';
+                            date_list += '<div class="col-lg-4 col-md-4 col-sm-4 col-xs-6 no-padding"><label class="flexlabel">Name Of School:</label></div>';
+                            date_list += '<div class="col-lg-8 col-md-8 col-sm-8 col-xs-6 no-padding">';
+                                date_list += '<input type="text" class="form-control onlybottomborder center-nametxt" value="'+datademo[dt].Center_Name+'" />';
+                            date_list += '</div>';
+                        date_list += '</div>';
+                        date_list += '<div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 inputflex">';
+                            date_list += '<div class="col-lg-4 col-md-4 col-sm-4 col-xs-6 no-padding"><label class="flexlabel">Name Of Examination:</label></div>';
+                        date_list += '<div class="col-lg-8 col-md-8 col-sm-8 col-xs-6 no-padding">';
+
+                         if (TermGroup_Id == 1) {
+                             date_list += '<input type="text" class="form-control onlybottomborder term-nametxt" value="First Term" />';
+                        }
+                        else if (TermGroup_Id == 2) {
+                              date_list += '<input type="text" class="form-control onlybottomborder term-nametxt" value="Second Term" />';
+                        }
+
+                             
+                            date_list += '</div>';
+                        date_list += '</div>';
+                    date_list += '</div>';
+                   
+
+
+                    date_list += '<div class="row adarticle attendesec2 margin-bottoms">';
+
+                        date_list += '<div class="col-lg-10 col-md-10 col-sm-12 col-xs-12 attend2subsec1 no-padding">';
+                            date_list += '<div class="row candidate_firstrow">';
+                        date_list += '<div class="col-lg-6 col-md-6 col-xs-12 col-sm-12">';
+                        date_list += '<p>Candidate Name:<span class="student_name_admission admissiontxt">' + datademo[dt].First_Name + '</span></p>';
+                        date_list += '</div>';
+                          date_list += '<div class="col-lg-6 col-md-6 col-xs-12 col-sm-12">';
+                        date_list += '<p>Block / Gender:<span class="student_name_admission admissiontxt">' + datademo[dt].Block_Name + " / "+ datademo[dt].GenderName + '</span></p>';
+                                date_list += '</div>';
+                            date_list += '</div>';
+                            date_list += '<div class="row candidate_secondrow">';
+                        date_list += '<div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">';
+                        date_list += '<p>Class / Sec:<span class="student_class admissiontxt">' + datademo[dt].Class_Name + " / " + datademo[dt].Section_Name + '</span></p>';
+                                date_list += '</div>';
+                        date_list += '<div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">';
+                        date_list += '<p>ERP#<span class="student_erp admissiontxt">' + datademo[dt].StudentERPNo + '</span></p>';
+                                date_list += '</div>';
+                            date_list += '</div>';
+
+                            date_list += '<div class="row candidate_thirdrow">';
+                        date_list += '<div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">';
+                        date_list += '<p>Examination Room: <span class="student_room admissiontxt">' + datademo[dt].Room_Id +'</span></p>';
+                                date_list += '</div>';
+                        date_list += '<div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">';
+                        date_list += '<p>Exam Roll #:<span class="student_rollno admissiontxt">' + datademo[dt].StudentMaskNo + '</span></p>';
+                                date_list += '</div>';
+                            date_list += '</div>';
+                        date_list += '</div>';
+                        date_list += '<div class="col-lg-2 col-md-2 col-sm-12 col-xs-12 attend2subsec2 admissionphotodiv">';
+
+                        date_list += '<img src="images/studentimg.png" class="admissionphotodiv_studentpic" style="visibility: hidden;">';
+                        date_list += '<p style="margin-bottom: 0px !important;position: relative;bottom: 45%;transform: rotate(-45deg);">PHOTO HERE</p>';
+                        date_list += '</div>';
+
+                    date_list += '</div>';
+                  
+                    date_list += '<div class="row adarticle attendesec3">';
+
+                        date_list += '<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 attend3subsec1 no-padding">';
+                            date_list += '<table class="table table-bordered admissiontable">';
+                                date_list += '<thead>';
+                                date_list += '<th>Date</th>';
+                                date_list += '<th>Subject</th>';
+                                date_list += '<th>Start Time</th>';
+                                date_list += '<th>Duration (min)</th>';
+                                date_list += '<th>Invigilator’s Sign</th>';
+                                date_list += '</thead>';
+                                date_list += '<tbody>';
+                        for (var tt = 0; tt < datademo[dt].ExamDate_Subjects.length; tt++) {
+                            date_list += '<tr>';
+                            date_list += '<td>' + stringtodate(datademo[dt].ExamDate_Subjects[tt].ExamDate) + '</td>';
+                            date_list += '<td>' + datademo[dt].ExamDate_Subjects[tt].Subject_Name + '</td>';
+                            date_list += '<td>' + datademo[dt].ExamDate_Subjects[tt].TimeFrom + '</td>';
+                            date_list += '<td>' + datademo[dt].ExamDate_Subjects[tt].TimeTill + '</td>';
+                            date_list += '<td></td>';
+                            date_list += '</tr>';
+                        }
+                                date_list += '</tbody>';
+                            date_list += '</table>';
+
+                        date_list += '</div>';
+                        date_list += '<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 attend3subsec2">';
+
+                            date_list += '<ul>';
+                                date_list += '<li>Carry your Admit Card for each examination.</li>';
+                                date_list += '<li>Do not write on your Admit Card.</li>';
+                                date_list += '<li> If the Admit Card is lost or damaged, you must immediately inform Head of School.</li>';
+                            date_list += '</ul>';
+                        date_list += '</div>';
+                    date_list += '</div>';
+                    
+                    date_list += '<div class="row adarticle attendesec4 addmissionhead-margin-top">';
+                        date_list += '<div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 attend4subsec1">';
+                            date_list += '<label class="headsign form-control text-center"></label>';
+                            date_list += '<label class="label-100 ">Head of School</label>';
+                        date_list += '</div>';
+                        date_list += '<div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 attend4subsec2">';
+                            date_list += '<label class="headsign form-control text-center"></label>';
+                            date_list += '<label class="label-100 ">School Stamp</label>';
+                        date_list += '</div>';
+                    date_list += '</div>';
+                  
+                        /****DATA****/
+                        date_list += '</div>';
+                        if (dt != datademo.length - 1) {//this condition is for last page of pdf no page break after that
+                            date_list += '<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 pagecut printmediaborderbottom pehlewala">';/*<p>ok</p>*/
+                            date_list += '</div>';
+                        }
+                           date_list += '<span style="visibility:hidden">'+"Page "+(dt+1)+'</span>';
+                       
+                    }
+
+                    //$(".student_name_admission").text(result[0].First_Name);
+                    //$(".student_class").text(result[0].Class_Name + " " + result[0].Section_Name);
+                    //$(".student_erp").text(StudentERPNo);
+                    //$(".student_room").text(result[0].Room_Id + " / " + result[0].BlockName);
+                    //$(".student_rollno").text(result[0].StudentMaskNo);
+                    //$(".center-nametxt").val(result[0].Center_Name);
+                    //if (TermGroup_Id == 1) {
+                    //    $(".term-nametxt").val("First Term");
+                    //}
+                    //else if (TermGroup_Id == 2) {
+                    //    $(".term-nametxt").val("Second Term");
+                    //}
+
+                    $("#printtable").html(date_list);
+                    $(".admissiontable").tablesorter({
+   
+    // sort on the first column and second column in ascending order
+    sortList: [[0,0]]
+  });
+                },//success
+                complete: function () {
+
+                    $(".overlay").hide();
+                    $('.container').on('scroll touchmove mousewheel');
+                }, error: function (err) {
+
+                    console.log(JSON.stringify(err));
+
+                }
+            });
+
+
+            /**string date format**/
+            function stringtodate(str) {
+
+                const months = ["null", "Jan", "Feb", "Mar", "Apr", "May", "Jun",
+                    "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"
+                ];
+
+                var res = str.split("/");
+                var month = res[0];
+
+                var monthfirstcheck = res[0].slice(0, 1);
+                if (monthfirstcheck == 0) {
+                    month = res[0].replace("0", "")
+                }
+                month = parseInt(month);
+
+
+                var date = res[1];
+
+                var year = res[2];
+                //console.log(months[month] + " " + date + "," + " " + year);
+                var strdate = months[month] + " " + date + "," + " " + year;
+                return strdate;
+
+            }
+            /**string date format**/
+            /**Format Date**/
+            function formatdate(datevalue) {
+                var date = new Date(datevalue);
+                var datess = date.getDate();
+                var monthss = months[date.getMonth()];
+                var fullyear = date.getFullYear();
+                var hours = date.getHours();
+                var minutes = date.getMinutes();
+                var mili = date.getMilliseconds();
+
+                var strdate = monthss + "  " + datess + ", " + fullyear;
+                return strdate;
+            }
+
+            function minsplit(vmins) {
+
+                var min_res = vmins.split(":");
+                return min_res[1];
+            }
+
+
+            //const value = encodeURIComponent(value).replace('%20','+');
+
+            var reportcard = "";
+            var reportcard2 = "";
+            //var Roll_Number="189570";
+            //var Session_Id="11";
+            //var Class_Id=13;
+
+
+
+            $('.container').off('scroll touchmove mousewheel');
+
+
+
+
+
+            //***PWA****/
+            if ('serviceWorker' in navigator) {
+                navigator.serviceWorker.register('./Content/service-worker.js').then(res => {
+                    //alert('SW register');
+                }).catch(err => {
+                    // alert("Error SW", err);
+                })
+
+            }
+            else {
+                console.log('SW Not supported');
+            }
+            //***PWA****/
+
+
+
+
+        });
+
+
+
+
+
+
+
+
+
+    </script>
+    <style>
+        .overlay {
+            background: url('./images/logo2.gif') no-repeat center center; /*loader.gif*/
+            position: fixed;
+            top: 0;
+            left: 0;
+            height: 100%;
+            width: 100%;
+            z-index: 9999999;
+            background-color: rgba(0,0,0,0.5);
+        }
+
+        #serachprinttable {
+            /*border: none;
+        padding: 1px !important;
+        height: 1000px !important;*/
+            border: 1px solid #000 !important;
+        }
+    </style>
+</body>
+</html>

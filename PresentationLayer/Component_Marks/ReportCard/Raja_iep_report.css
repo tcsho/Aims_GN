@@ -1,0 +1,443 @@
+﻿body {
+    -webkit-print-color-adjust: exact !important;
+}
+/**Salman report*/
+.marginremoveonprintview {
+    margin-left: 20% !important;
+    margin-right: 20% !important;
+}
+
+.visiblity-hidden_mediaclass {
+    visibility: hidden;
+}
+
+.schoollogo img {
+    width: 90px !important;
+}
+
+.text-mediaalign, .text-mediaalignright {
+    text-align: center;
+}
+
+.SettingsBox {
+    display: none;
+}
+
+.printbtn {
+    font-size: 11px !important;
+}
+/**Salman report*/
+
+@media only screen and (max-width:992px) {
+    /*.visiblity-hidden_mediaclass
+{
+display:none !important;
+}*/
+    /*.text-mediaalign{
+text-align:center !important;
+
+}
+.text-mediaalignright{
+text-align:center !important;
+
+}*/
+    .schoolname {
+        font-size: 20px;
+    }
+
+        .schoolname img {
+            width: 20% !important;
+        }
+
+    .schoollogo img {
+        width: 45% !important;
+    }
+
+    .headerwithlogo h4 {
+        font-size: 18px !important;
+    }
+}
+
+@media only screen and (max-width:1200px) and (min-width: 992px) {
+    .schoollogo img {
+        position: relative;
+        left: -30px !important;
+    }
+
+    .mediawidth {
+        flex: 0 0 100% !important;
+        max-width: 100% !important;
+    }
+}
+
+@font-face {
+    font-family: myFirstFont;
+    src: url(arenski/arenskiregular.ttf);
+}
+
+@font-face {
+    font-family: signfont1;
+    src: url(fonts/airin/Airin.ttf);
+}
+
+@font-face {
+    font-family: signfont2;
+    src: url(fonts/alleffra/Alleffra.ttf);
+}
+
+@font-face {
+    font-family: signfont3;
+    src: url(fonts/allison-script/Allison_Script.otf);
+}
+
+@font-face {
+    font-family: signfont4;
+    src: url(fonts/allison-tessa/AllisonTessaOblique.ttf);
+}
+
+@font-face {
+    font-family: signfont5;
+    src: url(fonts/amarula-personal-use/AmarulaPersonalUse/AmarulaPersonalUse.ttf);
+}
+
+
+.schoolname {
+    font-family: myFirstFont !important;
+    color: #0c4da2 !important;
+}
+
+.Biletter_main .bi_label {
+    width: 200px;
+    border: none !important;
+    border-bottom: 1px solid #000 !important;
+    padding: 0px !important;
+    line-height: revert;
+    font-weight: bold;
+}
+
+.Biletter_main .bi_bullet_list {
+    /* text-decoration: none !important; */
+    list-style: none;
+    padding: 0px;
+}
+
+.Biletter_main .rmarkheading span {
+    border-bottom: 2px solid #000;
+    font-weight: bold;
+}
+
+.Biletter_main .rmarkheading {
+    padding: 0px 0px 20px 0px;
+}
+
+.Biletter_main input[disabled].bi_label {
+    background: transparent;
+}
+
+.Biletter_main p, .Biletter_main ul li {
+    font-size: 14px;
+}
+
+.Biletter_main .bi_bullet_list li {
+    margin-bottom: 15px;
+}
+
+.Biletter_main .headerwithlogo {
+    padding: 30px !important;
+}
+
+.Biletter_main .bi_lettersubheading {
+    font-size: 14px;
+    font-weight: bold;
+    border-bottom: 1px solid #000;
+}
+
+.Biletter_main .signdiv .signdiv1 {
+    padding: 0px;
+    width: 130px;
+}
+
+.Biletter_main .signdivmain {
+    padding-top: 30px;
+    padding-bottom: 30px;
+}
+
+.Biletter_main .signdiv {
+    padding: 0px;
+    width: 50% !important;
+}
+ .bi_visibility {
+    display: none;
+}
+.Biletter_main .bi_label_father {
+    width: 300px !important;
+}
+.Biletter_main .bi_label_student {
+    width: 250px !important;
+}
+
+.Biletter_main .bi_labelsection {
+    width: 150px !important;
+    text-align: center;
+    font-weight: bold;
+}
+
+.Biletter_main .bifirstpra{
+    line-height: 24px;
+}
+.Biletter_main .remark_line {
+    border-color: black;
+    border-width: initial;
+}
+.Biletter_main .parentremark span {
+    background: #fff !important;
+    z-index: 10000 !important;
+    position: relative !important;
+    top: 7px !important;
+}
+.Biletter_main .parentremark input {
+    border-bottom: none !important;
+}
+.Biletter_main .parentremarkmain p {
+    margin-bottom: 4% !important;
+}
+.Biletter_main .parentremark span:nth-child(5), .Biletter_main .parentremark span:nth-child(3) {
+    padding-left: 1px;
+    padding-right: 2px;
+}
+
+
+/*.Biletter_main .signdivmain {
+    width: 100% !important;
+}
+
+.Biletter_main .signdiv1 {
+    width: 33.33333333% !important;
+}
+
+.Biletter_main .signdiv2 {
+    width: 66.66666667% !important;
+}*/
+
+
+@media print {
+    /*footer {page-break-after: always;}*/
+    /*.visiblity-hidden_mediaclass
+{
+display:none !important;
+}*/
+    /*.noticeborder {
+        height: 1400px !important;
+    }*/
+    .pagecut {
+        page-break-inside: avoid !important;
+    }
+
+    .pagecut {
+        page-break-after: always !important;
+    }
+
+    .pagebreak {
+        page-break-inside: avoid !important;
+    }
+
+    .pagebreak {
+        page-break-before: always !important;
+    }
+
+    .rowdisplayflex {
+        display: flex !important;
+    }
+    /*.printmediaborderbottom{border-bottom: 1px solid #000;}
+  .printmediabordertop{border-top: 1px solid #000;}
+  .pagecut{padding: 0px !important;font-size: 2px !important;}
+.pagecut p{margin-bottom: 0px !important;border-bottom: 1px solid #000 !important;font-size: 10px !important;}*/
+
+
+
+    /**Salman report*/
+    .marginremoveonprintview {
+        margin-left: 0% !important;
+        margin-right: 0% !important;
+    }
+    /**Salman report*/
+    .s_hidebtn {
+        display: none !important;
+    }
+
+
+    .tr_headingcolor {
+        background: #d5d1d1 !important;
+    }
+    .custom_table_styling {
+        margin-bottom: 0px !important;
+    }
+   
+
+    /***BIFRACTION REPORT PRINT VIEW*/
+    .Biletter_main .bi_label {
+        width: 200px;
+        border: none !important;
+        border-bottom: 1px solid #000 !important;
+        padding: 0px !important;
+        line-height: revert;
+        font-weight: bold;
+    }
+
+    .Biletter_main .bi_bullet_list {
+        /* text-decoration: none !important; */
+        list-style: none;
+        padding: 0px;
+    }
+
+    .Biletter_main .rmarkheading span {
+        border-bottom: 2px solid #000;
+        font-weight: bold;
+    }
+
+    .Biletter_main .rmarkheading {
+        padding: 0px 0px 20px 0px;
+    }
+
+    .Biletter_main input[disabled].bi_label {
+        background: transparent;
+    }
+
+    .Biletter_main p, .Biletter_main ul li {
+        font-size: 14px;
+    }
+
+    .Biletter_main .bi_bullet_list li {
+        margin-bottom: 15px;
+    }
+
+    .Biletter_main .headerwithlogo {
+        padding: 30px !important;
+    }
+
+    .Biletter_main .bi_lettersubheading {
+        font-size: 14px;
+        font-weight: bold;
+        border-bottom: 1px solid #000;
+    }
+
+    .Biletter_main .signdiv .signdiv1 {
+        padding: 0px;
+        width: 130px;
+    }
+
+    .Biletter_main .signdivmain {
+        padding-top: 30px;
+        padding-bottom: 30px;
+    }
+
+    .Biletter_main .signdiv {
+        padding: 0px;
+    }
+   .bi_visibility {
+        display: none;
+    }
+    .Biletter_main .bi_label_father {
+        width: 300px !important;
+    }
+    .Biletter_main .bi_label_student {
+        width: 250px !important;
+    }
+    .Biletter_main .bi_labelsection {
+        width: 150px !important;
+        text-align: center;
+        font-weight: bold;
+    }
+    .Biletter_main .bifirstpra {
+        line-height: 24px;
+    }
+    .Biletter_main .remark_line {
+        border-color: black;
+        border-width: initial;
+    }
+    .Biletter_main .parentremark span {
+        background: #fff !important;
+        z-index: 10000 !important;
+        position: relative !important;
+        top: 7px !important;
+    }
+        .Biletter_main .parentremark span:nth-child(5), .Biletter_main .parentremark span:nth-child(3) {
+            padding-left: 1px;
+            padding-right: 2px;
+        }
+        .Biletter_main .parentremark input {
+        border-bottom: none !important;
+    }
+    .Biletter_main .parentremarkmain p {
+        margin-bottom: 4% !important;
+    }
+
+
+    .Biletter_main .signdivmain {
+        width: 100% !important;
+    }
+
+    .Biletter_main .signdiv1 {
+        width: 33.33333333% !important;
+    }
+
+    .Biletter_main .signdiv2 {
+        width: 66.66666667% !important;
+    }
+    /***BIFRACTION REPORT PRINT VIEW*/
+
+ }
+
+.pagecut {
+    page-break-inside: avoid !important;
+}
+
+.pagecut {
+    page-break-after: always !important;
+}
+
+.pagebreak {
+    page-break-inside: avoid !important;
+}
+
+.pagebreak {
+    page-break-before: always !important;
+}
+/*******REPORTSSSSSSSSSSSS*/
+
+.custom_table_styling .nopadding_tds {
+    padding: 0px !important;
+}
+
+    .custom_table_styling .nopadding_tds input {
+        border: none !important;
+        box-shadow: none;
+        height: auto !important;
+    }
+
+.border_bottom_list li input, .border_bottomtextbox {
+    border: none !important;
+    box-shadow: none !important;
+    border-bottom: 1px solid #ccc !important;
+    border-radius: 0px !important;
+}
+.tr_headingcolor {
+    background: #d5d1d1;
+}
+    .tr_headingcolor p {
+        font-size: 1.4rem;
+        font-weight: bold;
+        text-align: center;
+        margin-bottom: 0px !important;
+        padding: 5px 0px;
+    }
+
+.abovetxt {
+padding:10px 0px !important;
+}
+.custom_table_styling {
+    margin-bottom: 0px !important;
+}
+/*******REPORTSSSSSSSSSSSS*/
+
+

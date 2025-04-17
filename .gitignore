@@ -1,0 +1,10 @@
+.vs/AIMS/v15/.suo
+.vs/AIMS/v15/Server/sqlite3/db.lock
+.vs/AIMS/v15/Server/sqlite3/storage.ide
+.vs/AIMS/v15/Server/sqlite3/storage.ide-shm
+.vs/AIMS/v15/Server/sqlite3/storage.ide-wal
+.vs/config/applicationhost.config
+Static DLL/GleamTech.FileUltimate.dll
+bin/GleamTech.FileUltimate.dll
+/.vs
+/aimsplus.solution.sln

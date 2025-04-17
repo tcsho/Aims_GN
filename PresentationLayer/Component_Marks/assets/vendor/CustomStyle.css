@@ -1,0 +1,370 @@
+
+/***************
+#00006a
+#f5e22b
+*/
+
+
+.body
+{
+  font-size: 1.3rem !important;
+  font-family: 'Raleway', sans-serif !important;
+  /* font-family: 'Segoe UI', Tahoma, Geneva, Verdana, Verdana, Geneva, Tahoma, sans-serif; */
+}
+
+
+.form-control_ {
+  display: inline;
+  width: 100%;
+  padding: .375rem .75rem;
+  font-size: 1.3rem;
+  line-height: 1.5;
+  color: #495057;
+  background-color: #f8f8f8;
+  background-clip: padding-box;
+  border: 0px solid #ced4da;
+  border-radius: .25rem;
+  /* transition: border-color .15s ease-in-out,box-shadow .15s ease-in-out; */
+  border-bottom: 1px solid #ac9d9d;
+}
+.form-control_:focus {
+  /* background-color: yellow; */
+}
+.Gap
+{
+  margin:auto;
+  clear: both;
+  width: 100%;
+  height: 10px;
+}
+.ImageLayoutCenter
+{
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  width: 50%;
+}
+.HeaderHeadingAMISPlus
+{
+  font-size: 21px;
+  color: #ffffff;
+  font-family: 'Raleway', sans-serif;
+  font-weight: 400;
+}
+.HeaderHeadingSubmenu
+{
+  font-size: 15px;
+  color: #ffffff;
+  font-family: 'Raleway', sans-serif;
+  font-weight: 400;
+}
+
+.ColorBlue
+{
+  color: #00006a;
+}
+.BackgroundBlue
+{
+  background: #00006a;
+}
+
+.ColorYellow
+{
+  color: #f5e22b;
+}
+.BackgroundYellow
+{
+  background: #f5e22b;
+}
+
+.LogoutButton
+{
+  color: white;
+}
+.LogoutButton:hover
+{
+  text-decoration: none;
+  color:#f5e22b;
+}
+
+.LoginAs
+{
+  color: #00006a;
+    font-size: 14px;
+    font-weight: 900;
+    background: white;
+    padding: 5px 15px 5px 15px;
+    border-radius: 6px;
+    margin: 0px 1px 1px 11px;
+}
+.PageMainHeading
+{
+  font-size: 21px;
+  font-family: 'Raleway', sans-serif;
+  font-weight: 600;
+
+}
+.PageMainHeadingBorder
+{
+  border-bottom: 3px solid #f5e22b;
+  padding-bottom: 4px;
+  font-size: 15px;
+}
+.CustomLabel
+{
+  font-weight: 600;
+  font-family: 'Raleway', sans-serif;
+}
+
+.RequiredLbl
+{
+  color: red;
+  font-weight: bold;
+}
+
+.inner-addon {
+  position: relative;
+}
+
+.inner-addon .glyphicon {
+  position: absolute;
+  padding: 10px;
+  pointer-events: none;
+}
+
+.left-addon .glyphicon {
+  left: 0px;
+}
+
+.left-addon input {
+  padding-left: 30px;
+  font-weight: 500;
+}
+
+/* .ngx-datatable .datatable-body .datatable-scroll {
+  display: block !important;
+} */
+
+.ngx-datatable.fixed-header .datatable-header .datatable-header-inner {
+  width: 100% !important;
+}
+
+.ngx-datatable .datatable-body .datatable-scroll {
+  width: 100% !important;
+}
+
+.ngx-datatable.fixed-row .datatable-scroll, .ngx-datatable.fixed-row .datatable-scroll .datatable-body-row {
+  width: 100% !important;
+}
+
+datatable-body-row .tbd-icon {
+  background-color: rgba(160, 160, 160, 0.22);
+
+  &:hover {
+    background-color: #caced2;
+  }
+}
+
+
+/* .ngx-datatable.material .datatable-footer .datatable-pager a {
+  height: 22px;
+  min-width: 18px;
+  line-height: 22px;
+  padding: 0 4px;
+  margin: 6px 2px;
+}
+
+.ngx-datatable.material .datatable-footer .datatable-pager .datatable-icon-left, .ngx-datatable.material .datatable-footer .datatable-pager .datatable-icon-skip, .ngx-datatable.material .datatable-footer .datatable-pager .datatable-icon-right, .ngx-datatable.material .datatable-footer .datatable-pager .datatable-icon-prev {
+  font-size: 14px;
+  line-height: 23px;
+  padding: 0 0px;
+} */
+
+.datatable-row-detail {
+  height: auto!important;
+  padding: 30px 20px!important;
+}
+
+.pager li>a, .pager li>span
+{
+  cursor: pointer;
+  padding: 10px 15px 10px 15px !important;
+  background-color: #00006a !important;
+  color: white !important;
+  font-weight: 500  !important;
+}
+
+
+
+.dtTable-detail {
+  display: flex;
+  flex-wrap: wrap;
+  max-width: 71vw;
+}
+
+.dtTable-detail .detail-box {
+  flex: 0 0 33.33%;
+  margin-bottom: 20px;
+}
+
+.dtTable-detail .detail-box label,
+.dtTable-detail .detail-list label {
+  display: block;
+  line-height: 16px;
+  margin-bottom: 3px;
+  font-size: 22px;
+  color: #3f3d3d;
+  font-weight: 600;
+  padding-bottom: 10px;
+}
+
+.dtTable-detail .detail-box span {
+  font-size: 14px;
+}
+
+.dtTable-detail .detail-list table {
+  width: 100%;
+}
+
+.dtTable-detail .detail-list {
+  margin-bottom: 20px;
+  width: 100%;
+}
+
+.ngx-datatable.material .datatable-body .datatable-row-detail {
+  background: #f5f5f5 !important;
+  padding: 10px;
+  box-shadow: -1px 2px 5px inset rgba(0,0,0,0.1) !important;
+}
+
+.dtTable-detail .tbd-style-1 td {
+  background-color: #fff;
+  padding: 10px 10px 10px 10px;
+  border: 1px solid #b0afaf;
+}
+
+.ngx-datatable-style-1 {
+  box-shadow: none !important;
+  border: 1px solid #dee2e6;
+
+  .datatable-header-inner {
+    height: 100%;
+  }
+
+  .datatable-header {
+    border-bottom: 2px solid rgba(0, 0, 0, 0.12) !important;
+  }
+
+  .datatable-header-cell {
+    padding: 12px !important;
+    color: #212529 !important;
+    font-weight: 600 !important;
+    font-size: 13px !important;
+    display: flex !important;
+    align-items: center;
+    border-right: 1px solid #dee2e6;
+
+    .sort-btn {
+      position: absolute;
+      top: calc(50% - 12px);
+      right: 7px;
+      font-size: 22px;
+    }
+  }
+
+  .datatable-body-cell {
+    padding: 12px 12px !important;
+    color: #566a79 !important;
+    font-weight: 600 !important;
+    font-size: 12px !important;
+    display: -webkit-box !important;
+    display: flex !important;
+    -webkit-box-align: center;
+    align-items: center;
+    border-right: 1px solid #dee2e6;
+    height: 100%;
+    border-bottom: 1px solid #dee2e6;
+  }
+
+  .dt-expander {
+    font-size: 23px;
+    margin-top: 1px;
+    text-align: center;
+    display: block;
+    margin-left: 3px;
+
+    &:hover,
+    &:active {
+      text-decoration: none;
+    }
+  }
+
+
+  .table > thead > tr > th, .table > tbody > tr > th, .table > tfoot > tr > th, .table > thead > tr > td, .table > tbody > tr > td, .table > tfoot > tr > td {
+    padding: 8px;
+    line-height: 1.42857143 !important;
+    vertical-align: top;
+    border-top: 1px solid #ddd;
+}
+
+.CustomAddRemoveIcon
+{
+  font-size: 19px !important;
+    padding: 3px 20px 3px 20px !important;
+}
+
+
+
+.pagerButton {
+  padding: 10px 15px 10px 15px !important;
+  background-color: #00006a !important;
+  color: white !important;
+  font-weight: 500  !important;
+}
+.TableUnit
+{
+  font-family: 'Raleway', sans-serif;
+    font-weight: 600;
+    border-bottom: 3px solid #f5e22b;
+    padding-bottom: 4px;
+    font-size: 15px;
+}
+
+.CursorPointer
+{
+  cursor: pointer;
+}
+
+
+.SubUnitDetaiHeadInClosp
+{
+  font-size: 21px;
+    font-weight: 600;
+    font-family: 'Raleway', sans-serif;
+    border-bottom: 4px solid #f5e22b;
+    padding-bottom: 10px;
+}
+
+.CustomTableTh
+{
+  vertical-align: bottom !important;
+  border-bottom: 2px solid #ddd !important;
+  font-size: 17px !important;
+  padding: 6px !important;
+  border: 1px solid #262626 !important;
+}
+
+.TableColapsDeatilHead
+{
+
+}
+
+.anyClass {
+  height:150px;
+  overflow-y: scroll;
+}
+
+.CustomHeadTbl
+{
+  font-size: 20px !important;
+}

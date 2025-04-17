@@ -1,0 +1,1010 @@
+body {
+    font-family: Arial !important;
+}
+
+.PrintArea {
+    margin: 20px 0px;
+    padding: 0px;
+    width: 100%;
+}
+
+.buttonBar {
+    height: 30px;
+}
+
+    .buttonBar div {
+        display: inline-block;
+        float: left;
+        margin-right: 10px;
+        padding: 3px 12px;
+        cursor: pointer;
+    }
+
+.button {
+    background: none repeat scroll 0 0 #999999;
+    border: 1px solid blue;
+    color: #EEEEEE;
+    text-align: center;
+}
+
+div.settingName {
+    display: inline-block;
+    vertical-align: top;
+}
+
+div.settingVals {
+    display: inline-block;
+    padding-left: 10px;
+}
+
+span.test {
+    color: red;
+}
+
+#Retain.PrintArea.area1 {
+    border: none !important; /*border:1px solid #000;*/
+}
+
+.PrintArea.area1 {
+    border: solid 1px #ffb40f;
+}
+
+.PrintArea.area2 {
+    border: solid 1px #20ff58;
+}
+
+.PrintArea.area3 {
+    border: solid 1px #999;
+}
+
+.SettingsBox {
+    display: none;
+}
+
+.visiblity-hidden_class {
+    visibility: hidden;
+}
+
+.list-style-none {
+    list-style: none;
+}
+
+.label-100 {
+    width: 100%;
+    font-weight: bold;
+    text-align: center;
+}
+
+.headsign {
+    border-top: none !important;
+    border-left: none !important;
+    border-right: none !important;
+    border-bottom: 2px solid #000 !important;
+    border-radius: 0px !important;
+}
+
+.no-table-border {
+    border: none !important;
+    margin-bottom: 0px;
+}
+
+.centertd {
+    vertical-align: inherit !important;
+}
+
+.schoolname {
+    margin-top: 10px;
+    font-size: 34px;
+}
+
+.reportname {
+    font-size: 50px;
+}
+
+.student_name {
+    font-size: 40px;
+}
+
+p {
+    font-size: 16px;
+}
+
+#serachprinttable {
+    border: none; /* 1px solid #000*/
+ 
+    padding: 1px !important;
+}
+
+.no-padding {
+    padding: 0px !important;
+}
+
+.sec1 {
+    border: 1px solid #2957a4;
+}
+
+.sec2 {
+    border: 1px solid #2957a4;
+    /*border-bottom: none !important;*/
+    margin-top: 1px;
+    padding-top: 30px;
+    padding-bottom: 15px;
+    border-top: none;
+    padding-left:1rem;
+}
+
+.sec3 {
+    border: 1px solid #2957a4 !important;
+    margin-top: 1px;
+    padding: 1px !important;
+}
+
+.effort-table {
+    text-align: center !important;
+    width: 240px;
+}
+
+    .effort-table td:nth-child(2) {
+        padding: 2px 5px;
+    }
+
+.efforttablediv {
+    padding-left: 54px !important;
+    padding-right: 54px !important;
+}
+
+.table-bordered td, .table-bordered th, .table-bordered {
+    border: 1px solid #000 !important;
+}
+
+.subjecttable td {
+    padding: 0px 0px 0px 0px !important;
+}
+
+    /*.subjecttable td:nth-child(1)*/
+.subjecttable tr:nth-child(1) td:nth-child(1) {
+    padding: 0px 0px 0px 30px !important;
+}
+
+.subjecttable .table {
+    margin-bottom: 0px !important;
+}
+
+.subjecttable td {
+    border: 0.1px solid #2957a4 !important;
+    border-top: none !important;
+    font-size: 18px;
+    font-weight: 500;
+    background: #e4e4e4 !important;
+}
+
+.subjecttable .table td {
+    border: none !important;
+    /*border-bottom: 1px solid #000 !important;
+    border-left: 1px solid #000 !important;*/
+}
+
+.subjecttable .table tr:nth-child(2) td {
+    /*border-bottom:none !important;*/
+}
+
+.centertd {
+    vertical-align: inherit !important;
+    text-align: left;
+    padding-left: 10px !important;
+}
+
+.subjecttable .table td {
+    padding: 0px 0px 0px 0px !important
+}
+
+.studentdetailtable {
+    margin-top: 45px;
+}
+
+    .studentdetailtable td {
+        border: 1px solid #fff !important;
+        /* margin: 10px !important; */
+        padding: 10px 10px !important;
+        font-size: 18px;
+        font-weight: 500;
+    }
+
+.text-mediaalign, .text-mediaalignright {
+    text-align: center;
+}
+
+.visiblity-hidden_mediaclass {
+    visibility: hidden;
+}
+
+.schoollogo img {
+    width: 90px !important;
+}
+
+.dobtable td {
+    padding: 5px 0px;
+}
+
+    .dobtable td:nth-child(2) {
+        padding-left: 10px;
+    }
+
+.printbtn {
+    position: absolute;
+    right: 0px;
+}
+/*****************TOOLTIP***************/
+.tooltip {
+    position: relative;
+    display: inline-block;
+    border-bottom: 1px dotted black;
+}
+
+    .tooltip .tooltiptext {
+        visibility: hidden;
+        width: 120px;
+        background-color: black;
+        color: #fff;
+        text-align: center;
+        border-radius: 6px;
+        padding: 5px 0;
+        /* Position the tooltip */
+        position: absolute;
+        z-index: 1;
+        /*bottom: 100%;*/
+        /*left: 50%;*/
+        width: 120px;
+        top: 100%;
+        left: 50%;
+        margin-left: -60px;
+    }
+
+    .tooltip:hover .tooltiptext {
+        visibility: visible;
+    }
+
+.tooltip {
+    opacity: 1 !important;
+    margin-left: 5px !important;
+}
+/*****************TOOLTIP***************/
+body .ui-tooltip {
+    display: none !important;
+}
+/*.subjecttable tr td
+{
+    width:15% !important;
+}
+.subjecttable tr td:nth-child(1)
+{
+    width:40%;
+}*/
+.subjecttable td {
+    width: 15%;
+}
+
+.subjecttable tr:nth-child(1) td:nth-child(1) {
+    width: 40%;
+}
+
+.printview {
+    position: fixed;
+    left: 90%;
+}
+
+@media only screen and (max-width:992px) {
+    /*.visiblity-hidden_mediaclass
+{
+display:none !important;
+}*/
+    /*.text-mediaalign{
+text-align:center !important;
+
+}
+.text-mediaalignright{
+text-align:center !important;
+
+}*/
+    .schoolname {
+        font-size: 20px;
+    }
+
+        .schoolname img {
+            width: 20% !important;
+        }
+
+    .schoollogo img {
+        width: 45% !important;
+    }
+
+    .headerwithlogo h4 {
+        font-size: 18px !important;
+    }
+
+    .dobtable {
+        font-size: 14px !important;
+    }
+
+    .effort-table {
+        font-size: 14px;
+    }
+
+    .row.sec2 ul li {
+        font-size: 14px !important;
+    }
+
+    .subjecttable td {
+        font-size: 14px !important;
+    }
+
+    .commentsec .commentsec1, .commentsec .commentsec2, .commentsec .commentsectec {
+        font-size: 14px;
+    }
+
+    h4 {
+        font-size: 18px !important;
+    }
+
+    .mediawidth {
+        flex: 0 0 100% !important;
+        max-width: 100% !important;
+    }
+
+    .label-100 {
+        font-size: 11px !important;
+    }
+
+    .effort-table {
+        width: 200px !important;
+        margin-left: 42px;
+    }
+    .inputflex {
+    display:block !important;
+    }
+}
+
+@media print {
+    /*footer {page-break-after: always;}*/
+    /*.visiblity-hidden_mediaclass
+{
+display:none !important;
+}*/
+    .mediawidthlg8 {
+        flex: 0 0 75% !important;
+        max-width: 75% !important;
+    }
+
+    .mediawidthlg4 {
+        flex: 0 0 25% !important;
+        max-width: 25% !important;
+    }
+
+    /*.noticeborder {
+        height: 1400px !important;
+    }*/
+        .pagecut {
+        page-break-inside: avoid !important;
+    }
+
+    .pagecut {
+        page-break-after: always !important;
+    }
+
+    .pagebreak {
+        page-break-inside: avoid !important;
+    }
+
+    .pagebreak {
+        page-break-before: always !important;
+    }
+
+    .rowdisplayflex {
+        display: flex !important;
+    }
+    /*.printmediaborderbottom{border-bottom: 1px solid #000;}
+  .printmediabordertop{border-top: 1px solid #000;}
+  .pagecut{padding: 0px !important;font-size: 2px !important;}
+.pagecut p{margin-bottom: 0px !important;border-bottom: 1px solid #000 !important;font-size: 10px !important;}*/
+    .sec3 {
+        border: 1px solid #2957a4 !important;
+        margin-top: 1px;
+        padding: 1px !important;
+    }
+    .noticeborder {
+        
+        padding: .3px 1px !important;
+    }
+}
+
+/*@media screen {
+  div.divFooter {
+    display: none;
+  }
+}
+@media print {
+  div.divFooter {
+    position: fixed;
+    bottom: 0;
+  }
+}*/
+
+.pagecut {
+    page-break-inside: avoid !important;
+}
+
+.pagecut {
+    page-break-after: always !important;
+}
+
+.pagebreak {
+    page-break-inside: avoid !important;
+}
+
+.pagebreak {
+    page-break-before: always !important;
+}
+/*.sec2
+{
+    margin-top:50px;
+    margin-bottom: 100%;
+}*/
+/*.sec3 {
+    margin: 30px 0px;
+}
+.sec2 {
+    margin: 30px 0px;
+}*/
+footer {
+    font-size: 9px;
+    color: #f00;
+    text-align: center;
+}
+
+@page {
+    size: A4;
+    margin: 11mm 17mm 17mm 17mm;
+}
+
+@media only screen and (max-width:1200px) and (min-width: 992px) {
+    .schoollogo img {
+        position: relative;
+        left: -30px !important;
+    }
+    .mediawidth {
+        flex: 0 0 100% !important;
+        max-width: 100% !important;
+    }
+    .mediawidthlg8 {
+        flex: 0 0 66.666667% !important;
+        max-width: 66.666667% !important;
+    }
+    .mediawidthlg4 {
+        flex: 0 0 33.333333% !important;
+        max-width: 33.333333% !important;
+    }
+    .effort-table {
+        width: 200px !important;
+        margin-left: 42px;
+    }
+
+}
+/*@media print {
+  footer {
+    position: fixed;
+    bottom: 0;
+  }
+@page {
+  size: A4;
+  margin: 11mm 17mm 17mm 17mm;
+}
+
+  .content-block, p {
+    page-break-inside: avoid;
+  }
+
+  html, body {
+    width: 210mm;
+    height: 297mm;
+  }
+}*/
+
+.pagecut {
+    padding: 0px !important;
+}
+
+    .pagecut p {
+        /*margin-bottom: 0px !important;*/
+        /*border-bottom: 1px solid #000 !important;*/
+        /*font-size: 10px !important;*/
+    }
+
+.displayflex {
+    padding: 10px 5px !important;
+}
+
+    .displayflex p {
+        margin-bottom: 0px !important;
+        font-size: 11.5px;
+        color: grey;
+    }
+
+.floatright {
+    float: right;
+}
+
+.sec1 {
+    border-bottom: none !important;
+}
+
+.sec2 {
+    margin-top: 0px !important;
+}
+/***Border***/
+.firstthreetable .sec3:nth-child(1) {
+    margin-top: 0px !important;
+    /*border-top: none !important;*/
+}
+
+
+/*  .subjecttable tr td {
+    border-top: none !important;
+
+}*/
+.subjecttable tr td:nth-child(1) {
+    border-left: none !important;
+}
+
+.firstthreetable .sec3 {
+    padding-left: 0px !important;
+    padding-top: 0px !important;
+    padding-right: 0px !important;
+    margin-top: 0px !important;
+    border-top: none;
+    padding-bottom: 0px !important;
+}
+
+.subjecttable td:nth-child(2) {
+    /*border-right: none !important;*/
+}
+
+.remainingtable .sec3 {
+    padding-left: 0px !important;
+    padding-top: 0px !important;
+    padding-right: 0px !important;
+    margin-top: 0px !important;
+    border-top: none;
+}
+
+    .remainingtable .sec3:nth-child(1) {
+        margin-top: 0px !important;
+    }
+
+.printmediabordertopafter3 {
+    border-bottom: 1px solid #2957a4 !important
+}
+/***Border***/
+.redcolor {
+    color: red !important;
+}
+
+.sec2 {
+    margin-right: 0px !important;
+    margin-left: 0px !important;
+}
+
+.effort-table {
+    width: 100%;
+}
+
+.floatleft {
+    float: left;
+}
+
+.headsigndiv {
+    margin-top: 25px;
+    width: 100%;
+}
+
+.norightborder {
+    border-right: none !important;
+}
+
+/****QR CODE*******/
+
+.qr-code-generator {
+    width: 500px;
+    margin: 0 auto;
+}
+
+    .qr-code-generator * {
+        -webkit-box-sizing: border-box;
+        -moz-box-sizing: border-box;
+        box-sizing: border-box;
+    }
+
+#qrcode {
+    width: 128px;
+    height: 128px;
+    margin: 0 auto;
+    text-align: center;
+}
+
+    #qrcode a {
+        font-size: 0.8em;
+    }
+
+.qr-url, .qr-size {
+    padding: 0.5em;
+    border: 1px solid #ddd;
+    border-radius: 2px;
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+}
+
+.qr-url {
+    width: 79%;
+}
+
+.qr-size {
+    width: 20%;
+}
+
+.generate-qr-code {
+    display: block;
+    width: 100%;
+    margin: 0.5em 0 0;
+    padding: 0.25em;
+    font-size: 1.2em;
+    border: none;
+    cursor: pointer;
+    background-color: #e5554e;
+    color: #fff;
+}
+
+@media only screen and (max-width: 1200px) {
+    #qrcode canvas {
+        width: 75%;
+    }
+}
+
+@media only screen and (min-width: 1200px) {
+    #qrcode canvas {
+        width: 75%;
+    }
+}
+
+@media only screen and (max-width: 992px) {
+    #qrcode canvas {
+        width: 60% !important;
+    }
+}
+
+/****QR CODE*******/
+.teachername {
+    margin-right: 10px !important;
+}
+
+
+@font-face {
+    font-family: myFirstFont;
+    src: url(arenski/arenskiregular.ttf);
+}
+@font-face {
+    font-family: signfont1;
+    src: url(fonts/airin/Airin.ttf);
+}
+@font-face {
+    font-family: signfont2;
+    src: url(fonts/alleffra/Alleffra.ttf);
+}
+@font-face {
+    font-family: signfont3;
+    src: url(fonts/allison-script/Allison_Script.otf);
+}
+@font-face {
+    font-family: signfont4;
+    src: url(fonts/allison-tessa/AllisonTessaOblique.ttf);
+}
+@font-face {
+    font-family: signfont5;
+    src: url(fonts/amarula-personal-use/AmarulaPersonalUse/AmarulaPersonalUse.ttf);
+}
+
+
+.schoolname {
+    font-family: myFirstFont !important;
+    color: #0c4da2 !important;
+}
+
+@media only screen and (min-width: 1000px) and (max-width: 1450px) {
+    .printview {
+        position: unset;
+        padding-bottom: 16px;
+        left: unset;
+    }
+}
+
+
+
+.incomplete {
+    border-left: 1px solid #2957a4;
+    border-right: 1px solid #2957a4;
+    border-bottom: 1px solid #2957a4;
+   display:none;
+}
+.incom-child {
+    padding: 10px 0px;
+}
+.incomplete h4 {
+    margin: 0;
+    font-family: myFirstFont !important;
+}
+
+
+/***NOTICE SEC*/
+.noticesec {
+padding-left:0px !important;
+padding-top:10px !important;
+}
+    .noticesec p {
+        text-align: justify;
+        padding-top: 10px;
+    }
+.noticespan {
+    border-bottom: 3px solid #000;
+}
+.schoollogowithname img{
+width:100px;
+}
+.schoollogowithname {
+    padding: 10px 0px;
+}
+.bottomsdiv p {
+    padding-bottom: 0px !important;
+    margin-bottom: 0px;
+    color: #b0adad;
+    font-family: myFirstFont !important;
+}
+.noticeborder {
+    /*height: 1400px !important;*/
+    border: 1px solid #000 !important;
+    padding: .3px 1px !important;
+}
+.noticesec1, .noticesec2{
+    border: none !important;
+}
+.noticetext {
+text-align:justify !important;
+}
+/*.noticebottom {
+    position: absolute;
+    height: auto;
+   
+    bottom: -140%;
+    left: 0px;
+    right: 15px;
+    margin-bottom: 0px;
+}*/
+.bottomsdiv.noticebottom {
+    margin-top: 80% !important;
+}
+.innerdiv {
+    border:1px solid #000 !important
+}
+.dearparents {
+margin-bottom:2rem !important;
+}
+.warm_regard {
+    margin-top: 5rem !important;
+}
+/***NOTICE SEC*/
+.incompletealready {
+    border-left: 1px solid #2957a4;
+    border-right: 1px solid #2957a4;
+    border-bottom: 1px solid #2957a4;
+}
+
+
+.incompletealready h4 {
+    margin: 0;
+    font-family: myFirstFont !important;
+}
+
+.captilizetext, .headsign {
+    text-transform: capitalize !important;
+}
+.headsign {
+    font-family: signfont4;
+    padding: 0px !important;
+    /*height:50px !important;*/
+}
+    .fullnamestudent {
+        text-transform: uppercase !important;
+    }
+
+.sign1 {
+    font-family: signfont1;
+}
+.sign2 {
+    font-family: signfont2;
+}
+.sign3 {
+    font-family: signfont3;
+}
+.sign4 {
+    font-family: signfont4;
+}
+.sign5 {
+    font-family: signfont5;
+}
+
+
+
+/****ADMISSION SHEET*/
+.displaydivflex, .inputflex {
+    display: flex;
+}
+.onlybottomborder {
+    border: none !important;
+    border-bottom: 1px solid #000 !important;
+    border-radius: 0px !important;
+    padding:0px !important;
+}
+.flexlabel {
+    margin-bottom: 0px !important;
+}
+
+.adarticle {
+    margin-left: 0px !important;
+    margin-right: 0px !important;
+    padding-left: 15px;
+    padding-right: 15px;
+}
+.attendesec2 {
+margin-top:10px !important;
+
+}
+.attendesec2 p {
+    margin-bottom: 3px !important;
+}
+.attend2subsec2 {
+    border: 1px solid #000;
+    text-align: center;
+    padding: 10px !important;
+}
+.attend3subsec2 ul {
+    padding-left: 0px !important;
+    list-style-position: inside;
+}
+.margin-bottoms {
+margin-bottom:10px !important;
+}
+.addmissionhead-margin-top {
+    margin-top: 5% !important;
+}
+/*****ADMISSION SHEET*/
+/***FLOORPLAN*/
+.tolabel {
+    margin-bottom: 0px;
+    padding-left: 10px;
+    padding-right: 10px;
+}
+    /**DATESHEET*/
+.importantmsg {
+    padding: 0px 70px !important;
+}
+    .importantmsg p {
+    font-size:14px !important;
+    }
+    .importantmsg ul li {
+        font-size: 11px !important;
+    }
+.datesheettable, .datesheettable p {
+    font-size: 10px !important;
+    margin-bottom: 1px !important;
+}
+.datesheettable {
+    text-align: center;
+}
+.subject_name {
+    font-weight: bold;
+}
+.tospace {
+    padding: 0px 3px;
+}
+.subject_name span {
+    border-bottom: 1px solid #000;
+    /* letter-spacing: 1px; */
+}
+.datesheettable th, .datesheettable td {
+    padding: 5px 0px !important;
+    vertical-align: inherit !important;
+}
+.dates_font {
+font-weight:bold;
+}
+.days_font {
+    font-weight: bold;
+}
+.color_red {
+    color: red !important;
+}
+.datesheettable tr:nth-child(odd) {
+    background: #d0e8f1;
+}
+.datesheettable th {
+    background: #fff !important;
+}
+/**DATESHEET*/
+
+/**CLASS WISE***/
+.class_wisetable td {
+    font-size: 12px !important;
+    padding: 5px !important;
+}
+.hidetr {
+visibility:hidden;
+}
+/*.class_wisetable {
+    margin-bottom: 30px !important;
+    margin-top: 30px !important;
+}*/
+.classwisename {
+    text-align: center !important;
+}
+/**CLASS WISE***/
+/**STUDENT ATTENDENCE*/
+.studentattendencetable th {
+    font-size: 12px !important;
+    padding: 5px !important;
+    text-align: center;
+}
+.studentattendencetable td {
+    font-size: 10px !important;
+    text-align: center;
+    vertical-align: middle !important;
+    padding: 5px !important;
+}
+    .studentattendencetable td p {
+        font-size: 10px !important;
+        text-align: center;
+        margin-bottom:0px !important;
+    }
+.hardcoded {
+    text-align: right !important;
+    font-weight: bold !important;
+}
+/**STUDENT ATTENDENCE*/
+/**Admiisionreport***/
+.admissiontxt {
+    margin-left: 10px !important;
+}
+/**Admiisionreport***/
+
+/**Floor plan*/
+.floorplantable tbody td:nth-child(2) span:last-child b {
+ 
+    display: none !important;
+}
+
+.first_mask {
+display:none;
+}
+.first_class {
+    display: none;
+}
+.first_mask:nth-child(2) {
+    display: block !important;
+}
+    .first_mask:last-child {
+        display: block !important;
+    }
+
+.first_class:nth-child(1) {
+    display: block !important;
+}
+
+
+/**Floor Plan*/
