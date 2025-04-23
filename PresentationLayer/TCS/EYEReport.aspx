@@ -168,6 +168,7 @@
        
         }
         .performance-list li.purple { color: purple; }
+        .performance-list li.orange { color: orange; }
         .performance-list li.blue { color: blue; }
         .section-heading {
             font-weight: bold;
@@ -445,7 +446,8 @@ body {
                     url: "EYEReport.aspx/testHeader",
                     // data: "{querytype: '1'}",
                     data: "{ sessionId: " + Session_Id +", TermGroupId :" + Term_Id +", sectionId: " + Sec_Id +", StudentId: " + Roll_Number +" }",
-                   // data: "{ sessionId: 15, TermGroupId : 2, sectionId: 3099, StudentId: 594390 }",
+                  //  data: "{ sessionId: 15, TermGroupId : 2, sectionId: 3099, StudentId: 594390 }",
+                  //  data: "{ sessionId: 16, TermGroupId : 1, sectionId: 3099, StudentId: 592940 }",
                     type: "POST",
                     dataType: "json",
                     contentType: "application/json; charset=utf-8",
@@ -493,7 +495,7 @@ body {
                         reportcard += '                       <div class="row">';
                         reportcard += '                           <div class="row">';
                         reportcard += '                               <div class="col-md-12" style="margin-left: 35px">';
-                        reportcard += '                                   <p><span style="text-decoration: underline;"><strong style="text-decoration: underline;">Attendance: </strong> ' + resultstr.Header[0].DaysAttend + ' (out of ' + resultstr.Header[0].SecondTermDays + ' days)</span></p>';
+                        reportcard += '                                   <p><span style="text-decoration: underline;"><strong style="text-decoration: underline;">Attendance: </strong> ' + resultstr.Header[0].DaysAttend + ' (out of ' + resultstr.Header[0].FirstTermDays + ' days)</span></p>';
                         reportcard += '                               </div>';
                         reportcard += '                           </div>';
 
@@ -506,9 +508,41 @@ body {
                         reportcard += '                           <div class="table mt-4" style="border:1px solid black; border-collapse: collapse;">';
                         reportcard += '                               <strong style="margin-left: 10px;">Colour coded performance indicators (PI):</strong>';
                         reportcard += '                               <ul class="performance-list" style="margin-top: 10px">';
-                        reportcard += '                                   <li class="green"><div style="color:black !important">Exceeding Development:Performs above the expected level, showing advanced skills. (<span style="color: green; font-weight: bold;">EXC</span>)</div></li>';
-                        reportcard += '                                   <li class="purple"><div style="color:black !important">Expected Development: Consistently meets the learning objective independently. (<span style="color: purple; font-weight: bold;">EXP</span>)</div></li>';
-                        reportcard += '                                   <li class="blue"><div style="color:black !important">Emerging Development: Performs below the expected level, requiring support and guidance.  (<span style="color: blue; font-weight: bold;">EME</span>)</div></li>';
+
+                        if (Session_Id == 16 && Term_Id == 1) {
+                            reportcard += '                                   <li class="green"><div style="color:black !important">Exceeding Development:Performs above the expected level, showing advanced skills. (<span style="color: green; font-weight: bold;">EXC</span>)</div></li>';
+                            reportcard += '                                   <li class="purple"><div style="color:black !important">Expected Development: Consistently meets the learning objective independently. (<span style="color: purple; font-weight: bold;">EXP</span>)</div></li>';
+                            reportcard += '                                   <li class="blue"><div style="color:black !important">Emerging Development: Performs below the expected level, requiring support and guidance.  (<span style="color: blue; font-weight: bold;">EME</span>)</div></li>';
+
+                        }
+                        else if (Session_Id >= 16) {
+
+                            for (var i = 0; i < resultstr.Indicator.length; i++) {
+                                if (resultstr.Indicator[i].RateCode === "EXC") {
+                                    reportcard += '  <li class="green"><div style="color:black !important">  ' + resultstr.Indicator[i].Description + ' (<span style="color: green; font-weight: bold;">' + resultstr.Indicator[i].RateCode + ' </span>)</div></li>';
+
+                                }
+                                else if (resultstr.Indicator[i].RateCode === "EXP") {
+                                    reportcard += '  <li class="purple"><div style="color:black !important">  ' + resultstr.Indicator[i].Description + ' (<span style="color: purple; font-weight: bold;">' + resultstr.Indicator[i].RateCode + ' </span>)</div></li>';
+
+                                }
+                                else if (resultstr.Indicator[i].RateCode === "EME") {
+                                    reportcard += '  <li class="blue"><div style="color:black !important">  ' + resultstr.Indicator[i].Description + ' (<span style="color: blue; font-weight: bold;">' + resultstr.Indicator[i].RateCode + ' </span>)</div></li>';
+
+                                }
+                                else {
+                                    reportcard += '  <li class="orange"><div style="color:black !important">  ' + resultstr.Indicator[i].Description + ' (<span style="color: orange; font-weight: bold;">' + resultstr.Indicator[i].RateCode + ' </span>)</div></li>';
+
+                                }
+                            }
+                        }
+                        else {
+                              reportcard += '  <li class="green"><div style="color:black !important">Exceeding Development:Performs above the expected level, showing advanced skills. (<span style="color: green; font-weight: bold;">EXC</span>)</div></li>';
+                              reportcard += '  <li class="purple"><div style="color:black !important">Expected Development: Consistently meets the learning objective independently. (<span style="color: purple; font-weight: bold;">EXP</span>)</div></li>';
+                              reportcard += '   <li class="blue"><div style="color:black !important">Emerging Development: Performs below the expected level, requiring support and guidance.  (<span style="color: blue; font-weight: bold;">EME</span>)</div></li>';
+
+                        }
+                      
                         reportcard += '                               </ul>';
                         reportcard += '                           </div>';
                         reportcard += '                       </div>';
@@ -589,10 +623,21 @@ if (resultstr.Detail[i].subjectid === 65) {
  
      reportcard += '      <th style="height: 40px; background-color: #B2A1C7; border: 1px solid black; text-align: center; color: purple;">' + resultstr.Detail[i].subjectName + '</th>';
 
+
      reportcard += '      <th style="height: 40px; background-color: #B2A1C7; border: 1px solid black; text-align: center; color: purple;">PI</th>';
  
 }
 
+             if (resultstr.Detail[i].subjectid === 14) {
+ 
+     reportcard += '      <th style="height: 40px; background-color: #F9C7DD; border: 1px solid black; text-align: center; color: rgb(238, 52, 83);">' + resultstr.Detail[i].subjectName + '</th>';
+     reportcard += '      <th style="height: 40px; background-color: #F9C7DD; border: 1px solid black; text-align: center; color: rgb(238, 52, 83);">PI</th>';
+}
+if (resultstr.Detail[i].subjectid === 21) {
+ 
+     reportcard += '      <th style="height: 40px; background-color: #F9C7DD; border: 1px solid black; text-align: center; color: rgb(238, 52, 83);">' + resultstr.Detail[i].subjectName + '</th>';
+     reportcard += '      <th style="height: 40px; background-color: #F9C7DD; border: 1px solid black; text-align: center; color: rgb(238, 52, 83);">PI</th>';
+}
 if (resultstr.Detail[i].subjectid === 17) {
  
      reportcard += '      <th style="height: 40px; background-color: #C6D9F1; border: 1px solid black; text-align: center" class="text-primary">' + resultstr.Detail[i].subjectName + '</th>';
@@ -601,11 +646,11 @@ if (resultstr.Detail[i].subjectid === 17) {
  
 }
 
-if (resultstr.Detail[i].subjectName.subjectid === 18) {
+if (resultstr.Detail[i].subjectid === 18) {
  
-     reportcard += '      <th style="height: 40px; background-color: #F0F371; border: 1px solid black; text-align: center" class="text-primary">' + resultstr.Detail[i].subjectName + '</th>';
+     reportcard += '      <th style="height: 40px; background-color: #F0F371; border: 1px solid black; text-align: center; color: rgb(155, 72, 6);">' + resultstr.Detail[i].subjectName + '</th>';
 
-     reportcard += '      <th style="height: 40px; background-color: #F0F371; border: 1px solid black; text-align: center" class="text-primary">PI</th>';
+     reportcard += '      <th style="height: 40px; background-color: #F0F371; border: 1px solid black; text-align: center; color: rgb(155, 72, 6);">PI</th>';
  
 }
  
@@ -630,18 +675,62 @@ if (resultstr.Detail[i].subjectName.subjectid === 18) {
 
 
 
-                                if (resultstr.Detail[i].Items[j].RateCode === "EXC") {
-                                    reportcard += ' <td style="border: 1px solid black; color:#00B050" class="pi">' + resultstr.Detail[i].Items[j].RateCode + '</td>';
 
-                                }
-                                else if (resultstr.Detail[i].Items[j].RateCode === "EXP") {
-                                    reportcard += '  <td style="border: 1px solid black; color:#7030A0" class="pi">' + resultstr.Detail[i].Items[j].RateCode + '</td>';
+                                if (Session_Id == 16 && Term_Id == 1) {
 
-                                }
-                                else if (resultstr.Detail[i].Items[j].RateCode === "EME") {
-                                    reportcard += '  <td style="border: 1px solid black; color:#0070C0" class="pi">' + resultstr.Detail[i].Items[j].RateCode + '</td>';
+                                    if (resultstr.Detail[i].Items[j].RateCode === "EXC") {
+                                        reportcard += ' <td style="border: 1px solid black; color:#00B050" class="pi">' + resultstr.Detail[i].Items[j].RateCode + '</td>';
 
+                                    }
+                                    else if (resultstr.Detail[i].Items[j].RateCode === "EXP") {
+                                        reportcard += '  <td style="border: 1px solid black; color:#7030A0" class="pi">' + resultstr.Detail[i].Items[j].RateCode + '</td>';
+
+                                    }
+                                    else if (resultstr.Detail[i].Items[j].RateCode === "EME") {
+                                        reportcard += '  <td style="border: 1px solid black; color:#0070C0" class="pi">' + resultstr.Detail[i].Items[j].RateCode + '</td>';
+
+                                    }
                                 }
+                                else if (Session_Id >= 16) {
+
+
+                                    if (resultstr.Detail[i].Items[j].RateCode === "EXC") {
+                                        reportcard += ' <td style="border: 1px solid black; color:#00B050" class="pi">' + resultstr.Detail[i].Items[j].RateCode + '</td>';
+
+                                    }
+                                    else if (resultstr.Detail[i].Items[j].RateCode === "EXP") {
+                                        reportcard += '  <td style="border: 1px solid black; color:#7030A0" class="pi">' + resultstr.Detail[i].Items[j].RateCode + '</td>';
+
+                                    }
+                                    else if (resultstr.Detail[i].Items[j].RateCode === "EME") {
+                                        reportcard += '  <td style="border: 1px solid black; color:#0070C0" class="pi">' + resultstr.Detail[i].Items[j].RateCode + '</td>';
+
+                                    }
+                                    else if (resultstr.Detail[i].Items[j].RateCode === "N.I") {
+                                        reportcard += '  <td style="border: 1px solid black; color:#FF5F1F" class="pi">' + resultstr.Detail[i].Items[j].RateCode + '</td>';
+
+                                    }
+                                }
+                                else {
+
+                                    if (resultstr.Detail[i].Items[j].RateCode === "EXC") {
+                                        reportcard += ' <td style="border: 1px solid black; color:#00B050" class="pi">' + resultstr.Detail[i].Items[j].RateCode + '</td>';
+
+                                    }
+                                    else if (resultstr.Detail[i].Items[j].RateCode === "EXP") {
+                                        reportcard += '  <td style="border: 1px solid black; color:#7030A0" class="pi">' + resultstr.Detail[i].Items[j].RateCode + '</td>';
+
+                                    }
+                                    else if (resultstr.Detail[i].Items[j].RateCode === "EME") {
+                                        reportcard += '  <td style="border: 1px solid black; color:#0070C0" class="pi">' + resultstr.Detail[i].Items[j].RateCode + '</td>';
+
+                                    }
+                                }
+
+
+
+
+
 
                                 reportcard += '                                       </tr>';
                             }
