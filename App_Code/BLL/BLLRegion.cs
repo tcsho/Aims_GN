@@ -72,6 +72,12 @@ public class BLLRegion
         return objdal.RegionSelect(_id);
       }
 
+//Add this method in BLLRegion.cs Class    
+//=============================================
+public DataTable NewRegionFetch(BLLRegion _obj)
+    {
+        return objdal.NewRegionSelect(_obj);
+    }
 
     #endregion
 

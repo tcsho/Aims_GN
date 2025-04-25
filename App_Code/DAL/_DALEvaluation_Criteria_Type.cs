@@ -143,7 +143,7 @@ public class DALEvaluation_Criteria_Type
     try
         {
         dalobj.OpenConnection();
-        _dt = dalobj.sqlcmdFetch("Evaluation_Criteria_For_Marks_Locking");
+        _dt = dalobj.sqlcmdFetch("Evaluation_Criteria_TypeSelectAll");
         return _dt;
         }
     catch (Exception _exception)

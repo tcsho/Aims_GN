@@ -62,8 +62,7 @@ public class BLLSearchStudent
     public string Teacher_Id { get; set; }
     public string EndIndex { get; set; }
     public string StartIndex { get; set; }
-    public string Image_Path { get; set; }
-
+public string Image_Path { get; set; }
 
     #endregion
 
@@ -129,14 +128,10 @@ public class BLLSearchStudent
         return objdal.SearchStudentSelect(_id);
     }
 
-
-
-    public DataTable Update_student_Profile_Image_Path(BLLSearchStudent _obj)
+public DataTable Update_student_Profile_Image_Path(BLLSearchStudent _obj)
     {
         return objdal.Update_student_Profile_Image_Path(_obj);
     }
-
-
     #endregion
 
 }

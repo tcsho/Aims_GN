@@ -95,15 +95,31 @@ public class DALStudent_Joined_In_NewSession
     }
     public int Student_Joined_In_NewSessionDelete(BLLStudent_Joined_In_NewSession objbll)
     {
-        SqlParameter[] param = new SqlParameter[1];
+       SqlParameter[] param = new SqlParameter[4];
+ 
+        
+	param[0] = new SqlParameter("@Student_Joined_In_NewSession_Id", SqlDbType.Int);
+        
+	param[0].Value = objbll.Student_Joined_In_NewSession_Id;   
+        
+	param[1] = new SqlParameter("@DeletedBy", SqlDbType.Int);
+        
+	param[1].Value = objbll.DeletedBy;   
+        
+	param[2] = new SqlParameter("@DeletedDate", SqlDbType.DateTime);
+        
+	param[2].Value = objbll.DeletedDate;   
+        
+	param[3] = new SqlParameter("@Session_Id", SqlDbType.Int);
+        
+	param[3].Value = objbll.Session_Id;
 
-        param[0] = new SqlParameter("@Student_Joined_In_NewSession_Id", SqlDbType.Int);
-        param[0].Value = objbll.Student_Joined_In_NewSession_Id;
-
-
-        int k = dalobj.sqlcmdExecute("Student_Joined_In_NewSessionDelete", param);
-
-        return k;
+ 
+        
+      int k = dalobj.sqlcmdExecute("Student_Joined_In_NewSessionDelete", param);
+ 
+       
+ 	return k;
     }
     #endregion
 

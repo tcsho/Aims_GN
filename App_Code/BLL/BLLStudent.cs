@@ -17,7 +17,7 @@ public class BLLStudent
         //
     }
 
-    DLLTcs_Mobile_App_Dashboard objdal = new DLLTcs_Mobile_App_Dashboard();
+    DALStudent objdal = new DALStudent();
 
 
 

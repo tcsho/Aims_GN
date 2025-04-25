@@ -187,11 +187,6 @@ public class DALClass_Center
 
 
 
-
-
-
-
-
     #endregion
 
 

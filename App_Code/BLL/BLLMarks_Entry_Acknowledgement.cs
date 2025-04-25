@@ -8,13 +8,13 @@ using System.Data;
 
 
 public class BLLMarks_Entry_Acknowledgement
-{
-    public BLLMarks_Entry_Acknowledgement()
     {
+    public BLLMarks_Entry_Acknowledgement()
+        {
         //
         // TODO: Add constructor logic here
         //
-    }
+        }
 
     DALMarks_Entry_Acknowledgement objdal = new DALMarks_Entry_Acknowledgement();
 
@@ -37,36 +37,36 @@ public class BLLMarks_Entry_Acknowledgement
     #region 'Start Executaion Methods'
 
     public int Marks_Entry_AcknowledgementAdd(BLLMarks_Entry_Acknowledgement _obj)
-    {
+        {
         return objdal.Marks_Entry_AcknowledgementAdd(_obj);
-    }
+        }
     public int Marks_Entry_AcknowledgementUpdate(BLLMarks_Entry_Acknowledgement _obj)
-    {
+        {
         return objdal.Marks_Entry_AcknowledgementUpdate(_obj);
-    }
+        }
     public int Marks_Entry_AcknowledgementDelete(BLLMarks_Entry_Acknowledgement _obj)
-    {
+        {
         return objdal.Marks_Entry_AcknowledgementDelete(_obj);
 
-    }
+        }
 
     #endregion
     #region 'Start Fetch Methods'
 
 
     public DataTable Marks_Entry_AcknowledgementFetch(BLLMarks_Entry_Acknowledgement _obj)
-    {
+        {
         return objdal.Marks_Entry_AcknowledgementSelect(_obj);
-    }
+        }
     public DataTable Marks_Entry_AcknowledgementSelectByEmployeeSession(BLLMarks_Entry_Acknowledgement _obj)
-    {
-        return objdal.Marks_Entry_AcknowledgementSelectByEmployeeSession(_obj);
-    }
+        {
+            return objdal.Marks_Entry_AcknowledgementSelectByEmployeeSession(_obj);
+        }
 
     public DataTable Marks_Entry_AcknowledgementSelectBySectionSessionId(BLLMarks_Entry_Acknowledgement _obj)
     {
         return objdal.Marks_Entry_AcknowledgementSelectBySectionSessionId(_obj);
-    }
+    }   
 
     public DataTable Marks_Entry_AcknowledgementFetchByStatusID(BLLMarks_Entry_Acknowledgement _obj)
     {
@@ -75,13 +75,13 @@ public class BLLMarks_Entry_Acknowledgement
 
     public int Marks_Entry_AcknowledgementSelectBySectionSessionVerify(BLLMarks_Entry_Acknowledgement _obj)
     {
-        return objdal.Marks_Entry_AcknowledgementSelectBySectionSessionVerify(_obj);
+        return objdal.Marks_Entry_AcknowledgementSelectBySectionSessionVerify(_obj);    
     }
 
     public DataTable Marks_Entry_AcknowledgementFetch(int _id)
-    {
+      {
         return objdal.Marks_Entry_AcknowledgementSelect(_id);
-    }
+      }
 
     public DataTable Marks_Entry_DataFetchResult(BLLMarks_Entry_Acknowledgement _obj)
     {
@@ -107,9 +107,7 @@ public class BLLMarks_Entry_Acknowledgement
     {
         return objdal.Marks_Entry_DataFetchResultPerformance(_obj);
     }
-
-
-    //2024-10-23
+ //2024-10-23
     public DataTable Marks_Entry_DataFetchResultStudentInformation_New(BLLMarks_Entry_Acknowledgement _obj)
     {
         return objdal.Marks_Entry_DataFetchResultStudentInformation_New(_obj);
@@ -121,4 +119,4 @@ public class BLLMarks_Entry_Acknowledgement
     }
     #endregion
 
-}
+    }

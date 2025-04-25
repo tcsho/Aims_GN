@@ -233,6 +233,7 @@ public class DALStudent_Conditionally_Promoted_Request
 
         return _dt;
     }
+
     public DataTable Student_Bifurcation(BLLStudent_Conditionally_Promoted_Request objbll)
     {
         SqlParameter[] param = new SqlParameter[3];
@@ -571,8 +572,8 @@ public class DALStudent_Conditionally_Promoted_Request
 
         return _dt;
 
-    }  
-  
+    }
+
     public string Student_Bifurcation_RequestSynWithErp(BLLStudent_Conditionally_Promoted_Request objbll)
     {
         string returnOutput = "";
@@ -601,7 +602,7 @@ public class DALStudent_Conditionally_Promoted_Request
         //new OracleParameter("p_Updated_Flag", OracleDbType.Varchar2);
         param[8] = new OracleParameter("p_status", OracleDbType.Varchar2, 255);
         param[8].Direction = ParameterDirection.Output;
-       
+
 
         DataTable _dt = new DataTable();
 
@@ -643,7 +644,8 @@ public class DALStudent_Conditionally_Promoted_Request
             //    command.ExecuteNonQuery();
             //    connection.Close();
             //}
-            try {
+            try
+            {
                 Student_Conditionally_Setup_BifurcationLetter(objbll);
             }
             catch (Exception _exception)
@@ -717,10 +719,10 @@ public class DALStudent_Conditionally_Promoted_Request
 
         param[0] = new OracleParameter("p_Region_Id", OracleDbType.Double);
         param[0].Value = objbll.Region_Id;
-       
+
         //param[8] = new OracleParameter("p_status", OracleDbType.Varchar2, 255);
         //param[8].Direction = ParameterDirection.Output;
-       
+
 
         DataTable _dt = new DataTable();
 
@@ -735,12 +737,12 @@ public class DALStudent_Conditionally_Promoted_Request
                     commProc.CommandType = CommandType.StoredProcedure;
                     commProc.Parameters.AddRange(param);
                     cnx.Open();
-                   // commProc.ExecuteReader();
+                    // commProc.ExecuteReader();
                     OracleDataReader reader = commProc.ExecuteReader();
                     cnx.Close();
                 }
             }
-          return "Success";
+            return "Success";
         }
         catch (Exception ex)
         {
@@ -748,7 +750,7 @@ public class DALStudent_Conditionally_Promoted_Request
         }
     }
 
-    
+
 
     public DataTable Student_Conditionally_Promoted_RequestForApproval(BLLStudent_Conditionally_Promoted_Request objbll)
     {
@@ -814,9 +816,61 @@ public class DALStudent_Conditionally_Promoted_Request
         return _dt;
 
     }
+    
+	public DataTable New_Student_Bifurcation_RequestSelectAllByOrgRegionCenterId(BLLStudent_Conditionally_Promoted_Request objbll)
+	{
+    		SqlParameter[] param = new SqlParameter[9];
 
+    		param[0] = new SqlParameter("@Main_Organisation_Id", SqlDbType.Int);
+    		param[0].Value = objbll.Main_Organisation_Id;
+    		param[1] = new SqlParameter("@Region_Id", SqlDbType.Int);
+    		param[1].Value = objbll.Region_Id;
+    		param[2] = new SqlParameter("@Center_Id", SqlDbType.Int);
+    		param[2].Value = objbll.Center_Id;
+   		 param[3] = new SqlParameter("@Session_Id", SqlDbType.Int);
+    		param[3].Value = objbll.Session_Id;
+    		param[4] = new SqlParameter("@Class_Id", SqlDbType.Int);
+    		if (objbll.Class_Id == null)
+        	param[4].Value = DBNull.Value;
+   		 else
+      		param[4].Value = objbll.Class_Id;
 
+    		param[5] = new SqlParameter("@RD_Approval", SqlDbType.Bit);
+    		if (objbll.RD_Approval == null)
+        	param[5].Value = DBNull.Value;
+    		else
+        	param[5].Value = objbll.RD_Approval;
 
+   		 param[6] = new SqlParameter("@Submit_RD", SqlDbType.Bit);
+    if (objbll.Submit_RD == null)
+        param[6].Value = DBNull.Value;
+    else
+        param[6].Value = objbll.Submit_RD;
+    param[7] = new SqlParameter("@Student_id", SqlDbType.VarChar);
+    param[7].Value = objbll.Student_Id;
+    param[8] = new SqlParameter("@Term", SqlDbType.VarChar);
+    param[8].Value = objbll.TermGroupID;
+    DataTable _dt = new DataTable();
+
+    try
+    {
+        dalobj.OpenConnection();
+        //_dt = dalobj.sqlcmdFetch("Student_Conditionally_Promoted_RequestSelectAllByOrgRegionCenterId", param);
+        _dt = dalobj.sqlcmdFetch("sp_New_bifurcation_process_MIdYearbk", param);
+        return _dt;
+    }
+    catch (Exception _exception)
+    {
+        throw _exception;
+    }
+    finally
+    {
+        dalobj.CloseConnection();
+    }
+
+    return _dt;
+
+}
     public DataTable Bifuration_Process_Setup_Add(BLLStudent_Conditionally_Promoted_Request objbll)
     {
         SqlParameter[] param = new SqlParameter[8];
@@ -918,6 +972,92 @@ public class DALStudent_Conditionally_Promoted_Request
 
     }
 
+public DataTable Student_AutomatedEmailStatus_SelectAllByOrgRegionCenterId(BLLStudent_Conditionally_Promoted_Request objbll)
+    {
+        SqlParameter[] param = new SqlParameter[5];
+ 
+        //param[0] = new SqlParameter("@Main_Organisation_Id", SqlDbType.Int);
+        //param[0].Value = objbll.Main_Organisation_Id;
+        param[0] = new SqlParameter("@region_id", SqlDbType.Int);
+        param[0].Value = objbll.Region_Id;
+        param[1] = new SqlParameter("@center_id", SqlDbType.Int);
+        param[1].Value = objbll.Center_Id;
+        param[2] = new SqlParameter("@session_id", SqlDbType.Int);
+        param[2].Value = objbll.Session_Id;
+        param[3] = new SqlParameter("@Termid", SqlDbType.VarChar);
+        param[3].Value = objbll.TermGroupID;
+ 
+        param[4] = new SqlParameter("@classid", SqlDbType.Int);
+        if (objbll.Class_Id == null)
+            param[4].Value = DBNull.Value;
+        else
+            param[4].Value = objbll.Class_Id;
+ 
+        
+        DataTable _dt = new DataTable();
+ 
+        try
+        {
+            dalobj.OpenConnection();
+            //_dt = dalobj.sqlcmdFetch("Student_Conditionally_Promoted_RequestSelectAllByOrgRegionCenterId", param);
+            _dt = dalobj.sqlcmdFetch("NEW_Automated_Email_Status", param);
+            return _dt;
+        }
+        catch (Exception _exception)
+        {
+            throw _exception;
+        }
+        finally
+        {
+            dalobj.CloseConnection();
+        }
+ 
+        return _dt;
+ 
+    }
+    public DataTable Student_AutomatedEmailStatus_SelectAllByOrgRegionCenterId_SyncERP(BLLStudent_Conditionally_Promoted_Request objbll)
+    {
+        SqlParameter[] param = new SqlParameter[5];
+
+        //param[0] = new SqlParameter("@Main_Organisation_Id", SqlDbType.Int);
+        //param[0].Value = objbll.Main_Organisation_Id;
+        param[0] = new SqlParameter("@Region_Id", SqlDbType.Int);
+        param[0].Value = objbll.Region_Id;
+        param[1] = new SqlParameter("@Center_Id", SqlDbType.Int);
+        param[1].Value = objbll.Center_Id;
+        param[2] = new SqlParameter("@Session_Id", SqlDbType.Int);
+        param[2].Value = objbll.Session_Id;
+        param[3] = new SqlParameter("@Term", SqlDbType.VarChar);
+        param[3].Value = objbll.TermGroupID;
+
+        param[4] = new SqlParameter("@Class_Id", SqlDbType.Int);
+        if (objbll.Class_Id == null)
+            param[4].Value = DBNull.Value;
+        else
+            param[4].Value = objbll.Class_Id;
+
+
+        DataTable _dt = new DataTable();
+
+        try
+        {
+            dalobj.OpenConnection();
+            //_dt = dalobj.sqlcmdFetch("Student_Conditionally_Promoted_RequestSelectAllByOrgRegionCenterId", param);
+            _dt = dalobj.sqlcmdFetch("sp_bifurcation_process_UndertakingNotRecieve", param);
+            return _dt;
+        }
+        catch (Exception _exception)
+        {
+            throw _exception;
+        }
+        finally
+        {
+            dalobj.CloseConnection();
+        }
+
+        return _dt;
+
+    }
 
     public DataTable GetBifurcationProcesReport(BLLStudent_Conditionally_Promoted_Request objbll)
     {

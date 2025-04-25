@@ -291,12 +291,6 @@ public class DALAdmTestQuestionsDetail
 
     }
 
-
-
-
-
-
-
     #endregion
 
 

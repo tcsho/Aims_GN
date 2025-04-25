@@ -47,6 +47,21 @@ public class BLLGLResult
     {
         objdal.GlResultAdd(_obj);
     }
+
+    public DataTable GLFileUploadHistory(int sessionID, int termGroupID, int subjectID)
+    {
+        throw new NotImplementedException();
+    }
+
+    public int FileUploadHistoryInsert(int sessionID, int termGroupId, int subject, string fileName, int records)
+    {
+        throw new NotImplementedException();
+    }
+
+    public DataTable GetFileUploadResultByID(int fileUploadID)
+    {
+        throw new NotImplementedException();
+    }
     #endregion
 
 }

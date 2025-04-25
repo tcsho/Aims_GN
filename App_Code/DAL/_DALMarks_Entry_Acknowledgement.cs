@@ -21,13 +21,13 @@ public class DALMarks_Entry_Acknowledgement
     {
         SqlParameter[] param = new SqlParameter[6];
 
-        param[0] = new SqlParameter("@Evaluation_Criteria_Type_Id", SqlDbType.Int);
+        param[0] = new SqlParameter("@Evaluation_Criteria_Type_Id", SqlDbType.Int); 
         param[0].Value = objbll.Evaluation_Criteria_Type_Id;
-
-        param[1] = new SqlParameter("@Section_Subject_Id", SqlDbType.Int);
+        
+        param[1] = new SqlParameter("@Section_Subject_Id", SqlDbType.Int); 
         param[1].Value = objbll.Section_Subject_Id;
-
-        param[2] = new SqlParameter("@Session_Id", SqlDbType.Int);
+        
+        param[2] = new SqlParameter("@Session_Id", SqlDbType.Int); 
         param[2].Value = objbll.Session_Id;
 
         param[3] = new SqlParameter("@CreatedOn", SqlDbType.DateTime);
@@ -49,7 +49,7 @@ public class DALMarks_Entry_Acknowledgement
     {
         SqlParameter[] param = new SqlParameter[10];
 
-
+ 
         param[9] = new SqlParameter("@AlreadyIn", SqlDbType.Int);
         param[9].Direction = ParameterDirection.Output;
 
@@ -62,7 +62,7 @@ public class DALMarks_Entry_Acknowledgement
         SqlParameter[] param = new SqlParameter[1];
 
         param[0] = new SqlParameter("@Marks_Entry_Acknowledgement_Id", SqlDbType.Int);
-        //   param[0].Value = objbll.Marks_Entry_Acknowledgement_Id;
+     //   param[0].Value = objbll.Marks_Entry_Acknowledgement_Id;
 
 
         int k = dalobj.sqlcmdExecute("Marks_Entry_AcknowledgementDelete", param);
@@ -74,62 +74,62 @@ public class DALMarks_Entry_Acknowledgement
     #region 'Start of Fetch Methods'
     public DataTable Marks_Entry_AcknowledgementSelect(int _id)
     {
-        SqlParameter[] param = new SqlParameter[3];
+    SqlParameter[] param = new SqlParameter[3];
 
-        param[0] = new SqlParameter("@sp_student_id", SqlDbType.Int);
-        param[0].Value = _id;
+    param[0] = new SqlParameter("@sp_student_id", SqlDbType.Int);
+    param[0].Value = _id;
 
 
-        DataTable dt = new DataTable();
+    DataTable dt = new DataTable();
 
-        try
+    try
         {
-            dalobj.OpenConnection();
-            dt = dalobj.sqlcmdFetch("Marks_Entry_AcknowledgementSelectById", param);
-            return dt;
-        }
-        catch (Exception _exception)
-        {
-            throw _exception;
-        }
-        finally
-        {
-            dalobj.CloseConnection();
-        }
-
+        dalobj.OpenConnection();
+        dt = dalobj.sqlcmdFetch("Marks_Entry_AcknowledgementSelectById", param);
         return dt;
+        }
+    catch (Exception _exception)
+        {
+        throw _exception;
+        }
+    finally
+        {
+        dalobj.CloseConnection();
+        }
+
+    return dt;
     }
 
 
 
-
+    
     public DataTable Marks_Entry_AcknowledgementSelect(BLLMarks_Entry_Acknowledgement objbll)
     {
-        SqlParameter[] param = new SqlParameter[3];
+    SqlParameter[] param = new SqlParameter[3];
 
-        param[0] = new SqlParameter("@Evaluation_Criteria_Type_Id", SqlDbType.Int);
-        //  param[0].Value = objbll.Evaluation_Criteria_Type_Id;
+    param[0] = new SqlParameter("@Evaluation_Criteria_Type_Id", SqlDbType.Int);
+  //  param[0].Value = objbll.Evaluation_Criteria_Type_Id;
 
 
-        DataTable dt = new DataTable();
+    DataTable dt = new DataTable();
 
-        try
+    try
         {
-            dalobj.OpenConnection();
-            dt = dalobj.sqlcmdFetch("Marks_Entry_AcknowledgementSelectAll", param);
-            return dt;
-        }
-        catch (Exception _exception)
-        {
-            throw _exception;
-        }
-        finally
-        {
-            dalobj.CloseConnection();
-        }
-
+        dalobj.OpenConnection();
+        dt = dalobj.sqlcmdFetch("Marks_Entry_AcknowledgementSelectAll", param);
         return dt;
+        }
+    catch (Exception _exception)
+        {
+        throw _exception;
+        }
+    finally
+        {
+        dalobj.CloseConnection();
+        }
 
+    return dt;
+    
     }
 
 
@@ -143,7 +143,7 @@ public class DALMarks_Entry_Acknowledgement
 
         param[1] = new SqlParameter("@Session_Id", SqlDbType.Int);
         param[1].Value = objbll.Session_Id;
-
+        
         param[2] = new SqlParameter("@TermGroup_Id", SqlDbType.Int);
         param[2].Value = objbll.TermGroup_Id;
 
@@ -181,7 +181,7 @@ public class DALMarks_Entry_Acknowledgement
 
         param[1] = new SqlParameter("@Session_Id", SqlDbType.Int);
         param[1].Value = objbll.Session_Id;
-
+        
         param[2] = new SqlParameter("@TermGroup_Id", SqlDbType.Int);
         param[2].Value = objbll.TermGroup_Id;
 
@@ -219,7 +219,7 @@ public class DALMarks_Entry_Acknowledgement
 
         param[1] = new SqlParameter("@Session_Id", SqlDbType.Int);
         param[1].Value = objbll.Session_Id;
-
+        
         param[2] = new SqlParameter("@TermGroup_Id", SqlDbType.Int);
         param[2].Value = objbll.TermGroup_Id;
         param[3] = new SqlParameter("@Student_Id", SqlDbType.Int);
@@ -255,7 +255,7 @@ public class DALMarks_Entry_Acknowledgement
 
         param[1] = new SqlParameter("@Session_Id", SqlDbType.Int);
         param[1].Value = objbll.Session_Id;
-
+        
         param[2] = new SqlParameter("@TermGroup_Id", SqlDbType.Int);
         param[2].Value = objbll.TermGroup_Id;
 
@@ -340,7 +340,7 @@ public class DALMarks_Entry_Acknowledgement
         try
         {
             dalobj.OpenConnection();
-            dt = dalobj.sqlcmdFetch("Marks_Entry_AcknowledgementSelectByEmployeeSession", param, 120);
+            dt = dalobj.sqlcmdFetch("Marks_Entry_AcknowledgementSelectByEmployeeSession", param,120);
             return dt;
         }
         catch (Exception _exception)
@@ -392,8 +392,8 @@ public class DALMarks_Entry_Acknowledgement
         return dt;
 
     }
-
-    public DataTable Marks_Entry_AcknowledgementSelectByStatusID(BLLMarks_Entry_Acknowledgement objbll)
+    
+        public DataTable Marks_Entry_AcknowledgementSelectByStatusID(BLLMarks_Entry_Acknowledgement objbll)
     {
         DataTable dt = new DataTable();
 
@@ -437,10 +437,6 @@ public class DALMarks_Entry_Acknowledgement
         return k;
 
     }
-
-
-    #endregion
-
 
 
 
@@ -514,6 +510,8 @@ public class DALMarks_Entry_Acknowledgement
         return dt;
 
     }
+
+    #endregion
 
 
 }

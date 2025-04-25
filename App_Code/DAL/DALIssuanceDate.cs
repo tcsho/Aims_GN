@@ -115,7 +115,44 @@ public int UpdatePromotionReqDate(BLLIssuanceDate bllIssuanceDate)
             throw ex;
         }
     }
+ public DataTable Student_Promotion_Date_All(int SessionID)
+    
+{
+        
+var test = dalobj._cn;
+        
+DataTable table = new DataTable("Table");
+        
+using (SqlConnection connection = new SqlConnection(test.ConnectionString))
+        
+{
+            var command = new SqlCommand
+            
+{
+                
+Connection = connection,
+                
+CommandType = CommandType.Text,
+                
+CommandText = @"
+                 Select SP_ID, Session_Id, CONVERT(VARCHAR,PromotionDate, 103) + ' 05:00 PM' AS PromotionDate, isProcess,
+CASE WHEN ISNULL(isProcess,0) = 0 THEN 'Pending' ELSE 'Processed' END [STATUS], (SELECT Description FROM Session WHERE Session_Id = Student_Promotion_Date.Session_Id) AS Session_name From Student_Promotion_Date
+               WHERE    Session_Id =" + SessionID
+            
+};
 
+
+
+            connection.Open();
+            
+var adapter = new SqlDataAdapter(command);
+            
+adapter.Fill(table);
+        }
+       
+ return table;
+   
+ }
     internal int ResultCardIssuanceDateDetailClassCenterInsert(BLLIssuanceDate bllIssuanceDate)
     {
         SqlParameter[] param = new SqlParameter[2];
@@ -192,7 +229,27 @@ public int UpdatePromotionReqDate(BLLIssuanceDate bllIssuanceDate)
         int k = (int)param[2].Value;
         return k;
     }
-
+ public int AddPromotionDate(BLLIssuanceDate bllIssuanceDate)
+    {
+        SqlParameter[] param = new SqlParameter[3];
+        param[0] = new SqlParameter("@Session_Id", SqlDbType.Int) { Value = bllIssuanceDate.Session_Id };
+        param[1] = new SqlParameter("@PromotionDate", SqlDbType.DateTime) { Value = bllIssuanceDate.DateFrom };        
+        param[2] = new SqlParameter("@AlreadyIn", SqlDbType.Int) { Direction = ParameterDirection.Output };
+        dalobj.sqlcmdExecute("StudentPromotionDate_Insert", param);
+        int k = (int)param[2].Value;
+        return k;
+    }
+    public int UpdatePromotionDate(BLLIssuanceDate bllIssuanceDate)
+    {
+        SqlParameter[] param = new SqlParameter[4];
+        param[0] = new SqlParameter("@SP_ID", SqlDbType.Int) { Value = bllIssuanceDate.SCPR_ID };
+        param[1] = new SqlParameter("@Session_Id", SqlDbType.Int) { Value = bllIssuanceDate.Session_Id };
+        param[2] = new SqlParameter("@PromotionDate", SqlDbType.DateTime) { Value = bllIssuanceDate.DateFrom };     
+        param[3] = new SqlParameter("@AlreadyIn", SqlDbType.Int) { Direction = ParameterDirection.Output };
+        dalobj.sqlcmdExecute("Student_Promotion_Date_Update", param);
+        int k = (int)param[3].Value;
+        return k;
+    }
     public DataTable GetListofIssuanceDates(int termId, int SessionID)
     {
         var test = dalobj._cn;

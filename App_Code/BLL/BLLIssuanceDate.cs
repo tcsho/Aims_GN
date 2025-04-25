@@ -80,7 +80,13 @@ public class BLLIssuanceDate
     {
         return objDll.SelectAllClassGroups();
     }
+ public DataTable Student_Promotion_Date_All(int session_ID)
 
+    {
+
+        return objDll.Student_Promotion_Date_All(session_ID);
+
+    }
     public  int ResultCardIssuanceDateDetailClassCenterInsert(BLLIssuanceDate bllIssuanceDate)
     {
         return objDll.ResultCardIssuanceDateDetailClassCenterInsert(bllIssuanceDate);
@@ -108,6 +114,21 @@ public class BLLIssuanceDate
     {
 
         return objDll.UpdatePromotionReqDate(bllIssuanceDate);
+
+    }
+ public int AddPromotionDate(BLLIssuanceDate bllIssuanceDate)
+
+    {
+
+        return objDll.AddPromotionDate(bllIssuanceDate);
+
+    }
+
+    public int UpdatePromotionDate(BLLIssuanceDate bllIssuanceDate)
+
+    {
+
+        return objDll.UpdatePromotionDate(bllIssuanceDate);
 
     }
     public int ResultCardIssuanceDateDetailClassCenterDelete(BLLIssuanceDate obj)

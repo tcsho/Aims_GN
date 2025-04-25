@@ -6,12 +6,12 @@ using System.Data.SqlClient;
 /// <summary>
 /// Summary description for _DALStudent
 /// </summary>
-public class DLLTcs_Mobile_App_Dashboard
+public class DALStudent
 {
     DALBase dalobj = new DALBase();
 
 
-    public DLLTcs_Mobile_App_Dashboard()
+    public DALStudent()
     {
         //
         // TODO: Add constructor logic here

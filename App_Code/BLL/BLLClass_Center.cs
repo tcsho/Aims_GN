@@ -74,8 +74,6 @@ public class BLLClass_Center
       }
 
 
-    
-
     #endregion
 
-}
+    }

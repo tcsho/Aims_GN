@@ -412,10 +412,6 @@ public DataTable CenterSelectByRegionIDSeatPlan(BLLCenter objbll)
 
 
 
-
-
-
-
     
 
 

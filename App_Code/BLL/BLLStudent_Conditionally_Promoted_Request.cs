@@ -105,11 +105,21 @@ public class BLLStudent_Conditionally_Promoted_Request
     }
 
 
-    #endregion
-    #region 'Start Fetch Methods'
+	public DataTable Student_AutomatedEmailStatus_SelectAllByOrgRegionCenterId(BLLStudent_Conditionally_Promoted_Request _obj)
+   	 {
+   	     return objdal.Student_AutomatedEmailStatus_SelectAllByOrgRegionCenterId(_obj);
+   	 }
 
 
-    public DataTable Student_Conditionally_Promoted_RequestCheckStatus(BLLStudent_Conditionally_Promoted_Request _obj)
+    public DataTable New_Student_Bifurcation_RequestSelectAllByOrgRegionCenterId_SyncERP(BLLStudent_Conditionally_Promoted_Request _obj)
+    {
+   		 return objdal.Student_AutomatedEmailStatus_SelectAllByOrgRegionCenterId_SyncERP(_obj);
+	}
+#endregion
+#region 'Start Fetch Methods'
+
+
+public DataTable Student_Conditionally_Promoted_RequestCheckStatus(BLLStudent_Conditionally_Promoted_Request _obj)
     {
         return objdal.Student_Conditionally_Promoted_RequestCheckStatus(_obj);
     }
@@ -148,9 +158,9 @@ public class BLLStudent_Conditionally_Promoted_Request
 
     public string Student_Bifurcation_RequestSynWithErp(BLLStudent_Conditionally_Promoted_Request _obj)
     {
-       
+
         return objdal.Student_Bifurcation_RequestSynWithErp(_obj);
-    } 
+    }
     public string Student_Bifurcation_BIFURCATION_CLASS_CHANGE(BLLStudent_Conditionally_Promoted_Request _obj)
     {
         //APPS.BIFURCATION_CLASS_CHANGE
@@ -167,7 +177,12 @@ public class BLLStudent_Conditionally_Promoted_Request
         return objdal.Student_Conditionally_Promoted_RequestSelect(_id);
     }
 
-
+//Add this method in BLLStudent_Conditionally_Promoted_Request.cs Class    
+//==========================================================================
+public DataTable New_Student_Bifurcation_RequestSelectAllByOrgRegionCenterId(BLLStudent_Conditionally_Promoted_Request _obj)
+    {
+        return objdal.New_Student_Bifurcation_RequestSelectAllByOrgRegionCenterId(_obj);
+    }
     public DataTable Student_Expelled(BLLStudent_Conditionally_Promoted_Request obj)
     {
         return objdal.Student_Expelled(obj);

@@ -41,7 +41,9 @@ public class BLLStudent_Joined_In_NewSession
     public string Section_Name { get; set; }
     public int Session_Id { get; set; }
     public bool IsProcess { get; set; }
-
+    public int DeletedBy { get; set; }
+    
+    public DateTime DeletedDate { get; set; }
 
     #endregion
 
