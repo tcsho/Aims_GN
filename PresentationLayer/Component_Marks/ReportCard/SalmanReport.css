@@ -1,0 +1,238 @@
+﻿body {
+    -webkit-print-color-adjust: exact !important;
+}
+/**Salman report*/
+.marginremoveonprintview {
+    margin-left: 20% !important;
+    margin-right: 20% !important;
+}
+.visiblity-hidden_mediaclass {
+    visibility: hidden;
+}
+.schoollogo img {
+    width: 90px !important;
+}
+.text-mediaalign, .text-mediaalignright {
+    text-align: center;
+}
+.SettingsBox {
+    display: none;
+}
+.printbtn {
+    font-size: 11px !important;
+}
+/**Salman report*/
+
+@media only screen and (max-width:992px) {
+    /*.visiblity-hidden_mediaclass
+{
+display:none !important;
+}*/
+    /*.text-mediaalign{
+text-align:center !important;
+
+}
+.text-mediaalignright{
+text-align:center !important;
+
+}*/
+    .schoolname {
+        font-size: 20px;
+    }
+
+        .schoolname img {
+            width: 20% !important;
+        }
+
+    .schoollogo img {
+        width: 45% !important;
+    }
+
+    .headerwithlogo h4 {
+        font-size: 18px !important;
+    }
+
+
+
+}
+@media only screen and (max-width:1200px) and (min-width: 992px) {
+    .schoollogo img {
+        position: relative;
+        left: -30px !important;
+    }
+
+    .mediawidth {
+        flex: 0 0 100% !important;
+        max-width: 100% !important;
+    }
+
+
+
+    
+}
+
+@font-face {
+    font-family: myFirstFont;
+    src: url(arenski/arenskiregular.ttf);
+}
+
+@font-face {
+    font-family: signfont1;
+    src: url(fonts/airin/Airin.ttf);
+}
+
+@font-face {
+    font-family: signfont2;
+    src: url(fonts/alleffra/Alleffra.ttf);
+}
+
+@font-face {
+    font-family: signfont3;
+    src: url(fonts/allison-script/Allison_Script.otf);
+}
+
+@font-face {
+    font-family: signfont4;
+    src: url(fonts/allison-tessa/AllisonTessaOblique.ttf);
+}
+
+@font-face {
+    font-family: signfont5;
+    src: url(fonts/amarula-personal-use/AmarulaPersonalUse/AmarulaPersonalUse.ttf);
+}
+
+
+.schoolname {
+    font-family: myFirstFont !important;
+    color: #0c4da2 !important;
+}
+
+@media print {
+    /*footer {page-break-after: always;}*/
+    /*.visiblity-hidden_mediaclass
+{
+display:none !important;
+}*/
+  
+
+    /*.noticeborder {
+        height: 1400px !important;
+    }*/
+    .pagecut {
+        page-break-inside: avoid !important;
+    }
+
+    .pagecut {
+        page-break-after: always !important;
+    }
+
+    .pagebreak {
+        page-break-inside: avoid !important;
+    }
+
+    .pagebreak {
+        page-break-before: always !important;
+    }
+
+    .rowdisplayflex {
+        display: flex !important;
+    }
+    /*.printmediaborderbottom{border-bottom: 1px solid #000;}
+  .printmediabordertop{border-top: 1px solid #000;}
+  .pagecut{padding: 0px !important;font-size: 2px !important;}
+.pagecut p{margin-bottom: 0px !important;border-bottom: 1px solid #000 !important;font-size: 10px !important;}*/
+ 
+
+   
+    /**Salman report*/
+    .marginremoveonprintview {
+        margin-left: 0% !important;
+        margin-right: 0% !important;
+    }
+    /**Salman report*/
+    .s_hidebtn {
+    display:none !important;
+    }
+    .Box {
+        background: #B3B3B3 !important;
+    }
+}
+
+.pagecut {
+    page-break-inside: avoid !important;
+}
+
+.pagecut {
+    page-break-after: always !important;
+}
+
+.pagebreak {
+    page-break-inside: avoid !important;
+}
+
+.pagebreak {
+    page-break-before: always !important;
+}
+/*******REPORTSSSSSSSSSSSS*/
+table.table-style-one {
+    font-family: verdana,arial,sans-serif !important;
+    width: 100% !important;
+    color: #333333 !important;
+    border-width: 1px !important;
+    border-color: #3A3A3A !important;
+    border-collapse: collapse !important;
+}
+
+    table.table-style-one th {
+        border-width: 1px !important;
+        border-style: solid !important;
+        border-color: #3A3A3A !important;
+        font-size: 13px !important;
+        width: 25% !important;
+    }
+
+    table.table-style-one td {
+        border-width: 1px !important;
+        border-style: solid !important;
+        border-color: #3A3A3A !important;
+        background-color: #ffffff !important;
+        font-size: 12px !important;
+        width: 25% !important;
+    }
+
+.table-style-one .form-control {
+    min-width: 0 !important;
+    height: 25px !important;
+    border: 0 !important;
+}
+
+.Box {
+    padding: 0px !important;
+    color: black !important;
+    font-size: 16px !important;
+    font-weight: 400 !important;
+    font-style: normal !important;
+    text-decoration: none !important;
+    font-family: Calibri, sans-serif !important;
+    text-align: center !important;
+    vertical-align: middle !important;
+    border: none !important;
+    border-top: .5pt solid windowtext !important;
+    border-right: .5pt solid black !important;
+    border-bottom: .5pt solid windowtext !important;
+    border-left: .5pt solid windowtext !important;
+    background: #B3B3B3 !important;
+    width: 120px !important;
+}
+
+.table-style-one textarea.form-control {
+    height: auto !important;
+}
+
+.table-style-one .select2 {
+    height:30px !important;
+}
+.nopadding {
+    padding: 0px !important;
+}
+/*******REPORTSSSSSSSSSSSS*/
