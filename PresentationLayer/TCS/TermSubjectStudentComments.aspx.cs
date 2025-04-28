@@ -11,7 +11,7 @@ using System.Web.UI.WebControls;
 public partial class PresentationLayer_TCS_TermSubjectStudentComments : System.Web.UI.Page
 {
     DALBase objBase = new DALBase();
-    static DataTable dd = new DataTable();
+  static  DataTable dd = new DataTable();
     //BLLAdmTest obj = new BLLAdmTest();
 
     BLLEvaluation_Criteria_StudentCommentsBank obj = new BLLEvaluation_Criteria_StudentCommentsBank();
@@ -56,7 +56,6 @@ public partial class PresentationLayer_TCS_TermSubjectStudentComments : System.W
                 //}
 
                 //  ====== End Page Access settings ======================//
-                loadRegions();
                 FillActiveSessions();
                 FillClass();
                 FillTermList();
@@ -85,7 +84,7 @@ public partial class PresentationLayer_TCS_TermSubjectStudentComments : System.W
     }
     protected void ddlSession_SelectedIndexChanged(object sender, EventArgs e)
     {
-
+       
     }
 
     private void BindReGrid()
@@ -114,7 +113,7 @@ public partial class PresentationLayer_TCS_TermSubjectStudentComments : System.W
             int moID = Int32.Parse(Session["moID"].ToString());
             obj.Main_Organisation_Id = moID;
             obj.Class_Id = Convert.ToInt32(ddlClass.SelectedValue);
-            obj.Region_Id = Convert.ToInt32(list_region.SelectedValue);
+
             DataTable dt = (DataTable)obj.Class_SubjectSelectAllByClassId(obj);
 
             objBase.FillDropDown(dt, ddlsubject, "subject_id", "Subject_Name");
@@ -189,7 +188,7 @@ public partial class PresentationLayer_TCS_TermSubjectStudentComments : System.W
         {
 
             ViewState["Data"] = null;
-
+          
 
 
         }
@@ -316,7 +315,7 @@ public partial class PresentationLayer_TCS_TermSubjectStudentComments : System.W
         {
             ViewState["Mode"] = "Add";
 
-            if (ddlSession.SelectedIndex > 0 && ddlTerm.SelectedIndex > 0 && ddlClass.SelectedIndex > 0 && ddlsubject.SelectedIndex > 0)
+            if (ddlSession.SelectedIndex > 0 && ddlTerm.SelectedIndex > 0 && ddlClass.SelectedIndex > 0 && ddlsubject.SelectedIndex >0)
             {
                 ViewState["Mode"] = "Add";
                 ddlCommentCat.SelectedIndex = 0;
@@ -386,7 +385,7 @@ public partial class PresentationLayer_TCS_TermSubjectStudentComments : System.W
                 obj.Class_Id = Convert.ToInt32(ddlClass.SelectedValue);
                 obj.TermGroup_Id = Convert.ToInt32(ddlTerm.SelectedValue);
                 obj.Subject_Id = Convert.ToInt32(ddlsubject.SelectedValue);
-
+                
                 btnAddTest.Visible = true;
                 //btnextpdf.Visible = true;
 
@@ -482,32 +481,18 @@ public partial class PresentationLayer_TCS_TermSubjectStudentComments : System.W
         }
     }
 
-    private void loadRegions()
-    {
-        try
-        {
-            BLLRegion oDALRegion = new BLLRegion();
-            DataTable dt = new DataTable();
 
-            oDALRegion.Main_Organisation_Country_Id = 1;
-            dt = oDALRegion.RegionFetch(oDALRegion);
 
-            objBase.FillDropDown(dt, list_region, "Region_Id", "Region_Name");
-        }
-        catch (Exception ex)
-        {
-            Session["error"] = ex.Message;
-            Response.Redirect("~/presentationlayer/ErrorPage.aspx", false);
-        }
 
-    }
+
+
 
     protected void extpdf_Click(object sender, EventArgs e)
     {
         if (dd.Rows.Count > 0)
         {
             int pdfRowIndex = 1;
-            string downloadsfolder = Environment.GetEnvironmentVariable("USERPROFILE") + @"\" + "Downloads";
+            string downloadsfolder = Environment.GetEnvironmentVariable("USERPROFILE")+@"\"+"Downloads";
             string filename = ddlSession.SelectedValue + ddlClass.SelectedValue + ddlsubject.SelectedValue;
             string filepath = Server.MapPath("\\") + "" + filename + ".pdf";
             Document document = new Document(PageSize.A4, 5f, 5f, 10f, 10f);

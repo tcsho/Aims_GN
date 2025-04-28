@@ -319,81 +319,85 @@ public partial class PresentationLayer_TCS_IEP_Form_Wizard : System.Web.UI.Page
                 if (dsStdDetail.Tables[0].Rows[0]["erpclass"].ToString() == "15")
                 {
 
-                    Page.ClientScript.RegisterStartupScript(this.GetType(), null,
-                   @"
-                    $(document).ready(function () {{
+                    Response.Redirect("~/PresentationLayer/tcs/IEP_Form_Wizard_Sub.aspx?s=" + StudentId, false);
+
+                //    Page.ClientScript.RegisterStartupScript(this.GetType(), null,
+                //   @"
+                //    $(document).ready(function () {{
                        
 
                           
-                            let timerInterval;
-                                Swal.fire({
-                                 title: ""Alert!"",
-                                     html: '" + ds.Tables[0].Rows[0][0].ToString() + @"',
-                                                timer: 2000,
-                                     timerProgressBar: true,
-                                     didOpen: () => {
-                                        Swal.showLoading();
+                //            let timerInterval;
+                //                Swal.fire({
+                //                 title: ""Alert!"",
+                //                     html: '" + ds.Tables[0].Rows[0][0].ToString() + @"',
+                //                                timer: 2000,
+                //                     timerProgressBar: true,
+                //                     didOpen: () => {
+                //                        Swal.showLoading();
                                          
-                                        timerInterval = setInterval(() => {
+                //                        timerInterval = setInterval(() => {
                                           
-                                                }, 100);
-                                            },
-                                     willClose: () => {
-                                    clearInterval(timerInterval);
-                                   window.location.href = 'IEP_Form_Wizard_Sub.aspx?s=" + StudentId + @"';
+                //                                }, 100);
+                //                            },
+                //                     willClose: () => {
+                //                    clearInterval(timerInterval);
+                //                   window.location.href = 'IEP_Form_Wizard_Sub.aspx?s=" + StudentId + @"';
 
-                                     }
-                                }).then((result) => {
-                                 /* Read more about handling dismissals below */
-                                 if (result.dismiss === Swal.DismissReason.timer) {
-                                             console.log(""I was closed by the timer"");
-                                         }
-                                        });
+                //                     }
+                //                }).then((result) => {
+                //                 /* Read more about handling dismissals below */
+                //                 if (result.dismiss === Swal.DismissReason.timer) {
+                //                             console.log(""I was closed by the timer"");
+                //                         }
+                //                        });
 
 
 
-                    }});
+                //    }});
            
-                ", true);
+                //", true);
                    // Response.Redirect("~/PresentationLayer/tcs/IEP_Form_Wizard_Sub.aspx?s="+ StudentId + "", false);
                 }
                 else
                 {
-                    Page.ClientScript.RegisterStartupScript(this.GetType(), null,
-                 @"
-                    $(document).ready(function () {{
+                    Response.Redirect("~/PresentationLayer/tcs/IEP_Form_Wizard_CR.aspx?s=" + StudentId, false);
+                  
+                //    Page.ClientScript.RegisterStartupScript(this.GetType(), null,
+                // @"
+                //    $(document).ready(function () {{
                        
 
-                            let timerInterval;
-                                Swal.fire({
-                                 title: ""Alert!"",
-                                     html: '" + ds.Tables[0].Rows[0][0].ToString() + @"',
-                                                timer: 2000,
-                                     timerProgressBar: true,
-                                     didOpen: () => {
-                                        Swal.showLoading();
+                //            let timerInterval;
+                //                Swal.fire({
+                //                 title: ""Alert!"",
+                //                     html: '" + ds.Tables[0].Rows[0][0].ToString() + @"',
+                //                                timer: 2000,
+                //                     timerProgressBar: true,
+                //                     didOpen: () => {
+                //                        Swal.showLoading();
                                          
-                                        timerInterval = setInterval(() => {
+                //                        timerInterval = setInterval(() => {
                                           
-                                                }, 100);
-                                            },
-                                     willClose: () => {
-                                    clearInterval(timerInterval);
-                                   window.location.href = 'IEP_Form_Wizard_CR.aspx?s=" + StudentId + @"';
+                //                                }, 100);
+                //                            },
+                //                     willClose: () => {
+                //                    clearInterval(timerInterval);
+                //                   window.location.href = 'IEP_Form_Wizard_CR.aspx?s=" + StudentId + @"';
 
-                                     }
-                                }).then((result) => {
-                                 /* Read more about handling dismissals below */
-                                 if (result.dismiss === Swal.DismissReason.timer) {
-                                             console.log(""I was closed by the timer"");
-                                         }
-                                        });
+                //                     }
+                //                }).then((result) => {
+                //                 /* Read more about handling dismissals below */
+                //                 if (result.dismiss === Swal.DismissReason.timer) {
+                //                             console.log(""I was closed by the timer"");
+                //                         }
+                //                        });
 
 
 
-                    }});
+                //    }});
            
-                ", true);
+                //", true);
                   //  Response.Redirect("~/PresentationLayer/tcs/IEP_Form_Wizard_CR.aspx?s="+ StudentId + "", false);
                 }
                 

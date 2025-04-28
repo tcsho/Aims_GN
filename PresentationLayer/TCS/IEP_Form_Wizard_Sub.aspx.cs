@@ -31,7 +31,7 @@ public partial class PresentationLayer_TCS_IEP_Form_Wizard_Sub : System.Web.UI.P
 
         param[0] = new SqlParameter("@user_id", Session["UserId"].ToString());
         param[1] = new SqlParameter("@Session_Id", Session["Session_Id"].ToString());//Session["Session_Id"].ToString()
-        param[2] = new SqlParameter("@Term_Group_Id", hfE_Trrm_Group_Id.Value);
+        param[2] = new SqlParameter("@Term_Group_Id", "1");
         param[3] = new SqlParameter("@Student_id", Request.QueryString["s"].ToString());
         param[4] = new SqlParameter("@Optional1", Optional1);
         param[5] = new SqlParameter("@Optional2", Optional2);
@@ -329,7 +329,7 @@ public partial class PresentationLayer_TCS_IEP_Form_Wizard_Sub : System.Web.UI.P
         if (dsE.Tables[10].Rows.Count > 0)
         {
 
-
+            
 
         }
         else
@@ -365,7 +365,7 @@ public partial class PresentationLayer_TCS_IEP_Form_Wizard_Sub : System.Web.UI.P
         }
         if (dsE.Tables[10].Rows.Count > 0)
         {
-
+            hfE_Trrm_Group_Id.Value = "2";
             lblE_Term1.InnerText = dsE.Tables[10].Rows[0]["Term"].ToString();
             int result = 0;//DateTime.Compare(dt2.Date, DateTime.Parse(ds.Tables[0].Rows[0]["ResultCardIssuanceDateEOYYear"].ToString()));
             if (result != -1)
@@ -655,7 +655,45 @@ public partial class PresentationLayer_TCS_IEP_Form_Wizard_Sub : System.Web.UI.P
         }
     }
 
+    public DataTable Data_SubjectDetail1()
+    {
+        try
+        {
+            DataTable dt_GetValues = new DataTable();
 
+            dt_GetValues.Columns.Add("Subject_Id");
+            dt_GetValues.Columns.Add("Weak_Topic_Areas");
+            dt_GetValues.Columns.Add("Academic_Potential");
+            dt_GetValues.Columns.Add("Suggested_Study_Hours");
+            dt_GetValues.Columns.Add("Suggested_Work_Plan");
+
+            for (int i = 0; i < grdE_SubjectDetail1.Rows.Count; i++)
+            {
+                HiddenField hdSubject_Id = grdE_SubjectDetail1.Rows[i].FindControl("hdSubject_Id") as HiddenField;
+                TextBox txtE_Weak_Topic_Areas = grdE_SubjectDetail1.Rows[i].FindControl("txtE_Weak_Topic_Areas") as TextBox;
+                TextBox txtE_Academic_Potential = grdE_SubjectDetail1.Rows[i].FindControl("txtE_Academic_Potential") as TextBox;
+                TextBox txtE_Suggested_Study_Hours = grdE_SubjectDetail1.Rows[i].FindControl("txtE_Suggested_Study_Hours") as TextBox;
+                TextBox txtE_Suggested_Work_Plan = grdE_SubjectDetail1.Rows[i].FindControl("txtE_Suggested_Work_Plan") as TextBox;
+
+                DataRow dr = dt_GetValues.NewRow();
+                dr[0] = hdSubject_Id.Value;
+                dr[1] = txtE_Weak_Topic_Areas.Text;
+                dr[2] = txtE_Academic_Potential.Text;
+                dr[3] = txtE_Suggested_Study_Hours.Text;
+                dr[4] = txtE_Suggested_Work_Plan.Text;
+
+                dt_GetValues.Rows.Add(dr);
+
+            }
+
+            return dt_GetValues;
+        }
+        catch (Exception ex)
+        {
+
+            throw;
+        }
+    }
     public DataTable DU_CR(Repeater rep)
     {
         try
@@ -868,10 +906,11 @@ public partial class PresentationLayer_TCS_IEP_Form_Wizard_Sub : System.Web.UI.P
     protected void btnSave_Click(object sender, EventArgs e)
     {
         try
-        {
+                {
             DataSet dsStdDetail = (DataSet)ViewState["vs_dataset"];
             string json_Subject_detal = JsonConvert.SerializeObject(Data_SubjectDetail());
-            DataSet ds = exec_SP_Save(json_Subject_detal);
+            string json_Subject_detal1 = JsonConvert.SerializeObject(Data_SubjectDetail1());
+            DataSet ds = exec_SP_Save(json_Subject_detal, json_Subject_detal1);
             if (ds.Tables.Count > 0)
             {
                 lblerror.Text = ds.Tables[0].Rows[0][0].ToString();
@@ -916,31 +955,32 @@ public partial class PresentationLayer_TCS_IEP_Form_Wizard_Sub : System.Web.UI.P
         }
 
     }
-    public DataSet exec_SP_Save(string json_Subject_detal)
+    public DataSet exec_SP_Save(string json_Subject_detal, string json_Subject_detal1)
     {
 
 
-        SqlParameter[] param = new SqlParameter[15];
+        SqlParameter[] param = new SqlParameter[16];
 
 
         param[0] = new SqlParameter("@user_id", Session["UserId"].ToString());
         param[1] = new SqlParameter("@Session_Id", Session["Session_Id"].ToString());//Session["Session_Id"].ToString()
-        param[2] = new SqlParameter("@Term_Group_Id", hfE_Trrm_Group_Id.Value);
+        param[2] = new SqlParameter("@Term_Group_Id", "1");//hfE_Trrm_Group_Id.Value
         param[3] = new SqlParameter("@Student_id", Request.QueryString["s"].ToString());
        
        
         param[4] = new SqlParameter("@json_Subject_detal", json_Subject_detal);
-        param[5] = new SqlParameter("@AcademicConcerns", txtE_AcademicConcerns.Text);
+        param[5] = new SqlParameter("@json_Subject_detal1", json_Subject_detal1);
+        param[6] = new SqlParameter("@AcademicConcerns", txtE_AcademicConcerns.Text);
        
-        param[6] = new SqlParameter("@Remarks1", txtE_Remarks1.Text);
-        param[7] = new SqlParameter("@Remarks2", txtE_Remarks2.Text);
-        param[8] = new SqlParameter("@Remarks3", txtE_Remarks3.Text);
-        param[9] = new SqlParameter("@TeacherName1", txtTeacherName1.Text);
-        param[10] = new SqlParameter("@TeacherName2", txtTeacherName2.Text);
-        param[11] = new SqlParameter("@SubjectTaught1", txtSubjectTaught1.Text);
-        param[12] = new SqlParameter("@SubjectTaught2", txtSubjectTaught2.Text);
-        param[13] = new SqlParameter("@Expected_Graduation_Year", "2024");
-        param[14] = new SqlParameter("@Progressto_A_Level", ViewState["Progress"]);
+        param[7] = new SqlParameter("@Remarks1", txtE_Remarks1.Text);
+        param[8] = new SqlParameter("@Remarks2", txtE_Remarks2.Text);
+        param[9] = new SqlParameter("@Remarks3", txtE_Remarks3.Text);
+        param[10] = new SqlParameter("@TeacherName1", txtTeacherName1.Text);
+        param[11] = new SqlParameter("@TeacherName2", txtTeacherName2.Text);
+        param[12] = new SqlParameter("@SubjectTaught1", txtSubjectTaught1.Text);
+        param[13] = new SqlParameter("@SubjectTaught2", txtSubjectTaught2.Text);
+        param[14] = new SqlParameter("@Expected_Graduation_Year", "2024");
+        param[15] = new SqlParameter("@Progressto_A_Level", ViewState["Progress"]);
        
 
 
@@ -1372,15 +1412,110 @@ public partial class PresentationLayer_TCS_IEP_Form_Wizard_Sub : System.Web.UI.P
         ds.Dispose();
         if (e.Row.RowType == DataControlRowType.DataRow)
         {
+
             HiddenField field = e.Row.FindControl("hdSubject_Id") as HiddenField;
-            if (field.Value == ds.Tables[0].Rows[0]["Subject_Id"].ToString())
+            for (int i = 0; i < ds.Tables[10].Rows.Count; i++)
             {
+                string rowvalue = ds.Tables[10].Rows[i]["Subject_Id"].ToString();
+                if (field.Value != rowvalue)
+                {
+                    e.Row.Enabled = false;
+                    //  e.Row.Visible = false;
+                }
+                else
+                {
+                    e.Row.Enabled = true;
+                    //  e.Row.Visible = true;
+                    break;
+                }
+
+                //if (field.Value == ds.Tables[10].Rows[i]["Subject_Id"].ToString())
+                //{
+                //   // e.Row.Enabled = true;
+                //}
+                //else
+                //{
+                //    e.Row.Enabled = false;
+                //}
+            }
+            TextBox txtInput = e.Row.FindControl("txtE_Weak_Topic_Areas") as TextBox;
+            TextBox txttxtE_Suggested_Study_Hours = e.Row.FindControl("txtE_Suggested_Study_Hours") as TextBox;
+
+            if (txtInput != null)
+            {
+                //  txtInput.Attributes["onkeyup"] = "javascript:this.value = this.value.substring(0, 120);";
+
+                // Get the client-side ID of the TextBox
+                string textBoxClientId = txtInput.ClientID;
+
+                // Register the script to handle the input event for each TextBox
+                Page.ClientScript.RegisterStartupScript(this.GetType(), "ValidationScript_" + textBoxClientId,
+                    string.Format(@"
+                    $(document).ready(function () {{
+                        $('#{0}').on('input', function () {{
+                            var inputValue = $(this).val();
+                            if (inputValue.length > 120) {{
+                              Swal.fire(
+                                'Maximum 120 characters allowed.',
+                                        '',
+                        ''
+                        )
+                               
+
+                                // alert('Maximum 120 characters allowed.');
+                                $('#{0}').val(inputValue.substring(0, 120));
+                            }} else {{
+                             
+                            }}
+                        }});
+                    }});
+           
+                ", textBoxClientId), true);
+            }
+
+            if (txttxtE_Suggested_Study_Hours != null)
+            {
+                //  txtInput.Attributes["onkeyup"] = "javascript:this.value = this.value.substring(0, 120);";
+
+                // Get the client-side ID of the TextBox
+                string txttxtE_Suggested_Study_HoursClientId = txttxtE_Suggested_Study_Hours.ClientID;
+
+                // Register the script to handle the input event for each TextBox
+                Page.ClientScript.RegisterStartupScript(this.GetType(), "ValidationScript_" + txttxtE_Suggested_Study_HoursClientId,
+                    string.Format(@"
+                    $(document).ready(function () {{
+                        $('#{0}').on('input', function () {{
+                            var inputValue = $(this).val();
+                            if (inputValue.length > 120) {{
+                              Swal.fire(
+                                'Maximum 120 characters allowed.',
+                                        '',
+                        ''
+                        )
+                               
+
+                                // alert('Maximum 120 characters allowed.');
+                                $('#{0}').val(inputValue.substring(0, 120));
+                            }} else {{
+                             
+                            }}
+                        }});
+                    }});
+           
+                ", txttxtE_Suggested_Study_HoursClientId), true);
 
             }
-            else
-            {
-                e.Row.Enabled = false;
-            }
+
+
+            //HiddenField field = e.Row.FindControl("hdSubject_Id") as HiddenField;
+            //if (field.Value == ds.Tables[0].Rows[0]["Subject_Id"].ToString())
+            //{
+
+            //}
+            //else
+            //{
+            //    e.Row.Enabled = false;
+            //}
         }
     }
 }

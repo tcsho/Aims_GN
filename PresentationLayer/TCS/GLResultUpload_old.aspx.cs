@@ -39,7 +39,7 @@ public partial class PresentationLayer_TCS_GLResultUpload : System.Web.UI.Page
         {
             if (!Page.IsPostBack)
             {
-          //      btnExport.Enabled = false;
+                //      btnExport.Enabled = false;
                 //======== Page Access Settings ========================
                 DALBase objBase = new DALBase();
                 DataRow row = (DataRow)Session["rightsRow"];
@@ -73,7 +73,7 @@ public partial class PresentationLayer_TCS_GLResultUpload : System.Web.UI.Page
         try
         {
             BLLGL objClass = new BLLGL();
-//            btnExport.Enabled = true;
+            //            btnExport.Enabled = true;
         }
         catch (Exception ex)
         {
@@ -200,7 +200,7 @@ public partial class PresentationLayer_TCS_GLResultUpload : System.Web.UI.Page
 
             DataTable dt = GLObject.GLFileUploadHistory(SessionID, TermGroupID, SubjectID);
 
-            if (dt.Rows.Count > 0) 
+            if (dt.Rows.Count > 0)
             {
                 gvGLFileUploadHistory.DataSource = dt;
                 gvGLFileUploadHistory.Visible = true;
@@ -246,7 +246,7 @@ public partial class PresentationLayer_TCS_GLResultUpload : System.Web.UI.Page
             Response.Redirect("~/presentationlayer/ErrorPage.aspx", false);
         }
     }
-    
+
 
     private void ImportFile()
     {
@@ -818,7 +818,7 @@ public partial class PresentationLayer_TCS_GLResultUpload : System.Web.UI.Page
             gvGLFileUploadHistory.SelectedIndex = r.RowIndex;
 
             int FileUploadID = Convert.ToInt32(btn.CommandArgument);
-            
+
             DataTable dt = GLObject.GetFileUploadResultByID(FileUploadID);
             if (dt.Rows.Count > 0)
             {
@@ -829,7 +829,8 @@ public partial class PresentationLayer_TCS_GLResultUpload : System.Web.UI.Page
                 lab_dataStatus.Visible = false;
                 titleStudentResult.Visible = true;
             }
-            else {
+            else
+            {
                 GridView1.DataSource = null;
                 GridView1.DataBind();
                 lab_dataStatus.Visible = true;

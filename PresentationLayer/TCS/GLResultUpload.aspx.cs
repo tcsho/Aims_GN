@@ -12,7 +12,6 @@ using ADG.JQueryExtenders.Impromptu;
 using System.IO;
 using System.Text;
 using System.Data.OleDb;
-//using GleamTech.Reflection;
 
 public partial class PresentationLayer_TCS_GLResultUpload : System.Web.UI.Page
 {

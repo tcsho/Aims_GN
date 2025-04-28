@@ -54,6 +54,8 @@ public partial class PresentationLayer_BifurcationPromotedRequest : System.Web.U
                     loadRegions();
                     FillActiveSessions();
                     ddlSession.SelectedIndex = ddlSession.Items.Count - 1;
+                    ddlClass.SelectedIndex = ddlClass.Items.Count - 1;
+                    ddlterm.SelectedIndex = ddlterm.Items.Count - 1;
 
                 }
 
@@ -70,6 +72,8 @@ public partial class PresentationLayer_BifurcationPromotedRequest : System.Web.U
                     loadRegions();
                     FillActiveSessions();
                     ddlSession.SelectedIndex = ddlSession.Items.Count - 1;
+                    ddlClass.SelectedIndex = ddlClass.Items.Count - 1;
+                    ddlterm.SelectedIndex = ddlterm.Items.Count - 1;
                     ddlSession_SelectedIndexChanged(this, EventArgs.Empty);
                     trButtons.Visible = false;
                 }
@@ -86,6 +90,8 @@ public partial class PresentationLayer_BifurcationPromotedRequest : System.Web.U
                     loadRegions();
                     FillActiveSessions();
                     ddlSession.SelectedIndex = ddlSession.Items.Count - 1;
+                    ddlClass.SelectedIndex = ddlClass.Items.Count - 1;
+                    ddlterm.SelectedIndex = ddlterm.Items.Count - 1;
                     ddlSession_SelectedIndexChanged(this, EventArgs.Empty);
                     trButtons.Visible = false;
 
@@ -178,9 +184,9 @@ public partial class PresentationLayer_BifurcationPromotedRequest : System.Web.U
                         ddlterm.Items.RemoveAt(1);
                     }
                 }
-                ViewState["dtDetails"] = null;
-                gv_details.DataSource = null;
-                gv_details.DataBind();
+                //ViewState["dtDetails"] = null;
+                //gv_details.DataSource = null;
+                //gv_details.DataBind();
             }
             else
             {
@@ -203,19 +209,81 @@ public partial class PresentationLayer_BifurcationPromotedRequest : System.Web.U
     {
         try
         {
-            BLLClass_Center obj = new BLLClass_Center();
+            // BLLClass_Center obj = new BLLClass_Center();
             DataTable dt = null;
-            int center = Convert.ToInt32(ddl_center.SelectedValue);
-            dt = obj.Class_CenterFetch(center);
-            dt = dt.AsEnumerable().Where(r => r.Field<int>("Class_Id") > 11).CopyToDataTable();
-            dt = dt.AsEnumerable().Where(r => r.Field<int>("Class_Id") < 15).CopyToDataTable();
+            // int center = Convert.ToInt32(ddl_center.SelectedValue);
+            BLLClass objCS = new BLLClass();
+            objCS.Main_Organisation_Id = Int32.Parse(Session["moID"].ToString());
+            dt = objCS.ClassFetch(objCS);
+            DataTable filteredDt = dt.Clone();
 
-            objBase.FillDropDown(dt, ddlClass, "Class_Id", "Class_Name");
-            //  ddlClass.SelectedValue = "12";
-            //ddlClass.Enabled = false;
+            // Apply the filter condition and copy the rows to the new DataTable for class ID 12
+            foreach (DataRow row in dt.Rows)
+            {
+                int classId = row.Field<int>("Class_Id");
+                if (classId == 12)
+                {
+                    filteredDt.ImportRow(row);
+                }
+            }
+
+            // Clear existing items in ddlClass
+            ddlClass.Items.Clear();
+            //ddlClass.Items.Add(new ListItem("Select", "0"));
+            // Add class ID 12 to ddlClass without a default "Select All" option
+            foreach (DataRow row in filteredDt.Rows)
+            {
+                string classId = row["Class_Id"].ToString();
+                string className = row["Class_Name"].ToString();
+                ddlClass.Items.Add(new ListItem(className, classId));
+            }
+            BLLSection_Subject objs = new BLLSection_Subject();
+            objs.Org_Id = Convert.ToInt32(Session["moID"].ToString());
+            objs.Section_Id = Convert.ToInt32(ddlClass.SelectedValue);
+
+            DataTable dt1 = objs.Evaluation_Criteria_TypeBySectionId(objs);
+            objBase.FillDropDown(dt1, ddlterm, "TermGroup_ID", "Type");
+            if (ddlClass.SelectedValue.Length > 0)
+            {
+                if (ddlClass.SelectedValue == "12" && ddl_region.SelectedValue == "20000000")
+                {
+                    if (ddl_center.SelectedValue.Length >= 1)
+                    {
+                        if (ddl_center.SelectedValue == "20201005" || ddl_center.SelectedValue == "20201002")
+                        {
+                            ddlterm.Items.RemoveAt(2);
+                            ddlterm.SelectedIndex = 1;
+                            //lblNote.Visible = true;
+                        }
+                        else
+                        {
+                            ddlterm.Items.RemoveAt(1);
+                            ddlterm.SelectedIndex = 1;
+                            //lblNote.Visible = true;
+                        }
+                    }
 
 
-
+                }
+                if (ddlClass.SelectedValue == "12" && ddl_region.SelectedValue != "20000000")
+                {
+                    if (ddl_center.SelectedValue == "20201005" || ddl_center.SelectedValue == "20201002")
+                    {
+                        ddlterm.Items.RemoveAt(2);
+                        ddlterm.SelectedIndex = 1;
+                        //lblNote.Visible = true;
+                    }
+                    else
+                    {
+                        ddlterm.Items.RemoveAt(2);
+                        ddlterm.SelectedIndex = 1;
+                        //lblNote.Visible = true;
+                    }
+                }
+            }
+            ViewState["dtDetails"] = null;
+            gv_details.DataSource = null;
+            gv_details.DataBind();
         }
         catch (Exception ex)
         {
@@ -294,7 +362,7 @@ public partial class PresentationLayer_BifurcationPromotedRequest : System.Web.U
             if (ddlClass.SelectedIndex > 0)
                 objClsSec.Class_Id = Convert.ToInt32(ddlClass.SelectedValue.ToString());  //Added by huzaifa on 30-05-2022
             else
-                objClsSec.Class_Id = Class_Id;
+                objClsSec.Class_Id = 12;
             if (ddlterm.SelectedIndex > 0)
                 objClsSec.TermGroupID = Convert.ToInt32(ddlterm.SelectedValue.ToString());  //Added by huzaifa on 30-05-2022
             else
@@ -303,6 +371,106 @@ public partial class PresentationLayer_BifurcationPromotedRequest : System.Web.U
             if (ViewState["dtDetails"] == null)
             {
                 dtsub = (DataTable)objClsSec.Student_Bifurcation_RequestSelectAllByOrgRegionCenterId(objClsSec);
+            }
+            else
+            {
+                dtsub = (DataTable)ViewState["dtDetails"];
+            }
+
+
+
+            if (dtsub.Rows.Count > 0)
+            {
+                //if (dtsub.Rows[0]["bifurcation"].ToString() != "1")
+                //{
+                //    btn_view_Undertaking.Visible = false;
+                //    btn_bif_email.Visible = false;
+                //}
+                gv_details.DataSource = null;
+                gv_details.DataBind();
+                tdSearch.Visible = true;
+                gv_details.DataSource = dtsub;
+                gv_details.DataBind();
+                ViewState["dtDetails"] = dtsub;
+                btns.Visible = true;
+                lblGridStatus.Text = "";
+                if (Region_Id == 0 && Center_Id == 0)
+                {
+                    foreach (GridViewRow r in gv_details.Rows)
+                    {
+                        r.FindControl("btnDelete").Visible = true;
+                        //r.FindControl("btnSubmit").Visible = false;
+                    }
+                }
+                else
+                {
+                    foreach (GridViewRow r in gv_details.Rows)
+                    {
+                        r.FindControl("btnDelete").Visible = false;
+
+                    }
+                }
+
+            }
+            else
+            {
+                tdSearch.Visible = false;
+                gv_details.DataSource = null;
+                gv_details.DataBind();
+                btns.Visible = false;
+                lblGridStatus.Text = "No Record Found!";
+            }
+        }
+        catch (Exception ex)
+        {
+            Session["error"] = ex.Message;
+            Response.Redirect("~/presentationlayer/ErrorPage.aspx", false);
+        }
+    }
+
+    private void BindGridNew()
+    {
+        try
+        {
+            BLLStudent_Conditionally_Promoted_Request objClsSec = new BLLStudent_Conditionally_Promoted_Request();
+
+            DataTable dtsub = new DataTable();
+
+            //if (ddlClass.SelectedIndex > 0)
+            //    objClsSec.Class_Id = Convert.ToInt32(ddlClass.SelectedValue);
+
+            objClsSec.Main_Organisation_Id = MOId;
+
+            if (Region_Id == 0)
+            {
+                objClsSec.Region_Id = Convert.ToInt32(ddl_region.SelectedValue.ToString());
+            }
+            else
+            {
+                objClsSec.Region_Id = Region_Id;
+            }
+            if (ddl_center.SelectedIndex > 0)
+            {
+                objClsSec.Center_Id = Convert.ToInt32(ddl_center.SelectedValue.ToString());
+            }
+            else
+            {
+                objClsSec.Center_Id = Center_Id;
+            }
+            objClsSec.Session_Id = Convert.ToInt32(ddlSession.SelectedValue.ToString());
+
+            if (ddlClass.SelectedIndex > 0)
+                objClsSec.Class_Id = Convert.ToInt32(ddlClass.SelectedValue.ToString());  //Added by huzaifa on 30-05-2022
+            else
+                objClsSec.Class_Id = Convert.ToInt32(ddlClass.SelectedValue.ToString());
+            if (ddlterm.SelectedIndex > 0)
+                objClsSec.TermGroupID = Convert.ToInt32(ddlterm.SelectedValue.ToString());  //Added by huzaifa on 30-05-2022
+            else
+                objClsSec.TermGroupID = 0;
+
+            if (ViewState["dtDetails"] == null)
+            {
+                dtsub = (DataTable)objClsSec.New_Student_Bifurcation_RequestSelectAllByOrgRegionCenterId(objClsSec);
             }
             else
             {
@@ -415,6 +583,7 @@ public partial class PresentationLayer_BifurcationPromotedRequest : System.Web.U
                 ddl_center.SelectedValue = Center_Id.ToString();
                 ddl_center.Enabled = false;
                 ddl_center_SelectedIndexChanged(this, EventArgs.Empty);
+                loadClass();
             }
 
         }
@@ -486,6 +655,7 @@ public partial class PresentationLayer_BifurcationPromotedRequest : System.Web.U
             DataTable dt = new DataTable();
             dt = objBll.SessionSelectAllActive();
             objBase.FillDropDown(dt, ddlSession, "Session_ID", "Description");
+            ddlSession.SelectedIndex = ddlSession.Items.Count - 1;
         }
         catch (Exception ex)
         {
@@ -512,23 +682,53 @@ public partial class PresentationLayer_BifurcationPromotedRequest : System.Web.U
     }
 
 
+
     protected void ddl_Region_SelectedIndexChanged(object sender, EventArgs e)
     {
         try
         {
             loadCenter();
-
+            loadClass();
             if (ddl_region.SelectedItem.Text == "Select")
             {
-
-                ddl_center.SelectedIndex = 0;
-                ddlSession.SelectedIndex = 0;
+                //ddl_center.SelectedIndex = ddl_center.Items.Count - 1;
+                // ddlSession.SelectedIndex = ddlSession.Items.Count - 1;
                 gv_details.DataSource = null;
                 gv_details.DataBind();
+                FillActiveSessions();
                 btns.Visible = false;
-
+                ddl_center.DataSource = null;
+                ddl_center.DataBind();
             }
+            else
+            {
+                ViewState["dtDetails"] = null;
+                ResetFilter();
+            }
+            //else
+            //{
+            //    ddlClass.SelectedIndex = ddlClass.Items.Count - 1;
 
+            //    BLLSection_Subject obj = new BLLSection_Subject();
+            //    obj.Org_Id = Convert.ToInt32(Session["moID"].ToString());
+            //    obj.Section_Id = Convert.ToInt32(ddlClass.SelectedValue);
+
+            //    DataTable dt1 = obj.Evaluation_Criteria_TypeBySectionId(obj);
+            //    objBase.FillDropDown(dt1, ddlterm, "TermGroup_ID", "Type");
+            //    ddlterm.SelectedIndex = ddlterm.Items.Count - 1;
+            //    if (ddlClass.SelectedValue == "12" && ddl_region.SelectedValue == "20000000")
+            //    {
+            //        if (ddl_center.SelectedValue != "20201005" && ddl_center.SelectedValue != "20201002")
+            //        {
+            //            ddlterm.Items.RemoveAt(1);
+            //        }
+            //    }
+            //    ViewState["dtDetails"] = null;
+            //    ResetFilter();
+            //}
+
+            //gv_details.DataSource = null;
+            //gv_details.DataBind();
         }
         catch (Exception ex)
         {
@@ -542,14 +742,21 @@ public partial class PresentationLayer_BifurcationPromotedRequest : System.Web.U
         {
             if (ddl_center.SelectedItem.Text == "Select")
             {
-                ddlSession.SelectedIndex = 0;
-                gv_details.DataSource = null;
-                gv_details.DataBind();
-                btns.Visible = false;
+                FillActiveSessions();
+                loadClass();
+                ResetFilter();
             }
             else
+            {
                 loadClass();
-            bindrdbClass();
+                bindrdbClass();
+                FillActiveSessions();
+                //ddlSession.SelectedIndex = ddlSession.Items.Count - 1;
+                //ddlClass.SelectedIndex = ddlClass.Items.Count - 1;
+                //ddlterm.SelectedIndex = ddlterm.Items.Count - 1;
+                ResetFilter();
+            }
+            
         }
         catch (Exception ex)
         {
@@ -841,8 +1048,19 @@ public partial class PresentationLayer_BifurcationPromotedRequest : System.Web.U
     {
         try
         {
-            //       ViewState["dtDetails"] = null;
-            BindGrid();
+            ViewState["dtDetails"] = null;
+            if (ddl_region.Text == "20000000" && ddlterm.Text == "2" && (ddl_center.Text != "20201002" || ddl_center.Text != "20201005"))
+            {
+                BindGrid();
+            }
+            else if (ddl_region.Text == "20000000" && ddlterm.Text == "1" && (ddl_center.Text == "20201002" || ddl_center.Text == "20201005"))
+            {
+                BindGrid();
+            }
+            else
+            {
+                BindGridNew();
+            }
             gv_details.SelectedIndex = -1;
         }
         catch (Exception ex)
@@ -856,7 +1074,15 @@ public partial class PresentationLayer_BifurcationPromotedRequest : System.Web.U
     {
         try
         {
-            ResetFilter();
+            if (ddlterm.SelectedIndex > 0)
+            {
+                ResetFilter();
+            }
+            else
+            {
+                ImpromptuHelper.ShowPrompt("Please select Term");
+            }
+            
             // ddlClass.SelectedIndex = 0;
         }
         catch (Exception ex)
@@ -1139,7 +1365,7 @@ public partial class PresentationLayer_BifurcationPromotedRequest : System.Web.U
 
         try
         {
-          DT_Data = obj_Access.ExecuteDataTable();
+            DT_Data = obj_Access.ExecuteDataTable();
         }
         catch (Exception ex)
         {
@@ -1184,7 +1410,7 @@ public partial class PresentationLayer_BifurcationPromotedRequest : System.Web.U
     DataTable ExecuteProcedure_StudentDetail(string student_id, string section_id)
     {
         DataTable DT_Data = null;
-        obj_Access.CreateProcedureCommand("sp_IEP_bifurcation_studentdetail");
+        obj_Access.CreateProcedureCommand("sp_IEP_bifurcation_studentdetail_ForEmail");
         obj_Access.AddParameter("student_id", student_id, DataAccess.SQLParameterType.VarChar, true);
         obj_Access.AddParameter("section_id", section_id, DataAccess.SQLParameterType.VarChar, true);
         //obj_Access.AddParameter("Term_id", Term_id, DataAccess.SQLParameterType.VarChar, true);
@@ -1244,307 +1470,443 @@ public partial class PresentationLayer_BifurcationPromotedRequest : System.Web.U
         ViewState["Section_Name"] = gvr.Cells[6].Text;
         ViewState["TermGroupID"] = ddlterm.SelectedValue;//gv_details.DataKeys[gvr.RowIndex].Values["TermGroupID"].ToString();
 
+        //DataTable dt2 = ExecuteFunctionIEPStatus(Convert.ToInt32(txtStdId.Text));
+        // if (dt2.Rows.Count > 0)
+        //  {
+        //  if (dt2.Rows[0]["Completion"].ToString() == dt2.Rows[0]["Total"].ToString())
+        //  {
+        DataTable dt1 = ExecuteProcedure_StudentDetail(txtStdId.Text, "");
+        dt1.Dispose();
 
-     
-                DataTable dt1 = ExecuteProcedure_StudentDetail(txtStdId.Text, "");
-                dt1.Dispose();
+        if (dt1.Rows.Count > 0)
+        {
+            // ImpromptuHelper.ShowPrompt(dt.Rows[0][0].ToString());
+            /*****************EMAIL***************/
 
-                if (dt1.Rows.Count > 0)
+            var getclass = ViewState["Class_Id"].ToString(); //ViewState["classids"].ToString();
+            var getterm = ViewState["TermGroupID"].ToString();//ViewState["TermGroupID"].ToString();
+
+            MailMessage mail = new MailMessage();
+            var Body = "";
+            var To = "";
+            var CC = "";
+            var CC2 = "";
+            var CC3 = "";
+            var Email = new MailAddress("AppNotifications@csn.edu.pk", "The City School");
+            //var Email = new MailAddress("noreply@csn.edu.pk", "The City School");
+            //need to be set previous when check        
+            To = dt1.Rows[0][2].ToString();
+            //To = "muhammad.maroof1@csn.edu.pk";
+            
+            //To = "hussain.shabbir@csn.edu.pk";
+            //need to be set previous when check
+            CC =  dt1.Rows[0]["CenterEmail"].ToString();
+            //CC = "muhammad.maroof1@csn.edu.pk";
+            //CC = "raheel.yousaf@csn.edu.pk";
+            //CC = "aqeel.farooq@csn.edu.pk";
+            //need to be open when check
+           CC2 = "ManageAcknowledgement@csn.edu.pk";
+            //CC2 = "muhammad.maroof1@csn.edu.pk";
+            
+
+            string Subject = "";
+            if (getclass == "12" && getterm == "2" && (ddl_region.SelectedValue == "30000000" || ddl_region.SelectedValue == "40000000"))
+                Subject = "Undertaking – " + dt1.Rows[0]["First_Name"].ToString() + " (" + dt1.Rows[0]["Student_No"].ToString() + ") | " + dt1.Rows[0]["class_name"].ToString() + " (Second Term) | " + dt1.Rows[0]["Center_Name"].ToString() + "";
+            else if (getclass == "12" && getterm == "2" && ddl_region.SelectedValue == "20000000" && (ddl_center.SelectedValue == "20201002" || ddl_center.SelectedValue == "20201005"))
+                Subject = "Undertaking – " + dt1.Rows[0]["First_Name"].ToString() + " (" + dt1.Rows[0]["Student_No"].ToString() + ") | " + dt1.Rows[0]["class_name"].ToString() + " (Second Term) | " + dt1.Rows[0]["Center_Name"].ToString() + "";
+            else if (getclass == "12" && getterm == "1" && (ddl_region.SelectedValue == "30000000" || ddl_region.SelectedValue == "40000000"))
+                Subject = "Bifurcation Undertaking  – " + dt1.Rows[0]["First_Name"].ToString() + " (" + dt1.Rows[0]["Student_No"].ToString() + ") | " + dt1.Rows[0]["class_name"].ToString() + " (First Term) | " + dt1.Rows[0]["Center_Name"].ToString() + "";
+            else if (getclass == "12" && getterm == "2" && ddl_region.SelectedValue == "20000000" && (ddl_center.SelectedValue != "20201002" || ddl_center.SelectedValue != "20201005"))
+                Subject = "Bifurcation Undertaking  – " + dt1.Rows[0]["First_Name"].ToString() + " (" + dt1.Rows[0]["Student_No"].ToString() + ") | " + dt1.Rows[0]["class_name"].ToString() +"-" + dt1.Rows[0]["Section_Name"].ToString() + " (Second Term) | " + dt1.Rows[0]["Center_Name"].ToString() + "";
+            else if (getclass == "13" && getterm == "1")
+                Subject = "Undertaking – " + dt1.Rows[0]["First_Name"].ToString() + " (" + dt1.Rows[0]["Student_No"].ToString() + ") | " + dt1.Rows[0]["class_name"].ToString() + " (First Term) | " + dt1.Rows[0]["Center_Name"].ToString() + "";
+            else if (getclass == "13" && getterm == "2")
+                Subject = "Undertaking – " + dt1.Rows[0]["First_Name"].ToString() + " (" + dt1.Rows[0]["Student_No"].ToString() + ") | " + dt1.Rows[0]["class_name"].ToString() + " (Second Term) | " + dt1.Rows[0]["Center_Name"].ToString() + "";
+            else if (getclass == "14" && getterm == "1")
+                Subject = "Undertaking – " + dt1.Rows[0]["First_Name"].ToString() + " (" + dt1.Rows[0]["Student_No"].ToString() + ") | " + dt1.Rows[0]["class_name"].ToString() + " (First Term) | " + dt1.Rows[0]["Center_Name"].ToString() + "";
+
+
+            var onclassbase = "";
+            /***********HTML TEMPLET***/
+            Body += "<body style='margin:0;padding:0;'>";
+            Body += "<table role='presentation' style='width:100%;border-collapse:collapse;border:0;border-spacing:0;background:#ffffff;'>";
+            Body += "<tr>";
+            Body += "<td align='center' style='padding:0;'>";
+            Body += "<table role='presentation' style='width:602px;border-collapse:collapse;border:1px solid #cccccc;border-spacing:0;text-align:left;'>";
+            Body += "<tr>";
+            Body += "<td align='center' style='padding:40px 0 30px 0;background:#0c4da2;'>";//#0c4da2
+
+            //Body += "< img src = 'http://tcsresults.csn.edu.pk/ReportCard/images/logo.png' alt = '' width = '300' style = 'height:auto;display:block;' /> ";
+            Body += "<img src = 'http://tcsresults.csn.edu.pk/ReportCard/images/logo.png'>";
+            Body += "</td>";
+            Body += "</tr>";
+            Body += "<tr>";
+            Body += "<td style='padding:36px 30px 42px 30px;'>";
+            Body += "<table role='presentation' style='width:100%;border-collapse:collapse;border:0;border-spacing:0;'>";
+            Body += "<tr>";
+            Body += "<td style='padding:0 0 36px 0;color:#153643;'>";
+            if (getclass == "12" && getterm == "1" && ddl_region.SelectedValue == "20000000" && (ddl_center.SelectedValue == "20201002" || ddl_center.SelectedValue == "20201005"))
+            {
+                Body += "<h1 style='font-size:24px;margin:0 0 20px 0;font-family:Arial,sans-serif;'>Dear Parent/Guardian,</h1>";
+                Body += "<p style='margin:0 0 12px 0;font-size:16px;line-height:24px;font-family:Arial,sans-serif;'>If you wish for your child to continue on the O-Level path, please read and submit the application for undertaking.</p><br/>";
+                Body += "<p style='margin: 0 0 12px 0font - size:14pxline - height:24pxfont - family:Arial,sans - serif'>I, the parent/guardian of <strong> " + dt1.Rows[0]["First_Name"].ToString() + "</strong> ERP # <strong>" + dt1.Rows[0]["Student_No"].ToString() + " </strong> studying in <strong>" + dt1.Rows[0]["Class_Name"].ToString() + "</strong> Section <strong>" + dt1.Rows[0]["Section_Name"].ToString() + "</strong>,   " +
+                "confirm that I have fully read and understood the points below. My acknowledgement indicates full agreement and consent to implement the appropriate consequences stated:</p> ";
+            }
+            else if (getclass == "12" && getterm == "2" && ddl_region.SelectedValue == "20000000" && (ddl_center.SelectedValue != "20201002" || ddl_center.SelectedValue != "20201005"))
+            {
+                Body += "<h1 style='font-size:24px;margin:0 0 20px 0;font-family:Arial,sans-serif;'>Dear Parent/Guardian,</h1>";
+                Body += "<p style='margin:0 0 12px 0;font-size:16px;line-height:24px;font-family:Arial,sans-serif;'>If you wish for your child to continue on the O-Level path, please read and submit the application for undertaking.</p><br/>";
+                Body += "<p style='margin: 0 0 12px 0font - size:14pxline - height:24pxfont - family:Arial,sans - serif'>I, the parent/guardian of <strong> " + dt1.Rows[0]["First_Name"].ToString() + "</strong> ERP # <strong>" + dt1.Rows[0]["Student_No"].ToString() + " </strong> studying in <strong>" + dt1.Rows[0]["Class_Name"].ToString() + "</strong> Section <strong>" + dt1.Rows[0]["Section_Name"].ToString() + "</strong>,   " +
+                "confirm that I have fully read and understood the points below. My acknowledgement indicates full agreement and consent to implement the appropriate consequences stated:</p> ";
+            }
+            else if (getclass == "15" && getterm == "1")
+            {
+                Body += "<h1 style='font-size:24px;margin:0 0 20px 0;font-family:Arial,sans-serif;'>Dear Parent/Guardian,</h1>";
+                Body += "<p style='margin:0 0 12px 0;font-size:16px;line-height:24px;font-family:Arial,sans-serif;'>If you wish for your child to take the Cambridge exams as The City School student, please read and submit the application for undertaking.</p><br/>";
+                Body += "<p style='margin: 0 0 12px 0font - size:14pxline - height:24pxfont - family:Arial,sans - serif'>I, as a parent/guardian of  <strong> " + dt1.Rows[0]["First_Name"].ToString() + "</strong> ERP # <strong>" + dt1.Rows[0]["Student_No"].ToString() + " </strong> studying in <strong> Class 11 Section " + dt1.Rows[0]["Section_Name"].ToString() + "</strong>,   " +
+                "confirm that I have read and understood the circumstances outlined below and have signed the agreement as per my consent:</p> ";
+            }
+            else
+            {
+                Body += "<h1 style='font-size:24px;margin:0 0 20px 0;font-family:Arial,sans-serif;'>Dear Parent/Guardian,</h1>";
+                Body += "<p style='margin:0 0 12px 0;font-size:16px;line-height:24px;font-family:Arial,sans-serif;'>If you wish for your child to continue on the O-Level route, please read and submit the application for undertaking.</p><br/>";
+                Body += "<p style='margin: 0 0 12px 0font - size:14pxline - height:24pxfont - family:Arial,sans - serif'>I, the parent/guardian of <strong> " + dt1.Rows[0]["First_Name"].ToString() + "</strong> ERP # <strong>" + dt1.Rows[0]["Student_No"].ToString() + " </strong> studying in <strong>" + dt1.Rows[0]["Class_Name"].ToString() + "</strong> Section <strong>" + dt1.Rows[0]["Section_Name"].ToString() + "</strong>,   " +
+                "confirm that I have fully read and understood the points below. My acknowledgement indicates full agreement and consent to implement the appropriate consequences stated:</p> ";
+            }
+
+            /**on basis change**/
+            /**CLASS UNDERTAKING**/
+            //Mid Year Bifurcation: For CR and NR only. (Bifurcation Undertaking Email)
+            if (getclass == "12" && getterm == "1" && (ddl_region.SelectedValue == "30000000" || ddl_region.SelectedValue == "40000000"))
+            {
+
+                onclassbase += "<p style='margin:0 0 12px 0;font-size:14px;line-height:24px;font-family:Arial,sans-serif;'> 1. The school, after careful deliberation and consideration of the Class 8 results, has advised me to transfer my child to the Matric system.</p>";
+                onclassbase += "<p style='margin:0 0 12px 0;font-size:14px;line-height:24px;font-family:Arial,sans-serif;'> 2. However, I insist that my child should continue on the O-Level route.</p>";
+                onclassbase += "<p style='margin:0 0 12px 0;font-size:14px;line-height:24px;font-family:Arial,sans-serif;'> 3. I accept the responsibility to ensure my child will meet the school’s required attainment levels.</p>";
+                onclassbase += "<p style='margin:0 0 12px 0;font-size:14px;line-height:24px;font-family:Arial,sans-serif;'> 4. Failure to meet the minimum requirements in the internal exams may result in my child being privately registered for the CAIE Exams.</p>";
+            }
+            // Mid year : For SR (Quetta Only)
+            if (getclass == "12" && getterm == "1" && (ddl_region.SelectedValue == "20000000") && (ddl_center.SelectedValue == "20201002" || ddl_center.SelectedValue == "20201005"))
+            {
+
+                onclassbase += "<p style='margin:0 0 12px 0;font-size:14px;line-height:24px;font-family:Arial,sans-serif;'> 1. The school, after careful deliberation and consideration of the Class 8 results, has advised me to transfer my child to the Matric system.</p>";
+                onclassbase += "<p style='margin:0 0 12px 0;font-size:14px;line-height:24px;font-family:Arial,sans-serif;'> 2. However, I insist that my child should continue on the O-Level route.</p>";
+                onclassbase += "<p style='margin:0 0 12px 0;font-size:14px;line-height:24px;font-family:Arial,sans-serif;'> 3. I accept the responsibility to ensure my child will meet the school’s required attainment levels.</p>";
+                onclassbase += "<p style='margin:0 0 12px 0;font-size:14px;line-height:24px;font-family:Arial,sans-serif;'> 4. Failure to meet the minimum requirements in the internal exams may result in my child being privately registered for the CAIE Exams.</p>";
+            }
+            //EOY : For SR only (Excluding Quetta)
+            if (getclass == "12" && getterm == "2" && ddl_region.SelectedValue == "20000000" && (ddl_center.SelectedValue != "20201002" || ddl_center.SelectedValue != "20201005"))
+            {
+                onclassbase += "<p style='margin:0 0 12px 0;font-size:14px;line-height:24px;font-family:Arial,sans-serif;'> 1. The school, after careful deliberation and consideration of the Class 8 results, has advised me to transfer my child to the Matric system.</p>";
+                onclassbase += "<p style='margin:0 0 12px 0;font-size:14px;line-height:24px;font-family:Arial,sans-serif;'> 2. However, I insist that my child should continue on the O-Level route.</p>";
+                onclassbase += "<p style='margin:0 0 12px 0;font-size:14px;line-height:24px;font-family:Arial,sans-serif;'> 3. I accept the responsibility to ensure my child will meet the school’s required attainment levels.</p>";
+                onclassbase += "<p style='margin:0 0 12px 0;font-size:14px;line-height:24px;font-family:Arial,sans-serif;'> 4. Failure to meet the minimum requirements in the internal exams may result in my child being privately registered for the CAIE Exams.</p>";
+            }
+            //(EoY for CR, NR)
+            if (getclass == "12" && getterm == "2" && (ddl_region.SelectedValue == "30000000" || ddl_region.SelectedValue == "40000000"))
+            {
+
+                onclassbase += "<p style='margin:0 0 12px 0;font-size:14px;line-height:24px;font-family:Arial,sans-serif;'> 1. The school has clearly explained that my child’s class 8 (2nd term) result is not up to the mark.</p>";
+                onclassbase += "<p style='margin:0 0 12px 0;font-size:14px;line-height:24px;font-family:Arial,sans-serif;'> 2. I take the responsibility that my child will meet the school’s required attainment levels.</p>";
+                onclassbase += "<p style='margin:0 0 12px 0;font-size:14px;line-height:24px;font-family:Arial,sans-serif;'> 3. Failure to meet the minimum requirements in the internal exams may result in my child being privately registered for the CAIE Exams.</p>";
+
+            }
+            //(EoY for  Quetta)
+            if (getclass == "12" && getterm == "2" && (ddl_region.SelectedValue == "20000000") && (ddl_center.SelectedValue == "20201002" || ddl_center.SelectedValue == "20201005"))
+            {
+                onclassbase += "<p style='margin:0 0 12px 0;font-size:14px;line-height:24px;font-family:Arial,sans-serif;'> 1. The school has clearly explained that my child’s class 8 (2nd term) result is not up to the mark.</p>";
+                onclassbase += "<p style='margin:0 0 12px 0;font-size:14px;line-height:24px;font-family:Arial,sans-serif;'> 2. I take the responsibility that my child will meet the school’s required attainment levels.</p>";
+                onclassbase += "<p style='margin:0 0 12px 0;font-size:14px;line-height:24px;font-family:Arial,sans-serif;'> 3. Failure to meet the minimum requirements in the internal exams may result in my child being privately registered for the CAIE Exams.</p>";
+            }
+            if (getclass == "13" && getterm == "2")
+            {
+
+                /**CLASS UNDERTAKING**/
+                onclassbase += "<p style='margin:0 0 12px 0;font-size:14px;line-height:24px;font-family:Arial,sans-serif;'> 1. The school has clearly explained that my child’s class 9 (2nd term) result is not up to the mark.</p>";
+                onclassbase += "<p style='margin:0 0 12px 0;font-size:14px;line-height:24px;font-family:Arial,sans-serif;'> 2. I take the responsibility that my child will meet the school’s required attainment levels.</p>";
+                onclassbase += "<p style='margin:0 0 12px 0;font-size:14px;line-height:24px;font-family:Arial,sans-serif;'> 3. Failure to meet the minimum requirements in the internal exams may result in my child being privately registered for the CAIE Exams.</p>";
+            }
+
+            if (getclass == "13" && getterm == "1")
+            {
+                /**CLASS UNDERTAKING**/
+                onclassbase += "<p style='margin:0 0 12px 0;font-size:14px;line-height:24px;font-family:Arial,sans-serif;'> 1. The school has clearly explained that my child’s class 9 (1st term) result is not up to the mark.</p>";
+                onclassbase += "<p style='margin:0 0 12px 0;font-size:14px;line-height:24px;font-family:Arial,sans-serif;'> 2. I take the responsibility that my child will meet the school’s required attainment levels.</p>";
+                onclassbase += "<p style='margin:0 0 12px 0;font-size:14px;line-height:24px;font-family:Arial,sans-serif;'> 3. Failure to meet the minimum requirements in the internal exams may result in my child being privately registered for the CAIE Exams.</p>";
+
+            }
+            if (getclass == "14" && getterm == "1")
+            {
+
+                onclassbase += "<p style='margin:0 0 12px 0;font-size:14px;line-height:24px;font-family:Arial,sans-serif;'> 1. The school has clearly explained that my child’s class 10 (1st term) result is not up to the mark.</p>";
+                onclassbase += "<p style='margin:0 0 12px 0;font-size:14px;line-height:24px;font-family:Arial,sans-serif;'> 2. I take the responsibility that my child will meet the school’s required attainment levels.</p>";
+                onclassbase += "<p style='margin:0 0 12px 0;font-size:14px;line-height:24px;font-family:Arial,sans-serif;'> 3. Failure to meet the minimum requirements in the internal exams may result in my child being privately registered for the CAIE Exams.</p>";
+
+            }
+            if (getclass == "15" && getterm == "1")
+            {
+
+                /**CLASS UNDERTAKING**/
+                onclassbase += "<p style='margin:0 0 12px 0;font-size:14px;line-height:24px;font-family:Arial,sans-serif;'> 1. That the school, after careful deliberation and consideration of the Class 10 Mid-year, Mocks and Cambridge Results, had provisionally promoted my child to Year 11.</p>";
+                onclassbase += "<p style='margin:0 0 12px 0;font-size:14px;line-height:24px;font-family:Arial,sans-serif;'> 2. My child has not passed the Class 11 Mid-year examinations with the minimum required attainment levels and is provisionally being allowed to appear for Year 11 Mock examinations with the condition of attaining an overall 60%. Failing to meet the minimum requirements may result in my child being privatized at the time of final Cambridge exams.</p>";
+            }
+            // End Of Year Bifurcation: For SR Only. (Bifurcation Undertaking Email)
+            //    if (getclass == "12" && getterm == "2" && ddl_region.SelectedValue == "20000000")
+            //{
+
+            //    onclassbase += "<p style='margin:0 0 12px 0;font-size:14px;line-height:24px;font-family:Arial,sans-serif;'> 1) The school, after careful deliberation and consideration of the Class 8 Results, has advised me to transfer my child to the Matric system.</p>";
+            //    onclassbase += "<p style='margin:0 0 12px 0;font-size:14px;line-height:24px;font-family:Arial,sans-serif;'> 2) However, I am insisting that my child should continue the O-Level route.</p>";
+            //    onclassbase += "<p style='margin:0 0 12px 0;font-size:14px;line-height:24px;font-family:Arial,sans-serif;'> 3) I take the responsibility that my child will meet the school’s required attainment levels.</p>";
+            //    onclassbase += "<p style='margin:0 0 12px 0;font-size:14px;line-height:24px;font-family:Arial,sans-serif;'> 4) Failure to meet the minimum requirements in the internal exams may result in my child’s private registration for his/her CAIE Exams.</p>";
+            //}
+            //End Of Year(CR and NR): Undertaking Email for promotion
+
+
+
+
+            if (getclass == "14" && getterm == "2")
+            {
+
+                onclassbase += "<p style='margin:0 0 12px 0;font-size:14px;line-height:24px;font-family:Arial,sans-serif;'> 1. The school has clearly explained that my child’s class 10 (2nd term) result is not up to the mark.</p>";
+                onclassbase += "<p style='margin:0 0 12px 0;font-size:14px;line-height:24px;font-family:Arial,sans-serif;'> 2. I take the responsibility that my child will meet the school’s required attainment levels.</p>";
+                onclassbase += "<p style='margin:0 0 12px 0;font-size:14px;line-height:24px;font-family:Arial,sans-serif;'> 3. Failure to meet the minimum requirements in the internal exams may result in my child being privately registered for the CAIE Exams.</p>";
+
+            }
+
+
+            if (getclass == "15" && getterm == "2")
+            {
+
+                onclassbase = "<p style='margin:0 0 12px 0;font-size:14px;line-height:24px;font-family:Arial,sans-serif;'> 1) That the school, after careful deliberation and consideration of the Class 11 Mid-year examination Results, had provisionally allowed my child to sit for Year 11 Mock examinations. </p><p style='margin:0 0 12px 0;font-size:14px;line-height:24px;font-family:Arial,sans-serif;'> 2) My child has not passed the Class 11 Mock examinations with the minimum required attainment levels and is going to be privatized for Cambridge Exams.</p>";
+
+            }
+
+
+            /**CLASS UNDERTAKING**/
+
+            Body += onclassbase;
+            //  Body += "<p style='margin:0 0 12px 0;font-size:14px;line-height:24px;font-family:Arial,sans-serif;'>You can also review the Individual Education Plan we have created to support your child’s progress. Once you have reviewed it, please acknowledge it.</p> ";
+            //2
+            //Body += "<p style='margin:0 0 12px 0;font-size:14px;line-height:24px;font-family:Arial,sans-serif;'>Please press confirm button to submit your request.</p>";
+
+
+
+            byte[] b = System.Text.ASCIIEncoding.ASCII.GetBytes(txtStdId.Text);
+            string encrypted_student_Id = Convert.ToBase64String(b);
+
+            byte[] c = System.Text.ASCIIEncoding.ASCII.GetBytes(ViewState["Class_Id"].ToString());
+            string encrypted_class_Id = Convert.ToBase64String(c);
+
+	    byte[] sess = System.Text.ASCIIEncoding.ASCII.GetBytes(ddlSession.SelectedValue.ToString());
+            string encrypted_session_Id = Convert.ToBase64String(sess);
+
+
+            byte[] stname = System.Text.ASCIIEncoding.ASCII.GetBytes(txtStdId.Text);
+            string encrypted_student_Name = Convert.ToBase64String(stname);
+
+            byte[] classsec = System.Text.ASCIIEncoding.ASCII.GetBytes(txtClassSec.Text);
+            string encrypted_student_ClassSec = Convert.ToBase64String(classsec);
+
+
+            //var baseurl = "http://trainingaims.thecityschool.edu.pk/";
+            var baseurl = "http://tcsaims.com/";
+
+            //need to be open when check
+            //var urlconfirmation = baseurl+"PresentationLayer/Bifurcation_Confirmation.aspx?St_Id=" + encrypted_student_Id + "&Cl_Id=" + encrypted_class_Id + "&Sess_Id=" + encrypted_session_Id + "&St_Nm=" + encrypted_student_Name + "&St_ClS=" + encrypted_student_ClassSec;//ddlStudent.SelectedValue
+            if (getclass == "12" && getterm == "2" && (ddl_region.SelectedValue == "30000000" || ddl_region.SelectedValue == "40000000"))
+            {
+                Body += "<p style='margin:0 0 12px 0;font-size:14px;line-height:24px;font-family:Arial,sans-serif;'>Please press confirm button to submit your request.</p>";
+                var urlnewconfirmation = "http://www.tcsaims.com/PresentationLayer/New_Bifurcation_Confirmation.aspx?St_Id=" + encrypted_student_Id + "&Cl_Id=" + encrypted_class_Id + "&Sess_Id=" + encrypted_session_Id + "&St_Nm=" + encrypted_student_Name + "&St_ClS=" + encrypted_student_ClassSec;
+                //var urlnewconfirmation = "http://localhost:50091/PresentationLayer/New_Bifurcation_Confirmation.aspx?St_Id=" + encrypted_student_Id + "&Cl_Id=" + encrypted_class_Id + "&Sess_Id=" + encrypted_session_Id + "&St_Nm=" + encrypted_student_Name + "&St_ClS=" + encrypted_student_ClassSec;
+                Body += "<p style='text-align:center'><b><a style='color: #fff;text-decoration:none;border:none;padding:10px 100px !important;background:#0C4DA2;border-radius:10px;' href='" + urlnewconfirmation + "'>Confirm</a></b></p>";
+            }
+            else if (getclass == "12" && getterm == "2" && (ddl_region.SelectedValue == "20000000") && (ddl_center.SelectedValue == "20201002" || ddl_center.SelectedValue == "20201005"))
+            {
+                Body += "<p style='margin:0 0 12px 0;font-size:14px;line-height:24px;font-family:Arial,sans-serif;'>Please press confirm button to submit your request.</p>";
+                var urlnewconfirmation = "http://www.tcsaims.com/PresentationLayer/New_Bifurcation_Confirmation.aspx?St_Id=" + encrypted_student_Id + "&Cl_Id=" + encrypted_class_Id + "&Sess_Id=" + encrypted_session_Id + "&St_Nm=" + encrypted_student_Name + "&St_ClS=" + encrypted_student_ClassSec;
+                //var urlnewconfirmation = "http://localhost:50091/PresentationLayer/New_Bifurcation_Confirmation.aspx?St_Id=" + encrypted_student_Id + "&Cl_Id=" + encrypted_class_Id + "&Sess_Id=" + encrypted_session_Id + "&St_Nm=" + encrypted_student_Name + "&St_ClS=" + encrypted_student_ClassSec;
+                Body += "<p style='text-align:center'><b><a style='color: #fff;text-decoration:none;border:none;padding:10px 100px !important;background:#0C4DA2;border-radius:10px;' href='" + urlnewconfirmation + "'>Confirm</a></b></p>";
+            }
+            else
+            {
+                //2
+                Body += "<p style='margin:0 0 12px 0;font-size:14px;line-height:24px;font-family:Arial,sans-serif;'>Please press the confirm button to submit your request to continue the O-Level route for your child.</p>";
+                //var url = "http://localhost:50091/PresentationLayer/Bifurcation_Confirmation.aspx?St_Id=" + encrypted_student_Id + "&Cl_Id=" + encrypted_class_Id + "&Sess_Id=" + encrypted_session_Id + "&St_Nm=" + encrypted_student_Name + "&St_ClS=" + encrypted_student_ClassSec;//ddlStudent.SelectedValue
+                var url = "http://www.tcsaims.com/PresentationLayer/Bifurcation_Confirmation.aspx?St_Id=" + encrypted_student_Id + "&Cl_Id=" + encrypted_class_Id + "&Sess_Id=" + encrypted_session_Id + "&St_Nm=" + encrypted_student_Name + "&St_ClS=" + encrypted_student_ClassSec;//ddlStudent.SelectedValue
+                Body += "<p style='text-align:center'><b><a style='color: #fff;text-decoration:none;border:none;padding:10px 100px !important;background:#0C4DA2;border-radius:10px;' href='" + url + "'>Confirm</a></b></p>";
+            }
+
+            //var urliep = baseurl+"PresentationLayer/tcs/Parent_IEP_Form.aspx?s=" + txtStdId.Text + "&ses=" + Session["Session_Id"].ToString();
+            // Body += "<p style='text-align:center'><b><a style='color: #fff text-decoration:none border:none padding:10px 100px !important background:#0C4DA2 border-radius:10px 'href='" + urliep + "' >Click to view IEP form</a></b></p> ";
+            //Body += "<p style='text-align:center'><b><a style='color: #fff;text-decoration:none;border:none;padding:10px 100px !important;background:#0C4DA2;border-radius:10px;' href='" + urlconfirmation + "'>Confirm</a></b></p>";
+
+            Body += "</td>";
+            Body += "</tr>";
+
+            Body += "</table>";
+            Body += "</td>";
+            Body += "</tr>";
+            Body += "<tr>";
+            Body += "<td style='padding:30px;background:#FBEE26;'>";
+            Body += "<table role='presentation' style='width:100%;border-collapse:collapse;border:0;border-spacing:0;font-size:9px;font-family:Arial,sans-serif;'>";
+            Body += "<tr>";
+            Body += "<td style='padding:0;width:100%;' align='Center'>";
+            Body += "<p style='margin:0;font-size:14px;line-height:16px;font-family:Arial,sans-serif;color:#000;font-weight:bold'>The City School Management</p>";
+
+            Body += "</td>";
+
+            Body += "</tr>";
+            Body += "</table>";
+            Body += "</td>";
+            Body += "</tr>";
+            Body += "</table>";
+            Body += "</td>";
+            Body += "</tr>";
+            Body += "</table>";
+            Body += "</body>";
+            /*****HTML TEMPLET*********/
+
+
+            //var Password = "Pakistan!@#$";//gmail//"@U13K$@CgMlG";
+            //var Password = ConfigurationManager.AppSettings["AppNotificationPwd"].ToString(); ;
+
+            try
+            {
+                using (MailMessage mm = new MailMessage(Email.Address, To))
                 {
-                    // ImpromptuHelper.ShowPrompt(dt.Rows[0][0].ToString());
-                    /*****************EMAIL***************/
-
-                    var getclass = ViewState["Class_Id"].ToString(); //ViewState["classids"].ToString();
-                    var getterm = ViewState["TermGroupID"].ToString();//ViewState["TermGroupID"].ToString();
-
-                    MailMessage mail = new MailMessage();
-                    var Body = "";
-                    var To = "";
-                    var CC = "";
-                    var CC2 = "";
-                    //var Email = new MailAddress("AppNotifications@csn.edu.pk", "The City School");
-		    var Email = new MailAddress("noreply@csn.edu.pk", "The City School");
-                    To = dt1.Rows[0][2].ToString();
-                    CC =  dt1.Rows[0]["CenterEmail"].ToString();
-                    CC2 = "ManageAcknowledgement@csn.edu.pk";
-                    // CC = "ManageAcknowledgement@csn.edu.pk";  //
-                    string Subject = "";
-                    if (getclass == "13" && getterm == "1")
-                        Subject = "Undertaking – Class 9 (1st term)";
-                    if (getclass == "13" && getterm == "2")
-                        Subject = "Undertaking – Class 9 (2nd term)";
-                    else if (getclass == "12" && getterm == "1")
-                        Subject = txtStdId.Text + " - Application – Moving from Class 9 Matric to the O-Level route";
-
-                    else if (getclass == "12" && getterm == "2" && ddl_region.SelectedValue == "20000000")
-                        Subject = txtStdId.Text + " - Application – Moving from Class 9 Matric to the O-Level route";
-                    else if (getclass == "12" && getterm == "2" && (ddl_region.SelectedValue == "30000000" || ddl_region.SelectedValue == "40000000"))
-                        Subject = txtStdId.Text +" - Application – Continue O-level route (Class 8 - 2nd term)";
-                    else if (getclass == "14" && getterm == "1")
-                        Subject = "Undertaking – Class 10 (1st term)";
-
-
-                    var onclassbase = "";
-                    /***********HTML TEMPLET***/
-                    Body += "<body style='margin:0;padding:0;'>";
-                    Body += "<table role='presentation' style='width:100%;border-collapse:collapse;border:0;border-spacing:0;background:#ffffff;'>";
-                    Body += "<tr>";
-                    Body += "<td align='center' style='padding:0;'>";
-                    Body += "<table role='presentation' style='width:602px;border-collapse:collapse;border:1px solid #cccccc;border-spacing:0;text-align:left;'>";
-                    Body += "<tr>";
-                    Body += "<td align='center' style='padding:40px 0 30px 0;background:#0c4da2;'>";//#0c4da2
-
-                    //Body += "< img src = 'http://tcsresults.csn.edu.pk/ReportCard/images/logo.png' alt = '' width = '300' style = 'height:auto;display:block;' /> ";
-                    Body += "<img src = 'http://tcsresults.csn.edu.pk/ReportCard/images/logo.png'>";
-                    Body += "</td>";
-                    Body += "</tr>";
-                    Body += "<tr>";
-                    Body += "<td style='padding:36px 30px 42px 30px;'>";
-                    Body += "<table role='presentation' style='width:100%;border-collapse:collapse;border:0;border-spacing:0;'>";
-                    Body += "<tr>";
-                    Body += "<td style='padding:0 0 36px 0;color:#153643;'>";
-                    Body += "<h1 style='font-size:24px;margin:0 0 20px 0;font-family:Arial,sans-serif;'>Dear Parent/Guardian</h1>";
-
-                    Body += "<p style='margin:0 0 12px 0;font-size:16px;line-height:24px;font-family:Arial,sans-serif;'>If you wish for your child to continue on the O-Level route, then please read & submit the application for undertaking.</p><br/>";
-                    Body += "<p style='margin: 0 0 12px 0font - size:14pxline - height:24pxfont - family:Arial,sans - serif'>I, as a parent / guardian of <strong> " + dt1.Rows[0]["First_Name"].ToString() + "</strong> ERP # " + dt1.Rows[0]["Student_No"].ToString() + " </strong> studying in " + dt1.Rows[0]["Class_Name"].ToString() + "-" + ViewState["Section_Name"].ToString() + "</strong>  " +
-                        "confirm that I have fully read and understood the points below. My acknowledgement indicates full agreement and consent to apply the appropriate consequences stated:</p> ";
-
-
-                    /**on basis change**/
-                    /**CLASS UNDERTAKING**/
-                    //Mid Year Bifurcation: For CR and NR only. (Bifurcation Undertaking Email)
-                    if (getclass == "12" && getterm == "1")
+                    mm.Subject = Subject;
+                    mm.From = new MailAddress("AppNotifications@csn.edu.pk", "The City School");
+                    //mm.From = new MailAddress("noreply@csn.edu.pk", "The City School");
+                    if (CC != "")
                     {
-
-                        onclassbase += "<p style='margin:0 0 12px 0;font-size:14px;line-height:24px;font-family:Arial,sans-serif;'> 1) The school, after careful deliberation and consideration of the Class 8 Results, has advised me to transfer my child to the Matric system.</p>";
-                        onclassbase += "<p style='margin:0 0 12px 0;font-size:14px;line-height:24px;font-family:Arial,sans-serif;'> 2) However, I am insisting that my child should continue the O-Level route.</p>";
-                        onclassbase += "<p style='margin:0 0 12px 0;font-size:14px;line-height:24px;font-family:Arial,sans-serif;'> 3) I take the responsibility that my child will meet the school’s required attainment levels.</p>";
-                        onclassbase += "<p style='margin:0 0 12px 0;font-size:14px;line-height:24px;font-family:Arial,sans-serif;'> 4) Failure to meet the minimum requirements in the internal exams may result in my child’s private registration for his/her CAIE Exams.</p>";
+                        mm.CC.Add(new MailAddress(CC));
                     }
-                    // End Of Year Bifurcation: For SR Only. (Bifurcation Undertaking Email)
-                    if (getclass == "12" && getterm == "2" && ddl_region.SelectedValue == "20000000")
+                    //mm.Bcc.Add("muhammad.maroof1@csn.edu.pk");
+                    // need to  be open after check
+                    mm.CC.Add(new MailAddress(CC2));
+                    //mm.CC.Add(new MailAddress(CC3));
+                    //mm.From = new MailAddress("AppNotifications@csn.edu.pk", "The City School");
+
+                    mm.Body = Body;
+                    mm.IsBodyHtml = true;
+                    using (SmtpClient smtp = new SmtpClient())
                     {
-
-                        onclassbase += "<p style='margin:0 0 12px 0;font-size:14px;line-height:24px;font-family:Arial,sans-serif;'> 1) The school, after careful deliberation and consideration of the Class 8 Results, has advised me to transfer my child to the Matric system.</p>";
-                        onclassbase += "<p style='margin:0 0 12px 0;font-size:14px;line-height:24px;font-family:Arial,sans-serif;'> 2) However, I am insisting that my child should continue the O-Level route.</p>";
-                        onclassbase += "<p style='margin:0 0 12px 0;font-size:14px;line-height:24px;font-family:Arial,sans-serif;'> 3) I take the responsibility that my child will meet the school’s required attainment levels.</p>";
-                        onclassbase += "<p style='margin:0 0 12px 0;font-size:14px;line-height:24px;font-family:Arial,sans-serif;'> 4) Failure to meet the minimum requirements in the internal exams may result in my child’s private registration for his/her CAIE Exams.</p>";
-                    }
-                    //End Of Year(CR and NR): Undertaking Email for promotion
-                    if (getclass == "12" && getterm == "2" && (ddl_region.SelectedValue == "30000000" || ddl_region.SelectedValue == "40000000"))
-                    {
-
-                        onclassbase += "<p style='margin:0 0 12px 0;font-size:14px;line-height:24px;font-family:Arial,sans-serif;'> 1) The school has clearly explained that my child’s class 8 (2nd term) result is not up to the mark.</p>";
-                        onclassbase += "<p style='margin:0 0 12px 0;font-size:14px;line-height:24px;font-family:Arial,sans-serif;'> 2) I take the responsibility that my child will meet the school’s required attainment levels.</p>";
-                        onclassbase += "<p style='margin:0 0 12px 0;font-size:14px;line-height:24px;font-family:Arial,sans-serif;'> 3) Failure to meet the minimum requirements in the internal exams may result in my child’s private registration for his/her CAIE Exams</p>";
-
-                    }
-
-                    if (getclass == "13" && getterm == "2")
-                    {
-
-
-                        onclassbase = "<p style='margin:0 0 12px 0;font-size:14px;line-height:24px;font-family:Arial,sans-serif;'>" +
-                            " 1) The school has clearly explained that my child’s class 9 (2nd term) result is not up to the mark.</p>" +
-                            "<p style='margin:0 0 12px 0;font-size:14px;line-height:24px;font-family:Arial,sans-serif;'> " +
-                            "2) I take the responsibility that my child will meet the school’s required attainment levels.</p>" +
-                             "<p style='margin:0 0 12px 0;font-size:14px;line-height:24px;font-family:Arial,sans-serif;'> " +
-                            "3) Failure to meet the minimum requirements in the internal exams may result in my child’s private registration for his/her CAIE Exams.</p>";
-
-                    }
-
-                    if (getclass == "13" && getterm == "1")
-                    {
-
-
-                        onclassbase = "<p style='margin:0 0 12px 0;font-size:14px;line-height:24px;font-family:Arial,sans-serif;'> " +
-                            "1) The school has clearly explained that my child’s class 9 (1st term) result is not up to the mark." +
-                              "<p style='margin:0 0 12px 0;font-size:14px;line-height:24px;font-family:Arial,sans-serif;'> " +
-                       " 2) I take the responsibility that my child will meet the school’s required attainment levels.+ " +
-                         "<p style='margin:0 0 12px 0;font-size:14px;line-height:24px;font-family:Arial,sans-serif;'> " +
-                        "3) Failure to meet the minimum requirements in the internal exams may result in my child’s private registration for his/her CAIE Exams. </p>";
-
-                    }
-
-
-                    if (getclass == "14" && getterm == "2")
-                    {
-
-                        onclassbase = "<p style='margin:0 0 12px 0;font-size:14px;line-height:24px;font-family:Arial,sans-serif;'> 1) The school has clearly explained that my child’s class 10 (1st term) result is not up to the mark.</p>" +
-                            "<p style='margin:0 0 12px 0;font-size:14px;line-height:24px;font-family:Arial,sans-serif;'> " +
-                            "2) I take the responsibility that my child will meet the school’s required attainment levels.</li>" +
-                            "<p style='margin:0 0 12px 0;font-size:14px;line-height:24px;font-family:Arial,sans-serif;'> " +
-                            "<li> Failure to meet the minimum requirements in the upcoming CAIE and the internal exams may result in my child’s private registration for his/her CAIE Exams next year.</p>";
-
-                    }
-                    if (getclass == "14" && getterm == "1")
-                    {
-
-                        onclassbase = "<p style='margin:0 0 12px 0;font-size:14px;line-height:24px;font-family:Arial,sans-serif;'> 1) That the school, after careful deliberation and consideration of the Class 9 EOY Results, had provisionally promoted my child to Year 10.</p><p style='margin:0 0 12px 0;font-size:14px;line-height:24px;font-family:Arial,sans-serif;'> 2) My child has not passed the Class 10 Mid-year examinations with the minimum required attainment levels and is provisionally being allowed to appear for Year 10 Mock examinations with the condition of attaining overall 60%. Failing to meet the minimum requirements may result in my child being privatized at the time of final Cambridge exams.</p>";
-
-                    }
-
-                    if (getclass == "15" && getterm == "2")
-                    {
-
-                        onclassbase = "<p style='margin:0 0 12px 0;font-size:14px;line-height:24px;font-family:Arial,sans-serif;'> 1) That the school, after careful deliberation and consideration of the Class 11 Mid-year examination Results, had provisionally allowed my child to sit for Year 11 Mock examinations. </p><p style='margin:0 0 12px 0;font-size:14px;line-height:24px;font-family:Arial,sans-serif;'> 2) My child has not passed the Class 11 Mock examinations with the minimum required attainment levels and is going to be privatized for Cambridge Exams.</p>";
-
-                    }
-
-                    if (getclass == "15" && getterm == "1")
-                    {
-
-                        onclassbase = "<p style='margin:0 0 12px 0;font-size:14px;line-height:24px;font-family:Arial,sans-serif;'> 1) That the school, after careful deliberation and consideration of the Class 10 Mocks and Cambridge Results, had provisionally promoted my child to Year 11.</p><p style='margin:0 0 12px 0;font-size:14px;line-height:24px;font-family:Arial,sans-serif;'> 2) My child has not passed the Class 11 Mid-year examinations with the minimum required attainment levels and is provisionally being allowed to appear for Year 11 Mock examinations with the condition of attaining overall 60%. Failing to meet the minimum requirements may result in my child being privatized at the time of final Cambridge exams.</p>";
-
-                    }
-                    /**CLASS UNDERTAKING**/
-
-
-
-                    //Body += "<p style='margin:0 0 12px 0;font-size:14px;line-height:24px;font-family:Arial,sans-serif;'>1) That the school, after careful deliberation and consideration of the " + spn_class.InnerText + " Results, has advised me to transfer my child to the Matric system.</p>";
-                    //Body += "<p style='margin:0 0 12px 0;font-size:14px;line-height:24px;font-family:Arial,sans-serif;'>2) However, at my insistence, the school has provisionally allowed my child to sit in " + spn_class.InnerText + " and take final examinations for the O level stream.</p>";
-                    //Body += "<p style='margin:0 0 12px 0;font-size:14px;line-height:24px;font-family:Arial,sans-serif;'>3) Accept the responsibility that my child must pass the " + spn_class.InnerText + " Annual examinations with the minimum required attainment levels. Failing to meet the minimum requirements may result in my child being privatized at the time of final Cambridge exams.</p>";
-                    //Body += "<p style='margin:0 0 12px 0;font-size:14px;line-height:24px;font-family:Arial,sans-serif;'>4) If at any point I want my child to join Class 9M, I will take full responsibility for the missed taught course.</p>";
-                    //Body += "<p style='margin:0 0 12px 0;font-size:14px;line-height:24px;font-family:Arial,sans-serif;'>5) I understand that I will also be responsible to register my child with the relevant Matric Board paying an additional fee, if applicable.</p>";
-
-                    Body += onclassbase;
-                    //  Body += "<p style='margin:0 0 12px 0;font-size:14px;line-height:24px;font-family:Arial,sans-serif;'>You can also review the Individual Education Plan we have created to support your child’s progress. Once you have reviewed it, please acknowledge it.</p> ";
-
-                    Body += "<p style='margin:0 0 12px 0;font-size:14px;line-height:24px;font-family:Arial,sans-serif;'>Please press confirm button to submit your request.</p>";
-
-
-
-                    byte[] b = System.Text.ASCIIEncoding.ASCII.GetBytes(txtStdId.Text);
-                    string encrypted_student_Id = Convert.ToBase64String(b);
-
-                    byte[] c = System.Text.ASCIIEncoding.ASCII.GetBytes(ViewState["Class_Id"].ToString());
-                    string encrypted_class_Id = Convert.ToBase64String(c);
-
-                    byte[] sess = System.Text.ASCIIEncoding.ASCII.GetBytes(Session["Session_Id"].ToString());
-                    string encrypted_session_Id = Convert.ToBase64String(sess);
-
-
-                    byte[] stname = System.Text.ASCIIEncoding.ASCII.GetBytes(txtStdId.Text);
-                    string encrypted_student_Name = Convert.ToBase64String(stname);
-
-                    byte[] classsec = System.Text.ASCIIEncoding.ASCII.GetBytes(txtClassSec.Text);
-                    string encrypted_student_ClassSec = Convert.ToBase64String(classsec);
-
-
-                    //var baseurl = "http://trainingaims.thecityschool.edu.pk/";
-                    var baseurl = "http://tcsaims.com/";
-                    var urlconfirmation = baseurl+"PresentationLayer/Bifurcation_Confirmation.aspx?St_Id=" + encrypted_student_Id + "&Cl_Id=" + encrypted_class_Id + "&Sess_Id=" + encrypted_session_Id + "&St_Nm=" + encrypted_student_Name + "&St_ClS=" + encrypted_student_ClassSec;//ddlStudent.SelectedValue
-                     // var url = "http://localhost:50091/PresentationLayer/Bifurcation_Confirmation.aspx?St_Id=" + encrypted_student_Id+"&Cl_Id="+ encrypted_class_Id+"&Sess_Id="+ encrypted_session_Id+"&St_Nm=" + encrypted_student_Name + "&St_ClS=" + encrypted_student_ClassSec;//ddlStudent.SelectedValue
-                     // var urlconfirmation = "http://tcsaims.com/PresentationLayer/Bifurcation_Confirmation.aspx?St_Id=" + encrypted_student_Id + "&Cl_Id=" + encrypted_class_Id + "&Sess_Id=" + encrypted_session_Id + "&St_Nm=" + encrypted_student_Name + "&St_ClS=" + encrypted_student_ClassSec;//ddlStudent.SelectedValue
-                    var urliep = baseurl+"PresentationLayer/tcs/Parent_IEP_Form.aspx?s=" + txtStdId.Text + "&ses=" + Session["Session_Id"].ToString();
-                    // Body += "<p style='text-align:center'><b><a style='color: #fff text-decoration:none border:none padding:10px 100px !important background:#0C4DA2 border-radius:10px 'href='" + urliep + "' >Click to view IEP form</a></b></p> ";
-                    Body += "<p style='text-align:center'><b><a style='color: #fff;text-decoration:none;border:none;padding:10px 100px !important;background:#0C4DA2;border-radius:10px;' href='" + urlconfirmation + "'>Confirm</a></b></p>";
-
-                    Body += "</td>";
-                    Body += "</tr>";
-
-                    Body += "</table>";
-                    Body += "</td>";
-                    Body += "</tr>";
-                    Body += "<tr>";
-                    Body += "<td style='padding:30px;background:#FBEE26;'>";
-                    Body += "<table role='presentation' style='width:100%;border-collapse:collapse;border:0;border-spacing:0;font-size:9px;font-family:Arial,sans-serif;'>";
-                    Body += "<tr>";
-                    Body += "<td style='padding:0;width:100%;' align='Center'>";
-                    Body += "<p style='margin:0;font-size:14px;line-height:16px;font-family:Arial,sans-serif;color:#000;font-weight:bold'>The City School Management</p>";
-
-                    Body += "</td>";
-
-                    Body += "</tr>";
-                    Body += "</table>";
-                    Body += "</td>";
-                    Body += "</tr>";
-                    Body += "</table>";
-                    Body += "</td>";
-                    Body += "</tr>";
-                    Body += "</table>";
-                    Body += "</body>";
-                    /*****HTML TEMPLET*********/
-
-
-                    //var Password = "Pakistan!@#$";//gmail//"@U13K$@CgMlG";
-                    var Password = ConfigurationManager.AppSettings["AppNotificationPwd"].ToString(); ;
-
-                    try
-                    {
-                        using (MailMessage mm = new MailMessage(Email.Address, To))
+                        smtp.Host = "smtp.office365.com";
+                        smtp.EnableSsl = true;
+                        smtp.Port = 587;
+                        smtp.UseDefaultCredentials = false;
+                        smtp.Credentials =
+                        new NetworkCredential("AppNotifications@csn.edu.pk", "Jup31963");
+                        //new NetworkCredential("noreply@csn.edu.pk", "Master@123");
+                        smtp.Timeout = 1000000000;
+                        // Enable verbose logging
+                        smtp.DeliveryMethod = SmtpDeliveryMethod.Network;
+                        smtp.EnableSsl = true;
+                        smtp.TargetName = "STARTTLS/smtp.office365.com";
+                        // Capture additional log information
+                        smtp.ServicePoint.MaxIdleTime = 1; smtp.ServicePoint.ConnectionLimit = 1; ServicePointManager.SecurityProtocol = SecurityProtocolType.Tls12;
+                        try
                         {
-                            mm.Subject = Subject;
-                            //mm.From = new MailAddress("AppNotifications@csn.edu.pk", "The City School");
-				mm.From = new MailAddress("noreply@csn.edu.pk", "The City School");
-                            if (CC != "")
+                            smtp.Send(mm);
+                            if (getclass == "12" && getterm == "2" && (ddl_region.SelectedValue == "30000000" || ddl_region.SelectedValue == "40000000"))
                             {
-                                mm.CC.Add(new MailAddress(CC));
+                                DataTable dtnew = SP_REMINDER_EMAIL_IEP_BIFURCATION(Session["session_id"].ToString(), dt1.Rows[0]["center_id"].ToString(), dt1.Rows[0]["Student_No"].ToString(), dt1.Rows[0]["First_Name"].ToString(), dt1.Rows[0]["class_id"].ToString(), "Successfully Sent", int.Parse(dt1.Rows[0]["Region_Id"].ToString()), int.Parse(ddlterm.SelectedValue));
+                                dtnew.Dispose();
                             }
-                   
-                            mm.CC.Add(new MailAddress(CC2));
-                            //mm.From = new MailAddress("AppNotifications@csn.edu.pk", "The City School");
-
-                            mm.Body = Body;
-
-
-                            mm.IsBodyHtml = true;
-                            using (SmtpClient smtp = new SmtpClient())
+                            else if (getclass == "12" && getterm == "2" && (ddl_region.SelectedValue == "20000000") && (ddl_center.SelectedValue == "20201002" || ddl_center.SelectedValue == "20201005"))
                             {
-                                // smtp.Host = "smtp.gmail.com"; //"mail.bizar.pk";
-                                //smtp.Host = "smtp.office365.com"; //"mail.bizar.pk";
-                                 smtp.Host = "10.1.1.120";
-                               smtp.EnableSsl = false;
-                                NetworkCredential NetworkCred = new NetworkCredential(Email.Address, Password);
-
-                                smtp.UseDefaultCredentials = false;
-                                smtp.Credentials = NetworkCred;
-                                smtp.Port = 25;
-                                smtp.Timeout = 1000000000;
-
-
-
-                                try
-                                {
-                                    DataTable dt = ExecuteProcedure("IN", "", ddlSession.SelectedValue.ToString(), dt1.Rows[0]["center_id"].ToString(), dt1.Rows[0]["Student_No"].ToString(), dt1.Rows[0]["First_Name"].ToString(), ddlClass.SelectedValue.ToString(), 1);
-                                    dt.Dispose();
-                                    smtp.Send(mm);
-
-
-
-                                }
-                                catch (SmtpFailedRecipientException ex)
-                                {
-
-                                }
-
+                                DataTable dtnew = SP_REMINDER_EMAIL_IEP_BIFURCATION(Session["session_id"].ToString(), dt1.Rows[0]["center_id"].ToString(), dt1.Rows[0]["Student_No"].ToString(), dt1.Rows[0]["First_Name"].ToString(), dt1.Rows[0]["class_id"].ToString(), "Successfully Sent", int.Parse(dt1.Rows[0]["Region_Id"].ToString()), int.Parse(ddlterm.SelectedValue));
+                                dtnew.Dispose();
+                            }
+                            else
+                            {
+                                DataTable dt = ExecuteProcedure("IN", "", ddlSession.SelectedValue.ToString(), dt1.Rows[0]["center_id"].ToString(), dt1.Rows[0]["Student_No"].ToString(), dt1.Rows[0]["First_Name"].ToString(), ddlClass.SelectedValue.ToString(), 1);
+                                dt.Dispose();
                             }
                         }
+                        catch
+                        (SmtpException smtpEx)
+                        {
+                            Console.WriteLine(
+                        "SMTP Exception: "
+                        + smtpEx.Message);
+                            if
+                            (smtpEx.InnerException != null)
+                            {
+                                Console.WriteLine(
+                            "Inner Exception: "
+                            + smtpEx.InnerException.Message);
+                            }
+                        }
+
+                        catch
+                        (Exception ex)
+                        {
+                            Console.WriteLine(
+                        "General Exception: "
+                        + ex.Message);
+                        }
                     }
-                    catch (Exception ex)
-                    {
-                        DataTable dt = ExecuteProcedure("IN", "", Session["session_id"].ToString(), dt1.Rows[0]["center_id"].ToString(), dt1.Rows[0]["Student_No"].ToString(), dt1.Rows[0]["First_Name"].ToString(), dt1.Rows[0]["class_id"].ToString(), 0);
-                        dt.Dispose();
-                    }
-
-                    /********EMAIL******************/
-                    ViewState["dtDetails"] = null;
-                    BindGrid();
                 }
-                else
-                {
+            }
+            catch (Exception ex)
+            {
+                DataTable dt = ExecuteProcedure("IN", "", Session["session_id"].ToString(), dt1.Rows[0]["center_id"].ToString(), dt1.Rows[0]["Student_No"].ToString(), dt1.Rows[0]["First_Name"].ToString(), dt1.Rows[0]["class_id"].ToString(), 0);
+                dt.Dispose();
+            }
 
-                }
-          //  }
-       // }
-        //else
-        //{
+            /********EMAIL******************/
+            ViewState["dtDetails"] = null;
+            if (getclass == "12" && getterm == "2" && (ddl_region.SelectedValue == "30000000" || ddl_region.SelectedValue == "40000000"))
+            {
+                BindGridNew();
+            }
+            else if (getclass == "12" && getterm == "2" && (ddl_region.SelectedValue == "20000000") && (ddl_center.SelectedValue == "20201002" || ddl_center.SelectedValue == "20201005"))
+            {
+                BindGridNew();
+            }
+            else
+            {
+                BindGrid();
+            }
 
-        //    lblerror.Text = "Incompleted IEP Can't send Bifurcation Email";
-        //    lblerror.CssClass = "label label-danger text-center";
-        //}
+
+        }
+        else
+        {
+
+        }
     }
+    DataTable SP_REMINDER_EMAIL_IEP_BIFURCATION(string sSessionID, string sCenterID, string SStudentID = "", string sStudentName = "", string sClassID = "", string sRemarks = "", int sRegionId = 0, int term = 0)
+    {
+        DataTable DT_Data = null;
+        obj_Access.CreateProcedureCommand("SP_REMINDER_EMAIL_IEP_AUTOMATED_STATUS");
+        obj_Access.AddParameter("P_SessionID", sSessionID, DataAccess.SQLParameterType.VarChar, true);//
+        obj_Access.AddParameter("P_CenterID", sCenterID, DataAccess.SQLParameterType.VarChar, true);
+        obj_Access.AddParameter("P_StudentID", SStudentID, DataAccess.SQLParameterType.VarChar, true);
+        obj_Access.AddParameter("P_StudentName", sStudentName, DataAccess.SQLParameterType.VarChar, true);
+        obj_Access.AddParameter("P_ClassID", sClassID, DataAccess.SQLParameterType.VarChar, true);
+        obj_Access.AddParameter("P_Term", term, DataAccess.SQLParameterType.VarChar, true);
+        obj_Access.AddParameter("P_SentRemarks", sRemarks, DataAccess.SQLParameterType.VarChar, true);
+        obj_Access.AddParameter("P_RegionId", sRegionId, DataAccess.SQLParameterType.VarChar, true);
+        //obj_Access.AddParameter("P_FatherEmail", lblfatheremail.Text.Trim(), DataAccess.SQLParameterType.VarChar, true); 
 
+
+        try
+        {
+            DT_Data = obj_Access.ExecuteDataTable();
+        }
+        catch (Exception ex)
+        {
+            Session["error"] = ex.Message;
+            Response.Redirect("~/presentationlayer/ErrorPage.aspx", false);
+        }
+        finally
+        {
+            if (DT_Data != null) { DT_Data.Dispose(); }
+        }
+        return DT_Data;
+    }
     protected void btn_view_Undertkng_Click(object sender, EventArgs e)
     {
         Button btn = (Button)(sender);
@@ -1749,8 +2111,8 @@ public partial class PresentationLayer_BifurcationPromotedRequest : System.Web.U
 
                     Body += onclassbase;
                     //Body += "<p style='margin:0 0 12px 0;font-size:14px;line-height:24px;font-family:Arial,sans-serif;'>You can also review the Individual Education Plan we have created to support your child’s progress. Once you have reviewed it, please acknowledge it.</p> ";
-
-                    Body += "<p style='margin:0 0 12px 0;font-size:14px;line-height:24px;font-family:Arial,sans-serif;'>Please press confirm button to submit your request.</p>";
+                    //1
+                    
 
 
 
@@ -1872,4 +2234,6 @@ public partial class PresentationLayer_BifurcationPromotedRequest : System.Web.U
             // lblerror.CssClass = "label label-danger text-center";
         }
     }
+
+   
 }

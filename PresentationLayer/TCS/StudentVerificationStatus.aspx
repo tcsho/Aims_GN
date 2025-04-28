@@ -3,12 +3,14 @@
 
 <%@ Register Assembly="AjaxControlToolkit" Namespace="AjaxControlToolkit" TagPrefix="cc1" %>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="Server">
+ 
     <cc1:ToolkitScriptManager ID="ToolkitScriptManager1" runat="server">
         <Scripts>
             <asp:ScriptReference Path="~/Scripts/jquery-1.4.1.min.js" />
             <asp:ScriptReference Path="~/Scripts/jquery-impromptu.2.7.min.js" />
         </Scripts>
     </cc1:ToolkitScriptManager>
+ 
     <asp:UpdatePanel ID="UpdatePanel1" runat="server" UpdateMode="Always">
         <ContentTemplate>
             <script type="text/javascript">
@@ -50,7 +52,7 @@
 
                                             ] // ******************* end of button master Collection
                                     } // ******************* end of tableTools
-                                    , "aLengthMenu": [[10, 25, 50, 100, 200, -1], [10, 25, 50, 100, 200, "All"]], "iDisplayLength": 50, 'bLengthChange': true // ,"bJQueryUI":true
+                                    , "aLengthMenu": [[-1], ["All"]] // ,"bJQueryUI":true
                                     , "order": [[0, "asc"]], "paging": true, "ordering": true, "searching": true, "info": true, "scrollX": false //, fixedHeader: true , "stateSave": true
                                     , //--- Dynamic Language---------
                                     "oLanguage": {

@@ -177,13 +177,7 @@
                 </p>
                 <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 ">
                     <div class="col-lg-8 col-md-8 col-sm-8 col-xs-12 form-group">
-                        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-                            <asp:Label ID="Label3" runat="server" CssClass="col-lg-6 col-md-6 col-sm-6 col-xs-12 TextLabelMandatory40" Text="*Region: "> </asp:Label>
-                            <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
-                                <asp:DropDownList ID="list_region" runat="server" CssClass="dropdownlist" AutoPostBack="True" Width="218px">
-                                </asp:DropDownList>
-                            </div>
-                        </div>
+
                         <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 ">
                             <asp:Label ID="lblsession" runat="server" CssClass="col-lg-6 col-md-6 col-sm-6 col-xs-12 TextLabelMandatory40" Text="*Session: "> </asp:Label>
                             <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">

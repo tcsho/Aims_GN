@@ -126,26 +126,34 @@
 </div>--%>
 
             <div class="row margintp">
-  
+    <!-- Group 1 Heading -->
    
                 <div class="col-lg-12 col-md-4 col-sm-12 col-xs-12">
         <div class="heading-container">
-            <h2 class="heading heading5 hind-font medium-font-weight">Parents</h2>
+            <h2 class="heading heading5 hind-font medium-font-weight">Registered & Unregistered Parents</h2>
         </div>
        <div class="row">
-              <div class="col-lg-4 col-md-4 col-sm-6 col-xs-12">
+    <div class="col-lg-4 col-md-4 col-sm-6 col-xs-12">
+        <div class="c-dashboardInfo">
+            <div class="wrap">
+                <h4 class="heading heading5 hind-font medium-font-weight c-dashboardInfo__title">Total Parents</h4>
+                <span class="hind-font caption-12 c-dashboardInfo__count total_bifr" style="color:#40C057;">
+                    <%-- <img src="../../regdb.png" alt="Icon"/>--%><asp:Label ID="lbltotalparents" runat="server" Text=""></asp:Label>
+                </span>
+            </div>
+        </div>
+    </div>
+               <div class="col-lg-4 col-md-4 col-sm-6 col-xs-12">
         <div class="c-dashboardInfo" id="specific-dashboard2" style="background:linear-gradient(#FA5252)">
             <div class="wrap">
-                <h4 class="heading heading5 hind-font medium-font-weight c-dashboardInfo__title">Registered</h4>
+                <h4 class="heading heading5 hind-font medium-font-weight c-dashboardInfo__title">Registered Parents</h4>
                 <span class="hind-font caption-12 c-dashboardInfo__count total_under" style="color:#FA5252;">
-                   
+                    <%--img src="../../unregdb.png" alt="Icon"/>--%>
                         <asp:Label ID="lblregisteredparents" runat="server" Text="" ></asp:Label>
                 </span>
             </div>
         </div>
     </div>
-  
-            
     <div class="col-lg-4 col-md-4 col-sm-6 col-xs-12">
         <div class="c-dashboardInfo" id="specific-dashboard" style="background:linear-gradient(#FA5252)">
             <div class="wrap">
@@ -153,16 +161,6 @@
                 <span class="hind-font caption-12 c-dashboardInfo__count total_under" style="color:#40C057;">
                     <%--img src="../../unregdb.png" alt="Icon"/>--%>
                         <asp:Label ID="lblunregisteredparents" runat="server" Text="" ></asp:Label>
-                </span>
-            </div>
-        </div>
-    </div>
-             <div class="col-lg-4 col-md-4 col-sm-6 col-xs-12">
-        <div class="c-dashboardInfo">
-            <div class="wrap">
-                <h4 class="heading heading5 hind-font medium-font-weight c-dashboardInfo__title">Total</h4>
-                <span class="hind-font caption-12 c-dashboardInfo__count total_bifr" style="color:#40C057;">
-                  <asp:Label ID="lbltotalparents" runat="server" Text=""></asp:Label>
                 </span>
             </div>
         </div>

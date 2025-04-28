@@ -456,16 +456,14 @@ public partial class PresentationLayer_Tcs_Mobile_App_Dashboard : System.Web.UI.
         if (dtparents == null)
         {
             ImpromptuHelper.ShowPromptGeneric("No Data Found...", 0);
-            // return;
+           // return;
         }
         else
         {
             lbltotalparents.Text = dtparents.Rows[0]["TotalParents"].ToString();
             lblregisteredparents.Text = dtparents.Rows[0]["RegisterdParent"].ToString();
-            //lblunregisteredparents.Text = Convert.ToString(Convert.ToInt32(dtparents.Rows[0]["TotalParents"].ToString()) - Convert.ToInt32(dtparents.Rows[0]["RegisterdParent"].ToString()));
-            lblunregisteredparents.Text = ((Convert.ToDouble(dtparents.Rows[0]["RegisterdParent"]) / Convert.ToDouble(dtparents.Rows[0]["TotalParents"])) * 100).ToString("F2") + "%";
+            lblunregisteredparents.Text = Convert.ToString(Convert.ToInt32(dtparents.Rows[0]["TotalParents"].ToString()) - Convert.ToInt32(dtparents.Rows[0]["RegisterdParent"].ToString()));
         }
-
 
 
 

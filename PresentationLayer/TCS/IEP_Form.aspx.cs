@@ -63,13 +63,13 @@ public partial class PresentationLayer_TCS_IEP_Form : System.Web.UI.Page
 
     private void Credentials()
     {
-        DIV_Teacher01.Enabled = false;
+       // DIV_Teacher01.Enabled = false;
         DIV_Teacher011.Enabled = false;
         DIV_Teacher02.Enabled = false;
-        DIV_Counsellor01.Enabled = false;
-        DIV_Counsellor02.Enabled = false;
-        DIV_Counsellor04.Enabled = false;
-        DIV_Counsellor03.Enabled = false;
+     //   DIV_Counsellor01.Enabled = false;
+     //   DIV_Counsellor02.Enabled = false;
+     //   DIV_Counsellor04.Enabled = false;
+      // DIV_Counsellor03.Enabled = false;
         Counselor_div1.Enabled = false;
 
         string a = Session["UserType_Id"].ToString();
@@ -225,7 +225,7 @@ public partial class PresentationLayer_TCS_IEP_Form : System.Web.UI.Page
             }
             if (c is TextBox)
             {
-                ((TextBox)(c)).Enabled = State;
+                ((TextBox)(c)).ReadOnly = State;
             }
             if (c is RadioButton)
             {
@@ -1271,6 +1271,23 @@ public partial class PresentationLayer_TCS_IEP_Form : System.Web.UI.Page
     {
         if (e.Row.RowType == DataControlRowType.DataRow)
         {
+
+            TextBox txtE_ExtraCurricularActivities = e.Row.FindControl("txtE_ExtraCurricularActivities") as TextBox;
+            TextBox txtE_ActivityTitleandOrganization = e.Row.FindControl("txtE_ActivityTitleandOrganization") as TextBox;
+            TextBox txtE_RoleandResponsibilities = e.Row.FindControl("txtE_RoleandResponsibilities") as TextBox;
+            TextBox txtE_HoursWeek = e.Row.FindControl("txtE_HoursWeek") as TextBox;
+            TextBox txtE_Organization = e.Row.FindControl("txtorganization") as TextBox;
+            DropDownList rdbE_Timeline = e.Row.FindControl("rdbE_Timeline") as DropDownList;
+
+            txtE_ExtraCurricularActivities.ReadOnly = true;
+            txtE_ActivityTitleandOrganization.ReadOnly = true;
+            txtE_RoleandResponsibilities.ReadOnly = true;
+            txtE_HoursWeek.ReadOnly = true;
+            txtE_Organization.ReadOnly = true;
+            rdbE_Timeline.Enabled = false;
+
+
+
             (e.Row.FindControl("rdbE_Timeline") as DropDownList).SelectedValue = (e.Row.FindControl("hfE_Timeline") as HiddenField).Value;
         }
     }
@@ -1279,6 +1296,19 @@ public partial class PresentationLayer_TCS_IEP_Form : System.Web.UI.Page
     {
         if (e.Row.RowType == DataControlRowType.DataRow)
         {
+            TextBox txtE_Organization = e.Row.FindControl("txtorganization") as TextBox;
+            TextBox txtE_ExtraCurricularActivities = e.Row.FindControl("txtE_ExtraCurricularActivities") as TextBox;
+            TextBox txtE_ActivityTitleandOrganization = e.Row.FindControl("txtE_ActivityTitleandOrganization") as TextBox;
+            TextBox txtE_HoursWeek = e.Row.FindControl("txtE_HoursWeek") as TextBox;
+            TextBox txtE_RoleandResponsibilities = e.Row.FindControl("txtE_RoleandResponsibilities") as TextBox;
+            DropDownList rdbE_Timeline = e.Row.FindControl("rdbE_Timeline") as DropDownList;
+
+            txtE_Organization.ReadOnly = true;
+            txtE_ExtraCurricularActivities.ReadOnly = true;
+            txtE_ActivityTitleandOrganization.ReadOnly = true;
+            txtE_HoursWeek.ReadOnly = true;
+            txtE_RoleandResponsibilities.ReadOnly = true;
+            rdbE_Timeline.Enabled = false;
             (e.Row.FindControl("rdbE_Timeline") as DropDownList).SelectedValue = (e.Row.FindControl("hfE_Timeline") as HiddenField).Value;
         }
     }
@@ -1513,7 +1543,12 @@ public partial class PresentationLayer_TCS_IEP_Form : System.Web.UI.Page
 
         if (e.Row.RowType == DataControlRowType.DataRow)
         {
-
+            TextBox Weak_Topic_Areastxt = e.Row.FindControl("txtE_Weak_Topic_Areas") as TextBox;
+            TextBox Academic_Potentialtxt = e.Row.FindControl("txtE_Academic_Potential") as TextBox;
+            TextBox Suggested_Study_Hourstxt = e.Row.FindControl("txtE_Suggested_Study_Hours") as TextBox;
+            Weak_Topic_Areastxt.ReadOnly = true;
+            Academic_Potentialtxt.ReadOnly = true;
+            Suggested_Study_Hourstxt.ReadOnly = true;
             HiddenField field = e.Row.FindControl("hdSubject_Id") as HiddenField;
             for (int i = 0; i < ds.Tables[10].Rows.Count; i++)
             {
@@ -1521,6 +1556,7 @@ public partial class PresentationLayer_TCS_IEP_Form : System.Web.UI.Page
                 if (field.Value != rowvalue)
                 {
                     e.Row.Enabled = false;
+                   
                 }
                 else
                 {
@@ -1614,15 +1650,107 @@ public partial class PresentationLayer_TCS_IEP_Form : System.Web.UI.Page
         ds.Dispose();
         if (e.Row.RowType == DataControlRowType.DataRow)
         {
-            HiddenField field = e.Row.FindControl("hdSubject_Id") as HiddenField;
-            if (field.Value == ds.Tables[0].Rows[0]["Subject_Id"].ToString())
-            {
 
-            }
-            else
+            HiddenField field = e.Row.FindControl("hdSubject_Id") as HiddenField;
+            for (int i = 0; i < ds.Tables[10].Rows.Count; i++)
             {
-                e.Row.Enabled = false;
+                string rowvalue = ds.Tables[10].Rows[i]["Subject_Id"].ToString();
+                if (field.Value != rowvalue)
+                {
+                    e.Row.Enabled = false;
+                }
+                else
+                {
+                    e.Row.Enabled = true;
+                    break;
+                }
+
+                //if (field.Value == ds.Tables[10].Rows[i]["Subject_Id"].ToString())
+                //{
+                //   // e.Row.Enabled = true;
+                //}
+                //else
+                //{
+                //    e.Row.Enabled = false;
+                //}
             }
+
+            TextBox txtInput = e.Row.FindControl("txtE_Weak_Topic_Areas") as TextBox;
+            TextBox txttxtE_Suggested_Study_Hours = e.Row.FindControl("txtE_Suggested_Study_Hours") as TextBox;
+
+            if (txtInput != null)
+            {
+                //  txtInput.Attributes["onkeyup"] = "javascript:this.value = this.value.substring(0, 120);";
+
+                // Get the client-side ID of the TextBox
+                string textBoxClientId = txtInput.ClientID;
+
+                // Register the script to handle the input event for each TextBox
+                Page.ClientScript.RegisterStartupScript(this.GetType(), "ValidationScript_" + textBoxClientId,
+                    string.Format(@"
+                    $(document).ready(function () {{
+                        $('#{0}').on('input', function () {{
+                            var inputValue = $(this).val();
+                            if (inputValue.length > 120) {{
+                              Swal.fire(
+                                'Maximum 120 characters allowed.',
+                                        '',
+                        ''
+                        )
+                               
+
+                                // alert('Maximum 120 characters allowed.');
+                                $('#{0}').val(inputValue.substring(0, 120));
+                            }} else {{
+                             
+                            }}
+                        }});
+                    }});
+           
+                ", textBoxClientId), true);
+            }
+
+            if (txttxtE_Suggested_Study_Hours != null)
+            {
+                //  txtInput.Attributes["onkeyup"] = "javascript:this.value = this.value.substring(0, 120);";
+
+                // Get the client-side ID of the TextBox
+                string txttxtE_Suggested_Study_HoursClientId = txttxtE_Suggested_Study_Hours.ClientID;
+
+                // Register the script to handle the input event for each TextBox
+                Page.ClientScript.RegisterStartupScript(this.GetType(), "ValidationScript_" + txttxtE_Suggested_Study_HoursClientId,
+                    string.Format(@"
+                    $(document).ready(function () {{
+                        $('#{0}').on('input', function () {{
+                            var inputValue = $(this).val();
+                            if (inputValue.length > 120) {{
+                              Swal.fire(
+                                'Maximum 120 characters allowed.',
+                                        '',
+                        ''
+                        )
+                               
+
+                                // alert('Maximum 120 characters allowed.');
+                                $('#{0}').val(inputValue.substring(0, 120));
+                            }} else {{
+                             
+                            }}
+                        }});
+                    }});
+           
+                ", txttxtE_Suggested_Study_HoursClientId), true);
+            }
+
+            //HiddenField field = e.Row.FindControl("hdSubject_Id") as HiddenField;
+            //if (field.Value == ds.Tables[0].Rows[0]["Subject_Id"].ToString())
+            //{
+
+            //}
+            //else
+            //{
+            //    e.Row.Enabled = false;
+            //}
         }
     }
 }

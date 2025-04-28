@@ -268,7 +268,7 @@ public partial class PresentationLayer_TCS_CampusSubjectCommentsCorrection : Sys
                     objESR.isAbsent = false;
 
 
-                    if (Convert.ToInt32(listG1.SelectedValue) > 0 && Convert.ToInt32(listG2.SelectedValue) > 0 && Convert.ToInt32(listImp1.SelectedValue) > 0 && Convert.ToInt32(listImp2.SelectedValue) > 0 && Convert.ToInt32(listEffort.SelectedValue) > 0)
+                    if (Convert.ToInt32(listG1.SelectedValue) > 0 && Convert.ToInt32(listG2.SelectedValue) > 0 && Convert.ToInt32(listImp1.SelectedValue) > 0 && Convert.ToInt32(listImp2.SelectedValue) > 0)
                     {
                         string[] myStrings = new string[4];
 
@@ -302,7 +302,7 @@ public partial class PresentationLayer_TCS_CampusSubjectCommentsCorrection : Sys
                         }
 
                     }
-                    else if (Convert.ToInt32(listG1.SelectedValue) == 0 && Convert.ToInt32(listG2.SelectedValue) == 0 && Convert.ToInt32(listImp1.SelectedValue) == 0 && Convert.ToInt32(listImp2.SelectedValue) == 0 && Convert.ToInt32(listEffort.SelectedValue) == 0)
+                    else if (Convert.ToInt32(listG1.SelectedValue) == 0 && Convert.ToInt32(listG2.SelectedValue) == 0 && Convert.ToInt32(listImp1.SelectedValue) == 0 && Convert.ToInt32(listImp2.SelectedValue) == 0)
                     {
 
                     }
@@ -318,17 +318,6 @@ public partial class PresentationLayer_TCS_CampusSubjectCommentsCorrection : Sys
 
                 }
                 /*=====================*/
-
-
-
-
-
-
-
-
-
-
-
             }
 
         }

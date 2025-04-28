@@ -51,13 +51,6 @@ public partial class PresentationLayer_TCS_ReportCard_MYE2022 : System.Web.UI.Pa
             {
                 conn.Close();
             }
-        }
-
-
-
-
-
-
-
+        } 
     }
 }

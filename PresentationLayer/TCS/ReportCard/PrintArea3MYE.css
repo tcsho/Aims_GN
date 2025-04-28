@@ -134,7 +134,7 @@ p {
     padding-top: 30px;
     padding-bottom: 15px;
     border-top: none;
-    padding-left: 1rem;
+    padding-left: 0;
 }
 
 .sec3 {
@@ -179,7 +179,7 @@ p {
     border-top: none !important;
     font-size: 18px;
     font-weight: 500;
-    background: #e4e4e4 !important;
+    /*background: #e4e4e4 !important;*/
 }
 
 .subjecttable .table td {
@@ -416,6 +416,11 @@ text-align:center !important;
 {
 display:none !important;
 }*/
+    .bckGround {
+        background-color: #f5f5f5 !important; 
+        -webkit-print-color-adjust: exact !important;
+    }
+
     .mediawidthlg8 {
         flex: 0 0 75% !important;
         max-width: 75% !important;
@@ -1443,4 +1448,4 @@ Originalbodytr td {
 .ulmarginlistnone {
     margin-bottom: 0px !important;
 }
-/**2022 report card*/
+/**2022 report card*/ 

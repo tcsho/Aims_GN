@@ -9,7 +9,7 @@ using System.Data;
 using System.Net.Mail;
 using System.Net;
 using System.Configuration;
-using Oracle.ManagedDataAccess.Client;
+
 public partial class PresentationLayer_Bifurcation_Confirmation : System.Web.UI.Page
 {
     DataAccess obj_Access = new DataAccess();
@@ -41,22 +41,24 @@ public partial class PresentationLayer_Bifurcation_Confirmation : System.Web.UI.
         //string decrypted_StudentClassSec = System.Text.ASCIIEncoding.ASCII.GetString(stclssec);
         DataTable dt1 = ExecuteProcedure_StudentDetail(decrypted_Student_Id, "");
         string studentname = dt1.Rows[0][1].ToString();
-        string centerid = dt1.Rows[0][7].ToString();
-        string Term = dt1.Rows[0][8].ToString();
+        string centerid = dt1.Rows[0][13].ToString();
+        string Term = dt1.Rows[0]["Term"].ToString();
         string region_id = dt1.Rows[0][13].ToString();
         dt1.Dispose();
         /****EMAIL***/
         MailMessage mail = new MailMessage();
         var Body = "";
-       
+        
 
         var Email = new MailAddress("AppNotifications@csn.edu.pk", "The City School");
 
-       // To = ConfigurationManager.AppSettings["Bifurcation_email"].ToString();//dt1.Rows[0][2].ToString();// //
+        // To = ConfigurationManager.AppSettings["Bifurcation_email"].ToString();//dt1.Rows[0][2].ToString();// //
         var To = dt1.Rows[0][2].ToString();
+        //var To = "muhammad.maroof1@csn.edu.pk";
         var CC = dt1.Rows[0]["CenterEmail"].ToString();
         var CC2 = "ManageAcknowledgement@csn.edu.pk";//dt1.Rows[0]["centerEmail"].ToString();                                                              // CC = "ManageAcknowledgement@csn.edu.pk";
-        var Subject = "Parent Undertaking for " + studentname + " (" + decrypted_Student_Id + ") | " + dt1.Rows[0][4].ToString() + " | Center Name: " + centerid;
+        
+            
 
 
 
@@ -90,17 +92,20 @@ public partial class PresentationLayer_Bifurcation_Confirmation : System.Web.UI.
         /**CLASS UNDERTAKING**/
         if (decrypted_Class_Id == "12" && Term == "1" && (region_id == "40000000" || region_id == "30000000"))
         {
-            onclassbase += "<p style='margin:0 0 12px 0;font-size:14px;line-height:24px;font-family:Arial,sans-serif;'>We have received your undertaking to promote your child for O-Level route. Upon your request, we are promoting the student on the desired path.</p>";
+            onclassbase += "<p style='margin:0 0 12px 0;font-size:14px;line-height:24px;font-family:Arial,sans-serif;'>We have received your undertaking to promote your child to the O-Level route. Upon your request, we are promoting the student on the desired path.</p>";
         }
         if (decrypted_Class_Id == "12" && Term == "2" && (region_id == "40000000" ||  region_id == "30000000"))
         {
-            onclassbase += "<p style='margin:0 0 12px 0;font-size:14px;line-height:24px;font-family:Arial,sans-serif;'>We have received your undertaking that your child will improve his/her academic results in the next term’s exams.</p>";
+            onclassbase += "<p style='margin:0 0 12px 0;font-size:14px;line-height:24px;font-family:Arial,sans-serif;'>Thank you sincerely for submitting the undertaking.</p>";
         }
         if (decrypted_Class_Id == "12" && Term == "2" && region_id == "20000000")
         {
-            onclassbase += "<p style='margin:0 0 12px 0;font-size:14px;line-height:24px;font-family:Arial,sans-serif;'>We have received your undertaking to promote your child for O-Level route. Upon your request, we are promoting the student on the desired path.</p>";
+            onclassbase += "<p style='margin:0 0 12px 0;font-size:14px;line-height:24px;font-family:Arial,sans-serif;'>We have received your undertaking to promote your child to the O-Level route. Upon your request, we are promoting the student on the desired path.</p>";
         }
-
+        if (decrypted_Class_Id == "12" && Term == "2" && region_id == "20000000" && (centerid == "20201002" || centerid == "20201005"))
+        {
+            onclassbase += "<p style='margin:0 0 12px 0;font-size:14px;line-height:24px;font-family:Arial,sans-serif;'>Thank you sincerely for submitting the undertaking.</p>";
+        }
         if (decrypted_Class_Id == "13")
         {
             onclassbase += "<p style='margin:0 0 12px 0;font-size:14px;line-height:24px;font-family:Arial,sans-serif;'>Dear Parent, We have received your undertaking that your child will improve his/her academic results in the next term’s exams.</p>";
@@ -163,11 +168,20 @@ public partial class PresentationLayer_Bifurcation_Confirmation : System.Web.UI.
 
         //var Password = "Pakistan!@#$";//gmail//"@U13K$@CgMlG";
         var Password = ConfigurationManager.AppSettings["AppNotificationPwd"].ToString();
+        //var Password2 = ConfigurationManager.AppSettings["AppNotificationGmail"].ToString();
 
+       // using (MailMessage mm = new MailMessage(Email.Address, To))
         using (MailMessage mm = new MailMessage(Email.Address, To))
         {
+            //if (decrypted_Class_Id == "12" && Term == "2" && (region_id == "40000000" || region_id == "30000000"))
+            //{
+                //var Subject = "Parent's Undertaking for " + studentname + " (" + decrypted_Student_Id + ") | " + dt1.Rows[0][4].ToString() + " | Term: " + Term + " | Center Name: " + dt1.Rows[0]["Center_Name"].ToString(); ;
+            //}
+            //else if (decrypted_Class_Id == "12" && Term == "2" && region_id == "20000000" && (centerid == "20201002" || centerid == "20201005"))
+            //{
+                var Subject = "Parent's Bifurcation Undertaking for " + studentname + " (" + decrypted_Student_Id + ") | " + dt1.Rows[0][4].ToString() + " | Term: " + Term + " | Center Name: " + dt1.Rows[0]["Center_Name"].ToString(); 
             mm.Subject = Subject;
-            mm.From = new MailAddress("AppNotifications@csn.edu.pk", "The City School");
+            mm.From = new MailAddress("noreply@csn.edu.pk", "The City School");
             if (CC != "")
             {
                 mm.CC.Add(new MailAddress(CC));
@@ -181,30 +195,45 @@ public partial class PresentationLayer_Bifurcation_Confirmation : System.Web.UI.
             mm.IsBodyHtml = true;
             using (SmtpClient smtp = new SmtpClient())
             {
-                // smtp.Host = "smtp.gmail.com"; //"mail.bizar.pk";
-                smtp.Host = "10.1.1.120"; //"mail.bizar.pk";
-                smtp.EnableSsl = false;
-                NetworkCredential NetworkCred = new NetworkCredential(Email.Address, Password);
-
+                smtp.Host = "smtp.office365.com";
+                smtp.EnableSsl = true;
+                smtp.Port = 587;
                 smtp.UseDefaultCredentials = false;
-                smtp.Credentials = NetworkCred;
-                smtp.Port = 25;
+                smtp.Credentials =
+                new NetworkCredential("noreply@csn.edu.pk", "Master@123");
                 smtp.Timeout = 1000000000;
-
-
-
+                // Enable verbose logging
+                smtp.DeliveryMethod = SmtpDeliveryMethod.Network;
+                smtp.EnableSsl = true;
+                smtp.TargetName = "STARTTLS/smtp.office365.com";
+                // Capture additional log information
+                smtp.ServicePoint.MaxIdleTime = 1; smtp.ServicePoint.ConnectionLimit = 1; ServicePointManager.SecurityProtocol = SecurityProtocolType.Tls12;
                 try
                 {
                     smtp.Send(mm);
-
-
-
                 }
-                catch (SmtpFailedRecipientException ex)
+                catch
+                (SmtpException smtpEx)
                 {
-
+                    Console.WriteLine(
+                "SMTP Exception: "
+                + smtpEx.Message);
+                    if
+                    (smtpEx.InnerException != null)
+                    {
+                        Console.WriteLine(
+                    "Inner Exception: "
+                    + smtpEx.InnerException.Message);
+                    }
                 }
 
+                catch
+                (Exception ex)
+                {
+                    Console.WriteLine(
+                "General Exception: "
+                + ex.Message);
+                }
             }
         }
 
@@ -231,8 +260,6 @@ public partial class PresentationLayer_Bifurcation_Confirmation : System.Web.UI.
 
         DataTable dtupdate = ExecuteProcedure("UP", "", decrypted_Session_Id, "", decrypted_Student_Id, "", decrypted_Class_Id, Term);
         dtupdate.Dispose();
-       
-        string _result = Student_Father_UnderTakingReceive(decrypted_Student_Id,decrypted_Class_Id, Term);
         //if (dtupdate.Rows.Count > 0)
         //{
 
@@ -242,42 +269,6 @@ public partial class PresentationLayer_Bifurcation_Confirmation : System.Web.UI.
 
         //else { txt_Student_Name1.Text = ""; txt_Student_Section.Text = ""; }
 
-    }
-    public string Student_Father_UnderTakingReceive(string Student_ID, string Class_ID, string Term)
-    {
-        OracleParameter[] param = new OracleParameter[3];
-
-        param[0] = new OracleParameter("p_student_no", OracleDbType.Double);
-        param[0].Value = Convert.ToDecimal(Student_ID);
-        param[1] = new OracleParameter("p_undertaking", OracleDbType.Varchar2);
-        param[1].Value = "Y";
-        param[2] = new OracleParameter("p_status", OracleDbType.Varchar2, 255);
-        param[2].Direction = ParameterDirection.Output;
-
-        DataTable _dt = new DataTable();
-
-        try
-        {
-            using (OracleConnection cnx = new OracleConnection(ConfigurationManager.ConnectionStrings["ERPDB"].ConnectionString))
-            {
-                using (OracleCommand commProc = new OracleCommand())
-                {
-                    commProc.Connection = cnx;
-                    commProc.CommandText = "AIMS.aims_update_bifurcation_data";
-                    commProc.CommandType = CommandType.StoredProcedure;
-                    commProc.Parameters.AddRange(param);
-                    cnx.Open();
-                    commProc.ExecuteReader();
-                    string outputV1 = commProc.Parameters["p_status"].Value.ToString();                    
-                    cnx.Close();
-                }
-            }
-            return "Success";
-        }
-        catch (Exception ex)
-        {
-            throw ex;
-        }
     }
 
     DataTable ExecuteProcedure(string sAction, string sEmployee_Id, string sSessionID, string sCenterID, string SStudentID = "", string sStudentName = "", string sClassID = "",string p_term = "")
@@ -313,7 +304,7 @@ public partial class PresentationLayer_Bifurcation_Confirmation : System.Web.UI.
     DataTable ExecuteProcedure_StudentDetail(string student_id, string section_id)
     {
         DataTable DT_Data = null;
-        obj_Access.CreateProcedureCommand("sp_IEP_bifurcation_studentdetail");
+        obj_Access.CreateProcedureCommand("sp_IEP_bifurcation_studentdetail_ForEmail");
         obj_Access.AddParameter("student_id", student_id, DataAccess.SQLParameterType.VarChar, true);
         obj_Access.AddParameter("section_id", section_id, DataAccess.SQLParameterType.VarChar, true);
         //obj_Access.AddParameter("Term_id", Term_id, DataAccess.SQLParameterType.VarChar, true);

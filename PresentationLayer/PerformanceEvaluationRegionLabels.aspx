@@ -13,6 +13,34 @@
         <ContentTemplate>
             <script type="text/javascript">             
                 // New method added by Adil
+                function adjustTextDirection() {
+                    // Find all labels with class 'description-label'
+                    var labels = document.getElementsByClassName('description-label');
+
+                    for (var i = 0; i < labels.length; i++) {
+                        var label = labels[i];
+                        var text = label.innerText;
+
+                        // Regular expression to check if the text contains Urdu characters
+                        //var urduRegex = /[\u0600-\u06FF]/;
+                        // Regular expression to check if the text contains Arabic characters
+                        var urduRegex = /[\u0600-\u06FF\u0750-\u077F\u08A0-\u08FF\uFB1D-\uFB4F\uFE70-\uFEFF]/;
+                      
+
+                        if (urduRegex.test(text)) {
+                            label.setAttribute('dir', 'rtl');
+                            label.style.textAlign = 'right';
+                            label.style.fontFamily = " Arial, sans-serif";
+                        } else {
+                            label.setAttribute('dir', 'ltr');
+                            label.style.textAlign = 'left';
+                            label.style.fontFamily = "Arial, sans-serif";
+                        }
+                    }
+                }
+                Sys.Application.add_load(function () {
+                    adjustTextDirection();
+                });
                 function setUrdu() {
 
                     var txtBoxId = '<%= txtCritName.ClientID %>';
@@ -275,10 +303,17 @@
                                         <ItemStyle CssClass="hide" />
                                         <HeaderStyle CssClass="hide" />
                                     </asp:BoundField>
-                                    <asp:BoundField DataField="Description" HeaderText="Description">
+                                    <%-- <asp:BoundField DataField="Description" HeaderText="Description">
                                         <HeaderStyle HorizontalAlign="Left" />
                                         <ItemStyle HorizontalAlign="Left" />
-                                    </asp:BoundField>
+                                    </asp:BoundField>--%>
+                                    <asp:TemplateField HeaderText="Description">
+                                        <HeaderStyle HorizontalAlign="Left" />
+                                        <ItemTemplate>
+                                            <asp:Label ID="lblDescription" runat="server" Text='<%# Eval("Description") %>' CssClass='<%# Eval("Subject_Name").ToString() == "Urdu" ? "description-label" : "description-label1" %>'></asp:Label>
+                                        </ItemTemplate>
+                                        <ItemStyle HorizontalAlign="Left" />
+                                    </asp:TemplateField>
                                     <asp:BoundField DataField="OrderOfPer" HeaderText="Sort Order (Report)">
                                         <HeaderStyle HorizontalAlign="Left" />
                                         <ItemStyle HorizontalAlign="Left" />

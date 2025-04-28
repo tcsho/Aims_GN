@@ -43,7 +43,11 @@ public partial class PresentationLayer_BifurcatedStudentSyncWithERP: System.Web.
                     loadRegions();
                     FillActiveSessions();
                     ddlSession.SelectedIndex = ddlSession.Items.Count - 1;
-                    loadClass();
+                    //if (Convert.ToInt32(row["User_Type_Id"].ToString()) != 5)
+                    //{
+                    //    ddlSession.Enabled = false;
+                    //}
+                    //loadClass();
                 }
 
                 else if (Convert.ToInt32(row["UserLevel_ID"].ToString()) == 3) //Regional Officer
@@ -58,12 +62,14 @@ public partial class PresentationLayer_BifurcatedStudentSyncWithERP: System.Web.
                     Center_Id = 0;
                     loadRegions();
                     FillActiveSessions();
+                    loadClass();
                     ddlSession.SelectedIndex = ddlSession.Items.Count - 1;
                     ddlSession_SelectedIndexChanged(this, EventArgs.Empty);
-                    loadClass();
+                    //loadClass();
                     trButtons.Visible = false;
+                    //ddlSession.Enabled = false;
 
-                   
+
                 }
 
                 else if (Convert.ToInt32(row["UserLevel_ID"].ToString()) == 4) //Campus Officer
@@ -79,9 +85,9 @@ public partial class PresentationLayer_BifurcatedStudentSyncWithERP: System.Web.
                     FillActiveSessions();
                     ddlSession.SelectedIndex = ddlSession.Items.Count - 1;
                     ddlSession_SelectedIndexChanged(this, EventArgs.Empty);
-                    loadClass();
+                    //loadClass();
                     trButtons.Visible = false;
-
+                    //ddlSession.Enabled = false;
 
                 }
                 else if (Convert.ToInt32(row["UserLevel_ID"].ToString()) == 5) //Campus Officer
@@ -164,6 +170,28 @@ public partial class PresentationLayer_BifurcatedStudentSyncWithERP: System.Web.
 
                 DataTable dt1 = obj.Evaluation_Criteria_TypeBySectionId(obj);
                 objBase.FillDropDown(dt1, ddlterm, "TermGroup_ID", "Type");
+                if (ddlClass.SelectedValue == "12" && ddl_region.SelectedValue == "20000000")
+                {
+                    if (ddl_center.SelectedValue != "20201005" && ddl_center.SelectedValue != "20201002")
+                    {
+                        ddlterm.Items.RemoveAt(1);
+                    }
+                    else
+                    {
+                        ddlterm.Items.RemoveAt(2);
+                    }
+                }
+                if (ddlClass.SelectedValue == "12" && ddl_region.SelectedValue != "20000000")
+                {
+                    if (ddl_center.SelectedValue == "20201005" && ddl_center.SelectedValue == "20201002")
+                    {
+                        ddlterm.Items.RemoveAt(2);
+                    }
+                    else
+                    {
+                        ddlterm.Items.RemoveAt(2);
+                    }
+                }
                 ViewState["dtDetails"] = null;
                 gv_details.DataSource = null;
                 gv_details.DataBind();
@@ -261,7 +289,8 @@ public partial class PresentationLayer_BifurcatedStudentSyncWithERP: System.Web.
 
             //if (ViewState["dtDetails"] == null)
             //{
-                dtsub = (DataTable)objClsSec.Student_Bifurcation_UndertakingNotRecieve(objClsSec);
+            //dtsub = (DataTable)objClsSec.Student_Bifurcation_UndertakingNotRecieve(objClsSec);
+            dtsub = (DataTable)objClsSec.New_Student_Bifurcation_RequestSelectAllByOrgRegionCenterId_SyncERP(objClsSec);
             //}
             //else
             //{
@@ -354,7 +383,6 @@ public partial class PresentationLayer_BifurcatedStudentSyncWithERP: System.Web.
     {
         try
         {
-
             BLLCenter objCen = new BLLCenter();
             if (Region_Id != 0)
             {
@@ -370,9 +398,11 @@ public partial class PresentationLayer_BifurcatedStudentSyncWithERP: System.Web.
 
             if (Center_Id != 0)
             {
+                //foreach (var item in )
                 ddl_center.SelectedValue = Center_Id.ToString();
                 ddl_center.Enabled = false;
                 ddl_center_SelectedIndexChanged(this, EventArgs.Empty);
+                loadClass();
             }
 
         }
@@ -444,6 +474,7 @@ public partial class PresentationLayer_BifurcatedStudentSyncWithERP: System.Web.
             DataTable dt = new DataTable();
             dt = objBll.SessionSelectAllActive();
             objBase.FillDropDown(dt, ddlSession, "Session_ID", "Description");
+            ddlSession.SelectedIndex = ddlSession.Items.Count - 1;
         }
         catch (Exception ex)
         {
@@ -485,7 +516,7 @@ public partial class PresentationLayer_BifurcatedStudentSyncWithERP: System.Web.
 
             // Clear existing items in ddlClass
             ddlClass.Items.Clear();
-
+            //ddlClass.Items.Add(new ListItem("Select", "0"));
             // Add class ID 12 to ddlClass without a default "Select All" option
             foreach (DataRow row in filteredDt.Rows)
             {
@@ -493,19 +524,44 @@ public partial class PresentationLayer_BifurcatedStudentSyncWithERP: System.Web.
                 string className = row["Class_Name"].ToString();
                 ddlClass.Items.Add(new ListItem(className, classId));
             }
-            
                 BLLSection_Subject objs = new BLLSection_Subject();
                 objs.Org_Id = Convert.ToInt32(Session["moID"].ToString());
                 objs.Section_Id = Convert.ToInt32(ddlClass.SelectedValue);
 
                 DataTable dt1 = objs.Evaluation_Criteria_TypeBySectionId(objs);
                 objBase.FillDropDown(dt1, ddlterm, "TermGroup_ID", "Type");
+            if (ddlClass.SelectedValue.Length > 0)
+            {
+                if (ddlClass.SelectedValue == "12" && ddl_region.SelectedValue == "20000000")
+                {
+                    if (ddl_center.SelectedValue == "20201005" || ddl_center.SelectedValue == "20201002")
+                    {
+                        ddlterm.Items.RemoveAt(2);
+                        ddlterm.SelectedIndex = 1;
+                    }
+                    else
+                    {
+                        ddlterm.Items.RemoveAt(1);
+                        ddlterm.SelectedIndex = 1;
+                    }
+                }
+                if (ddlClass.SelectedValue == "12" && ddl_region.SelectedValue != "20000000")
+                {
+                    if (ddl_center.SelectedValue == "20201005" || ddl_center.SelectedValue == "20201002")
+                    {
+                        ddlterm.Items.RemoveAt(2);
+                        ddlterm.SelectedIndex = 1;
+                    }
+                    else
+                    {
+                        ddlterm.Items.RemoveAt(2);
+                        ddlterm.SelectedIndex = 1;
+                    }
+                }
+            }
                 ViewState["dtDetails"] = null;
                 gv_details.DataSource = null;
                 gv_details.DataBind();
-            
-
-
         }
         catch (Exception ex)
         {
@@ -522,16 +578,22 @@ public partial class PresentationLayer_BifurcatedStudentSyncWithERP: System.Web.
         try
         {
             loadCenter();
-
+            loadClass();
             if (ddl_region.SelectedItem.Text == "Select")
             {
-
-                ddl_center.SelectedIndex = 0;
-                ddlSession.SelectedIndex = 0;
+                //ddl_center.SelectedIndex = ddl_center.Items.Count - 1;
+                //ddl_center.SelectedIndex = 0;
                 gv_details.DataSource = null;
                 gv_details.DataBind();
                 btns.Visible = false;
+                FillActiveSessions();
+                ddl_center.DataSource = null;
+                ddl_center.DataBind();
 
+            }
+            else
+            {
+                ResetFilter();
             }
            // BindGrid();
         }
@@ -547,14 +609,21 @@ public partial class PresentationLayer_BifurcatedStudentSyncWithERP: System.Web.
         {
             if (ddl_center.SelectedItem.Text == "Select")
             {
-                ddlSession.SelectedIndex = 0;
+                FillActiveSessions();
                 gv_details.DataSource = null;
                 gv_details.DataBind();
                 btns.Visible = false;
+                loadClass();
+                ResetFilter();
             }
             else
-             
-            bindrdbClass();
+            {
+                bindrdbClass();
+                loadClass();
+                FillActiveSessions();
+                ResetFilter();
+            }
+            
         }
         catch (Exception ex)
         {
@@ -623,7 +692,7 @@ public partial class PresentationLayer_BifurcatedStudentSyncWithERP: System.Web.
                         }
                     case 4: // Apply class Filter
                         {
-                            strFilter = " Convert([Class_Id], 'System.String')='" + ddlClass.SelectedValue + "'";
+                            strFilter = " Convert([Grade_Id], 'System.String')='" + ddlClass.SelectedValue + "'";
                             break;
                         }
 
@@ -1058,7 +1127,7 @@ public partial class PresentationLayer_BifurcatedStudentSyncWithERP: System.Web.
             if (studentDataList.Count > 0)
             {
                 objb.Region_Id = Convert.ToInt32(ddl_region.SelectedValue.ToString());
-                dtsubs = objb.Student_Bifurcation_BIFURCATION_CLASS_CHANGE(objb);
+                //dtsubs = objb.Student_Bifurcation_BIFURCATION_CLASS_CHANGE(objb);
             }
             BindGrid();
             ImpromptuHelper.ShowPrompt(dtsub);
@@ -1100,4 +1169,21 @@ public partial class PresentationLayer_BifurcatedStudentSyncWithERP: System.Web.
     }
 
 
+
+    protected void gv_details_PreRender1(object sender, EventArgs e)
+    {
+        try
+        {
+            if (gv_details.Rows.Count > 0)
+            {
+                gv_details.UseAccessibleHeader = false;
+                gv_details.HeaderRow.TableSection = TableRowSection.TableHeader;
+            }
+        }
+        catch (Exception ex)
+        {
+            Session["error"] = ex.Message;
+            Response.Redirect("~/presentationlayer/ErrorPage.aspx", false);
+        }
+    }
 }

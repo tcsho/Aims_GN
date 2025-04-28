@@ -46,8 +46,7 @@ public partial class PresentationLayer_TCS_MonthlyStdVerification : System.Web.U
         try
         {
             //only for Class teachers
-             if (Session["EmployeeCode"] != null && Session["isClassTeacher"].ToString() == "1" && Session["UserType_Id"].ToString() == "1")
-            //if (Session["EmployeeCode"] != null && Convert.ToInt32(Session["isClassTeacher"].ToString()) > 0 && Session["UserType_Id"].ToString() == "1")
+            if (Session["EmployeeCode"] != null && Session["isClassTeacher"].ToString() == "1" && Session["UserType_Id"].ToString() == "1")
             {
 
                 objstudent.Employee_Id = Convert.ToInt32(Session["ContactID"].ToString());

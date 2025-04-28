@@ -412,7 +412,7 @@
                                             TotalTermDays: itr.TotalTermDays,
                                             HeadName: itr.HeadName,
                                             StudentWise: Student_array,
-                                            Section_Name: itr.Section_Name,
+                                            Section_Name: itr.Section_Name
 
                                         });
                                         alreadyt = itr.Subject_Id;
@@ -448,7 +448,7 @@
                                             TotalTermDays: itr.TotalTermDays,
                                             HeadName: itr.HeadName,
                                             StudentWise: Student_array,
-                                            Section_Name: itr.Section_Name,
+                                            Section_Name: itr.Section_Name
                                         });
                                         alreadyt = itr.Subject_Id;
                                     }

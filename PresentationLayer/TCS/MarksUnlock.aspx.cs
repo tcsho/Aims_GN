@@ -434,7 +434,7 @@ public partial class PresentationLayer_TCS_MarksUnlock : System.Web.UI.Page
             //                        objClsSec.TermGroup_Id = Convert.ToInt32(ddlTerm.SelectedValue.ToString());
             //                        objClsSec.User_Id = Convert.ToInt32(Session["ContactID"].ToString());
 
-                                   // AlreadyIn = objClsSec.TCS_Result_GenerateResultAllBySection_Id(objClsSec);
+            //                        AlreadyIn = objClsSec.TCS_Result_GenerateResultAllBySection_Id(objClsSec);
             //                        ImpromptuHelper.ShowPrompt("Result Calculation Generated Successfully!");
 
             //                        objClsSec.MarksLockUnlockCompileLog_Insert(objClsSec);

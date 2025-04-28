@@ -458,13 +458,13 @@
                                                                     </table>
                                                                 </td>
                                                             </tr>
-                                                            <tr id="Tr5" runat="server" class="tr2" visible='<%# Convert.ToBoolean( Eval("Flag"))==true %>' >   
+                                                            <tr id="Tr5" runat="server" class="tr2" visible='<%# Convert.ToBoolean( Eval("Flag"))==true %>'> 
                                                                 <td style="width: 100%; font-size: medium; font-weight: bold;">
                                                                     <div class="pull-right">
                                                                         <asp:Button ID="btnSubmit" runat="server" class="btn btn-primary" CommandArgument='<%# Eval("Student_No") %>'
                                                                             OnClick="btnSubmit_Click" Text="Request for Discretionary Promotion" ToolTip="Request for Discretionary Promotion"
                                                                             Visible='<%# ((int)( Eval("RD_Approval")))== 3 ? true :false %>' />
-                                                                     <%--    <button  ID="btnSubmit" runat="server" type="button" class="btn btn-info" data-toggle="modal" data-target="#myModal" 
+                                                                        <%-- <button  ID="btnSubmit" runat="server" type="button" class="btn btn-info" data-toggle="modal" data-target="#myModal" 
                                                                         Visible='<%# Convert.ToBoolean( Eval("Submit_RD"))==false %>' causesvalidation="true" onclick="btnSubmit_Click" >
                                                                            Request for Discretionary Promotion</button>--%>
                                                                     </div>

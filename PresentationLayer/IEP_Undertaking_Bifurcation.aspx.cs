@@ -12,6 +12,11 @@ using City.Library.SQL;
 using System.Net.Mail;
 using System.Net;
 using System.Configuration;
+using System.Security.Cryptography;
+using System.Web;
+using iTextSharp.text;
+using iTextSharp.text.pdf;
+using iTextSharp.text.html.simpleparser;
 
 public partial class PresentationLayer_TCS_IEP_Undertaking_Bifurcation : System.Web.UI.Page
 {
@@ -112,14 +117,14 @@ public partial class PresentationLayer_TCS_IEP_Undertaking_Bifurcation : System.
                     string _classID = "";
                     if (dt.Rows.Count > 0)
                     {
-                       
+
                         _classID = dt.Rows[0]["class_id"].ToString();
                         ViewState["classids"] = _classID;
                         ViewState["termids"] = _Trmid;
                         /**CLASS UNDERTAKING**/
-                        if (_classID == "12" && _Trmid == "1"  )
+                        if (_classID == "12" && _Trmid == "1")
                         {
-                            bi_lettersubheading.Text = dt.Rows[0]["student_no"].ToString() + " - Application – Moving from Class 9 Matric to the O-Level route";
+                            //bi_lettersubheading.Text = dt.Rows[0]["student_no"].ToString() + " - Application – Moving from Class 9 Matric to the O-Level route";
                             bi_classchange.Text = "Class 8 ";
                             ul_List.InnerHtml = "<li> 1) That the school, after careful deliberation and consideration of the Class 8 Results, had advised me to transfer my child to the Matric system.</li>" +
                                 "<li> 2) However, I am insisting that my child should continue the O-Level route.</li>" +
@@ -128,56 +133,56 @@ public partial class PresentationLayer_TCS_IEP_Undertaking_Bifurcation : System.
                             spn_class.InnerText = "Class 8 ";
                         }
 
-                        if (_classID == "12" && _Trmid == "2" && dt.Rows[0]["region_id"].ToString() == "30000000" || dt.Rows[0]["region_id"].ToString() == "40000000")
+                        if (_classID == "12" && _Trmid == "2" && (dt.Rows[0]["region_id"].ToString() == "30000000" || dt.Rows[0]["region_id"].ToString() == "40000000"))
                         {
-                            bi_lettersubheading.Text = dt.Rows[0]["student_no"].ToString() + "- Application – Continue O-level route (Class 8 - 2nd term)";
+                            //bi_lettersubheading.Text = dt.Rows[0]["student_no"].ToString() + "- Application – Continue O-level route (Class 8 - 2nd term)";
                             bi_classchange.Text = "Class 8 ";
-                            ul_List.InnerHtml = "<li> 1)  The school has clearly explained that my child’s class 8 (2nd term) result is not up to the mark.</li><li> 2)  I take the responsibility that my child will meet the school’s required attainment levels. </li><li> 3) Failure to meet the minimum requirements in the internal exams may result in my child’s private registration for his/her CAIE Exams.</li>";
+                            ul_List.InnerHtml = "<li> 1)  The school has clearly explained that my child’s class 8 (2nd term) result is not up to the mark.</li><li> 2)  I take the responsibility that my child will meet the school’s required attainment levels. </li><li> 3) Failure to meet the minimum requirements in the internal exams may result in my child being privately registered for the CAIE Exams.</li>";
                             spn_class.InnerText = "Class 8 ";
                         }
-                        if (_classID == "12" && _Trmid == "2" && dt.Rows[0]["region_id"].ToString() == "20000000" )
+                        if (_classID == "12" && _Trmid == "2" && dt.Rows[0]["region_id"].ToString() == "20000000")
                         {
-                            bi_lettersubheading.Text = dt.Rows[0]["student_no"].ToString() + "- Application – Moving from Class 9 Matric to the O-Level route";
+                            //bi_lettersubheading.Text = dt.Rows[0]["student_no"].ToString() + "- Application – Moving from Class 9 Matric to the O-Level route";
                             bi_classchange.Text = "Class 8 ";
-                            ul_List.InnerHtml = "<li> 1)  The school, after careful deliberation and consideration of the Class 8 Results, has advised me to transfer my child to the Matric system.</li><li> 2)  However, I am insisting that my child should continue the O-Level route. </li><li> 3)  I take the responsibility that my child will meet the school’s required attainment levels.</li><li> 4) Failure to meet the minimum requirements in the internal exams may result in my child’s private registration for his/her CAIE Exams.</li>";
+                            ul_List.InnerHtml = "<li> 1)  The school, after careful deliberation and consideration of the Class 8 results, has advised me to transfer my child to the Matric system.</li><li> 2)  However, I insist that my child should continue on the O-Level route. </li><li> 3)  I accept the responsibility to ensure my child will meet the school’s required attainment levels.</li><li> 4) Failure to meet the minimum requirements in the internal exams may result in my child being privately registered for the CAIE Exams.</li>";
                             spn_class.InnerText = "Class 8 ";
                         }
 
                         if (_classID == "13" && _Trmid == "1")
                         {
 
-                            bi_lettersubheading.Text = "Undertaking – Class 9 (1st term)";
+                            //bi_lettersubheading.Text = "Undertaking – Class 9 (1st term)";
                             bi_classchange.Text = "Class 9 ";
                             ul_List.InnerHtml = "<li> 1) The school has clearly explained that my child’s class 9 (1st term) result is not up to the mark.</li>" +
                                 "<li> 2) I take the responsibility that my child will meet the school’s required attainment levels.</li>" +
-                                  "<li> 3) Failure to meet the minimum requirements in the internal exams may result in my child’s private registration for his/her CAIE Exams.</li>";
+                                  "<li> 3) Failure to meet the minimum requirements in the internal exams may result in my child being privately registered for the CAIE Exams.</li>";
                             spn_class.InnerText = "Class 9 ";
                         }
 
                         if (_classID == "13" && _Trmid == "2")
                         {
 
-                            bi_lettersubheading.Text = "Undertaking – Class 9 (2nd term)";
+                            //bi_lettersubheading.Text = "Undertaking – Class 9 (2nd term)";
                             bi_classchange.Text = "Class 9 ";
                             ul_List.InnerHtml = "<li> 1) The school has clearly explained that my child’s class 9 (2nd term) result is not up to the mark.</li>" +
                                 "<li> 2) I take the responsibility that my child will meet the school’s required attainment levels. </li>" +
-                                "<li> 3) Failure to meet the minimum requirements in the internal exams may result in my child’s private registration for his/her CAIE Exams. </li>";
+                                "<li> 3) Failure to meet the minimum requirements in the internal exams may result in my child being privately registered for the CAIE Exams. </li>";
                             spn_class.InnerText = "Class 9 ";
                         }
 
 
                         if (_classID == "14" && _Trmid == "1")
                         {
-                            bi_lettersubheading.Text = "Undertaking – Class 10 (1st term)";
+                            //bi_lettersubheading.Text = "Undertaking – Class 10 (1st term)";
                             bi_classchange.Text = "Class 10 ";
-                            ul_List.InnerHtml = "<li> 1) 1)\tThe school has clearly explained that my child’s class 10 (1st term) result is not up to the mark.</li>" +
+                            ul_List.InnerHtml = "<li> 1) The school has clearly explained that my child’s class 10 (1st term) result is not up to the mark.</li>" +
                                 "<li> 2) I take the responsibility that my child will meet the school’s required attainment levels.</li>" +
                                 "<li> 3) Failure to meet the minimum requirements in the upcoming CAIE and the internal exams may result in my child’s private registration for his/her CAIE Exams next year.</li>";
                             spn_class.InnerText = "Class 10 ";
                         }
                         if (_classID == "14" && _Trmid == "2")
                         {
-                            bi_lettersubheading.Text = "Class 10 Mid-Year Undertaking";
+                            //bi_lettersubheading.Text = "Class 10 Mid-Year Undertaking";
                             bi_classchange.Text = "Class 10 ";
                             ul_List.InnerHtml = "<li> 1) That the school, after careful deliberation and consideration of the Class 9 EOY Results, had provisionally promoted my child to Year 10.</li><li> 2) My child has not passed the Class 10 Mid-year examinations with the minimum required attainment levels and is provisionally being allowed to appear for Year 10 Mock examinations with the condition of attaining overall 60%. Failing to meet the minimum requirements may result in my child being privatized at the time of final Cambridge exams.</li>";
                             spn_class.InnerText = "Class 10 ";
@@ -185,7 +190,7 @@ public partial class PresentationLayer_TCS_IEP_Undertaking_Bifurcation : System.
 
                         if (_classID == "15" && _Trmid == "2")
                         {
-                            bi_lettersubheading.Text = "Class 11 Mock Undertaking";
+                            //bi_lettersubheading.Text = "Class 11 Mock Undertaking";
                             bi_classchange.Text = "Class 11 ";
                             ul_List.InnerHtml = "<li> 1) That the school, after careful deliberation and consideration of the Class 11 Mid-year examination Results, had provisionally allowed my child to sit for Year 11 Mock examinations. </li><li> 2) My child has not passed the Class 11 Mock examinations with the minimum required attainment levels and is going to be privatized for Cambridge Exams.</li>";
                             spn_class.InnerText = "Class 11 ";
@@ -193,7 +198,7 @@ public partial class PresentationLayer_TCS_IEP_Undertaking_Bifurcation : System.
 
                         if (_classID == "15" && _Trmid == "1")
                         {
-                            bi_lettersubheading.Text = "Class 11 Mid-Year Undertaking";
+                            //bi_lettersubheading.Text = "Class 11 Mid-Year Undertaking";
                             bi_classchange.Text = "Class 11 ";
                             ul_List.InnerHtml = "<li> 1) That the school, after careful deliberation and consideration of the Class 10 Mocks and Cambridge Results, had provisionally promoted my child to Year 11.</li><li> 2) My child has not passed the Class 11 Mid-year examinations with the minimum required attainment levels and is provisionally being allowed to appear for Year 11 Mock examinations with the condition of attaining overall 60%. Failing to meet the minimum requirements may result in my child being privatized at the time of final Cambridge exams.</li>";
                             spn_class.InnerText = "Class 11 ";
@@ -209,12 +214,12 @@ public partial class PresentationLayer_TCS_IEP_Undertaking_Bifurcation : System.
                         txt_Student_Name1.Text = dt.Rows[0]["First_Name"].ToString();
                         txt_Student_Section.Text = dt.Rows[0]["Section_Name"].ToString();
                         if (dt.Rows[0]["ParentApproved"].ToString() == "1")
-                        {//   txtfathersign.Text = dt.Rows[0]["First_Name"].ToString();
+                        {   //txtfathersign.Text = dt.Rows[0]["First_Name"].ToString();
                             lblrcv.Visible = true;
-                            lblrcv.InnerText = lblrcv.InnerText + dt.Rows[0]["Date"].ToString() + "."; 
+                            lblrcv.InnerText = lblrcv.InnerText + dt.Rows[0]["Date"].ToString() + ".";
                         }
-                       // txtheadname.Text = dt.Rows[0]["headname"].ToString();
-                       // txtdate.Text = dt.Rows[0]["Date"].ToString();
+                        // txtheadname.Text = dt.Rows[0]["headname"].ToString();
+                        // txtdate.Text = dt.Rows[0]["Date"].ToString();
                         /**SET label**/
                     }
 
@@ -241,7 +246,7 @@ public partial class PresentationLayer_TCS_IEP_Undertaking_Bifurcation : System.
     }
 
     /**detail procedure**/
-    DataTable ExecuteProcedure_StudentDetail(string student_id, string section_id,int term_id)
+    DataTable ExecuteProcedure_StudentDetail(string student_id, string section_id, int term_id)
     {
         DataTable DT_Data = null;
         obj_Access.CreateProcedureCommand("sp_iepandbifurcation_studentdetail");
@@ -267,6 +272,8 @@ public partial class PresentationLayer_TCS_IEP_Undertaking_Bifurcation : System.
         }
         return DT_Data;
     }
+
+    
     /**detail procedure**/
     DataTable ExecuteProcedure(string sAction, string sEmployee_Id, string sSessionID, string sCenterID, string SStudentID = "", string sStudentName = "", string sClassID = "")
     {
@@ -397,240 +404,363 @@ public partial class PresentationLayer_TCS_IEP_Undertaking_Bifurcation : System.
     //        Response.Redirect("~/presentationlayer/ErrorPage.aspx", false);
     //    }
     //}
+    DataTable ExecuteProcedure_StudentDetail(string student_id, string section_id)
+    {
+        DataTable DT_Data = null;
+        obj_Access.CreateProcedureCommand("sp_IEP_bifurcation_studentdetail");
+        obj_Access.AddParameter("student_id", student_id, DataAccess.SQLParameterType.VarChar, true);
+        obj_Access.AddParameter("section_id", section_id, DataAccess.SQLParameterType.VarChar, true);
+        //obj_Access.AddParameter("Term_id", Term_id, DataAccess.SQLParameterType.VarChar, true);
+        //obj_Access.AddParameter("P_FatherEmail", lblfatheremail.Text.Trim(), DataAccess.SQLParameterType.VarChar, true); 
 
+
+        try
+        {
+            DT_Data = obj_Access.ExecuteDataTable();
+        }
+        catch (Exception ex)
+        {
+            Session["error"] = ex.Message;
+            Response.Redirect("~/presentationlayer/ErrorPage.aspx", false);
+        }
+        finally
+        {
+            if (DT_Data != null) { DT_Data.Dispose(); }
+        }
+        return DT_Data;
+    }
 
     protected void btnSave_Click(object sender, EventArgs e)
     {
-        DataTable dt = ExecuteProcedure("IN", "", Session["session_id"].ToString(), lblCenter_Id.Text, lblStudent_Id.Text, txt_Student_Name1.Text, lblClass_Id.Text);
-        dt.Dispose();
-        if (dt.Rows.Count > 0)
+        //DataTable dt = ExecuteProcedure("IN", "", Session["session_id"].ToString(), lblCenter_Id.Text, lblStudent_Id.Text, txt_Student_Name1.Text, lblClass_Id.Text);
+        //dt.Dispose();
+        //if (dt.Rows.Count > 0)
+        //{
+        // ImpromptuHelper.ShowPrompt(dt.Rows[0][0].ToString());
+        /*****************EMAIL***************/
+
+        var getclass = ViewState["classids"].ToString();
+        var getterm = ViewState["termids"].ToString();
+
+        MailMessage mail = new MailMessage();
+        var Body = "";
+        var To = "";
+
+        var Email = new MailAddress("AppNotifications@csn.edu.pk", "The City School");
+
+        DataTable dt1 = ExecuteProcedure_StudentDetail(lblStudent_Id.Text, "");
+        dt1.Dispose();
+
+        //To = lblfatheremail.Text;
+        To = dt1.Rows[0][2].ToString();
+        //To = "muhammad.maroof1@csn.edu.pk";
+        //var Subject = "Bifrucation Confirmation";
+        var Subject = "Bifurcation Undertaking  – " + dt1.Rows[0]["First_Name"].ToString() + " (" + dt1.Rows[0]["Student_No"].ToString() + ") | " + dt1.Rows[0]["class_name"].ToString() + "-" + dt1.Rows[0]["Section_Name"].ToString() + " (Second Term) | " + dt1.Rows[0]["Center_Name"].ToString() + "";
+
+
+
+        var onclassbase = "";
+
+        /***********HTML TEMPLET***/
+        Body += "<body style='margin:0;padding:0;'>";
+        Body += "<table role='presentation' style='width:100%;border-collapse:collapse;border:0;border-spacing:0;background:#ffffff;'>";
+        Body += "<tr>";
+        Body += "<td align='center' style='padding:0;'>";
+        Body += "<table role='presentation' style='width:602px;border-collapse:collapse;border:1px solid #cccccc;border-spacing:0;text-align:left;'>";
+        Body += "<tr>";
+        Body += "<td align='center' style='padding:40px 0 30px 0;background:#0c4da2;'>";//#0c4da2
+
+        //Body += "< img src = 'http://tcsresults.csn.edu.pk/ReportCard/images/logo.png' alt = '' width = '300' style = 'height:auto;display:block;' /> ";
+        Body += "<img src = 'https://rebill.csn.edu.pk:8096/inassets/city/tcslogowhite.png'>";
+        Body += "</td>";
+        Body += "</tr>";
+        Body += "<tr>";
+        Body += "<td style='padding:36px 30px 42px 30px;'>";
+        Body += "<table role='presentation' style='width:100%;border-collapse:collapse;border:0;border-spacing:0;'>";
+        Body += "<tr>";
+        Body += "<td style='padding:0 0 36px 0;color:#153643;'>";
+        Body += "<h1 style='font-size:24px;margin:0 0 20px 0;font-family:Arial,sans-serif;'>Dear Parent/Guardian</h1>";
+
+        Body += "<p style='margin:0 0 12px 0;font-size:16px;line-height:24px;font-family:Arial,sans-serif;'>If you wish for your child to continue on the O-Level path, please read and submit the application for undertaking.</p><br/><br/>";
+
+
+        Body += "<p style='margin:0 0 12px 0;font-size:14px;line-height:24px;font-family:Arial,sans-serif;'>I, the parent/guardian of  <strong>" + txt_Student_Name1.Text.Trim() + "</strong>, ERP #" + lblStudent_Id.Text.Trim() + "studying in " + spn_class.InnerText + " Section <strong>" + txt_Student_Section.Text.Trim() + "</strong> confirm that I have fully read and understood the points below. My acknowledgement indicates full agreement and consent to implement the appropriate consequences stated:</p>";
+
+        /**on basis change**/
+        /**CLASS UNDERTAKING**/
+        if (getclass == "12" && getterm == "1")
         {
-            // ImpromptuHelper.ShowPrompt(dt.Rows[0][0].ToString());
-            /*****************EMAIL***************/
 
-            var getclass = ViewState["classids"].ToString();
-            var getterm = ViewState["termids"].ToString();
+            onclassbase += "<p style='margin:0 0 12px 0;font-size:14px;line-height:24px;font-family:Arial,sans-serif;'> 1) tThe school, after careful deliberation and consideration of the Class 8 Results, has advised me to transfer my child to the Matric system.</p>";
+            onclassbase += "<p style='margin:0 0 12px 0;font-size:14px;line-height:24px;font-family:Arial,sans-serif;'> 2) However, I am insisting that my child should continue the O-Level route.</p>";
+            onclassbase += "<p style='margin:0 0 12px 0;font-size:14px;line-height:24px;font-family:Arial,sans-serif;'> 3) I take the responsibility that my child will meet the school’s required attainment levels.</p>";
+            onclassbase += "<p style='margin:0 0 12px 0;font-size:14px;line-height:24px;font-family:Arial,sans-serif;'> 4) Failure to meet the minimum requirements in the internal exams may result in my child being privately registered for the CAIE Exams.</p>";
+        }
+        if (getclass == "12" && getterm == "2")
+        {
 
-            MailMessage mail = new MailMessage();
-            var Body = "";
-            var To = "";
+            onclassbase += "<p style='margin:0 0 12px 0;font-size:14px;line-height:24px;font-family:Arial,sans-serif;'> 1) The school, after careful deliberation and consideration of the Class 8 results, has advised me to transfer my child to the Matric system.</p>";
+            onclassbase += "<p style='margin:0 0 12px 0;font-size:14px;line-height:24px;font-family:Arial,sans-serif;'> 2) However, I insist that my child should continue on the O-Level route.</p>";
+            onclassbase += "<p style='margin:0 0 12px 0;font-size:14px;line-height:24px;font-family:Arial,sans-serif;'> 3) I accept the responsibility to ensure my child will meet the school’s required attainment levels.</p>";
+            onclassbase += "<p style='margin:0 0 12px 0;font-size:14px;line-height:24px;font-family:Arial,sans-serif;'> 4) Failure to meet the minimum requirements in the internal exams may result in my child being privately registered for the CAIE Exams.</p>";
 
-            var Email = new MailAddress("AppNotifications@csn.edu.pk", "The City School");
+        }
 
-            To = lblfatheremail.Text;
-            var Subject = "Bifrucation Confirmation";
-
-
-
-            var onclassbase = "";
-
-            /***********HTML TEMPLET***/
-            Body += "<body style='margin:0;padding:0;'>";
-            Body += "<table role='presentation' style='width:100%;border-collapse:collapse;border:0;border-spacing:0;background:#ffffff;'>";
-            Body += "<tr>";
-            Body += "<td align='center' style='padding:0;'>";
-            Body += "<table role='presentation' style='width:602px;border-collapse:collapse;border:1px solid #cccccc;border-spacing:0;text-align:left;'>";
-            Body += "<tr>";
-            Body += "<td align='center' style='padding:40px 0 30px 0;background:#0c4da2;'>";//#0c4da2
-
-            //Body += "< img src = 'http://tcsresults.csn.edu.pk/ReportCard/images/logo.png' alt = '' width = '300' style = 'height:auto;display:block;' /> ";
-            Body += "<img src = 'https://rebill.csn.edu.pk:8096/inassets/city/tcslogowhite.png'>";
-            Body += "</td>";
-            Body += "</tr>";
-            Body += "<tr>";
-            Body += "<td style='padding:36px 30px 42px 30px;'>";
-            Body += "<table role='presentation' style='width:100%;border-collapse:collapse;border:0;border-spacing:0;'>";
-            Body += "<tr>";
-            Body += "<td style='padding:0 0 36px 0;color:#153643;'>";
-            Body += "<h1 style='font-size:24px;margin:0 0 20px 0;font-family:Arial,sans-serif;'>Dear Parent/Guardian</h1>";
-
-            Body += "<p style='margin:0 0 12px 0;font-size:16px;line-height:24px;font-family:Arial,sans-serif;'>If you wish to submit your application for your child to take O level route, then read & submit the following application:</p><br/><br/>";
+        if (getclass == "13" && getterm == "2")
+        {
 
 
-            Body += "<p style='margin:0 0 12px 0;font-size:14px;line-height:24px;font-family:Arial,sans-serif;'>I, as a parent / guardian of <strong>" + txt_Student_Name1.Text.Trim() + "</strong> studying in " + spn_class.InnerText + " Section <strong>" + txt_Student_Section.Text.Trim() + "</strong> confirm that I have fully read and understood the points below. My acknowledgement indicates full agreement and consent to apply the appropriate consequences stated:</p>";
-
-            /**on basis change**/
-            /**CLASS UNDERTAKING**/
-            if (getclass == "12" && getterm == "1")
-            {
-
-                onclassbase += "<p style='margin:0 0 12px 0;font-size:14px;line-height:24px;font-family:Arial,sans-serif;'> 1) tThe school, after careful deliberation and consideration of the Class 8 Results, has advised me to transfer my child to the Matric system.</p>";
-                onclassbase += "<p style='margin:0 0 12px 0;font-size:14px;line-height:24px;font-family:Arial,sans-serif;'> 2) However, I am insisting that my child should continue the O-Level route.</p>";
-                onclassbase += "<p style='margin:0 0 12px 0;font-size:14px;line-height:24px;font-family:Arial,sans-serif;'> 3) I take the responsibility that my child will meet the school’s required attainment levels.</p>";
-                onclassbase += "<p style='margin:0 0 12px 0;font-size:14px;line-height:24px;font-family:Arial,sans-serif;'> 4) Failure to meet the minimum requirements in the internal exams may result in my child’s private registration for his/her CAIE Exams.</p>";
-            }
-            if (getclass == "12" && getterm == "2")
-            {
-
-                onclassbase += "<p style='margin:0 0 12px 0;font-size:14px;line-height:24px;font-family:Arial,sans-serif;'> 1) The school has clearly explained that my child’s class 8 (2nd term) result is not up to the mark.</p>";
-                onclassbase += "<p style='margin:0 0 12px 0;font-size:14px;line-height:24px;font-family:Arial,sans-serif;'> 2) I take the responsibility that my child will meet the school’s required attainment levels.</p>";
-                onclassbase += "<p style='margin:0 0 12px 0;font-size:14px;line-height:24px;font-family:Arial,sans-serif;'> 3) Failure to meet the minimum requirements in the internal exams may result in my child’s private registration for his/her CAIE Exams</p>";
-
-            }
-
-            if (getclass == "13" && getterm == "2")
-            {
-
-
-                onclassbase = "<p style='margin:0 0 12px 0;font-size:14px;line-height:24px;font-family:Arial,sans-serif;'>" +
-                    " 1) The school has clearly explained that my child’s class 9 (2nd term) result is not up to the mark.</p>" +
-                    "<p style='margin:0 0 12px 0;font-size:14px;line-height:24px;font-family:Arial,sans-serif;'> " +
-                    "2) I take the responsibility that my child will meet the school’s required attainment levels.</p>" +
-                     "<p style='margin:0 0 12px 0;font-size:14px;line-height:24px;font-family:Arial,sans-serif;'> " +
-                    "3) Failure to meet the minimum requirements in the internal exams may result in my child’s private registration for his/her CAIE Exams.</p>";
-
-            }
-
-            if (getclass == "13" && getterm == "1")
-            {
-
-
-                onclassbase = "<p style='margin:0 0 12px 0;font-size:14px;line-height:24px;font-family:Arial,sans-serif;'> " +
-                    "1) The school has clearly explained that my child’s class 9 (1st term) result is not up to the mark." +
-                      "<p style='margin:0 0 12px 0;font-size:14px;line-height:24px;font-family:Arial,sans-serif;'> " +
-               " 2) I take the responsibility that my child will meet the school’s required attainment levels.+ " +
+            onclassbase = "<p style='margin:0 0 12px 0;font-size:14px;line-height:24px;font-family:Arial,sans-serif;'>" +
+                " 1) The school has clearly explained that my child’s class 9 (2nd term) result is not up to the mark.</p>" +
+                "<p style='margin:0 0 12px 0;font-size:14px;line-height:24px;font-family:Arial,sans-serif;'> " +
+                "2) I take the responsibility that my child will meet the school’s required attainment levels.</p>" +
                  "<p style='margin:0 0 12px 0;font-size:14px;line-height:24px;font-family:Arial,sans-serif;'> " +
-                "3) Failure to meet the minimum requirements in the internal exams may result in my child’s private registration for his/her CAIE Exams. </p>";
+                "3) Failure to meet the minimum requirements in the internal exams may result in my child being privately registered for the CAIE Exams.</p>";
 
-            }
+        }
+
+        if (getclass == "13" && getterm == "1")
+        {
 
 
-            if (getclass == "14" && getterm == "2")
+            onclassbase = "<p style='margin:0 0 12px 0;font-size:14px;line-height:24px;font-family:Arial,sans-serif;'> " +
+                "1) The school has clearly explained that my child’s class 9 (1st term) result is not up to the mark." +
+                  "<p style='margin:0 0 12px 0;font-size:14px;line-height:24px;font-family:Arial,sans-serif;'> " +
+           " 2) I take the responsibility that my child will meet the school’s required attainment levels.+ " +
+             "<p style='margin:0 0 12px 0;font-size:14px;line-height:24px;font-family:Arial,sans-serif;'> " +
+            "3) Failure to meet the minimum requirements in the internal exams may result in my child being privately registered for the CAIE Exams. </p>";
+
+        }
+
+
+        if (getclass == "14" && getterm == "2")
+        {
+
+            onclassbase = "<p style='margin:0 0 12px 0;font-size:14px;line-height:24px;font-family:Arial,sans-serif;'> 1) The school has clearly explained that my child’s class 10 (1st term) result is not up to the mark.</p>" +
+                "<p style='margin:0 0 12px 0;font-size:14px;line-height:24px;font-family:Arial,sans-serif;'> " +
+                "2) I take the responsibility that my child will meet the school’s required attainment levels.</li>" +
+                "<p style='margin:0 0 12px 0;font-size:14px;line-height:24px;font-family:Arial,sans-serif;'> " +
+                "<li> Failure to meet the minimum requirements in the upcoming CAIE and the internal exams may result in my child being privately registered for the CAIE Exams.</p>";
+
+        }
+        if (getclass == "14" && getterm == "1")
+        {
+
+            onclassbase = "<p style='margin:0 0 12px 0;font-size:14px;line-height:24px;font-family:Arial,sans-serif;'> 1) That the school, after careful deliberation and consideration of the Class 9 EOY Results, had provisionally promoted my child to Year 10.</p><p style='margin:0 0 12px 0;font-size:14px;line-height:24px;font-family:Arial,sans-serif;'> 2) My child has not passed the Class 10 Mid-year examinations with the minimum required attainment levels and is provisionally being allowed to appear for Year 10 Mock examinations with the condition of attaining overall 60%. Failing to meet the minimum requirements may result in my child being privatized at the time of final Cambridge exams.</p>";
+
+        }
+
+        if (getclass == "15" && getterm == "2")
+        {
+
+            onclassbase = "<p style='margin:0 0 12px 0;font-size:14px;line-height:24px;font-family:Arial,sans-serif;'> 1) That the school, after careful deliberation and consideration of the Class 11 Mid-year examination Results, had provisionally allowed my child to sit for Year 11 Mock examinations. </p><p style='margin:0 0 12px 0;font-size:14px;line-height:24px;font-family:Arial,sans-serif;'> 2) My child has not passed the Class 11 Mock examinations with the minimum required attainment levels and is going to be privatized for Cambridge Exams.</p>";
+
+        }
+
+        if (getclass == "15" && getterm == "1")
+        {
+
+            onclassbase = "<p style='margin:0 0 12px 0;font-size:14px;line-height:24px;font-family:Arial,sans-serif;'> 1) That the school, after careful deliberation and consideration of the Class 10 Mocks and Cambridge Results, had provisionally promoted my child to Year 11.</p><p style='margin:0 0 12px 0;font-size:14px;line-height:24px;font-family:Arial,sans-serif;'> 2) My child has not passed the Class 11 Mid-year examinations with the minimum required attainment levels and is provisionally being allowed to appear for Year 11 Mock examinations with the condition of attaining overall 60%. Failing to meet the minimum requirements may result in my child being privatized at the time of final Cambridge exams.</p>";
+
+        }
+        /**CLASS UNDERTAKING**/
+
+
+
+        //Body += "<p style='margin:0 0 12px 0;font-size:14px;line-height:24px;font-family:Arial,sans-serif;'>1) That the school, after careful deliberation and consideration of the " + spn_class.InnerText + " Results, has advised me to transfer my child to the Matric system.</p>";
+        //Body += "<p style='margin:0 0 12px 0;font-size:14px;line-height:24px;font-family:Arial,sans-serif;'>2) However, at my insistence, the school has provisionally allowed my child to sit in " + spn_class.InnerText + " and take final examinations for the O level stream.</p>";
+        //Body += "<p style='margin:0 0 12px 0;font-size:14px;line-height:24px;font-family:Arial,sans-serif;'>3) Accept the responsibility that my child must pass the " + spn_class.InnerText + " Annual examinations with the minimum required attainment levels. Failing to meet the minimum requirements may result in my child being privatized at the time of final Cambridge exams.</p>";
+        //Body += "<p style='margin:0 0 12px 0;font-size:14px;line-height:24px;font-family:Arial,sans-serif;'>4) If at any point I want my child to join Class 9M, I will take full responsibility for the missed taught course.</p>";
+        //Body += "<p style='margin:0 0 12px 0;font-size:14px;line-height:24px;font-family:Arial,sans-serif;'>5) I understand that I will also be responsible to register my child with the relevant Matric Board paying an additional fee, if applicable.</p>";
+
+        Body += onclassbase;
+
+        Body += "<p style='margin:0 0 12px 0;font-size:14px;line-height:24px;font-family:Arial,sans-serif;'>Please press confirm button to submit your request</p>";
+
+
+
+        byte[] b = System.Text.ASCIIEncoding.ASCII.GetBytes(lblStudent_Id.Text.Trim());
+        string encrypted_student_Id = Convert.ToBase64String(b);
+
+        byte[] c = System.Text.ASCIIEncoding.ASCII.GetBytes(lblClass_Id.Text.Trim());
+        string encrypted_class_Id = Convert.ToBase64String(c);
+
+        byte[] sess = System.Text.ASCIIEncoding.ASCII.GetBytes(Session["session_id"].ToString().Trim());
+        string encrypted_session_Id = Convert.ToBase64String(sess);
+
+
+
+        //var url = "http://localhost:50091/PresentationLayer/Bifurcation_Confirmation.aspx?St_Id=" + encrypted_student_Id+"&Cl_Id="+ encrypted_class_Id+"&Sess_Id="+ encrypted_session_Id;//ddlStudent.SelectedValue
+        var url = "http://tcsaims.com/PresentationLayer/BifurcationConfirmation_IEP.aspx?St_Id=" + encrypted_student_Id + "&Cl_Id=" + encrypted_class_Id + "&Sess_Id=" + encrypted_session_Id;//ddlStudent.SelectedValue
+        Body += "<p style='text-align:center'><b><a style='color: #fff;text-decoration:none;border:none;padding:10px 100px !important;background:#0C4DA2;border-radius:10px;' href='" + url + "'>Confirm</a></b></p>";
+
+        Body += "</td>";
+        Body += "</tr>";
+
+        Body += "</table>";
+        Body += "</td>";
+        Body += "</tr>";
+        Body += "<tr>";
+        Body += "<td style='padding:30px;background:#FBEE26;'>";
+        Body += "<table role='presentation' style='width:100%;border-collapse:collapse;border:0;border-spacing:0;font-size:9px;font-family:Arial,sans-serif;'>";
+        Body += "<tr>";
+        Body += "<td style='padding:0;width:100%;' align='Center'>";
+        Body += "<p style='margin:0;font-size:14px;line-height:16px;font-family:Arial,sans-serif;color:#000;font-weight:bold'>The City School Management</p>";
+
+        Body += "</td>";
+
+        Body += "</tr>";
+        Body += "</table>";
+        Body += "</td>";
+        Body += "</tr>";
+        Body += "</table>";
+        Body += "</td>";
+        Body += "</tr>";
+        Body += "</table>";
+        Body += "</body>";
+        /*****HTML TEMPLET*********/
+
+
+        //var Password = "Pakistan!@#$";//gmail//"@U13K$@CgMlG";
+        var Password = "Jup31963";
+
+        using (MailMessage mm = new MailMessage(Email.Address, To))
+        {
+            mm.Subject = Subject;
+            mm.From = new MailAddress("AppNotifications@csn.edu.pk", "The City School");
+            //mm.From = new MailAddress("noreply@csn.edu.pk", "The City School");
+            //if (CC != "")
+            //{
+            //    mm.CC.Add(new MailAddress(CC));
+            //}
+            //mm.Bcc.Add("muhammad.maroof1@csn.edu.pk");
+            // need to  be open after check
+            //mm.CC.Add(new MailAddress(CC2));
+            //mm.CC.Add(new MailAddress(CC3));
+            //mm.From = new MailAddress("AppNotifications@csn.edu.pk", "The City School");
+
+            mm.Body = Body;
+            mm.IsBodyHtml = true;
+            using (SmtpClient smtp = new SmtpClient())
             {
-
-                onclassbase = "<p style='margin:0 0 12px 0;font-size:14px;line-height:24px;font-family:Arial,sans-serif;'> 1) The school has clearly explained that my child’s class 10 (1st term) result is not up to the mark.</p>" +
-                    "<p style='margin:0 0 12px 0;font-size:14px;line-height:24px;font-family:Arial,sans-serif;'> " +
-                    "2) I take the responsibility that my child will meet the school’s required attainment levels.</li>" +
-                    "<p style='margin:0 0 12px 0;font-size:14px;line-height:24px;font-family:Arial,sans-serif;'> " +
-                    "<li> Failure to meet the minimum requirements in the upcoming CAIE and the internal exams may result in my child’s private registration for his/her CAIE Exams next year.</p>";
-
-            }
-            if (getclass == "14" && getterm == "1")
-            {
-
-                onclassbase = "<p style='margin:0 0 12px 0;font-size:14px;line-height:24px;font-family:Arial,sans-serif;'> 1) That the school, after careful deliberation and consideration of the Class 9 EOY Results, had provisionally promoted my child to Year 10.</p><p style='margin:0 0 12px 0;font-size:14px;line-height:24px;font-family:Arial,sans-serif;'> 2) My child has not passed the Class 10 Mid-year examinations with the minimum required attainment levels and is provisionally being allowed to appear for Year 10 Mock examinations with the condition of attaining overall 60%. Failing to meet the minimum requirements may result in my child being privatized at the time of final Cambridge exams.</p>";
-
-            }
-
-            if (getclass == "15" && getterm == "2")
-            {
-
-                onclassbase = "<p style='margin:0 0 12px 0;font-size:14px;line-height:24px;font-family:Arial,sans-serif;'> 1) That the school, after careful deliberation and consideration of the Class 11 Mid-year examination Results, had provisionally allowed my child to sit for Year 11 Mock examinations. </p><p style='margin:0 0 12px 0;font-size:14px;line-height:24px;font-family:Arial,sans-serif;'> 2) My child has not passed the Class 11 Mock examinations with the minimum required attainment levels and is going to be privatized for Cambridge Exams.</p>";
-
-            }
-
-            if (getclass == "15" && getterm == "1")
-            {
-
-                onclassbase = "<p style='margin:0 0 12px 0;font-size:14px;line-height:24px;font-family:Arial,sans-serif;'> 1) That the school, after careful deliberation and consideration of the Class 10 Mocks and Cambridge Results, had provisionally promoted my child to Year 11.</p><p style='margin:0 0 12px 0;font-size:14px;line-height:24px;font-family:Arial,sans-serif;'> 2) My child has not passed the Class 11 Mid-year examinations with the minimum required attainment levels and is provisionally being allowed to appear for Year 11 Mock examinations with the condition of attaining overall 60%. Failing to meet the minimum requirements may result in my child being privatized at the time of final Cambridge exams.</p>";
-
-            }
-            /**CLASS UNDERTAKING**/
-
-
-
-            //Body += "<p style='margin:0 0 12px 0;font-size:14px;line-height:24px;font-family:Arial,sans-serif;'>1) That the school, after careful deliberation and consideration of the " + spn_class.InnerText + " Results, has advised me to transfer my child to the Matric system.</p>";
-            //Body += "<p style='margin:0 0 12px 0;font-size:14px;line-height:24px;font-family:Arial,sans-serif;'>2) However, at my insistence, the school has provisionally allowed my child to sit in " + spn_class.InnerText + " and take final examinations for the O level stream.</p>";
-            //Body += "<p style='margin:0 0 12px 0;font-size:14px;line-height:24px;font-family:Arial,sans-serif;'>3) Accept the responsibility that my child must pass the " + spn_class.InnerText + " Annual examinations with the minimum required attainment levels. Failing to meet the minimum requirements may result in my child being privatized at the time of final Cambridge exams.</p>";
-            //Body += "<p style='margin:0 0 12px 0;font-size:14px;line-height:24px;font-family:Arial,sans-serif;'>4) If at any point I want my child to join Class 9M, I will take full responsibility for the missed taught course.</p>";
-            //Body += "<p style='margin:0 0 12px 0;font-size:14px;line-height:24px;font-family:Arial,sans-serif;'>5) I understand that I will also be responsible to register my child with the relevant Matric Board paying an additional fee, if applicable.</p>";
-
-            Body += onclassbase;
-
-            Body += "<p style='margin:0 0 12px 0;font-size:14px;line-height:24px;font-family:Arial,sans-serif;'>Please press confirm button to submit your request</p>";
-
-
-
-            byte[] b = System.Text.ASCIIEncoding.ASCII.GetBytes(lblStudent_Id.Text.Trim());
-            string encrypted_student_Id = Convert.ToBase64String(b);
-
-            byte[] c = System.Text.ASCIIEncoding.ASCII.GetBytes(lblClass_Id.Text.Trim());
-            string encrypted_class_Id = Convert.ToBase64String(c);
-
-            byte[] sess = System.Text.ASCIIEncoding.ASCII.GetBytes(Session["session_id"].ToString().Trim());
-            string encrypted_session_Id = Convert.ToBase64String(sess);
-
-
-
-            //var url = "http://localhost:50091/PresentationLayer/Bifurcation_Confirmation.aspx?St_Id=" + encrypted_student_Id+"&Cl_Id="+ encrypted_class_Id+"&Sess_Id="+ encrypted_session_Id;//ddlStudent.SelectedValue
-            var url = "http://tcsaims.com/PresentationLayer/BifurcationConfirmation_IEP.aspx?St_Id=" + encrypted_student_Id + "&Cl_Id=" + encrypted_class_Id + "&Sess_Id=" + encrypted_session_Id;//ddlStudent.SelectedValue
-            Body += "<p style='text-align:center'><b><a style='color: #fff;text-decoration:none;border:none;padding:10px 100px !important;background:#0C4DA2;border-radius:10px;' href='" + url + "'>Confirm</a></b></p>";
-
-            Body += "</td>";
-            Body += "</tr>";
-
-            Body += "</table>";
-            Body += "</td>";
-            Body += "</tr>";
-            Body += "<tr>";
-            Body += "<td style='padding:30px;background:#FBEE26;'>";
-            Body += "<table role='presentation' style='width:100%;border-collapse:collapse;border:0;border-spacing:0;font-size:9px;font-family:Arial,sans-serif;'>";
-            Body += "<tr>";
-            Body += "<td style='padding:0;width:100%;' align='Center'>";
-            Body += "<p style='margin:0;font-size:14px;line-height:16px;font-family:Arial,sans-serif;color:#000;font-weight:bold'>The City School Management</p>";
-
-            Body += "</td>";
-
-            Body += "</tr>";
-            Body += "</table>";
-            Body += "</td>";
-            Body += "</tr>";
-            Body += "</table>";
-            Body += "</td>";
-            Body += "</tr>";
-            Body += "</table>";
-            Body += "</body>";
-            /*****HTML TEMPLET*********/
-
-
-            //var Password = "Pakistan!@#$";//gmail//"@U13K$@CgMlG";
-            var Password = "Jup31963";
-
-            using (MailMessage mm = new MailMessage(Email.Address, To))
-            {
-                mm.Subject = Subject;
-                mm.From = new MailAddress("AppNotifications@csn.edu.pk", "The City School");
-                //mm.From = new MailAddress("AppNotifications@csn.edu.pk", "The City School");
-
-                mm.Body = Body;
-
-
-                mm.IsBodyHtml = true;
-                using (SmtpClient smtp = new SmtpClient())
+                smtp.Host = "smtp.office365.com";
+                smtp.EnableSsl = true;
+                smtp.Port = 587;
+                smtp.UseDefaultCredentials = false;
+                smtp.Credentials =
+                new NetworkCredential("AppNotifications@csn.edu.pk", "Jup31963");
+                //new NetworkCredential("noreply@csn.edu.pk", "Master@123");
+                smtp.Timeout = 1000000000;
+                // Enable verbose logging
+                smtp.DeliveryMethod = SmtpDeliveryMethod.Network;
+                smtp.EnableSsl = true;
+                smtp.TargetName = "STARTTLS/smtp.office365.com";
+                // Capture additional log information
+                smtp.ServicePoint.MaxIdleTime = 1; smtp.ServicePoint.ConnectionLimit = 1; ServicePointManager.SecurityProtocol = SecurityProtocolType.Tls12;
+                try
                 {
-                    // smtp.Host = "smtp.gmail.com"; //"mail.bizar.pk";
-                    smtp.Host = "smtp.office365.com"; //"mail.bizar.pk";
-                    smtp.EnableSsl = true;
-                    NetworkCredential NetworkCred = new NetworkCredential(Email.Address, Password);
-
-                    smtp.UseDefaultCredentials = false;
-                    smtp.Credentials = NetworkCred;
-                    smtp.Port = 587;
-                    smtp.Timeout = 1000000000;
-
-
-
-                    try
-                    {
-                        smtp.Send(mm);
-
-
-
-                    }
-                    catch (SmtpFailedRecipientException ex)
-                    {
-
-                    }
+                    smtp.Send(mm);
+                    //DataTable dt = ExecuteProcedure("IN", "", dt1.Rows[0]["center_id"].ToString(), dt1.Rows[0]["center_id"].ToString(), dt1.Rows[0]["Student_No"].ToString(), dt1.Rows[0]["First_Name"].ToString(), ddlClass.SelectedValue.ToString(), 1);
+                    //dt.Dispose();
 
                 }
+                catch
+                (SmtpException smtpEx)
+                {
+                    Console.WriteLine(
+                "SMTP Exception: "
+                + smtpEx.Message);
+                    if
+                    (smtpEx.InnerException != null)
+                    {
+                        Console.WriteLine(
+                    "Inner Exception: "
+                    + smtpEx.InnerException.Message);
+                    }
+                }
+
+                catch
+                (Exception ex)
+                {
+                    Console.WriteLine(
+                "General Exception: "
+                + ex.Message);
+                }
             }
-
-            /********EMAIL******************/
-        }
-        else
-        { //ImpromptuHelper.ShowPrompt("No Data Found"); }
         }
 
+        /********EMAIL******************/
+        //}
+        //else
+        //{ //ImpromptuHelper.ShowPrompt("No Data Found"); }
+        //}
 
+
+    }
+
+    protected void btnPrint_Click(object sender, EventArgs e)
+    {
+       
+    }
+
+    protected void btnPrint_Click1(object sender, EventArgs e)
+    {
+        Response.ContentType =
+"application/pdf"
+; Response.AddHeader(
+"content-disposition"
+,
+"attachment;filename=ExportedContent.pdf"
+); Response.Cache.SetCacheability(HttpCacheability.NoCache); StringWriter sw =
+new
+StringWriter(); HtmlTextWriter hw =
+new
+HtmlTextWriter(sw); Retain1.RenderControl(hw);
+        using
+        (MemoryStream ms =
+        new
+        MemoryStream())
+        {
+            TextReader reader =
+        new
+        StringReader(sw.ToString());
+            var
+            pdfDoc =
+            new
+            iTextSharp.text.Document();
+            var
+            writer = iTextSharp.text.pdf.PdfWriter.GetInstance(pdfDoc, ms);
+            pdfDoc.Open(); 
+            iTextSharp.text.html.simpleparser.HTMLWorker htmlWorker = new
+            iTextSharp.text.html.simpleparser.HTMLWorker(pdfDoc); htmlWorker.Parse(reader); pdfDoc.Close(); Response.ContentType =
+            "application/pdf"
+            ; Response.AddHeader(
+            "content-disposition"
+            ,
+            "attachment;filename=ExportedContent.pdf"
+            ); Response.Cache.SetCacheability(HttpCacheability.NoCache); Response.OutputStream.Write(ms.GetBuffer(), 0, ms.GetBuffer().Length); Response.OutputStream.Flush(); Response.End();
+        }
+    }
+
+    protected void btnDownloadPdf_Click(object sender, EventArgs e)
+    {
+        Response.ContentType = "application/pdf";
+        Response.AddHeader("content-disposition", "attachment;filename=BifurcationStudent.pdf");
+        Response.Cache.SetCacheability(HttpCacheability.NoCache);
+
+        StringWriter sw = new StringWriter();
+        HtmlTextWriter hw = new HtmlTextWriter(sw);
+        this.RenderControl(hw);
+
+        StringReader sr = new StringReader(sw.ToString());
+        Document pdfDoc = new Document(PageSize.A4, 10f, 10f, 10f, 0f);
+        HTMLWorker htmlparser = new HTMLWorker(pdfDoc);
+        PdfWriter.GetInstance(pdfDoc, Response.OutputStream);
+        pdfDoc.Open();
+        htmlparser.Parse(sr);
+        pdfDoc.Close();
+
+        Response.Write(pdfDoc);
+        Response.End();
     }
 }

@@ -270,7 +270,7 @@
                                                                 <td colspan="5"></td>
                                                             </tr>
 
-                                                            <tr class="row" id="treffort" runat="server">
+                                                            <tr class="row" id="treffort" runat="server"  style="display:none;">
 
                                                                 <%--  <td colspan="4">
                                                                     
@@ -356,7 +356,7 @@
             </table>
             <div id="savearea" runat="server" class="savearea">
                 <!---Style="margin-top:40%;margin-right:50px"-->
-                <asp:Button Style="display: none;" ID="btn_save" runat="server" CssClass="btn btn-primary savebtn" OnClick="btnSave_Click" Text="Save" ValidationGroup="valSave" />
+                <asp:Button Style="display:none" ID="btn_save" runat="server" CssClass="btn btn-primary savebtn" OnClick="btnSave_Click" Text="Save" ValidationGroup="valSave" />
             </div>
 
             <cc1:AlwaysVisibleControlExtender ID="AlwaysVisibleControlExtender2"

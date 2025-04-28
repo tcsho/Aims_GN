@@ -493,8 +493,68 @@ public partial class PresentationLayer_MarksLockingCriteria : System.Web.UI.Page
         }
     }
 
-    
+
+/*
     protected void btnCopy_Click(object sender, EventArgs e)
+    {
+        ImageButton btn = (ImageButton)sender;
+        string dateTimeString = "";
+        if (btn.CommandArgument.StartsWith("LOCKED AT"))
+        {
+            dateTimeString = btn.CommandArgument.Substring("LOCKED AT - ".Length);
+        }
+        if (btn.CommandArgument.Contains("UNLOCKED AT"))
+        {
+            dateTimeString = btn.CommandArgument.Substring("UNLOCKED AT - ".Length);
+        }
+
+
+        DateTime date = Convert.ToDateTime(dateTimeString);
+        bool _isLock = Convert.ToBoolean(btn.CommandName);
+        GridViewRow grv = (GridViewRow)btn.NamingContainer;
+        CheckBox cb = null;
+        date = Convert.ToDateTime(date);
+        //date = Convert.ToDateTime(grv.Cells[4].Text);
+        foreach (GridViewRow gvRow in gvLocking.Rows)
+        {
+            int _index = gvRow.RowIndex;
+            cb = (CheckBox)gvRow.FindControl("chkSelect");
+            if (cb.Checked)
+            {
+                try
+                {
+                    int k = 0;
+                    int id = Convert.ToInt32(gvRow.Cells[0].Text.ToString());
+                    obj.MLCri_Id = id;
+                    obj.LockingDate = date;
+                    obj.isLock = _isLock;
+                    k = obj.MarksLockingCriteriaUpdate(obj);
+                    if (k == 1)
+                    {
+                        ImpromptuHelper.ShowPrompt("Update Successfull");
+                    }
+                    else if (k == 2)
+                    {
+                        ImpromptuHelper.ShowPrompt("Update UnSuccessfull");
+                    }
+                }
+                catch (Exception ex)
+                {
+                    Session["error"] = ex.Message;
+                    Response.Redirect("~/presentationlayer/ErrorPage.aspx", false);
+                }
+                cb.Checked = false;
+            }
+        }
+        ViewState["Data"] = null;
+        BindGrid();
+    }
+
+*/
+
+
+
+ protected void btnCopy_Click(object sender, EventArgs e)
     {
         ImageButton btn = (ImageButton)sender;
         string dateTimeString = "";
@@ -548,7 +608,8 @@ public partial class PresentationLayer_MarksLockingCriteria : System.Web.UI.Page
         ViewState["Data"] = null;
         BindGrid();
     }
-    
+
+
     protected void GridView1_RowDataBound(object sender, GridViewRowEventArgs e)
     {
         if (e.Row.RowType == DataControlRowType.DataRow)

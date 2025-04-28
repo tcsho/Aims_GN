@@ -180,24 +180,47 @@ public partial class PresentationLayer_TCS_StudentJoinedInNewSession : System.We
     protected void btnDelete_Click(object sender, EventArgs e)
     {
         try
-        {
-            LinkButton btn = (LinkButton)(sender);
-            GridViewRow gvr = (GridViewRow)btn.NamingContainer;
-            gvNewStudents.SelectedIndex = gvr.RowIndex;
-
-            BLLStudent_Joined_In_NewSession obj = new BLLStudent_Joined_In_NewSession();
-            obj.Student_Joined_In_NewSession_Id = Convert.ToInt32(btn.CommandArgument);
-            int k = obj.Student_Joined_In_NewSessionDelete(obj);
-
-            ViewState["LoadData"] = null;
-            BindNewStudents();
-        }
-        catch (Exception ex)
-        {
-            Session["error"] = ex.Message;
-            Response.Redirect("~/presentationlayer/ErrorPage.aspx", false);
-        }
-    }
+        
+	{
+            
+		//DataRow row = (DataRow)Session["UserId"];
+            
+		DataRow row = (DataRow)Session["rightsRow"];
+            
+		LinkButton btn = (LinkButton)(sender);
+            
+		GridViewRow gvr = (GridViewRow)btn.NamingContainer;
+            
+		gvNewStudents.SelectedIndex = gvr.RowIndex;
+ 
+            		BLLStudent_Joined_In_NewSession obj = new BLLStudent_Joined_In_NewSession();
+            		obj.Student_Joined_In_NewSession_Id = Convert.ToInt32(btn.CommandArgument);
+            
+		obj.DeletedBy = Convert.ToInt32		(Session["ContactID"].ToString());
+           
+		obj.DeletedDate= DateTime.Now;
+            
+		obj.Session_Id=  Convert.ToInt32		(Session["Session_Id"].ToString());
+ 
+            
+		int k = obj.Student_Joined_In_NewSessionDelete(obj);
+ 
+            		ViewState["LoadData"] = null;
+            
+		BindNewStudents();
+        
+	}
+        
+	catch (Exception ex)
+        
+	{
+            		Session["error"] = ex.Message;
+            
+		Response.Redirect("~/presentationlayer/ErrorPage.aspx", false);
+        
+	}
+    
+}
     protected void dg_student_PreRender(object sender, EventArgs e)
     {
         try

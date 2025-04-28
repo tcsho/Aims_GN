@@ -72,7 +72,7 @@ public partial class PresentationLayer_ClassSetionTeacherAllocation : System.Web
                 dt = ObjSec.SectionSelectClassTeacherBySection_Id(ObjSec);
                 if (dt.Rows.Count > 0)
                 {
-                    List_ClassTeacher.SelectedValue = dt.Rows[0]["ClassTeacher_Id"].ToString() =="" ? "0" : dt.Rows[0]["ClassTeacher_Id"].ToString();
+                    List_ClassTeacher.SelectedValue = dt.Rows[0]["ClassTeacher_Id"].ToString();
 
                 }
                 else

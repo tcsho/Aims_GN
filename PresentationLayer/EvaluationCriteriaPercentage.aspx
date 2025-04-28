@@ -147,7 +147,8 @@
                                      {
                                          extend: 'excel',
                                          exportOptions: {
-                                             columns: [1, 3, 4, 5]
+                                             columns: [1,2,3,4,5,11]
+
                                          }
                                      }
                                  ],
@@ -199,16 +200,6 @@
                             </table>
                             <table class="main_table" cellspacing="0" cellpadding="0" width="100%" align="center"
                                 border="0">
-                                    <tr style="width: 100%">
-                                    <td style="height: 18px; width: 40%; text-align: right" align="right" colspan="1">
-                                        Region*:
-                                    </td>
-                                    <td style="width: 60%" align="left">
-                                        <asp:DropDownList ID="ddl_region" runat="server" CssClass="dropdownlist" Width="217px"
-                                            AutoPostBack="True">
-                                        </asp:DropDownList>
-                                    </td>
-                                </tr>
                                 <tr style="width: 100%">
                                     <td style="height: 18px; width: 40%; text-align: right" align="right" colspan="1">
                                         Class :
@@ -357,7 +348,7 @@
                                                     <HeaderStyle HorizontalAlign="Left" Width="5%" />
                                                     <ItemStyle HorizontalAlign="Center" Width="5%" />
                                                 </asp:TemplateField>
-                                                <asp:BoundField DataField="Type" HeaderText="Type" >
+                                                <asp:BoundField DataField="Type" HeaderText="Term" >
                                                 <ItemStyle CssClass="hide" />
                                                     <HeaderStyle CssClass="hide" />
                                                 </asp:BoundField>
@@ -424,6 +415,10 @@
                                                     <HeaderStyle HorizontalAlign="Center" />
                                                     <ItemStyle Width="30px" />
                                                 </asp:TemplateField>
+<asp:BoundField DataField="Class_Name" HeaderText="Class">
+<ItemStyle CssClass="hide" />
+<HeaderStyle CssClass="hide" />
+</asp:BoundField>
                                             </Columns>
                                             <HeaderStyle CssClass="tableheader" BackColor="#868B74" />
                                             <RowStyle CssClass="tr1" />

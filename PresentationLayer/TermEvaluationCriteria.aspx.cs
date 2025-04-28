@@ -18,8 +18,7 @@ public partial class PresentationLayer_TermEvaluationCriteria : System.Web.UI.Pa
             try
             {
                 //lblSave.Text = "";
-                loadRegions();
-              
+                FillClassSection();
                 pan_New.Attributes.CssStyle.Add("display", "none");
                 ViewState["tMood"] = "check";
                 ViewState["SortDirection"] = "ASC";
@@ -93,7 +92,7 @@ public partial class PresentationLayer_TermEvaluationCriteria : System.Web.UI.Pa
             int moID = Int32.Parse(Session["moID"].ToString());
             obj.Main_Organisation_Id = moID;
             obj.Class_Id = Convert.ToInt32(List_ClassSection.SelectedValue);
-            obj.Region_Id = Convert.ToInt32(ddl_region.SelectedValue);
+
             DataTable dt = (DataTable)obj.Class_SubjectSelectAllByClassId(obj);
             ViewState["SubjectList"] = dt;
 
@@ -113,25 +112,7 @@ public partial class PresentationLayer_TermEvaluationCriteria : System.Web.UI.Pa
 
     }
 
-    private void loadRegions()
-    {
-        try
-        {
-            BLLRegion oDALRegion = new BLLRegion();
-            DataTable dt = new DataTable();
 
-            oDALRegion.Main_Organisation_Country_Id = 1;
-            dt = oDALRegion.RegionFetch(oDALRegion);
-
-            objBase.FillDropDown(dt, ddl_region, "Region_Id", "Region_Name");
-        }
-        catch (Exception ex)
-        {
-            Session["error"] = ex.Message;
-            Response.Redirect("~/presentationlayer/ErrorPage.aspx", false);
-        }
-
-    }
     protected void bindTermList()
     {
         try
@@ -270,7 +251,7 @@ public partial class PresentationLayer_TermEvaluationCriteria : System.Web.UI.Pa
             dt.Columns.Add("Subject_Id");
             dt.Columns.Add("Evaluation_Criteria_Type_Id");
             dt.Columns.Add("Evaluation_Type_Id");
-            
+            dt.Columns.Add("Class_Name");
             dt.Rows.Add(dt.NewRow());
             gv.DataSource = dt;
             gv.DataBind();
@@ -473,14 +454,11 @@ public partial class PresentationLayer_TermEvaluationCriteria : System.Web.UI.Pa
                     subj_Id = Convert.ToInt32(item.Value.ToString());
                     foreach (ListItem item2 in cblTerm.Items)
                     {
-                      
-                            if (item2.Selected)
-                            {
-                                Term_Id = Convert.ToInt32(item2.Value.ToString());
-                                save(subj_Id, Term_Id);
-                            }
-                            
-                      
+                        if (item.Selected)
+                        {
+                            Term_Id = Convert.ToInt32(item2.Value.ToString());
+                            save(subj_Id, Term_Id);
+                        }
 
                     }
                    
@@ -757,10 +735,5 @@ public partial class PresentationLayer_TermEvaluationCriteria : System.Web.UI.Pa
             Session["error"] = ex.Message;
             Response.Redirect("~/presentationlayer/ErrorPage.aspx", false);
         }
-    }
-
-    protected void ddl_region_SelectedIndexChanged(object sender, EventArgs e)
-    {
-        FillClassSection();
     }
 }

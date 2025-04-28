@@ -40,7 +40,7 @@ public partial class PresentationLayer_CEPD_professional_Qualification : System.
         {
             if (string.IsNullOrWhiteSpace(txtProQualification.Text))
             {
-                //*ImpromptuHelper.ShowError("Qualification cannot be empty!");
+                ImpromptuHelper.ShowError("Qualification cannot be empty!");
                 return;
             }
             if (ddlcategory.SelectedValue.ToString() == "")
@@ -58,7 +58,7 @@ public partial class PresentationLayer_CEPD_professional_Qualification : System.
             objec.CreatedBy = Convert.ToInt32(Session["ContactID"].ToString());
             objec.CreatedOn = DateTime.Now;
             objec.SaveUpdateQualification(objec);
-            //*ImpromptuHelper.ShowSuccess("New Category Saved Successfully!");
+            ImpromptuHelper.ShowSuccess("New Category Saved Successfully!");
             BindGrid();
 
         }
@@ -82,7 +82,7 @@ public partial class PresentationLayer_CEPD_professional_Qualification : System.
         objec.CreatedBy = Convert.ToInt32(Session["ContactID"].ToString());
         objec.CreatedOn = DateTime.Now;
         objec.SaveUpdateQualification(objec);
-        //*ImpromptuHelper.ShowSuccess("Qualification Edit Successfully!");
+        ImpromptuHelper.ShowSuccess("Qualification Edit Successfully!");
     }
 
 
@@ -126,7 +126,7 @@ public partial class PresentationLayer_CEPD_professional_Qualification : System.
     {
 
         objec.DeleteQualification(categoryId);
-        //*ImpromptuHelper.ShowSuccess("Qualification Deleted Successfully!");
+        ImpromptuHelper.ShowSuccess("Qualification Deleted Successfully!");
     }
 
     protected void ddlcategory_SelectedIndexChanged(object sender, EventArgs e)

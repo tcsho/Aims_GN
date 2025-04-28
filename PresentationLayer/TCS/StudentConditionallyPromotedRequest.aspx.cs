@@ -192,7 +192,6 @@ public partial class PresentationLayer_StudentConditionallyPromotedRequest : Sys
             //dt = dt.AsEnumerable().Where(r => r.Field<int>("Class_Id") != 12).CopyToDataTable();
             int[] excludedClassIds = new int[] { 2, 3, 4, 5, 6, 12, 14, 15, 17, 18, 19, 20, 89, 90, 92, 93 };
             dt = dt.AsEnumerable().Where(r => !excludedClassIds.Contains(r.Field<int>("Class_Id"))).CopyToDataTable();
-
             objBase.FillDropDown(dt, ddlClass, "Class_Id", "Class_Name");
 
         }
@@ -234,14 +233,14 @@ public partial class PresentationLayer_StudentConditionallyPromotedRequest : Sys
 
             objClsSec.Main_Organisation_Id = MOId;
 
-            if (Region_Id == 0)
-            {
+            //if (Region_Id == 0)
+           // {
                 objClsSec.Region_Id = Convert.ToInt32(ddl_region.SelectedValue.ToString());
-            }
-            else
-            {
-                objClsSec.Region_Id = Region_Id;
-            }
+            //}
+           // else
+            //{
+              //  objClsSec.Region_Id = Region_Id;
+           // }
             if (ddl_center.SelectedIndex > 0)
             {
                 objClsSec.Center_Id = Convert.ToInt32(ddl_center.SelectedValue.ToString());
@@ -258,10 +257,10 @@ public partial class PresentationLayer_StudentConditionallyPromotedRequest : Sys
             //}
             //else
             //{
-            //    dtsub = (DataTable)ViewState["dtDetails"];
+              //  dtsub = (DataTable)ViewState["dtDetails"];
             //}
 
-            ViewState["dtDetails"] = dtsub;
+
 
             if (dtsub.Rows.Count > 0)
             {
@@ -269,7 +268,7 @@ public partial class PresentationLayer_StudentConditionallyPromotedRequest : Sys
                 tdSearch.Visible = true;
                 gv_details.DataSource = dtsub;
                 gv_details.DataBind();
-                
+                ViewState["dtDetails"] = dtsub;
                 btns.Visible = true;
                 lblGridStatus.Text = "";
                 if (Region_Id == 0 && Center_Id == 0)
@@ -433,7 +432,6 @@ public partial class PresentationLayer_StudentConditionallyPromotedRequest : Sys
             DataTable dt = new DataTable();
             dt = objBll.SessionSelectAllActive();
             objBase.FillDropDown(dt, ddlSession, "Session_ID", "Description");
-            ddlSession.SelectedIndex = ddlSession.Items.Count - 1;
         }
         catch (Exception ex)
         {
@@ -593,14 +591,15 @@ public partial class PresentationLayer_StudentConditionallyPromotedRequest : Sys
                 if (AlreadyIn == 0)
                 {
                     ImpromptuHelper.ShowPrompt("Record successfully updated.");
-                    ViewState["dtDetails"] = null;
-                    BindGrid();
+                    
                 }
                 else
                 {
                     ImpromptuHelper.ShowPrompt("Student can request for discretionary promotion only once");
 
                 }
+                    ViewState["dtDetails"] = null;
+                    BindGrid();
             }
             btnClose_Click(this, EventArgs.Empty);
         }

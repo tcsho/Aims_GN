@@ -327,12 +327,24 @@
                                     <ItemStyle CssClass="hide" />
                                     <HeaderStyle CssClass="hide" />
                                 </asp:BoundField>
+
+
+
+
+
+
+
+
+
+
+
                                 </Columns>
                                 <SelectedRowStyle ForeColor="SlateGray" />
                                 <RowStyle CssClass="tr2" BackColor="White"></RowStyle>
                                 <HeaderStyle CssClass="tableheader"></HeaderStyle>
                                 <AlternatingRowStyle CssClass="tr2"></AlternatingRowStyle>
                             </asp:GridView>
+
                         </td>
                     </tr>
                     <tr>
@@ -345,6 +357,17 @@
 
                         </td>
                     </tr>
+                 
+
+
+
+
+
+
+                  
+
+
+
                     <tr>
                         <td>
                             <div class="pull-right">
@@ -372,6 +395,7 @@
                                     <asp:TextBox ID="txtFirstName" ValidationGroup="modal" runat="server" CssClass="form-control " Enabled="false"></asp:TextBox>
                                     <asp:RequiredFieldValidator ID="RequiredFieldValidator1" runat="server" ControlToValidate="txtFirstName"
                                         ErrorMessage="First Name Required" ForeColor="Red" ValidationGroup="modal" />
+
                                 </p>
                                 <p>
                                     <asp:Label ID="lblLastName" runat="server" CssClass="TextLabelMandatory40" Text="University Name(s)"></asp:Label>
@@ -411,6 +435,7 @@
                                     <asp:TextBox ID="txtStdName" ValidationGroup="modal" runat="server" CssClass="form-control " Enabled="false"></asp:TextBox>
                                     <asp:RequiredFieldValidator ID="RequiredFieldValidator2" runat="server" ControlToValidate="txtStdName"
                                         ErrorMessage="First Name Required" ForeColor="Red" ValidationGroup="modal" />
+
                                 </p>
                                 <p>
                                     <asp:Label ID="Label3" runat="server" CssClass="TextLabelMandatory40" Text="* For multiple files upload please select all files at once" ForeColor="Green"></asp:Label>
@@ -418,6 +443,8 @@
                                     <%--<asp:DropDownList ID="DropDownList1" runat="server" AutoPostBack="false" CssClass="form-control"></asp:DropDownList>
                                     <asp:RequiredFieldValidator ID="RequiredFieldValidator3" runat="server" ControlToValidate="ddluni" InitialValue="select" ErrorMessage="Please select University " />--%>
                                 </p>
+
+
                             </div>
                             <div class="modal-footer">
 
@@ -433,6 +460,8 @@
 
                 </div>
             </div>
+
+
             <%--****************************Rejection Modal**********************************--%>
             <div class="container">
 
@@ -451,6 +480,7 @@
                                     <asp:TextBox ID="txtrejstudent" ValidationGroup="modal" runat="server" CssClass="form-control " Enabled="false"></asp:TextBox>
                                     <asp:RequiredFieldValidator ID="RequiredFieldValidator3" runat="server" ControlToValidate="txtrejstudent"
                                         ErrorMessage="First Name Required" ForeColor="Red" ValidationGroup="modal" />
+
                                 </p>
                                 <p>
                                     <asp:Label ID="Label5" runat="server" CssClass="TextLabelMandatory40" Text="Remarks"></asp:Label>

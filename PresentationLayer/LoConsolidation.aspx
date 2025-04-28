@@ -233,7 +233,7 @@
 
                                                     <td class="col-lg-3">
                                                         <div class="form-group">
-                                                            <label class="TextLabelLeft">Region :</label>
+                                                            <label class="TextLabelLeft">Region ::</label>
                                                             <asp:DropDownList ID="ddl_region" runat="server" AutoPostBack="True" CssClass="dropdownlist form-control"
                                                                 OnSelectedIndexChanged="ddl_Region_SelectedIndexChanged" Width="100%" OnClientClick="saveActiveTab()">
                                                             </asp:DropDownList>

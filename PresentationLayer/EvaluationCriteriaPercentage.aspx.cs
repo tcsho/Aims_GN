@@ -18,7 +18,6 @@ public partial class PresentationLayer_EvaluationCriteriaPercentage : System.Web
             try
             {
                 lblSave.Text = "";
-                loadRegions();
                 FillClassSection();
                 pan_New.Attributes.CssStyle.Add("display", "none");
                 ViewState["tMood"] = "check";
@@ -39,7 +38,7 @@ public partial class PresentationLayer_EvaluationCriteriaPercentage : System.Web
                 if (Convert.ToBoolean(_dtSettings.Rows[0]["isAllow"]) == false)
                 {
                     Session.Abandon();
-                    Response.Redirect("~/login.aspx", false);
+                    Response.Redirect("~/login.aspx",false);
                 }
 
                 //====== End Page Access settings ======================
@@ -59,16 +58,16 @@ public partial class PresentationLayer_EvaluationCriteriaPercentage : System.Web
         try
         {
 
-            lblSave.Text = "";
-            BLLResult_Grade obj = new BLLResult_Grade();
+        lblSave.Text = "";
+        BLLResult_Grade obj = new BLLResult_Grade();
 
+       
+        int moID = Int32.Parse(Session["moID"].ToString());
+        obj.Main_Organisation_Id = moID;
 
-            int moID = Int32.Parse(Session["moID"].ToString());
-            obj.Main_Organisation_Id = moID;
+        DataTable dt = (DataTable)obj.Class_SelectByOrgId(obj);
 
-            DataTable dt = (DataTable)obj.Class_SelectByOrgId(obj);
-
-            objBase.FillDropDown(dt, List_ClassSection, "Class_Id", "Class_Name");
+        objBase.FillDropDown(dt, List_ClassSection, "Class_Id", "Class_Name");
         }
         catch (Exception ex)
         {
@@ -83,17 +82,17 @@ public partial class PresentationLayer_EvaluationCriteriaPercentage : System.Web
     {
         try
         {
-            lblSave.Text = "";
-            BLLEvaluation_Criteria_Percentage obj = new BLLEvaluation_Criteria_Percentage();
+        lblSave.Text = "";
+        BLLEvaluation_Criteria_Percentage obj = new BLLEvaluation_Criteria_Percentage();
 
+        
+        int moID = Int32.Parse(Session["moID"].ToString());
+        obj.Main_Organisation_Id = moID;
+        obj.Class_Id = Convert.ToInt32(List_ClassSection.SelectedValue);
 
-            int moID = Int32.Parse(Session["moID"].ToString());
-            obj.Main_Organisation_Id = moID;
-            obj.Class_Id = Convert.ToInt32(List_ClassSection.SelectedValue);
-            obj.Region_Id = Convert.ToInt32(ddl_region.SelectedValue);
-            DataTable dt = (DataTable)obj.Class_SubjectSelectAllByClassId(obj);
+        DataTable dt = (DataTable)obj.Class_SubjectSelectAllByClassId(obj);
 
-            objBase.FillDropDown(dt, list_subject, "subject_id", "Subject_Name");
+        objBase.FillDropDown(dt, list_subject, "subject_id", "Subject_Name");
         }
         catch (Exception ex)
         {
@@ -103,34 +102,16 @@ public partial class PresentationLayer_EvaluationCriteriaPercentage : System.Web
 
     }
 
-    private void loadRegions()
-    {
-        try
-        {
-            BLLRegion oDALRegion = new BLLRegion();
-            DataTable dt = new DataTable();
 
-            oDALRegion.Main_Organisation_Country_Id = 1;
-            dt = oDALRegion.RegionFetch(oDALRegion);
-
-            objBase.FillDropDown(dt, ddl_region, "Region_Id", "Region_Name");
-        }
-        catch (Exception ex)
-        {
-            Session["error"] = ex.Message;
-            Response.Redirect("~/presentationlayer/ErrorPage.aspx", false);
-        }
-
-    }
     protected void bindTermList()
     {
         try
         {
-            DataTable dt = null;
-            BLLEvaluation_Criteria_Type ObjECT = new BLLEvaluation_Criteria_Type();
-            ObjECT.Class_Id = Convert.ToInt32(List_ClassSection.SelectedValue);
-            dt = ObjECT.Evaluation_Criteria_TypeSelectByNewClassID(ObjECT);
-            objBase.FillDropDown(dt, list_term, "Evaluation_Criteria_Type_Id", "Type");
+        DataTable dt = null;
+        BLLEvaluation_Criteria_Type ObjECT = new BLLEvaluation_Criteria_Type();
+        ObjECT.Class_Id = Convert.ToInt32(List_ClassSection.SelectedValue);
+        dt = ObjECT.Evaluation_Criteria_TypeSelectByNewClassID(ObjECT);
+        objBase.FillDropDown(dt, list_term, "Evaluation_Criteria_Type_Id", "Type");
         }
         catch (Exception ex)
         {
@@ -144,13 +125,13 @@ public partial class PresentationLayer_EvaluationCriteriaPercentage : System.Web
     {
         try
         {
-            FillSubjects();
-            bindTermList();
-            BindEvaluationType();
+        FillSubjects();
+        bindTermList();
+        BindEvaluationType();
 
-            //gvSubjects.DataSource = null;
-            //gvSubjects.DataBind();
-            SetEmptyGrid(gvSubjects);
+        //gvSubjects.DataSource = null;
+        //gvSubjects.DataBind();
+        SetEmptyGrid(gvSubjects);
         }
         catch (Exception ex)
         {
@@ -158,7 +139,7 @@ public partial class PresentationLayer_EvaluationCriteriaPercentage : System.Web
             Response.Redirect("~/presentationlayer/ErrorPage.aspx", false);
         }
 
-
+        
 
     }
 
@@ -167,18 +148,18 @@ public partial class PresentationLayer_EvaluationCriteriaPercentage : System.Web
     {
         try
         {
-            if (List_ClassSection.SelectedIndex > 0)
-            {
-                BLLEvaluation_Type obj = new BLLEvaluation_Type();
+        if (List_ClassSection.SelectedIndex > 0)
+        {
+            BLLEvaluation_Type obj = new BLLEvaluation_Type();
 
-                obj.Main_Organisation_Id = Convert.ToInt32(Session["moID"].ToString());
+            obj.Main_Organisation_Id = Convert.ToInt32(Session["moID"].ToString());
 
-                DataTable dt = obj.Evaluation_TypeSelectByOrgId(obj);
+            DataTable dt = obj.Evaluation_TypeSelectByOrgId(obj);
 
-                objBase.FillDropDown(dt, list_EvlType, "Evaluation_Type_Id", "Name");
+            objBase.FillDropDown(dt, list_EvlType, "Evaluation_Type_Id", "Name");
 
 
-            }
+        }
 
         }
         catch (Exception ex)
@@ -193,34 +174,34 @@ public partial class PresentationLayer_EvaluationCriteriaPercentage : System.Web
     {
         try
         {
-            BLLEvaluation_Criteria_Percentage objClsSec = new BLLEvaluation_Criteria_Percentage();
+        BLLEvaluation_Criteria_Percentage objClsSec = new BLLEvaluation_Criteria_Percentage();
 
-            DataTable dtsub = new DataTable();
+        DataTable dtsub = new DataTable();
 
+       
+        objClsSec.Class_Id = Convert.ToInt32(List_ClassSection.SelectedValue.ToString());
+        objClsSec.Subject_Id = Convert.ToInt32(list_subject.SelectedValue.ToString());
+        objClsSec.Evaluation_Criteria_Type_Id = Convert.ToInt32(list_term.SelectedValue.ToString());
 
-            objClsSec.Class_Id = Convert.ToInt32(List_ClassSection.SelectedValue.ToString());
-            objClsSec.Subject_Id = Convert.ToInt32(list_subject.SelectedValue.ToString());
-            objClsSec.Evaluation_Criteria_Type_Id = Convert.ToInt32(list_term.SelectedValue.ToString());
+        if (ViewState["dtDetails"] == null)
+        {
+            dtsub = (DataTable)objClsSec.Evaluation_Criteria_PercentageSelectAllByClassIdSubjectId(objClsSec);
+        }
+        else
+        {
+            dtsub = (DataTable)ViewState["dtDetails"];
+        }
 
-            if (ViewState["dtDetails"] == null)
-            {
-                dtsub = (DataTable)objClsSec.Evaluation_Criteria_PercentageSelectAllByClassIdSubjectId(objClsSec);
-            }
-            else
-            {
-                dtsub = (DataTable)ViewState["dtDetails"];
-            }
-
-            if (dtsub.Rows.Count > 0)
-            {
-                gvSubjects.DataSource = dtsub;
-                gvSubjects.DataBind();
-            }
-            else
-                SetEmptyGrid(gvSubjects);
-
-            ViewState["tMood"] = "check";
-            trSave.Visible = true;
+        if (dtsub.Rows.Count > 0)
+        {
+            gvSubjects.DataSource = dtsub;
+            gvSubjects.DataBind();
+        }
+        else
+            SetEmptyGrid(gvSubjects);
+        
+        ViewState["tMood"] = "check";
+        trSave.Visible = true;
         }
         catch (Exception ex)
         {
@@ -230,12 +211,12 @@ public partial class PresentationLayer_EvaluationCriteriaPercentage : System.Web
 
     }
 
+    
 
+    
+   
 
-
-
-
-
+  
 
 
 
@@ -243,34 +224,34 @@ public partial class PresentationLayer_EvaluationCriteriaPercentage : System.Web
     {
         try
         {
-            pan_New.Attributes.CssStyle.Add("display", "inline");
-            BLLEvaluation_Criteria_Percentage objClsSec = new BLLEvaluation_Criteria_Percentage();
+        pan_New.Attributes.CssStyle.Add("display", "inline");
+        BLLEvaluation_Criteria_Percentage objClsSec = new BLLEvaluation_Criteria_Percentage();
 
-            DataTable dtsub = new DataTable();
-            ViewState["mode"] = "Edit";
-            ImageButton btn = (ImageButton)(sender);
-            string ResultGradeValue = btn.CommandArgument;
+        DataTable dtsub = new DataTable();
+        ViewState["mode"] = "Edit";
+        ImageButton btn = (ImageButton)(sender);
+        string ResultGradeValue = btn.CommandArgument;
 
-            Result_GradeIdGe = ResultGradeValue;
+        Result_GradeIdGe = ResultGradeValue;
 
-            ViewState["ResultGrade"] = ResultGradeValue;
-
-
-            objClsSec.Class_Id = Convert.ToInt32(List_ClassSection.SelectedValue.ToString());
-            objClsSec.Subject_Id = Convert.ToInt32(list_subject.SelectedValue.ToString());
-            objClsSec.Evaluation_Criteria_Type_Id = Convert.ToInt32(list_term.SelectedValue.ToString());
-            objClsSec.Evaluation_Criteria_Percentage_Id = Convert.ToInt32(Result_GradeIdGe);
+        ViewState["ResultGrade"] = ResultGradeValue;
 
 
-            dtsub = (DataTable)objClsSec.Evaluation_Criteria_PercentageSelectAllByClassIdSubjectIdEvlPerctId(objClsSec);
+        objClsSec.Class_Id = Convert.ToInt32(List_ClassSection.SelectedValue.ToString());
+        objClsSec.Subject_Id = Convert.ToInt32(list_subject.SelectedValue.ToString());
+        objClsSec.Evaluation_Criteria_Type_Id = Convert.ToInt32(list_term.SelectedValue.ToString());
+        objClsSec.Evaluation_Criteria_Percentage_Id = Convert.ToInt32(Result_GradeIdGe);
 
-            txtGrade.Text = dtsub.Rows[0]["Percentage"].ToString().Trim();
 
-            ViewState["currentWeightage"] = txtGrade.Text;
+        dtsub = (DataTable)objClsSec.Evaluation_Criteria_PercentageSelectAllByClassIdSubjectIdEvlPerctId(objClsSec);
 
-            list_EvlType.SelectedValue = dtsub.Rows[0]["Evaluation_Type_Id"].ToString().Trim();
-            list_subject.SelectedValue = dtsub.Rows[0]["Subject_Id"].ToString().Trim();
-            lblSave.Text = "";
+        txtGrade.Text = dtsub.Rows[0]["Percentage"].ToString().Trim();
+
+        ViewState["currentWeightage"] = txtGrade.Text;
+
+        list_EvlType.SelectedValue = dtsub.Rows[0]["Evaluation_Type_Id"].ToString().Trim();
+        list_subject.SelectedValue = dtsub.Rows[0]["Subject_Id"].ToString().Trim();
+        lblSave.Text = "";
 
         }
         catch (Exception ex)
@@ -279,8 +260,8 @@ public partial class PresentationLayer_EvaluationCriteriaPercentage : System.Web
             Response.Redirect("~/presentationlayer/ErrorPage.aspx", false);
         }
 
-
-
+    
+        
 
     }
 
@@ -289,27 +270,27 @@ public partial class PresentationLayer_EvaluationCriteriaPercentage : System.Web
     {
         try
         {
-            BLLEvaluation_Criteria_Percentage objClsSec = new BLLEvaluation_Criteria_Percentage();
-            int AlreadyIn = 0;
+        BLLEvaluation_Criteria_Percentage objClsSec = new BLLEvaluation_Criteria_Percentage();
+        int AlreadyIn = 0;
 
-            ImageButton btn = (ImageButton)(sender);
-            string ResultGradeValue = btn.CommandArgument;
-
-
-            ViewState["ResultGrade"] = ResultGradeValue;
-
-            objClsSec.Evaluation_Criteria_Percentage_Id = Convert.ToInt32(ViewState["ResultGrade"]);
-
-            AlreadyIn = objClsSec.Evaluation_Criteria_PercentageDelete(objClsSec);
+        ImageButton btn = (ImageButton)(sender);
+        string ResultGradeValue = btn.CommandArgument;
 
 
-            ViewState["dtDetails"] = null;
+        ViewState["ResultGrade"] = ResultGradeValue;
 
-            ImpromptuHelper.ShowPrompt("Delete Record successfully");
-            lblSave.Visible = true;
-            lblSave.Text = "Delete Record successfully";
-            pan_New.Attributes.CssStyle.Add("display", "none");
-            BindGrid();
+        objClsSec.Evaluation_Criteria_Percentage_Id = Convert.ToInt32(ViewState["ResultGrade"]);
+
+        AlreadyIn = objClsSec.Evaluation_Criteria_PercentageDelete(objClsSec);
+
+
+        ViewState["dtDetails"] = null;
+
+        ImpromptuHelper.ShowPrompt("Delete Record successfully");
+        lblSave.Visible = true;
+        lblSave.Text = "Delete Record successfully";
+        pan_New.Attributes.CssStyle.Add("display", "none");
+        BindGrid();
 
         }
         catch (Exception ex)
@@ -327,24 +308,24 @@ public partial class PresentationLayer_EvaluationCriteriaPercentage : System.Web
     {
         try
         {
-            if (List_ClassSection.SelectedIndex > 0 && list_term.SelectedIndex > 0)
-            {
-                pan_New.Attributes.CssStyle.Add("display", "inline");
-                ViewState["mode"] = "Add";
-                txtGrade.Text = "";
-                ViewState["currentWeightage"] = "0";
-                list_EvlType.SelectedIndex = 0;
-                list_subject.SelectedIndex = 0;
-                lblSave.Text = "";
+        if (List_ClassSection.SelectedIndex > 0 && list_term.SelectedIndex > 0)
+        {
+        pan_New.Attributes.CssStyle.Add("display", "inline");
+        ViewState["mode"] = "Add";
+        txtGrade.Text = "";
+        ViewState["currentWeightage"] = "0";
+        list_EvlType.SelectedIndex = 0;
+        list_subject.SelectedIndex = 0;
+        lblSave.Text = "";
 
-            }
+        }
 
-            else
-            {
-                ImpromptuHelper.ShowPrompt("Please select Class, Subject and Term!");
-                lblSave.Visible = true;
-                lblSave.Text = "Please select Class and Term!";
-            }
+        else
+        {
+            ImpromptuHelper.ShowPrompt("Please select Class, Subject and Term!");
+            lblSave.Visible = true;
+            lblSave.Text = "Please select Class and Term!";
+        }
 
         }
         catch (Exception ex)
@@ -353,7 +334,7 @@ public partial class PresentationLayer_EvaluationCriteriaPercentage : System.Web
             Response.Redirect("~/presentationlayer/ErrorPage.aspx", false);
         }
 
-
+        
 
 
     }
@@ -365,15 +346,15 @@ public partial class PresentationLayer_EvaluationCriteriaPercentage : System.Web
         {
 
             ImageButton btnCopy = (ImageButton)sender;
-            GridViewRow grv = (GridViewRow)btnCopy.NamingContainer;
+            GridViewRow grv = (GridViewRow)btnCopy.NamingContainer;            
             string Weitage = grv.Cells[4].Text;
-
+            
             CheckBox cb = null;
-
+            
 
             foreach (GridViewRow gvRow in gvSubjects.Rows)
             {
-
+               
                 cb = (CheckBox)gvRow.FindControl("CheckBox1");
                 if (cb.Checked)
                 {
@@ -400,13 +381,13 @@ public partial class PresentationLayer_EvaluationCriteriaPercentage : System.Web
         try
         {
 
+           
+               
+                int AlreadyIn = 0;
+                DataTable dt = new DataTable();
 
-
-            int AlreadyIn = 0;
-            DataTable dt = new DataTable();
-
-            if (list_EvlType.SelectedIndex > 0 && list_subject.SelectedIndex > 0)
-            {
+                if (list_EvlType.SelectedIndex > 0 && list_subject.SelectedIndex > 0)
+                {
 
                 BLLEvaluation_Criteria_Percentage objClsSec = new BLLEvaluation_Criteria_Percentage();
 
@@ -425,92 +406,92 @@ public partial class PresentationLayer_EvaluationCriteriaPercentage : System.Web
 
                 dtsub = (DataTable)objClsSec.GetCurrentWeightagePercentage(objClsSec);
 
-                decimal weightage = decimal.Parse(txtGrade.Text);
-                decimal currWeightage = decimal.Parse(ViewState["currentWeightage"].ToString());
-                decimal currentWeightage = decimal.Parse(dtsub.Rows[0]["currentWeightage"].ToString().Trim());
-                if ((weightage + (currentWeightage - currWeightage)) > 100)
-                {
-
-                    ImpromptuHelper.ShowPrompt("Total Weightage Can Not Exceed From 100 For " + list_EvlType.SelectedItem.Text + ". Current Weightage Is " + ((float)(weightage + (currentWeightage - currWeightage))).ToString());
-                    lblSave.Visible = true;
-                    lblSave.Text = "Total Weightage Can Not Exceed From 100 For " + list_EvlType.SelectedItem.Text + ". Current Weightage Is " + ((float)(weightage + (currentWeightage - currWeightage))).ToString();
-                }
-                else
-                {
-                    string mode = Convert.ToString(ViewState["mode"]);
-
-                    if (mode != "Edit")
+                    decimal weightage = decimal.Parse(txtGrade.Text);
+                    decimal currWeightage = decimal.Parse(ViewState["currentWeightage"].ToString());
+                    decimal currentWeightage = decimal.Parse(dtsub.Rows[0]["currentWeightage"].ToString().Trim());
+                    if ((weightage + (currentWeightage - currWeightage)) > 100)
                     {
-                        dt = (DataTable)objClsSec.Evaluation_Criteria_PercentageSelectAllByEvlTypeId(objClsSec);
-                        if (dt.Rows.Count == 0)
+                        
+                        ImpromptuHelper.ShowPrompt("Total Weightage Can Not Exceed From 100 For " + list_EvlType.SelectedItem.Text + ". Current Weightage Is " + ((float)(weightage + (currentWeightage - currWeightage))).ToString());
+                        lblSave.Visible = true;
+                        lblSave.Text = "Total Weightage Can Not Exceed From 100 For " + list_EvlType.SelectedItem.Text + ". Current Weightage Is " + ((float)(weightage + (currentWeightage - currWeightage))).ToString();
+                    }
+                    else
+                    {
+                        string mode = Convert.ToString(ViewState["mode"]);
+
+                        if (mode != "Edit")
+                        {
+                            dt = (DataTable)objClsSec.Evaluation_Criteria_PercentageSelectAllByEvlTypeId(objClsSec);
+                            if (dt.Rows.Count == 0)
+                            {
+
+
+                                AlreadyIn = objClsSec.Evaluation_Criteria_PercentageAdd(objClsSec);
+
+
+                                ViewState["dtDetails"] = null;
+                                if (AlreadyIn == 0)
+                                {
+                                    ImpromptuHelper.ShowPrompt("Record was successfully added.");
+                                    ////pan_New.Attributes.CssStyle.Add("display", "none");
+                                    ViewState["mode"] = "Add";
+                                    BindGrid();
+
+                                    txtGrade.Text = "";
+                                    list_EvlType.SelectedIndex = 0;
+
+
+                                    lblSave.Visible = true;
+                                    lblSave.Text = "Record Saved Successfully";
+
+                                }
+
+
+                            }
+                            else
+                            {
+
+                                ImpromptuHelper.ShowPrompt("Evaluation Type with this name already exists.");
+                                lblSave.Text = "Evaluation Type with this name already exists.";
+                            }
+                        }
+
+                        else
                         {
 
 
-                            AlreadyIn = objClsSec.Evaluation_Criteria_PercentageAdd(objClsSec);
+
+                            AlreadyIn = objClsSec.Evaluation_Criteria_PercentageUpdate(objClsSec);
 
 
                             ViewState["dtDetails"] = null;
                             if (AlreadyIn == 0)
                             {
-                                ImpromptuHelper.ShowPrompt("Record was successfully added.");
-                                ////pan_New.Attributes.CssStyle.Add("display", "none");
-                                ViewState["mode"] = "Add";
+                                ImpromptuHelper.ShowPrompt("Record successfully updated.");
+                                pan_New.Attributes.CssStyle.Add("display", "none");
                                 BindGrid();
 
-                                txtGrade.Text = "";
-                                list_EvlType.SelectedIndex = 0;
-
-
                                 lblSave.Visible = true;
-                                lblSave.Text = "Record Saved Successfully";
+                                lblSave.Text = "Record Updated Successfully";
 
                             }
 
 
                         }
-                        else
-                        {
 
-                            ImpromptuHelper.ShowPrompt("Evaluation Type with this name already exists.");
-                            lblSave.Text = "Evaluation Type with this name already exists.";
-                        }
-                    }
-
-                    else
-                    {
-
-
-
-                        AlreadyIn = objClsSec.Evaluation_Criteria_PercentageUpdate(objClsSec);
-
-
-                        ViewState["dtDetails"] = null;
-                        if (AlreadyIn == 0)
-                        {
-                            ImpromptuHelper.ShowPrompt("Record successfully updated.");
-                            pan_New.Attributes.CssStyle.Add("display", "none");
-                            BindGrid();
-
-                            lblSave.Visible = true;
-                            lblSave.Text = "Record Updated Successfully";
-
-                        }
 
 
                     }
 
+            }
 
-
+                else
+                {
+                    ImpromptuHelper.ShowPrompt("Please Evaluation Type and Subject!");
+                    lblSave.Visible = true;
+                    lblSave.Text = "Please Evaluation Type and Subject!";
                 }
-
-            }
-
-            else
-            {
-                ImpromptuHelper.ShowPrompt("Please Evaluation Type and Subject!");
-                lblSave.Visible = true;
-                lblSave.Text = "Please Evaluation Type and Subject!";
-            }
             //}
         }
         catch (Exception ex)
@@ -527,10 +508,10 @@ public partial class PresentationLayer_EvaluationCriteriaPercentage : System.Web
     {
         try
         {
-            pan_New.Attributes.CssStyle.Add("display", "none");
-            gvSubjects.SelectedRowStyle.Reset();
+        pan_New.Attributes.CssStyle.Add("display", "none");
+        gvSubjects.SelectedRowStyle.Reset();
 
-            lblSave.Text = "";
+        lblSave.Text = "";
 
         }
         catch (Exception ex)
@@ -555,7 +536,7 @@ public partial class PresentationLayer_EvaluationCriteriaPercentage : System.Web
             dt.Columns.Add("Evaluation_Criteria_Type_Id");
             dt.Columns.Add("EvaluationType");
             dt.Columns.Add("Subject_Id");
-
+	    dt.Columns.Add("Class_Name");
             dt.Rows.Add(dt.NewRow());
             gv.DataSource = dt;
             gv.DataBind();
@@ -612,18 +593,18 @@ public partial class PresentationLayer_EvaluationCriteriaPercentage : System.Web
     {
         try
         {
-            if (list_term.SelectedValue != "0")
-            {
-                BindGrid();
-                pan_New.Attributes.CssStyle.Add("display", "none");
-            }
-            else
-            {
-                //gvSubjects.DataSource = null;
-                //gvSubjects.DataBind(); .
-                SetEmptyGrid(gvSubjects);
-                pan_New.Attributes.CssStyle.Add("display", "none");
-            }
+        if (list_term.SelectedValue != "0")
+        {
+            BindGrid();
+            pan_New.Attributes.CssStyle.Add("display", "none");
+        }
+        else
+        {
+            //gvSubjects.DataSource = null;
+            //gvSubjects.DataBind(); .
+            SetEmptyGrid(gvSubjects);
+            pan_New.Attributes.CssStyle.Add("display", "none");
+        }
         }
         catch (Exception ex)
         {
@@ -631,24 +612,24 @@ public partial class PresentationLayer_EvaluationCriteriaPercentage : System.Web
             Response.Redirect("~/presentationlayer/ErrorPage.aspx", false);
         }
 
-
+        
     }
 
-
-
+    
+    
     protected void list_term_SelectedIndexChanged(object sender, EventArgs e)
     {
         try
         {
-            BindGrid();
-            //////pan_New.Attributes.CssStyle.Add("display", "none");
-            pan_New.Attributes.CssStyle.Add("display", "inline");
-            ViewState["mode"] = "Add";
-            txtGrade.Text = "";
-            ViewState["currentWeightage"] = "0";
-            list_EvlType.SelectedIndex = 0;
-            lblSave.Text = "";
-            txtGrade.Focus();
+        BindGrid();
+        //////pan_New.Attributes.CssStyle.Add("display", "none");
+        pan_New.Attributes.CssStyle.Add("display", "inline");
+        ViewState["mode"] = "Add";
+        txtGrade.Text = "";
+        ViewState["currentWeightage"] = "0";
+        list_EvlType.SelectedIndex = 0;
+        lblSave.Text = "";
+        txtGrade.Focus();
 
         }
         catch (Exception ex)
@@ -659,10 +640,10 @@ public partial class PresentationLayer_EvaluationCriteriaPercentage : System.Web
 
 
     }
-
+    
     protected void btn_apply_Click(object sender, EventArgs e)
     {
-        try
+         try
         {
             int AlreadyIn = 0;
             DataTable dt = new DataTable();
@@ -672,12 +653,12 @@ public partial class PresentationLayer_EvaluationCriteriaPercentage : System.Web
 
             for (int i = 0; i < gvSubjects.Rows.Count; i++)
             {
-                objClsSec.Evaluation_Criteria_Percentage_Id = Convert.ToInt32(gvSubjects.Rows[i].Cells[0].Text);
-                objClsSec.Percentage = Convert.ToInt32(gvSubjects.Rows[i].Cells[4].Text);
+                 objClsSec.Evaluation_Criteria_Percentage_Id = Convert.ToInt32(gvSubjects.Rows[i].Cells[0].Text);
+                 objClsSec.Percentage = Convert.ToInt32(gvSubjects.Rows[i].Cells[4].Text);
 
-                AlreadyIn = objClsSec.Evaluation_Criteria_PercentageApplyAllChangesUpdate(objClsSec);
+                 AlreadyIn = objClsSec.Evaluation_Criteria_PercentageApplyAllChangesUpdate(objClsSec);
 
-
+                
             }
 
             ViewState["dtDetails"] = null;
@@ -693,10 +674,10 @@ public partial class PresentationLayer_EvaluationCriteriaPercentage : System.Web
             }
 
         }
-        catch (Exception ex)
-        {
-            Session["error"] = ex.Message;
-            Response.Redirect("~/presentationlayer/ErrorPage.aspx", false);
-        }
+         catch (Exception ex)
+         {
+             Session["error"] = ex.Message;
+             Response.Redirect("~/presentationlayer/ErrorPage.aspx", false);
+         }
     }
 }

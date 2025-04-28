@@ -140,7 +140,7 @@
                                     </asp:BoundField>
                                     <asp:TemplateField HeaderText="Achievement Rating">
                                         <ItemTemplate>
-                                            <asp:DropDownList Width="90%" runat="server" ID="ddlAchRate" CssClass="dropdownlist" >
+                                            <asp:DropDownList Width="90%" runat="server" ID="ddlAchRate"  CssClass="dropdownlist" >
                                             </asp:DropDownList>
 
                                         </ItemTemplate>
@@ -260,7 +260,7 @@
 
                                                         <td style="height: 19px; width: 100%" align="center" colspan="4">
                                                             <asp:Button ID="but_save" OnClick="but_save_Click" runat="server" CssClass="btn btn-primary"
-                                                                Text="Save"></asp:Button>&nbsp;<asp:Button ID="but_cancel" OnClick="but_cancel_Click"
+                                                                Text="Save" Visible="True"></asp:Button>&nbsp;<asp:Button ID="but_cancel" OnClick="but_cancel_Click"
                                                                     runat="server" CssClass="btn btn-primary" CausesValidation="False" Text="Cancel"></asp:Button>&nbsp;&nbsp;
                                                         </td>
 

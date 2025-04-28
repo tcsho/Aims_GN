@@ -34,7 +34,6 @@ public partial class PresentationLayer_TCS_ReportCard_EOY2023 : System.Web.UI.Pa
 
             SqlCommand comm = new SqlCommand("EXEC TCS_Result_SectionResultAllPOPULATEMYE2021 "+Session_Id+","+ TermGroup_Id + ","+ Section_Id + " ,"+ Student_Id + "  ", conn);
             
-            //SqlCommand comm = new SqlCommand("EXEC TCS_Result_SectionResultAllPOPULATEMYE2021_hasan " + Session_Id + "," + TermGroup_Id + "," + Section_Id + " ," + Student_Id + "  ", conn);
             try
             {
                 SqlDataAdapter data = new SqlDataAdapter(comm);

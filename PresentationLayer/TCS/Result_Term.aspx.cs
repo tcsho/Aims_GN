@@ -1165,14 +1165,7 @@ public partial class PresentationLayer_TCS_Result_Term : System.Web.UI.Page
                 list_section.SelectedValue = "0";
             }
 
-            if (Convert.ToInt32(ddlSession.SelectedValue)>14)
-            {
-                btnViewReport.Visible = false;
-            }
-            else
-            {
-                btnViewReport.Visible = true;
-            }
+            
 
         }
         catch (Exception ex)

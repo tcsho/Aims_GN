@@ -168,18 +168,18 @@ public partial class PresentationLayer_StudentConditionallyPromotedApproval : Sy
 
 
             objClsSec.Main_Organisation_Id = NMOId;
-            //if (NRegion_Id == 0)
-            //{
+            if (NRegion_Id == 0)
+            {
                 objClsSec.Region_Id = Convert.ToInt32(ddl_region.SelectedValue.ToString());
 
 
-            //}
-            //else
-            //{
-            //    objClsSec.Region_Id = NRegion_Id;
+            }
+            else
+            {
+                objClsSec.Region_Id = NRegion_Id;
 
 
-            //}
+            }
             if (NCenter_Id == 0)
             {
                 objClsSec.Center_Id = Convert.ToInt32(ddl_center.SelectedValue.ToString());
@@ -202,15 +202,15 @@ public partial class PresentationLayer_StudentConditionallyPromotedApproval : Sy
                 objClsSec.Class_Id = Convert.ToInt32(ddlClass.SelectedValue);
             else
                 objClsSec.Class_Id = null;
-            //if (ViewState["dtDetails"] == null)
-            //{
+            if (ViewState["dtDetails"] == null)
+            {
                 dtsub = (DataTable)objClsSec.Student_Conditionally_Promoted_RequestForApproval(objClsSec);
                 ViewState["dtDetails"] = dtsub;
-            //}
-            //else
-            //{
-            //    dtsub = (DataTable)ViewState["dtDetails"];
-            //}
+            }
+            else
+            {
+                dtsub = (DataTable)ViewState["dtDetails"];
+            }
 
             if (dtsub.Rows.Count > 0)
             {
@@ -325,8 +325,6 @@ public partial class PresentationLayer_StudentConditionallyPromotedApproval : Sy
             else
             {
                 //  ImpromptuHelper.ShowPrompt("Please Select Region,Center and Session!");
-                gv_details.DataSource = null;
-                gv_details.DataBind();
             }
         }
         catch (Exception ex)
@@ -510,15 +508,14 @@ public partial class PresentationLayer_StudentConditionallyPromotedApproval : Sy
             if (AlreadyIn == 0)
             {
                 ImpromptuHelper.ShowPrompt("Record successfully updated.");
-                
+                ViewState["dtDetails"] = null;
+                BindGrid();
             }
 
             else
             {
                 ImpromptuHelper.ShowPrompt("Record Already exist.");
             }
-            ViewState["dtDetails"] = null;
-            BindGrid();
         }
         btnClose_Click(this, EventArgs.Empty);
         //if (objClsSec.RD_Approval == true)
@@ -615,7 +612,6 @@ public partial class PresentationLayer_StudentConditionallyPromotedApproval : Sy
         try
         {
             //       ViewState["dtDetails"] = null;
-
             BindGrid();
             gv_details.SelectedIndex = -1;
         }

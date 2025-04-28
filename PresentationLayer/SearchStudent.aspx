@@ -292,7 +292,7 @@
                     <tr>
                         <td colspan="7">&nbsp;
                             <asp:Label ID="lblerror" runat="server" Text="" ForeColor="Red" Visible="false"></asp:Label>
-                            <asp:GridView ID="dg_student" runat="server" DataKeyNames="student_id" CssClass="datatable table table-striped table-bordered table-hover"
+                            <asp:GridView ID="dg_student" runat="server" DataKeyNames="student_id" CssClass="datatable table table-striped table-bordered table-hover" OnRowDataBound="dg_student_RowDataBound1"
                                 OnPreRender="dg_student_PreRender" AutoGenerateColumns="False" AllowPaging="false">
                                 <Columns>
                                     <asp:BoundField DataField="row" HeaderText="#">
@@ -314,9 +314,11 @@
                                     <asp:TemplateField HeaderText="">
                                         <HeaderStyle HorizontalAlign="Center" Font-Size="14px" />
                                         <ItemTemplate>
-                                            <asp:Label runat="server" ID="lblstudent"><%# Eval("Student_No") %></asp:Label>
+                                            <asp:Label runat="server" id="lblstudent"><%# Eval("Student_No") %></asp:Label>
                                             <div style="display: flex; justify-content: center; align-items: center; height: 100%;">
-                                                <asp:Image ID="imgStatus" runat="server"
+                                                <%--<asp:Image ID="imgStatus" runat="server" Visible='<%# (int)( Eval("Class_Id"))==5 || (int)( Eval("Class_Id"))==6  %>' ImageUrl='<%# string.IsNullOrEmpty(Eval("Image_Path").ToString()) ? "~/PresentationLayer/TCS/Files/dummy.png" : Eval("Image_Path").ToString() %>'
+                                                    Width="50px" Height="50px" Style="border-radius: 50%; object-fit: cover;" />--%>
+  <asp:Image ID="imgStatus" runat="server"
                                                     Visible='<%# (int)( Eval("Class_Id"))==5 || (int)( Eval("Class_Id"))==6 %>'
                                                     ImageUrl='<%# string.IsNullOrEmpty(Eval("Image_Path").ToString()) ? "~/PresentationLayer/TCS/Files/dummy.png" : Eval("Image_Path").ToString() %>'
                                                     Width="70px" Height="50px"
@@ -451,12 +453,13 @@
                                             </asp:LinkButton>
                                         </ItemTemplate>
                                     </asp:TemplateField>
-                                    <asp:TemplateField HeaderText="IEP" Visible="false">
+                                    <asp:TemplateField HeaderText="SDP" Visible="true">
                                         <%--17--%>
                                         <ItemStyle HorizontalAlign="Center" />
                                         <HeaderStyle HorizontalAlign="Center" />
                                         <ItemTemplate>
-                                            <a href='<%# ResolveUrl("~/PresentationLayer/tcs/IEP_Form_Wizard.aspx?s="+Eval("Student_Id")) %>'><i class="glyphicon glyphicon-edit TextLabelMandatory40 text-success"></i>
+                                            <%--<a href='<%# ResolveUrl("~/PresentationLayer/tcs/IEP_Form_Wizard.aspx?s="+Eval("Student_Id")) %>'><i class="glyphicon glyphicon-edit TextLabelMandatory40 text-success"></i>--%>
+                                            <asp:Button runat="server" ID="btnAPICall" Text="View SDP" CommandName="CallAPI" CommandArgument='<%# Eval("Student_No") %>' CssClass="btn btn-primary" OnClick="btnAPICall_Click" />
                                             </a>
                                         </ItemTemplate>
                                     </asp:TemplateField>
@@ -497,7 +500,7 @@
                                             </asp:LinkButton>
                                         </ItemTemplate>
                                     </asp:TemplateField>
-                                    <%--    <asp:TemplateField HeaderText="">
+                                    <%--    <asp:TemplateField HeaderText="Edit Image">
                                         <HeaderStyle HorizontalAlign="Center" Font-Size="14px" />
                                         <ItemTemplate>
                                             <div style="display: flex; justify-content: center; align-items: center; height: 100%;">
@@ -842,8 +845,8 @@
                                 </p>
                             </div>
                             <div class="modal-footer">
-                                <asp:ImageButton ID="btndocsupload" runat="server" ImageUrl="~/PresentationLayer/TCS/Files/upload.png" Text="Upload & Save" Height="70px" Width="70px" OnClick="btndocsupload_Click" />
-                                <%-- <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>--%>
+                                <asp:ImageButton ID="btndocsupload" runat="server"  ImageUrl="~/PresentationLayer/TCS/Files/upload.png" Text="Upload & Save" Height="70px" Width="70px" OnClick="btndocsupload_Click" />
+                               <%-- <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>--%>
                             </div>
                         </div>
                     </div>

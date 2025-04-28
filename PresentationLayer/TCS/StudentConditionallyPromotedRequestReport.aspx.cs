@@ -84,7 +84,7 @@ public partial class PresentationLayer_StudentConditionallyPromotedRequestReport
                     loadRegions();
                     FillActiveSessions();
                     ddlSession.SelectedIndex = ddlSession.Items.Count - 1;
-                    //  ddlSession_SelectedIndexChanged(this, EventArgs.Empty);
+                  //  ddlSession_SelectedIndexChanged(this, EventArgs.Empty);
                     trButtons.Visible = false;
 
 
@@ -232,21 +232,21 @@ public partial class PresentationLayer_StudentConditionallyPromotedRequestReport
 
             //if (ddlClass.SelectedIndex > 0)
             //    objClsSec.Class_Id = Convert.ToInt32(ddlClass.SelectedValue);
-            if (ddlClass.SelectedIndex > 0)
-
-            {
-
-                objClsSec.Class_Id = Convert.ToInt32(ddlClass.SelectedValue.ToString());
-
-            }
-
-            else
-
-            {
-
-                objClsSec.Class_Id = Class_Id;
-
-            }
+	   if (ddlClass.SelectedIndex > 0)
+            
+           {
+                
+			objClsSec.Class_Id = Convert.ToInt32(ddlClass.SelectedValue.ToString());
+            
+           }
+           
+          else
+            
+          {
+                 
+		objClsSec.Class_Id = Class_Id;
+            
+		}
             objClsSec.Main_Organisation_Id = MOId;
 
             if (Region_Id == 0)
@@ -269,11 +269,11 @@ public partial class PresentationLayer_StudentConditionallyPromotedRequestReport
 
             //if (ViewState["dtDetails"] == null)
             //{
-            dtsub = (DataTable)objClsSec.Student_Conditionally_Promoted_RequestSelectAllByOrgRegionCenterId(objClsSec);
+                dtsub = (DataTable)objClsSec.Student_Conditionally_Promoted_RequestSelectAllByOrgRegionCenterId(objClsSec);
             //}
             //else
             //{
-            // dtsub = (DataTable)ViewState["dtDetails"];
+               // dtsub = (DataTable)ViewState["dtDetails"];
             //}
 
 
@@ -312,7 +312,7 @@ public partial class PresentationLayer_StudentConditionallyPromotedRequestReport
                 tdSearch.Visible = false;
                 gv_details.DataSource = dtsub;
                 gv_details.DataBind();
-                ViewState["dtDetails"] = dtsub;
+ 		ViewState["dtDetails"] = dtsub;
                 btns.Visible = false;
                 lblGridStatus.Text = "No Record Found!";
             }
@@ -712,7 +712,7 @@ public partial class PresentationLayer_StudentConditionallyPromotedRequestReport
                 dv.RowFilter = strFilter;
                 gv_details.DataSource = dv;
                 gv_details.DataBind();
-
+                
                 gv_details.SelectedIndex = -1;
 
 
@@ -1080,7 +1080,7 @@ public partial class PresentationLayer_StudentConditionallyPromotedRequestReport
     protected void btn_bif_email_Click(object sender, EventArgs e)
     {
 
-
+        
         if (Request.QueryString.Count > 0)
         {
             string _studntid = Request.QueryString["S"].ToString();
@@ -1147,7 +1147,7 @@ public partial class PresentationLayer_StudentConditionallyPromotedRequestReport
 
 
 
-                Body += "<p style='margin:0 0 12px 0;font-size:14px;line-height:24px;font-family:Arial,sans-serif;'>I, as a parent / guardian of <strong>" + dt1.Rows[0]["First_Name"].ToString() + "</strong>ERP # " + dt1.Rows[0]["Student_no"].ToString() + "</strong> studying in Class " + dt1.Rows[0]["Class_Name"].ToString() + " </strong> confirm that I have fully read and understood the points below. My acknowledgement indicates full agreement and consent to apply the appropriate consequences stated:</p>";
+                Body += "<p style='margin:0 0 12px 0;font-size:14px;line-height:24px;font-family:Arial,sans-serif;'>I, as a parent / guardian of <strong>" + dt1.Rows[0]["First_Name"].ToString() + "</strong>ERP # " + dt1.Rows[0]["Student_no"].ToString() + "</strong> studying in Class " + dt1.Rows[0]["Class_Name"].ToString() +  " </strong> confirm that I have fully read and understood the points below. My acknowledgement indicates full agreement and consent to apply the appropriate consequences stated:</p>";
 
 
 

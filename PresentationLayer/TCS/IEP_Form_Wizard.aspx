@@ -199,6 +199,17 @@
             </script>
             <div class="container-fluid">
                 <div class="row">
+                    <div class="col-x-6 text-right">
+                                <div class="btn-group" style="margin-bottom: 0px;">
+
+                                    <asp:LinkButton runat="server" ID="btn_bifurcation" CssClass="btn btn-info btn-custom" OnClick="btn_bifurcation_Click" Visible="false"><i class="fa fa-save"></i>&nbsp;&nbsp;&nbsp;Bifurcation</asp:LinkButton>
+                                    <asp:LinkButton runat="server" ID="btnSave" CssClass="btn btn-info btn-custom" OnClick="btnSave_Click"><i class="fa fa-save" visible="false"></i>&nbsp;&nbsp;&nbsp;Save & Next</asp:LinkButton>
+<%--                                    <asp:LinkButton runat="server" ID="btnReset" CssClass="btn btn-info btn-custom"><i class="fa fa-refresh"></i>&nbsp;&nbsp;&nbsp;Reset</asp:LinkButton>--%>
+                                  <%--  <asp:LinkButton runat="server" ID="btnPrint" OnClientClick="Print()" CssClass="btn btn-info btn-custom"><i class="fa fa-print"></i>&nbsp;&nbsp;&nbsp;Print</asp:LinkButton>
+                                    <asp:LinkButton runat="server" Visible="false" ID="btnSend" CssClass="btn btn-info btn-custom" OnClick="btnSend_Click"><i class="fa fa-paper-plane"></i>&nbsp;&nbsp;&nbsp;Acknowledgement/Send</asp:LinkButton>--%>
+                                </div>
+
+                            </div>
                     <asp:HiddenField runat="server" ID="Batch_Id" />
                     <div id="tdFrmHeading" class="formheading">
 
@@ -206,6 +217,7 @@
                             <div class="col-xs-6">
                                 <asp:Label ID="lbl" CssClass="lblFormHead" runat="server">Individual Education Plan (Page 1 of 3)</asp:Label>
                             </div>
+                              
                            
                         </div>
                         <img alt="logo" src="<%= Page.ResolveUrl("~")%>images/h01.png" height="100%" width="100%"
@@ -424,17 +436,7 @@ rver" ID="mskD" /> //--//%>
                 </div>
 
             </div>
-             <div class="col-x-6 text-center">
-                                <div class="btn-group" style="margin-bottom: 0px;">
-
-                                    <asp:LinkButton runat="server" ID="btn_bifurcation" CssClass="btn btn-info btn-custom" OnClick="btn_bifurcation_Click" Visible="false"><i class="fa fa-save"></i>&nbsp;&nbsp;&nbsp;Bifurcation</asp:LinkButton>
-                                    <asp:LinkButton runat="server" ID="btnSave" CssClass="btn btn-info btn-custom" OnClick="btnSave_Click"><i class="fa fa-save" visible="false"></i>&nbsp;&nbsp;&nbsp;Save & Next</asp:LinkButton>
-<%--                                    <asp:LinkButton runat="server" ID="btnReset" CssClass="btn btn-info btn-custom"><i class="fa fa-refresh"></i>&nbsp;&nbsp;&nbsp;Reset</asp:LinkButton>--%>
-                                  <%--  <asp:LinkButton runat="server" ID="btnPrint" OnClientClick="Print()" CssClass="btn btn-info btn-custom"><i class="fa fa-print"></i>&nbsp;&nbsp;&nbsp;Print</asp:LinkButton>
-                                    <asp:LinkButton runat="server" Visible="false" ID="btnSend" CssClass="btn btn-info btn-custom" OnClick="btnSend_Click"><i class="fa fa-paper-plane"></i>&nbsp;&nbsp;&nbsp;Acknowledgement/Send</asp:LinkButton>--%>
-                                </div>
-
-                            </div>
+           
             
            <%-- </div>--%>
             <asp:SqlDataSource ID="dsRaisec" runat="server"></asp:SqlDataSource>
@@ -791,34 +793,31 @@ rver" ID="mskD" /> //--//%>
         });
     --%>
     <script>
+
         $(document).ready(function () {
 
             var selected = $('.raisec  option:selected').toArray().map(item => item.value);
             for (var s = 0; s < selected.length; s++) {
                 $(".raisec option:contains('" + selected[s] + "')").attr("disabled", "disabled");
+               
             }
-
-
-
-
-            (function () {
-                debugger
-                var previous;
-
-                $(".raisec").focus(function () {
-                    previous = this.value;
-                }).change(function () {
-                    var selectedval = this.value;
-
-                    $(".raisec option:contains('" + previous + "')").attr("disabled", false);
-                    $(".raisec option[value=" + selectedval + "]").prop('disabled', true);
-                    previous = this.value;
-                });
-            })();
 
          
         });
+        (function () {
 
+            var previous;
+
+            $(".raisec").focus(function () {
+                previous = this.value;
+            }).change(function () {
+                var selectedval = this.value;
+                $(".raisec option:contains('" + previous + "')").attr("disabled", false);
+                $(".raisec option:contains('" + previous + "')").removeAttr("disabled");
+                $(".raisec option[value=" + selectedval + "]").prop('disabled', true);
+                previous = this.value;
+            });
+        })();
 
     </script>
 </asp:Content>

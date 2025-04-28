@@ -6,6 +6,10 @@ using ADG.JQueryExtenders.Impromptu;
 using System.Web.UI;
 using System.IO;
 using System.Configuration;
+using System.Net.Http;
+using AngleSharp.Io;
+using System.Web.Http.Results;
+using AjaxControlToolkit;
 public partial class PresentationLayer_SearchStudent : System.Web.UI.Page
 {
     private int windowWidth = 5;
@@ -517,7 +521,7 @@ public partial class PresentationLayer_SearchStudent : System.Web.UI.Page
                 {
                     ch.Enabled = false;
                 }
-
+                
             }
         }
         catch (Exception ex)
@@ -1169,7 +1173,7 @@ public partial class PresentationLayer_SearchStudent : System.Web.UI.Page
             GridViewRow r = (GridViewRow)btn.NamingContainer;
             dg_student.SelectedIndex = r.RowIndex;
             ViewReport obj = new ViewReport();
-            obj.Section_Id =  Convert.ToInt32(r.Cells[4].Text); // remove dependency over section id for result   2424;
+            obj.Section_Id = Convert.ToInt32(r.Cells[4].Text); // remove dependency over section id for result
             obj.Student_Id = Convert.ToInt32(r.Cells[0].Text);
             obj.Session_Id = Convert.ToInt32(r.Cells[1].Text);
             obj.Class_Id = Convert.ToInt32(r.Cells[3].Text);
@@ -1219,7 +1223,7 @@ public partial class PresentationLayer_SearchStudent : System.Web.UI.Page
                     }
                     else if (obj.TermGroup_Id == 2 || (obj.Class_Id == 19 || obj.Class_Id == 20)) //goto Old Report
                     {
-                        //url = "TCS/";    //2025-02-18
+                        //url = "TCS/";     //2025-02-18
                         url = "";
                     }
                 }
@@ -1456,7 +1460,6 @@ public partial class PresentationLayer_SearchStudent : System.Web.UI.Page
             GridViewRow gvr = (GridViewRow)btnview.NamingContainer;
             gvReportCard.SelectedIndex = gvr.RowIndex;
             txtStdName.Text = gvr.Cells[3].Text == "&nbsp;" ? "" : gvr.Cells[3].Text + " / " + StudentId;
-         
             ViewState["Regionid"] = gvr.Cells[21].Text == "&nbsp;" ? "" : gvr.Cells[21].Text;
             ViewState["Centerid"] = gvr.Cells[22].Text == "&nbsp;" ? "" : gvr.Cells[22].Text;
             ViewState["Classid"] = gvr.Cells[8].Text == "&nbsp;" ? "" : gvr.Cells[8].Text;
@@ -1584,7 +1587,54 @@ public partial class PresentationLayer_SearchStudent : System.Web.UI.Page
         lblerror.Visible = false;
     }
 
+    protected void btnAPICall_Click(object sender, EventArgs e)
+  {
+      // Cast the sender to Button to get the CommandArgument
+      Button btn = (Button)sender;
+      GridViewRow row = (GridViewRow)btn.NamingContainer;
+
+      // Student_No from CommandArgument
+      string studentId = btn.CommandArgument;
+
+      // Class_Id directly from GridView
+      string classId = row.Cells[8].Text;
 
 
-  
+      // Get the Session_Id from the DataTable
+      string sessionID = string.Empty;
+
+      DataTable dt = new BLLSession().SessionSelectAll();
+      if (dt != null && dt.Rows.Count > 0)
+      {
+          sessionID = dt.Rows[0]["Session_Id"].ToString();
+      }
+      
+      // API URL construction
+      string termID = "2"; // Default value
+      if (classId == "12" || classId == "14" || classId == "15" || classId == "92" || classId == "93")
+      {
+          termID = "1";
+      }
+      string apiUrl = "http://sdp.csn.edu.pk/student/sdp?studentid=" + studentId + "&termid=" + termID + "&sessionid=" + sessionID;
+
+      ScriptManager.RegisterStartupScript(this, GetType(), "OpenNewTab", "window.open('" + apiUrl + "', '_blank');", true);
+  }
+    protected void dg_student_RowDataBound1(object sender, GridViewRowEventArgs e)
+    {
+        if (e.Row.RowType == DataControlRowType.DataRow)
+        {
+            // Extract Class_Id from the DataItem
+            int classId = Convert.ToInt32(DataBinder.Eval(e.Row.DataItem, "Class_Id"));
+
+            // Find the Button control in the current row
+            Button btnAPICall = (Button)e.Row.FindControl("btnAPICall");
+
+            // Check and set visibility based on Class_Id
+            if (btnAPICall != null)
+            {
+                btnAPICall.Visible = classId == 12 || classId == 13 || classId == 14 ||
+                                     classId == 15 || classId == 91 || classId == 92 || classId == 93;
+            }
+        }
+    }
 }

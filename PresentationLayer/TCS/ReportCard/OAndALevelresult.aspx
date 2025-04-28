@@ -744,7 +744,9 @@
                             //        reportcard += "<td>" + datademo[t].Grade + "</td>";
                             //    }
                             //}
-                            if (datademo[t].Marks == 0) {
+
+                            //reportcard += "<td>" + roundfun(datademo[t].Marks) + "</td>";
+ 			    if (datademo[t].Marks == 0) {
                                 reportcard += "<td>-</td>";
                             } else {
                                 reportcard += "<td>" + roundfun(datademo[t].Marks) + "</td>";
@@ -795,17 +797,20 @@
 
                         if (Term_Id == 2) {
                             if (datademo[0].Class_Id == 13 || datademo[0].Class_Id == 91) {
-                                if (datademo[0].isPromoted) {
+                                if (result[0].isPromoted == true) {
                                     reportcard += '<div class="col-lg-12 col-md-12 col-xs-12 col-sm-12 ispromoted">Promoted to ' + datademo[0].PromotedToClass + '</div>';
-                                } else {
+                                } else if (result[0].isPromoted == false && result[0].Cond_Prom == true) {
+                            reportcard += '<div class="col-lg-12 col-md-12 col-xs-12 col-sm-12 			ispromoted">Discretionarily Promoted  to ' + result[0].RequestedClass + '</div>';
+                        }
+				else {
                                     reportcard += '<div class="col-lg-12 col-md-12 col-xs-12 col-sm-12 notpromoted">Contact school management for promotion</div>';
                                 }
                             }
                         }
-
-                        reportcard += "<table class='table  subjecttable martictable margintoptb marticoveralltable'>";
+			
+                        reportcard += "<table class='table  subjecttable martictable margintoptb marticoveralltable'>"; 
                         reportcard += "</table>";
-
+                        
                         reportcard += "</div>";
 
                         reportcard += "</div>";

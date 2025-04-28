@@ -63,103 +63,23 @@
 
                             //****************************************************************
                             try {
-                                jq('table.datatable').DataTable({
+                                // alert("abc");
+                                $('table.datatable').DataTable({
                                     destroy: true,
-                                    // sDom: 'T<"dataTables_wrapper"tfrlip>', // its ok
+                                    "dom": 'Blfrtip',
 
+                                    buttons: [
 
-                                    //                    dom: "<'row'<'col-sm-5'T><'col-sm-7'f>>R" +
-                                    dom: "<'row'<'col-sm-4'l><'col-sm-3'T><'col-sm-5'f>>R" +
-                                        "<'row'<'col-sm-12'tr>>" +
-                                        //                     "<'row'<'col-sm-12'l>>" +
-                                        "<'row'<'col-sm-12'i>><'row'<'col-sm-12'p>>",
-                                    "columnDefs": [
-
-                                        { orderable: false, targets: [0] } //disable sorting on toggle button
-                                    ]
-
-                                    ,
-                                    tableTools:
-                                    { //Start of tableTools collection
-                                        "sSwfPath": "http://cdn.datatables.net/tabletools/2.2.4/swf/copy_csv_xls_pdf.swf",
-                                        "aButtons":
-                                            [ //start of button main/master collection
-
-
-
-                                                { // ******************* Start of child collection for export button
-                                                    "sExtends": "collection",
-                                                    "sButtonText": "<span class='glyphicon glyphicon-export'></span>",
-                                                    "sToolTip": "Export Data",
-                                                    "aButtons":
-                                                        [ //start of button export buttons collection
-
-                                                            // ******************* Start of copy button
-                                                            {
-                                                                "sExtends": "copy",
-                                                                "sButtonText": "<span class='glyphicon glyphicon-copy'></span> Copy Contents",
-                                                                "sToolTip": "Copy Data"
-                                                                , "mColumns": [6]
-                                                            } // ******************* end of copy button
-
-                                                            // ******************* Start of csv button
-                                                            , {
-                                                                'sExtends': 'csv',
-                                                                'bShowAll': false // ,'sFileName': "DataInCSVFormat.csv"
-                                                                ,
-                                                                "sFileName": "DataInCSVFormat - *.csv",
-                                                                "sToolTip": "Save as CSV",
-                                                                //'sButtonText': 'Save as CSV',
-                                                                "sButtonText": "<span class='fa fa-file-text-o'></span> Save to CSV",
-                                                                "sNewLine": "auto"
-                                                                , "mColumns": [6]
-                                                            }  // ******************* end of csv button
-
-                                                            // ******************* Start of excel button
-                                                            , {
-                                                                'sExtends': 'xls',
-                                                                'bShowAll': false,
-                                                                "sFileName": "DataInExcelFormat.xls",
-                                                                //'sButtonText': 'Save to Excel',
-                                                                "sButtonText": "<span class='fa fa-file-excel-o'></span> Save to Excel",
-                                                                "sToolTip": "Save as Excel"
-                                                                , "mColumns": [6]
-                                                            }  // ******************* End of excel button
-
-
-                                                            // ******************* Start of PDF button
-                                                            , {
-                                                                'sExtends': "pdf",
-                                                                'bShowAll': false,
-                                                                "sButtonText": "<span class='fa fa-file-pdf-o'></span> Save to PDF",
-                                                                //'sButtonText': 'Save to PDF',
-                                                                "sFileName": "DataInPDFFormat.pdf",
-                                                                "sToolTip": "Save as PDF" //,"sPdfOrientation": "landscape"
-                                                                , "mColumns": [6]
-                                                                //,"sPdfMessage": "Your custom message would go here."
-                                                            } // *********************  End of PDF button 
-
-                                                        ]// ******************* end of Export buttons collection
-                                                }    // ******************* end of child of export buttons collection
-                                            ] // ******************* end of button master Collection
-                                    } // ******************* end of tableTools
-                                    , "aLengthMenu": [[10, 25, 50, 100, 200, -1], [10, 25, 50, 100, 200, "All"]], "iDisplayLength": 100, 'bLengthChange': true // ,"bJQueryUI":true , fixedHeader: true , "order": [[6, "asc"]]
-                                    , "paging": true, "ordering": true, "searching": true, "info": true, "scrollX": false, "stateSave": true
-                                    , //--- Dynamic Language---------
-                                    "oLanguage": {
-                                        "sZeroRecords": "There are no Records that match your search critera",
-                                        "sLengthMenu": "Display _MENU_ records per page&nbsp;&nbsp;",
-                                        "sInfo": "Displaying _START_ to _END_ of _TOTAL_ records",
-                                        "sInfoEmpty": "Showing 0 to 0 of 0 records",
-                                        "sInfoFiltered": "(filtered from _MAX_ total records)",
-                                        "sEmptyTable": 'No Rows to Display.....!',
-                                        "sSearch": "Search :"
-                                    }
-                                }
-                                );
+                                        {
+                                            extend: 'excel',
+                                            title: 'List of Bifurcated Students'
+                                        }
+                                    ],
+                                    "lengthMenu": [[10, 25, 50, -1], [10, 25, 50, "All"]],
+                                });
                             }
                             catch (err) {
-                                //alert('datatable ' + err);
+                                // alert('datatable ' + err);
                             }
 
                             //****************************************************************
@@ -306,7 +226,7 @@
                                 <tr id="Tr3" runat="server" style="width: 100%">
                                     <td style="width: 100%">
                                         <asp:GridView ID="gv_details" runat="server" DataKeyNames="student_id" CssClass="datatable table table-striped table-bordered table-hover"
-                                            AutoGenerateColumns="False" AllowPaging="false">
+                                            AutoGenerateColumns="False" AllowPaging="false" OnPreRender="gv_details_PreRender1">
                                             <Columns>
 
 
@@ -350,12 +270,18 @@
                                                     <HeaderStyle HorizontalAlign="Center" Font-Size="14px" ForeColor="Black" />
                                                     <ItemStyle Font-Size="14px" />
                                                 </asp:BoundField>
-
-                                                <asp:BoundField DataField="EmailSent" HeaderText="Email Sent">
+                                                                                                <asp:TemplateField HeaderText="Email Sent">
+                                                    <HeaderStyle HorizontalAlign="Center" Font-Size="14px" ForeColor="Black" />
+<ItemStyle Font-Size="14px" />
+            <ItemTemplate>
+                <%# Eval("Status").ToString() == "1" ? "Yes" : "No" %>
+            </ItemTemplate>
+        </asp:TemplateField>
+                                                <%--<asp:BoundField DataField="EmailSent" HeaderText="Email Sent">
 
                                                     <HeaderStyle HorizontalAlign="Center" Font-Size="14px" ForeColor="Black" />
                                                     <ItemStyle Font-Size="14px" />
-                                                </asp:BoundField>
+                                                </asp:BoundField>--%>
                                                 <asp:BoundField DataField="Acknowledgement" HeaderText="Parent Acknowledgement">
 
                                                     <HeaderStyle HorizontalAlign="Center" Font-Size="14px" ForeColor="Black" />

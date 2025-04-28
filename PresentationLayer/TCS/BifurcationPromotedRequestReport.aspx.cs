@@ -193,10 +193,10 @@ public partial class PresentationLayer_BifurcationPromotedRequestReport : System
         {
             BLLClass_Center obj = new BLLClass_Center();
             DataTable dt = null;
-            int center = Convert.ToInt32(ddl_center.SelectedValue);
+            int center = Convert.ToInt32(20103004);
             dt = obj.Class_CenterFetch(center);
             dt = dt.AsEnumerable().Where(r => r.Field<int>("Class_Id") > 11).CopyToDataTable();
-            dt = dt.AsEnumerable().Where(r => r.Field<int>("Class_Id") < 15).CopyToDataTable();
+            dt = dt.AsEnumerable().Where(r => r.Field<int>("Class_Id") < 13).CopyToDataTable();
 
             objBase.FillDropDown(dt, ddlClass, "Class_Id", "Class_Name");
 
@@ -470,7 +470,7 @@ public partial class PresentationLayer_BifurcationPromotedRequestReport : System
         try
         {
             loadCenter();
-
+            loadClass();
             if (ddl_region.SelectedItem.Text == "Select")
             {
 
@@ -964,4 +964,21 @@ public partial class PresentationLayer_BifurcationPromotedRequestReport : System
     //    }
 
     //}
+
+    protected void gv_details_PreRender1(object sender, EventArgs e)
+    {
+        try
+        {
+            if (gv_details.Rows.Count > 0)
+            {
+                gv_details.UseAccessibleHeader = false;
+                gv_details.HeaderRow.TableSection = TableRowSection.TableHeader;
+            }
+        }
+        catch (Exception ex)
+        {
+            Session["error"] = ex.Message;
+            Response.Redirect("~/presentationlayer/ErrorPage.aspx", false);
+        }
+    }
 }

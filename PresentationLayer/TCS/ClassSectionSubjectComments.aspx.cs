@@ -244,7 +244,7 @@ public partial class PresentationLayer_TCS_ClassSectionSubjectComments : System.
                     objESR.isAbsent = false;
 
 
-                    if (Convert.ToInt32(listG1.SelectedValue) > 0 && Convert.ToInt32(listG2.SelectedValue) > 0 && Convert.ToInt32(listImp1.SelectedValue) > 0 && Convert.ToInt32(listImp2.SelectedValue) > 0 && Convert.ToInt32(listEffort.SelectedValue) > 0)
+                    if (Convert.ToInt32(listG1.SelectedValue) > 0 && Convert.ToInt32(listG2.SelectedValue) > 0 && Convert.ToInt32(listImp1.SelectedValue) > 0 && Convert.ToInt32(listImp2.SelectedValue) > 0)
                     {
                         string[] myStrings = new string[4];
 
@@ -278,7 +278,7 @@ public partial class PresentationLayer_TCS_ClassSectionSubjectComments : System.
                         }
 
                     }
-                    else if (Convert.ToInt32(listG1.SelectedValue) == 0 && Convert.ToInt32(listG2.SelectedValue) == 0 && Convert.ToInt32(listImp1.SelectedValue) == 0 && Convert.ToInt32(listImp2.SelectedValue) == 0 && Convert.ToInt32(listEffort.SelectedValue) == 0)
+                    else if (Convert.ToInt32(listG1.SelectedValue) == 0 && Convert.ToInt32(listG2.SelectedValue) == 0 && Convert.ToInt32(listImp1.SelectedValue) == 0 && Convert.ToInt32(listImp2.SelectedValue) == 0)
                     {
 
                     }
@@ -641,7 +641,7 @@ public partial class PresentationLayer_TCS_ClassSectionSubjectComments : System.
                     /**If First Term then hide save button**/
                     if (e.Row.Cells[11].Text == "True")
                     {
-                        btn_save.Attributes.CssStyle["display"] = "none";   //*****************
+                        //btn_save.Attributes.CssStyle["display"] = "none";
                         listG1.Enabled = false;
                         listG2.Enabled = false;
                         listImp1.Enabled = false;
@@ -651,7 +651,7 @@ public partial class PresentationLayer_TCS_ClassSectionSubjectComments : System.
                     }
                     else
                     {
-                        // btn_save.Attributes.CssStyle["display"] = "block";  //*************************
+                        //btn_save.Attributes.CssStyle["display"] = "block";
                         btn_save.Attributes.CssStyle["display"] = "none";
                         listG1.Enabled = true;
                         listG2.Enabled = true;
@@ -661,8 +661,8 @@ public partial class PresentationLayer_TCS_ClassSectionSubjectComments : System.
                         chkAbsent.Enabled = true;
                     }
 
-                    //***********************************************2024-12-26*********************************
-                    //if (e.Row.Cells[0].Text == "531085" || e.Row.Cells[0].Text== "670318")
+                    //***********************************************2024-12-26 manually open dropdown*********************************
+                    //if (e.Row.Cells[0].Text == "531085" || e.Row.Cells[0].Text == "670318")
                     //{
                     //    //btn_save.Attributes.CssStyle["display"] = "none";
                     //    listG1.Enabled = true;
@@ -672,11 +672,6 @@ public partial class PresentationLayer_TCS_ClassSectionSubjectComments : System.
                     //    listEffort.Enabled = true;
                     //    chkAbsent.Enabled = true;
                     //}
-
-                    //*******************************************************************************************
-
-
-
                     /**If First Term then hide save button**/
 
 

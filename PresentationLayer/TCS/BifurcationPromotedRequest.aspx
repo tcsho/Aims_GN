@@ -237,8 +237,8 @@
                                         <asp:DropDownList ID="ddl_center" runat="server" CssClass="dropdownlist" Width="218px"
                                             AutoPostBack="True" OnSelectedIndexChanged="ddl_center_SelectedIndexChanged">
                                         </asp:DropDownList>
-                                        <asp:Button ID="btnShowAll" runat="server" CssClass="btn btn-info" Text="Show All Records"
-                                            Width="485px" OnClick="btnShowAll_Click"></asp:Button>
+                                        <asp:Button ID="btnShowAll" runat="server" CssClass="btn btn-info" Text="Show Records"
+                                            Width="485px" OnClick="btnShowAll_Click" ></asp:Button>
                                     </td>
                                     <td align="right" valign="top"></td>
                                 </tr>
@@ -275,6 +275,15 @@
                                     <td align="left" style="width: 60%">&nbsp;
                                     </td>
                                 </tr>
+                                  <tr style="width: 50%">
+      <td align="right" colspan="1" class="TextLabel40" style="width: 37%">
+      </td>
+      <td align="left" style="width: 60%">
+          <%--<asp:Label runat="server" ID="lblNote" CssClass="TextLabelMandatory40" ForeColor="Red"
+    Text="This screen only for bifurcation Process, For Normal undertaking email use Automated Email Non Bifurcated Students (Screen)" Visible="false">
+</asp:Label>--%>
+      </td>
+  </tr>
                             </table>
                             <table class="main_table" cellspacing="0" cellpadding="0" width="100%" align="center"
                                 border="0">
@@ -496,7 +505,7 @@
 
                                                                           <asp:Button ID="btn_bif_email" runat="server" class="btn btn-primary" CommandArgument='<%# Eval("Student_No") %>'
                                                                               OnClick="btn_bif_email_Click" Text="Send Undertaking " ToolTip="Send Undertaking"
-                                                                              Visible="true" />
+                                                                              Visible='<%# Eval("Acknowledgement").ToString() == "No" %>'/>
                                                                           <br />
 
                                                                           <asp:Label runat="server" ID="emailstatus" Text='<%#Convert.ToString(Eval("Email_Status")) %>' Style="float: right;"></asp:Label>

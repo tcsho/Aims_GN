@@ -281,7 +281,6 @@
                                             MessageValidatorTip="true"
                                             MaskType="Number" InputDirection="RightToLeft" AcceptNegative="None" DisplayMoney="None"
                                             ErrorTooltipEnabled="True" runat="se
-
 rver" ID="mskD" />--%>
                                     </label>
                                 </td>
@@ -681,7 +680,7 @@ rver" ID="mskD" />--%>
                                                 </asp:GridView>
                                             </asp:Panel>
                                             <br />
-                                            <div runat="server" id="tbl_EYE">
+                                            <div runat="server" id="tbl_EYE" hidden="hidden">
                                                 <table class="table table-bordered">
                                                     <thead>
                                                         <tr>
@@ -707,7 +706,7 @@ rver" ID="mskD" />--%>
 
                                             <br />
                                             <br />
-                                            <asp:Panel clas="col-xs-12" runat="server" ID="DIV_Teacher011">
+                                            <asp:Panel clas="col-xs-12" runat="server" ID="DIV_Teacher011" hidden="hidden">
                                                 <h5 id="belowmarks1" runat="server">Subjects</h5>
                                                 <asp:GridView runat="server" ID="grdE_SubjectDetail1" CssClass="table table-bordered tbl-no-padding" AutoGenerateColumns="false" OnRowDataBound="grdE_SubjectDetail1_RowDataBound">
                                                     <Columns>
@@ -780,13 +779,13 @@ rver" ID="mskD" />--%>
                                                         <ItemTemplate>
                                                             <tr>
                                                                 <td>
-                                                                    <asp:TextBox runat="server" ID="txtE_Award_Honor" CssClass="form-control" Text='<%#  Eval("Award_Honor")%>'></asp:TextBox>
+                                                                    <asp:TextBox runat="server" ID="txtE_Award_Honor" ReadOnly="true" CssClass="form-control" Text='<%#  Eval("Award_Honor")%>'></asp:TextBox>
                                                                 </td>
                                                                 <td>
-                                                                    <asp:TextBox runat="server" ID="txtE_Awarding_Body" CssClass="form-control" Text='<%#  Eval("Awarding_Body")%>'></asp:TextBox>
+                                                                    <asp:TextBox runat="server" ID="txtE_Awarding_Body" ReadOnly="true" CssClass="form-control" Text='<%#  Eval("Awarding_Body")%>'></asp:TextBox>
                                                                 </td>
                                                                 <td>
-                                                                    <asp:TextBox runat="server" ID="txtE_Year" CssClass="form-control" Text='<%#  Eval("Year")%>'></asp:TextBox>
+                                                                    <asp:TextBox runat="server" ID="txtE_Year" ReadOnly="true" CssClass="form-control" Text='<%#  Eval("Year")%>'></asp:TextBox>
                                                                 </td>
                                                             </tr>
                                                         </ItemTemplate>
@@ -819,13 +818,13 @@ rver" ID="mskD" />--%>
                                                         <ItemTemplate>
                                                             <tr>
                                                                 <td>
-                                                                    <asp:TextBox runat="server" ID="txtsubject1" CssClass="form-control" Text='<%#  Eval("Subject_1")%>'></asp:TextBox>
+                                                                    <asp:TextBox runat="server" ID="txtsubject1" ReadOnly ="true" CssClass="form-control" Text='<%#  Eval("Subject_1")%>'></asp:TextBox>
                                                                 </td>
                                                                 <td>
-                                                                    <asp:TextBox runat="server" ID="txtsubject2" CssClass="form-control" Text='<%#  Eval("Subject_2")%>'></asp:TextBox>
+                                                                    <asp:TextBox runat="server" ID="txtsubject2" ReadOnly ="true" CssClass="form-control" Text='<%#  Eval("Subject_2")%>'></asp:TextBox>
                                                                 </td>
                                                                 <td>
-                                                                    <asp:TextBox runat="server" ID="txtsubject3" CssClass="form-control" Text='<%#  Eval("Subject_3")%>'></asp:TextBox>
+                                                                    <asp:TextBox runat="server" ID="txtsubject3" ReadOnly ="true" CssClass="form-control" Text='<%#  Eval("Subject_3")%>'></asp:TextBox>
                                                                 </td>
                                                             </tr>
                                                         </ItemTemplate>
@@ -940,10 +939,10 @@ rver" ID="mskD" />--%>
                                                             <ItemTemplate>
                                                                 <tr>
                                                                     <td>
-                                                                        <asp:TextBox runat="server" ID="txtE_International" CssClass="form-control" Text='<%#  Eval("International")%>'></asp:TextBox>
+                                                                        <asp:TextBox runat="server" ID="txtE_International" ReadOnly="true" CssClass="form-control" Text='<%#  Eval("International")%>'></asp:TextBox>
                                                                     </td>
                                                                     <td>
-                                                                        <asp:TextBox runat="server" ID="txtE_Local" CssClass="form-control" Text='<%#  Eval("Local")%>'></asp:TextBox>
+                                                                        <asp:TextBox runat="server" ID="txtE_Local" ReadOnly="true" CssClass="form-control" Text='<%#  Eval("Local")%>'></asp:TextBox>
                                                                     </td>
 
                                                                 </tr>
@@ -964,10 +963,10 @@ rver" ID="mskD" />--%>
                                                             <ItemTemplate>
                                                                 <tr>
                                                                     <td>
-                                                                        <asp:TextBox runat="server" ID="txtE_International" CssClass="form-control" Text='<%#  Eval("International")%>'></asp:TextBox>
+                                                                        <asp:TextBox runat="server" ID="txtE_International" ReadOnly="true"  CssClass="form-control" Text='<%#  Eval("International")%>'></asp:TextBox>
                                                                     </td>
                                                                     <td>
-                                                                        <asp:TextBox runat="server" ID="txtE_Local" CssClass="form-control" Text='<%#  Eval("Local")%>'></asp:TextBox>
+                                                                        <asp:TextBox runat="server" ID="txtE_Local" ReadOnly="true"  CssClass="form-control" Text='<%#  Eval("Local")%>'></asp:TextBox>
                                                                     </td>
 
                                                                 </tr>
@@ -990,7 +989,7 @@ rver" ID="mskD" />--%>
                                                         <h5>Will you be continuing at The City School? If yes, which campus? If no, why not?</h5>
                                                     </div>
                                                     <div class="col-xs-12">
-                                                        <asp:TextBox runat="server" ID="txtE_Remarks1" TextMode="MultiLine" CssClass="form-control" Style="min-height: 120px; overflow: auto"></asp:TextBox>
+                                                        <asp:TextBox runat="server" ID="txtE_Remarks1" ReadOnly="true" TextMode="MultiLine" CssClass="form-control" Style="min-height: 120px; overflow: auto"></asp:TextBox>
                                                     </div>
                                                 </div>
 
@@ -999,7 +998,7 @@ rver" ID="mskD" />--%>
                                                         <h5>Main essay/ Personal Statement Brainstorming:</h5>
                                                     </div>
                                                     <div class="col-xs-12">
-                                                        <asp:TextBox runat="server" ID="txtE_Remarks2" TextMode="MultiLine" CssClass="form-control" Style="min-height: 200px; overflow: auto"></asp:TextBox>
+                                                        <asp:TextBox runat="server" ID="txtE_Remarks2"  ReadOnly="true" TextMode="MultiLine" CssClass="form-control" Style="min-height: 200px; overflow: auto"></asp:TextBox>
                                                     </div>
                                                 </div>
 
@@ -1008,7 +1007,7 @@ rver" ID="mskD" />--%>
                                                         <h5>Anything that a person writing a recommendation for you should know.</h5>
                                                     </div>
                                                     <div class="col-xs-12">
-                                                        <asp:TextBox runat="server" ID="txtE_Remarks3" TextMode="MultiLine" CssClass="form-control" Style="min-height: 100px;"></asp:TextBox>
+                                                        <asp:TextBox runat="server" ID="txtE_Remarks3"  ReadOnly="true" TextMode="MultiLine" CssClass="form-control" Style="min-height: 100px;"></asp:TextBox>
                                                     </div>
                                                 </div>
 
@@ -1025,16 +1024,16 @@ rver" ID="mskD" />--%>
                                                         </div>
 
                                                         <div class="col-xs-6">
-                                                            <asp:TextBox runat="server" MaxLength="200" ID="txtTeacherName1" CssClass="form-control"></asp:TextBox>
+                                                            <asp:TextBox runat="server" MaxLength="200" ID="txtTeacherName1" ReadOnly="true" CssClass="form-control"></asp:TextBox>
                                                         </div>
                                                         <div class="col-xs-6">
-                                                            <asp:TextBox runat="server" MaxLength="200" ID="txtSubjectTaught1" CssClass="form-control"></asp:TextBox>
+                                                            <asp:TextBox runat="server" MaxLength="200" ID="txtSubjectTaught1" ReadOnly="true" CssClass="form-control"></asp:TextBox>
                                                         </div>
                                                         <div class="col-xs-6">
-                                                            <asp:TextBox runat="server" MaxLength="200" ID="txtTeacherName2" CssClass="form-control"></asp:TextBox>
+                                                            <asp:TextBox runat="server" MaxLength="200" ID="txtTeacherName2" ReadOnly="true" CssClass="form-control"></asp:TextBox>
                                                         </div>
                                                         <div class="col-xs-6">
-                                                            <asp:TextBox runat="server" MaxLength="200" ID="txtSubjectTaught2" CssClass="form-control"></asp:TextBox>
+                                                            <asp:TextBox runat="server" MaxLength="200" ID="txtSubjectTaught2" ReadOnly="true" CssClass="form-control"></asp:TextBox>
                                                         </div>
                                                     </div>
                                                 </div>

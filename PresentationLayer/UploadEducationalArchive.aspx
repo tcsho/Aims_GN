@@ -700,6 +700,8 @@
                                     <asp:Label ID="Label3" runat="server" CssClass="TextLabelMandatory40" Text="* For multiple files upload please select all files at once" ForeColor="Green"></asp:Label><br />
                                     <asp:Label ID="Label6" runat="server" CssClass="TextLabelMandatory40" Text="* File format must be PDF and file size must be less than 1MB" ForeColor="Red"></asp:Label>
                                     <asp:FileUpload ID="FileUpload1" AllowMultiple="true" runat="server" />
+                                    <%--<asp:DropDownList ID="DropDownList1" runat="server" AutoPostBack="false" CssClass="form-control"></asp:DropDownList>
+                                    <asp:RequiredFieldValidator ID="RequiredFieldValidator3" runat="server" ControlToValidate="ddluni" InitialValue="select" ErrorMessage="Please select University " />--%>
                                 </p>
 
 

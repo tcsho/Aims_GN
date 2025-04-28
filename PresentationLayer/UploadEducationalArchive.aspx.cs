@@ -1535,7 +1535,9 @@ public partial class PresentationLayer_UploadEducationalArchive : System.Web.UI.
                         byte[] buffer = new byte[contentLength];
                         postedFile.InputStream.Read(buffer, 0, contentLength);
                         string fileName = FileUpload1.PostedFile.FileName.ToString();
+
                         additionals = DateTime.Now.Year.ToString().PadLeft(4, '0') + DateTime.Now.Month.ToString().PadLeft(2, '0') + DateTime.Now.Day.ToString().PadLeft(2, '0');
+
                         //FileStream stream = new FileStream(base.Server.MapPath("~\\PresentationLayer\\TCS\\Files\\" + fName + Path.GetExtension(postedFile.FileName).ToLower()), FileMode.Create);
                         FileStream stream = new FileStream(base.Server.MapPath("~\\PresentationLayer\\TCS\\Files\\" + additionals + "_" + Convert.ToString(studentid) + "_" + FileName), FileMode.Create);
                         stream.Write(buffer, 0, buffer.Length);

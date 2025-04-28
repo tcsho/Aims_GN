@@ -32,13 +32,20 @@
 
     <link type="text/css" rel="stylesheet" href="jquery-ui-1.10.4.custom.css" />
 
-    <link type="text/css" rel="stylesheet" href="PrintArea3MYE.css" />                <!-- Y : rel is stylesheet and media is in [all,print,empty,undefined] -->
-    <link type="text/css" rel="stylesheet" href="media_all.css" media="all" />   <!-- Y : rel is stylesheet and media is in [all,print,empty,undefined] -->
-    <link type="text/css" rel="" href="empty.css" />                    <!-- N : rel is not stylesheet -->
-    <link type="text/css" rel="noPrint" href="noPrint.css" />                  <!-- N : rel is not stylesheet -->
-    <link type="text/css" rel="stylesheet" href="media_none.css" media="xyz" />   <!-- N : media not in [all,print,empty,undefined] -->
-    <link type="text/css" href="no_rel.css" media="print" /> <!-- N : no rel attribute -->
-    <link type="text/css" href="no_rel_no_media.css" /> <!-- N : no rel, no media attributes -->
+    <link type="text/css" rel="stylesheet" href="PrintArea3MYE.css" />
+    <!-- Y : rel is stylesheet and media is in [all,print,empty,undefined] -->
+    <link type="text/css" rel="stylesheet" href="media_all.css" media="all" />
+    <!-- Y : rel is stylesheet and media is in [all,print,empty,undefined] -->
+    <link type="text/css" rel="" href="empty.css" />
+    <!-- N : rel is not stylesheet -->
+    <link type="text/css" rel="noPrint" href="noPrint.css" />
+    <!-- N : rel is not stylesheet -->
+    <link type="text/css" rel="stylesheet" href="media_none.css" media="xyz" />
+    <!-- N : media not in [all,print,empty,undefined] -->
+    <link type="text/css" href="no_rel.css" media="print" />
+    <!-- N : no rel attribute -->
+    <link type="text/css" href="no_rel_no_media.css" />
+    <!-- N : no rel, no media attributes -->
     <link rel="stylesheet" type="text/css" href="bootstrap.min.css">
     <!--<link rel="stylesheet" type="text/css"  href="bootstrap/css/bootstrap.css.map">-->
     <script src="popper.min.js"></script>
@@ -69,7 +76,6 @@
                     </div>-->
                     <!--remove sec---->
                     <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 no-padding uppersec">
-
                     </div>
 
                     <!--section 1--->
@@ -143,24 +149,34 @@
             <table>
                 <tbody>
                     <tr>
-                        <td><input value="popup" name="mode" id="popup" checked="" type="radio"> Popup</td>
+                        <td>
+                            <input value="popup" name="mode" id="popup" checked="" type="radio">
+                            Popup</td>
                     </tr>
                     <tr>
-                        <td style="padding-left: 20px;"><input value="popup" name="popup" id="closePop" type="checkbox"> Close popup</td>
+                        <td style="padding-left: 20px;">
+                            <input value="popup" name="popup" id="closePop" type="checkbox">
+                            Close popup</td>
                     </tr>
                     <tr>
-                        <td><input value="iframe" name="mode" id="iFrame" type="radio"> IFrame</td>
+                        <td>
+                            <input value="iframe" name="mode" id="iFrame" type="radio">
+                            IFrame</td>
                     </tr>
                     <tr>
-                        <td>Extra css: <input type="text" name="extraCss" size="50" /></td>
+                        <td>Extra css:
+                            <input type="text" name="extraCss" size="50" /></td>
                     </tr>
                     <tr>
                         <td>
                             <div class="settingName">Print area:</div>
                             <div class="settingVals">
-                                <input type="checkbox" class="selPA" value="area1" checked /> Area 1<br>
-                                <input type="checkbox" class="selPA" value="area2" checked /> Area 2<br>
-                                <input type="checkbox" class="selPA" value="area3" checked /> Area 3<br>
+                                <input type="checkbox" class="selPA" value="area1" checked />
+                                Area 1<br>
+                                <input type="checkbox" class="selPA" value="area2" checked />
+                                Area 2<br>
+                                <input type="checkbox" class="selPA" value="area3" checked />
+                                Area 3<br>
                             </div>
                         </td>
                     </tr>
@@ -168,11 +184,14 @@
                         <td>
                             <div class="settingName">Retain Attributes:</div>
                             <div class="settingVals">
-                                <input type="checkbox" checked name="retainCss" id="retainCss" class="chkAttr" value="class" /> Class
+                                <input type="checkbox" checked name="retainCss" id="retainCss" class="chkAttr" value="class" />
+                                Class
                                 <br>
-                                <input type="checkbox" checked name="retainId" id="retainId" class="chkAttr" value="id" /> ID
+                                <input type="checkbox" checked name="retainId" id="retainId" class="chkAttr" value="id" />
+                                ID
                                 <br>
-                                <input type="checkbox" checked name="retainStyle" id="retainId" class="chkAttr" value="style" /> Style
+                                <input type="checkbox" checked name="retainStyle" id="retainId" class="chkAttr" value="style" />
+                                Style
                             </div>
                         </td>
                     </tr>
@@ -193,7 +212,7 @@
 
         <footer>okss</footer>
     </div>
-    
+
     <script>
         /****Disabled f12 and right click key***/
 
@@ -508,28 +527,30 @@
                     console.log(JSON.stringify(result));
                     var result = JSON.parse(result.d);
 
+                    if (result.length == 0) {
+                        reportcard = "<div class='alert error'>";
+                        reportcard += "<span class='alertText'>"
+                        reportcard += "For the report card, please get in touch with the school as some entries are missing. We are sorry for the inconvenience.";
+                        reportcard += "<br class='clear' /></span>";
+                        reportcard += "</div>";
 
-
-                    if (result == null || result == "" || result == " ") {
-                        $(".overlay").hide();
-                        Swal.fire(
-                            'No Data',
-                            '',
-                            'error'
-                        )
+                        $(".serachprinttable").append(reportcard);
                         return;
                     }
 
-                    var feedeafaulter = result[0].isFeeDefaulter;
-                    if (feedeafaulter == true) {
-                        $(".overlay").hide();
-                        Swal.fire(
-                            'No Data',
-                            '',
-                            'error'
-                        )
-                        return;
-                    }
+                    //if (result[0].isFeeDefaulter) {
+                    //    let TermName = 'Mock Exam Report Card';
+                    //    let SessionCode = '2022-2023';
+
+                    //    reportcard = "<div class='alert error'>";
+                    //    reportcard += "<span class='alertText'>"
+                    //    reportcard += "Your child's " + TermName + " " + SessionCode + " is ready. After the payment of pending dues, the report card will be accessible via the link in two business days.";
+                    //    reportcard += "<br class='clear' /></span>";
+                    //    reportcard += "</div>";
+
+                    //    $(".serachprinttable").append(reportcard);
+                    //    return;
+                    //}
 
                     for (var i = 0; i < result.length; i++) {//result.length
 
@@ -756,10 +777,14 @@
                             attendence = "Low";
                         }
                         else {
+                            for (var r = 0; r < datademo[t].StudentWise.length; r++) {
+                                if (datademo[t].StudentWise[r].Improve1 == null || datademo[t].StudentWise[r].Strength1 == null) {
+                                    datademo[t].IsComplete = 0;
+                                }
+                            }
+                             
                             attendence = datademo[t].DaysPresent;
                         }
-
-
 
                         reportcard += '<tr><td><strong>Attendance:</strong> </td><td><span class="attendenceclass">' + attendence + '</span> (out of <span class="attendencetotal">' + datademo[t].FirstTermDaysCH + " days" + '</span>)</td></tr>';
                         reportcard += '</table>';
@@ -791,7 +816,7 @@
                         reportcard += '<div class="col-lg-3 col-md-3 col-sm-3 col-xs-12 floatleft ">';
 
                         reportcard += '<table class="table-bordered effort-table">';
-                        reportcard += '<tr class="text-center"><td colspan="2" style=" background:#e4e4e4 !important;">Effort</td></tr>';
+                        reportcard += '<tr class="text-center"><td class="bckGround" style="background-color: #f5f5f5 !important;" colspan="2">Effort</td></tr>';
                         reportcard += '<tr><td>Excellent</td><td>1</td></tr>';
                         reportcard += '<tr><td>Good</td><td>2</td></tr>';
                         reportcard += '<tr><td>Satisfactory</td><td>3</td></tr>';
@@ -801,41 +826,63 @@
                         /**2022 mid term report card changes**/
                         reportcard += '<ul class="ulpaddingoflist">';
 
-                        if (attendenceperc < 25) {
-                            reportcard += '<li>Due to ' + datademo[t].FirstName + '<span class="fontchange">' + "'" + '</span >s low attendance, we are unable to comment on any progress made through this term.</li>';
+                        if (Session_Id >= 15) {
+                            if (attendenceperc < 25) {
+                                reportcard += '<li>Due to student' + '<span class="fontchange">' + "'" + '</span >s low attendance, we are unable to comment on any progress made through this term.</li>';
+                            }
+                            else {
+                                if (datademo[t].Class_Id >= 7 && datademo[t].Class_Id <= 12) {
+                                    reportcard += '<li>Student' + '<span class="fontchange">' + "'" + '</span >s strengths and areas for improvement are mentioned below each subject.';
+                                }
+                            }
+                        } else {
+                            if (attendenceperc < 25) {
+                                reportcard += '<li>Due to ' + datademo[t].FirstName + '<span class="fontchange">' + "'" + '</span >s low attendance, we are unable to comment on any progress made through this term.</li>';
 
-                        }
-                        else {
-                            if (datademo[t].Class_Id >= 7 && datademo[t].Class_Id <= 12) {
-                                reportcard += '<li>' + datademo[t].FirstName + '<span class="fontchange">' + "'" + '</span >s strengths and areas for improvement are mentioned below each subject.';
+                            }
+                            else {
+                                if (datademo[t].Class_Id >= 7 && datademo[t].Class_Id <= 12) {
+                                    reportcard += '<li>' + datademo[t].FirstName + '<span class="fontchange">' + "'" + '</span >s strengths and areas for improvement are mentioned below each subject.';
+                                }
                             }
                         }
+
                         reportcard += '</ul>';
                         /**2022 mid term report card changes**/
-                        reportcard += '<div class="headsigndiv">';
-                        reportcard += '<div class="col-lg-9 col-md-6 col-sm-6 col-xs-6 floatleft mediawidthlg8">';
-                        reportcard += '<p style="width: 100%" class="visiblity-hidden_class">p</p>';
-                        reportcard += '</div>';
-                        reportcard += '<div class="col-lg-3 col-md-6 col-sm-6 col-xs-6 floatleft mediawidthlg4">';
-                        reportcard += '<label class="headsign form-control text-center">' + result[t].HeadName + '</label>';
 
-                        reportcard += '<label class="label-100 ">Head of School</label>';
-                        reportcard += '</div>';
-                        reportcard += '</div>';
-                        reportcard += '</div>';
+                        if (Session_Id < 15) {
+                            reportcard += '<div class="headsigndiv">';
+                            reportcard += '<div class="col-lg-9 col-md-6 col-sm-6 col-xs-6 floatleft mediawidthlg8">';
+                            reportcard += '<p style="width: 100%" class="visiblity-hidden_class">p</p>';
+                            reportcard += '</div>';
+                            reportcard += '<div class="col-lg-3 col-md-6 col-sm-6 col-xs-6 floatleft mediawidthlg4">';
+                            reportcard += '<label class="headsign form-control text-center">' + result[t].HeadName + '</label>';
+
+                            reportcard += '<label class="label-100 ">Head of School</label>';
+                            reportcard += '</div>';
+                            reportcard += '</div>';
+                            reportcard += '</div>';
+                        }
 
                         /****HEADER SEC2 ********/
                         //reportcard += '<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 incomplete text-center"></div>';
-
+                         
                         if (datademo[t].IsComplete == 0) {
+                            //reportcard += '<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 text-center secincomplete">';
+                            //reportcard += '<div class="incom-child"><img src="warning.png"/><h4 class="redcolor">InComplete Result</h4></div>';
+                            //reportcard += '</div>';
+                            //reportcard += '<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 pagecut printmediaborderbottom pehlewala">';/*<p>ok</p>*/
+                            //reportcard += '</div>';
+                            //continue;
 
-                            reportcard += '<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 text-center secincomplete">';
-                            reportcard += '<div class="incom-child"><img src="images/warning.png"/><h4 class="redcolor">InComplete Result</h4></div>';
-                            reportcard += '</div>';
-                            reportcard += '<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 pagecut printmediaborderbottom pehlewala">';/*<p>ok</p>*/
-                            reportcard += '</div>';
-                            continue;
+                            reportcard = "<div class='alert error'>";
+                            reportcard += "<span class='alertText'>"
+                            reportcard += "For the report card, please get in touch with the school as some entries are missing. We are sorry for the inconvenience.";
+                            reportcard += "<br class='clear' /></span>";
+                            reportcard += "</div>";
 
+                            $(".serachprinttable").append(reportcard);
+                            return;
                         }
                         else {
                             /**TABLE**/
@@ -846,7 +893,11 @@
                                     effort = "-";
                                 }
                                 else {
-                                    effort = datademo[t].StudentWise[r].Effort;
+                                    if (datademo[t].StudentWise[r].Effort == null) {
+                                        effort = "-";
+                                    } else {
+                                        effort = datademo[t].StudentWise[r].Effort;
+                                    }
                                 }
                                 if (datademo[t].StudentWise[r].Comments == null || datademo[t].StudentWise[r].Comments == "" || datademo[t].StudentWise[r].Comments == " ") {
                                     comments = "";
@@ -983,8 +1034,6 @@
 
 
                                 if (Session_Id == 12 && Term_Id == 1) {
-
-
                                     reportcard += '<p class="commentsec1 col-lg-12 col-md-12 col-sm-12 col-xs-12">' + remarks + '</p>';
                                 }
                                 else {
@@ -1187,8 +1236,10 @@
                                     }
                                 }
 
+                                if (Session_Id < 15) {
+                                    reportcard += '<p class="text-right commentsectec captilizetext"><strong class="teachername">Teacher:</strong>' + fullname + '</p>';
+                                }
 
-                                reportcard += '<p class="text-right commentsectec captilizetext"><strong class="teachername">Teacher:</strong>' + fullname + '</p>';
                                 reportcard += '</div>';
                                 reportcard += '</div>';
 
@@ -1267,14 +1318,8 @@
                             /**befrication */
 
                             if (datademo[t].Class_Id == 12) {
-                                if ((datademo[t].Region_Name == "(TCS)-Central Region" || datademo[t].Region_Name == "TPC Central Region" || datademo[t].Region_Name == "(TCS) Northern Region") && datademo[t].isPromoted == false) {
-
-
-
-
-                                    reportcard += '<div class="col-lg-12 col-md-12 col-xs-12 col-sm-12 ispromoted">Bifurcated to Class 9 (Matric)</div>';
-
-
+                                if ((datademo[t].Region_Name == "(TCS)-Central Region" || datademo[t].Region_Name == "(TCS) Northern Region" || datademo[t].Center_Name == "S064- (TCS) Quetta Cantt" || datademo[t].Center_Name == "S067- (TCS) Quetta Campus") && datademo[t].isPromoted == false) {
+                                    reportcard += '<div class="col-lg-12 col-md-12 col-xs-12 col-sm-12 ispromoted">Bifurcated to Class 9 (Matric)</div>'; 
                                 }
                             }
 
@@ -1284,8 +1329,7 @@
                                 reportcard += '<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 pagecut printmediaborderbottom pehlewala">';/*<p>ok</p>*/
                                 reportcard += '</div>';
                             }
-
-
+                             
                             //reportcard += '<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 pagebreak printmediaborderbottom pehlewala">';/*<p>ok</p>*/
                             //reportcard += '</div>';
                         }//iscomplete end
@@ -1408,6 +1452,34 @@
             color: #fff;
             border-radius: 3px;
             margin-bottom: 0px;
+        }
+        .alert {
+            position: relative;
+            top: 50px;
+            left: 0;
+            width: auto;
+            height: auto;
+            padding: 10px;
+            margin: 10px;
+            line-height: 1.8;
+            border-radius: 5px;
+            cursor: hand;
+            cursor: pointer;
+            font-family: sans-serif;
+            font-weight: 400;
+        }
+
+        .error {
+            background-color: #FEE;
+            border: 1px solid #EDD;
+            color: #A66;
+        }
+
+        .alertText {
+            display: table;
+            margin: 0 auto;
+            text-align: center;
+            font-size: 16px;
         }
     </style>
 </body>

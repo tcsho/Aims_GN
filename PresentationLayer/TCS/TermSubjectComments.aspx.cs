@@ -28,6 +28,8 @@ public partial class PresentationLayer_TCS_TermSubjectComments : System.Web.UI.P
   
     protected void Page_Load(object sender, EventArgs e)
     {
+
+
         try
         {
             if (Session["ContactID"] == null)

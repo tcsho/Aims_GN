@@ -265,7 +265,7 @@
                                     <asp:LinkButton runat="server" ID="btnSave" visible="false" CssClass="btn btn-info btn-custom" OnClick="btnSave_Click"><i class="fa fa-save"></i>&nbsp;&nbsp;&nbsp;Save</asp:LinkButton>
                                     <asp:LinkButton runat="server" ID="btnReset" visible="false" CssClass="btn btn-info btn-custom"><i class="fa fa-refresh"></i>&nbsp;&nbsp;&nbsp;Reset</asp:LinkButton>
                                     <asp:LinkButton runat="server" ID="btnPrint" OnClientClick="Print()" CssClass="btn btn-info btn-custom"><i class="fa fa-print"></i>&nbsp;&nbsp;&nbsp;Print</asp:LinkButton>
-                                     <asp:LinkButton runat="server" ID="btn_confirm" CssClass="btn btn-info btn-custom" OnClick="btn_Confirm_Click" visible="false"><i class="fa fa-yes"></i>&nbsp;&nbsp;&nbsp;Confirm</asp:LinkButton>
+                                     <asp:LinkButton runat="server" ID="btn_confirm" CssClass="btn btn-info btn-custom" OnClick="btn_Confirm_Click"><i class="fa fa-yes"></i>&nbsp;&nbsp;&nbsp;Confirm</asp:LinkButton>
                                     <asp:LinkButton runat="server" Visible="false" ID="btnSend" CssClass="btn btn-info btn-custom" OnClick="btnSend_Click"><i class="fa fa-paper-plane"></i>&nbsp;&nbsp;&nbsp;Acknowledgement/Send</asp:LinkButton>
                                 </div>
 
@@ -1117,7 +1117,7 @@ rver" ID="mskD" />--%>
                                             <div class="row">
                                                 <div class="col-xs-12">
                                                     <h4>Acknowledgement</h4>
-                                                    <table class="table table-condensed signature">
+                                                    <table class="table table-condensed">
                                                         <tbody>
                                                             <tr>
                                                                 <th style="width: 50%">Class Teacher’s: <span runat="server" id="lblAcknowledge_By_Class_Teacher" class="signname"></span>

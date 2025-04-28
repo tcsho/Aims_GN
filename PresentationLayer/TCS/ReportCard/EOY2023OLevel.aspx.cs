@@ -1,15 +1,9 @@
 ﻿using Newtonsoft.Json;
 using System;
-using System.Collections.Generic;
-using System.Data.SqlClient;
-using System.Data;
-using System.Linq;
-using System.Web;
-using System.Web.Services;
-using System.Web.UI;
-using System.Web.UI.WebControls;
-using Newtonsoft.Json;
 using System.Configuration;
+using System.Data;
+using System.Data.SqlClient;
+using System.Web.Services;
 
 public partial class PresentationLayer_TCS_ReportCard_EOY2023OLevel : System.Web.UI.Page
 {
@@ -31,7 +25,7 @@ public partial class PresentationLayer_TCS_ReportCard_EOY2023OLevel : System.Web
             conn.Open();
 
             SqlCommand comm = new SqlCommand("EXEC sp_OALevel_Result_Card_New_Test " + TermGroup_Id + "," + Student_Id + "," + Class_Id + " ," + Session_Id + "  ", conn);
-
+            comm.CommandTimeout = 300;
             try
             {
                 SqlDataAdapter data = new SqlDataAdapter(comm);
@@ -51,13 +45,6 @@ public partial class PresentationLayer_TCS_ReportCard_EOY2023OLevel : System.Web
             {
                 conn.Close();
             }
-        }
-
-
-
-
-
-
-
+        } 
     }
 }

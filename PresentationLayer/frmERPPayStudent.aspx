@@ -33,7 +33,7 @@
                                         {
                                             extend: 'excel',
                                             exportOptions: {
-                                                columns: [1, 2, 3, 4, 5, 6, 7, 8, 9]
+                                                columns: [1, 2, 3, 4, 5, 6, 7, 8,9]
                                             }
                                         }
                                     ],
@@ -124,8 +124,6 @@
 
                         </div>
                     </div>
-                </div>
-            </div>
         </ContentTemplate>
     </asp:UpdatePanel>
     <asp:UpdateProgress ID="UpdateProgress1" runat="server" AssociatedUpdatePanelID="UpdatePanel1">

@@ -198,6 +198,20 @@
             </script>
             <div class="container-fluid">
                 <div class="row">
+                     <div class="col-x-6 text-right">
+                                <div class="btn-group" style="margin-bottom: 0px;">
+
+                                    <asp:LinkButton runat="server" ID="btn_bifurcation" CssClass="btn btn-info btn-custom" OnClick="btn_bifurcation_Click" Visible="false"><i class="fa fa-save"></i>&nbsp;&nbsp;&nbsp;Bifurcation</asp:LinkButton>
+                                    <asp:LinkButton runat="server" ID="btnSave" CssClass="btn btn-info btn-custom" OnClick="btnSave_Click"><i class="fa fa-save" visible="false"></i>&nbsp;&nbsp;&nbsp;Save</asp:LinkButton>
+<%--                                    <asp:LinkButton runat="server" ID="btnReset" CssClass="btn btn-info btn-custom"><i class="fa fa-refresh"></i>&nbsp;&nbsp;&nbsp;Reset</asp:LinkButton>--%>
+<%--                                    <asp:LinkButton runat="server" ID="btnPrint" OnClientClick="Print()" CssClass="btn btn-info btn-custom"><i class="fa fa-print"></i>&nbsp;&nbsp;&nbsp;Print</asp:LinkButton>--%>
+                                    <%--<asp:LinkButton runat="server" ID="btnViewFullForm" OnClick="btnViewFullForm_Click" CssClass="btn btn-info btn-custom"><i class="fa fa-print"></i>&nbsp;&nbsp;&nbsp;View Full Form</asp:LinkButton>--%>
+                                   
+                                    
+                                    <%--<asp:LinkButton runat="server" Visible="false" ID="btnSend" CssClass="btn btn-info btn-custom" OnClick="btnSend_Click"><i class="fa fa-paper-plane"></i>&nbsp;&nbsp;&nbsp;Acknowledgement/Send</asp:LinkButton>--%>
+                                </div>
+
+                            </div>
                     <asp:HiddenField runat="server" ID="Batch_Id" />
                     <div id="tdFrmHeading" class="formheading">
 
@@ -515,20 +529,7 @@ rver" ID="mskD" /> --//%>
                 </div>
                  
             </div>
-            <div class="col-x-6 text-center mt-2">
-                                <div class="btn-group" style="margin-bottom: 0px;">
-
-                                    <asp:LinkButton runat="server" ID="btn_bifurcation" CssClass="btn btn-info btn-custom" OnClick="btn_bifurcation_Click" Visible="false"><i class="fa fa-save"></i>&nbsp;&nbsp;&nbsp;Bifurcation</asp:LinkButton>
-                                    <asp:LinkButton runat="server" ID="btnSave" CssClass="btn btn-info btn-custom" OnClick="btnSave_Click"><i class="fa fa-save" visible="false"></i>&nbsp;&nbsp;&nbsp;Save</asp:LinkButton>
-<%--                                    <asp:LinkButton runat="server" ID="btnReset" CssClass="btn btn-info btn-custom"><i class="fa fa-refresh"></i>&nbsp;&nbsp;&nbsp;Reset</asp:LinkButton>--%>
-<%--                                    <asp:LinkButton runat="server" ID="btnPrint" OnClientClick="Print()" CssClass="btn btn-info btn-custom"><i class="fa fa-print"></i>&nbsp;&nbsp;&nbsp;Print</asp:LinkButton>--%>
-                                    <%--<asp:LinkButton runat="server" ID="btnViewFullForm" OnClick="btnViewFullForm_Click" CssClass="btn btn-info btn-custom"><i class="fa fa-print"></i>&nbsp;&nbsp;&nbsp;View Full Form</asp:LinkButton>--%>
-                                   
-                                    
-                                    <%--<asp:LinkButton runat="server" Visible="false" ID="btnSend" CssClass="btn btn-info btn-custom" OnClick="btnSend_Click"><i class="fa fa-paper-plane"></i>&nbsp;&nbsp;&nbsp;Acknowledgement/Send</asp:LinkButton>--%>
-                                </div>
-
-                            </div>
+           
             <%-- <div class="floating_btn">
                 <button type="button" class="tourbtn">
                     <div class="contact_icon startpluse">

@@ -22,7 +22,6 @@ public partial class PresentationLayer_LoConsolidation : System.Web.UI.Page
     {
         ScriptManager scriptManager = ScriptManager.GetCurrent(this.Page);
         scriptManager.RegisterPostBackControl(this.btnNbconsolidationexport);
-        scriptManager.RegisterPostBackControl(this.btnexportsiqaendorsedgrades);
         try
         {
             if (!Page.IsPostBack)

@@ -607,8 +607,17 @@ public partial class PresentationLayer_TCS_IEP_Form_Wizard_CR : System.Web.UI.Pa
             DataSet ds = exec_SP_Save(json_ExtraCurricularActivities, json_CounsellorRecommendation, json_Honors_Awards, json_DreamUniversities, json_DU_CounsellorRecommendation, json_A_LEVEL_SUBJECTS);
             if (ds.Tables.Count > 0)
             {
-                lblerror.Text = ds.Tables[0].Rows[0][0].ToString();
-                lblerror.CssClass = "label label-success text-center";
+                if(ds.Tables[0].Rows[0][1].ToString() == "Err"){
+                    lblerror.Text = "Record Not Saved " + ds.Tables[0].Rows[0][0].ToString();
+                    lblerror.CssClass = "label label-danger text-center";
+                }
+                else
+                {
+                    lblerror.Text = ds.Tables[0].Rows[0][0].ToString();
+                    lblerror.CssClass = "label label-success text-center";
+                }
+
+               
                 //Batch_Id.Value = ds.Tables[0].Rows[0][1].ToString();
             }
             else
@@ -888,115 +897,117 @@ public partial class PresentationLayer_TCS_IEP_Form_Wizard_CR : System.Web.UI.Pa
         //   //      div_OLevels.Visible = false;
         //     }
 
-        //     if (dsE.Tables[0].Rows.Count > 0)
-        //     {
-        //         if (dsE.Tables[0].Rows[0]["Progressto_A_Level"].ToString() == "True")
-        //             rd_progress2.Checked = true;
-        //         else
-        //             rd_progress1.Checked = true;
-
-        //    //        htmlE_SubjectBody.Text = Generate_AcademicOverview_SubjectDetail(dsE.Tables[0]);
-        //   //      htmlE_SubjectBody1.Text = Generate_AcademicOverview_SubjectDetail(dsE.Tables[9]);
-        //   //      txtE_Remarks1.Text = dsE.Tables[0].Rows[0]["Remarks1"].ToString();
-        //   //      txtE_Remarks2.Text = dsE.Tables[0].Rows[0]["Remarks2"].ToString();
-        //   //      txtE_Remarks3.Text = dsE.Tables[0].Rows[0]["Remarks3"].ToString();
-        //         txtE_AcademicConcerns.Text = dsE.Tables[0].Rows[0]["Academic_Concerns_Struggles"].ToString();
-        //    //     txtTeacherName1.Text = dsE.Tables[0].Rows[0]["Recommendation_Teacher_Name_1"].ToString();
-        //   //      txtTeacherName2.Text = dsE.Tables[0].Rows[0]["Recommendation_Teacher_Name_2"].ToString();
-        //    //     txtSubjectTaught1.Text = dsE.Tables[0].Rows[0]["Recommendation_Subject_Taught_1"].ToString();
-        //   //      txtSubjectTaught2.Text = dsE.Tables[0].Rows[0]["Recommendation_Subject_Taught_2"].ToString();
-        //         txtExpected_Graduation_Year.Text = dsE.Tables[0].Rows[0]["Expected_Graduation_Year"].ToString();
-        //         Batch_Id.Value = dsE.Tables[0].Rows[0]["batch_Id"].ToString();
-        //         //if (dsE.Tables[0].Rows[0]["Acknowledge_By_Class_Teacher"].ToString() != "")
-        //         //{
-        //         //    lblAcknowledge_By_Class_Teacher.InnerText = dsE.Tables[0].Rows[0]["Acknowledge_By_Class_Teacher"].ToString();
-        //         //}
-
-        //         //if (dsE.Tables[13].Rows.Count > 0)
-        //         //    lblAcknowledge_By_School_Head.InnerText = dsE.Tables[13].Rows[0]["signature"].ToString();
-        //         //else
-        //         //    lblAcknowledge_By_School_Head.InnerText = "";
-        //         //if (dsE.Tables[0].Rows[0]["Acknowledge_By_Counselor"].ToString() != "")
-        //         //{
-        //         //    lblAcknowledge_By_Counselor.InnerText = "Acknowledged";
-        //         //}
-
-        //         if (dsE.Tables[0].Rows[0]["Acknowledge_By_Parent"].ToString() != "")
-        //         {
-        //     //        lblAcknowledge_By_Parent.InnerText = dt.Rows[0][5].ToString();
-        //         }
-             //    hfE_Trrm_Group_Id.Value = dsE.Tables[0].Rows[0]["Term_Group_Id"].ToString();
-
-        //     }
-        //     else
-        //     {
-        //      //   belowmarks.Visible = false;
-        //       //  belowmarks1.Visible = false;
-        //       //  tbl_EYE.Visible = false;
-        //      //   tbl_MYE.Visible = false;
-        //     }
-        //     if (dsE.Tables[10].Rows.Count > 0)
-        //     {
+        if (dsE.Tables[9].Rows.Count > 0)
+        {
+            if (dsE.Tables[9].Rows[0]["Progressto_A_Level"].ToString() == "True")
+                rd_progress2.Checked = true;
+            else
+                rd_progress1.Checked = true;
+        }
 
 
+            //    //        htmlE_SubjectBody.Text = Generate_AcademicOverview_SubjectDetail(dsE.Tables[0]);
+            //   //      htmlE_SubjectBody1.Text = Generate_AcademicOverview_SubjectDetail(dsE.Tables[9]);
+            //   //      txtE_Remarks1.Text = dsE.Tables[0].Rows[0]["Remarks1"].ToString();
+            //   //      txtE_Remarks2.Text = dsE.Tables[0].Rows[0]["Remarks2"].ToString();
+            //   //      txtE_Remarks3.Text = dsE.Tables[0].Rows[0]["Remarks3"].ToString();
+            //         txtE_AcademicConcerns.Text = dsE.Tables[0].Rows[0]["Academic_Concerns_Struggles"].ToString();
+            //    //     txtTeacherName1.Text = dsE.Tables[0].Rows[0]["Recommendation_Teacher_Name_1"].ToString();
+            //   //      txtTeacherName2.Text = dsE.Tables[0].Rows[0]["Recommendation_Teacher_Name_2"].ToString();
+            //    //     txtSubjectTaught1.Text = dsE.Tables[0].Rows[0]["Recommendation_Subject_Taught_1"].ToString();
+            //   //      txtSubjectTaught2.Text = dsE.Tables[0].Rows[0]["Recommendation_Subject_Taught_2"].ToString();
+            //         txtExpected_Graduation_Year.Text = dsE.Tables[0].Rows[0]["Expected_Graduation_Year"].ToString();
+            //         Batch_Id.Value = dsE.Tables[0].Rows[0]["batch_Id"].ToString();
+            //         //if (dsE.Tables[0].Rows[0]["Acknowledge_By_Class_Teacher"].ToString() != "")
+            //         //{
+            //         //    lblAcknowledge_By_Class_Teacher.InnerText = dsE.Tables[0].Rows[0]["Acknowledge_By_Class_Teacher"].ToString();
+            //         //}
 
-        //     }
-        //     else
-        //     {
-        //    //     belowmarks1.Visible = false;
-        //   //      tbl_EYE.Visible = false;
-        //     }
-        //     DataSet ds = (DataSet)ViewState["vs_dataset"];
-        //     ds.Dispose();
-        //     // DateTime dt2 = DateTime.Parse("2023-12-26"); //  DateTime.Now; //Temporaroy Disabled this condition for result date compare to todayy date
-        //     if (dsE.Tables[1].Rows.Count > 0)
-        //     {
-        //      //   lblE_Term.InnerText = dsE.Tables[1].Rows[0]["Term"].ToString();
+            //         //if (dsE.Tables[13].Rows.Count > 0)
+            //         //    lblAcknowledge_By_School_Head.InnerText = dsE.Tables[13].Rows[0]["signature"].ToString();
+            //         //else
+            //         //    lblAcknowledge_By_School_Head.InnerText = "";
+            //         //if (dsE.Tables[0].Rows[0]["Acknowledge_By_Counselor"].ToString() != "")
+            //         //{
+            //         //    lblAcknowledge_By_Counselor.InnerText = "Acknowledged";
+            //         //}
 
-        //         hfE_Trrm_Group_Id.Value = dsE.Tables[0].Rows[0]["Term_Group_Id"].ToString();
-        //         int result = 0; //Temporaroy Disabled this condition for result date compare to todayy date      DateTime.Compare(dt2.Date, DateTime.Parse(ds.Tables[0].Rows[0]["ResultCardIssuanceDateMidYear"].ToString()));
-        //         if (result != -1)
-        //         {
-        //    //         grdE_SubjectDetail.DataSource = dsE.Tables[1];
-        //    //         grdE_SubjectDetail.DataBind();
-        //         }
-        //         else
-        //         {
+            //         if (dsE.Tables[0].Rows[0]["Acknowledge_By_Parent"].ToString() != "")
+            //         {
+            //     //        lblAcknowledge_By_Parent.InnerText = dt.Rows[0][5].ToString();
+            //         }
+            //    hfE_Trrm_Group_Id.Value = dsE.Tables[0].Rows[0]["Term_Group_Id"].ToString();
 
-        //    //         belowmarks.Visible = false;
-        //         }
+            //     }
+            //     else
+            //     {
+            //      //   belowmarks.Visible = false;
+            //       //  belowmarks1.Visible = false;
+            //       //  tbl_EYE.Visible = false;
+            //      //   tbl_MYE.Visible = false;
+            //     }
+            //     if (dsE.Tables[10].Rows.Count > 0)
+            //     {
 
-        //     }
-        //     else
-        //     {
-        //   //      belowmarks.Visible = false;
-        //     //    lblE_Term.InnerText = "MYE";
-        //     }
-        //     if (dsE.Tables[10].Rows.Count > 0)
-        //     {
 
-        //     //    lblE_Term1.InnerText = dsE.Tables[10].Rows[0]["Term"].ToString();
-        //         int result = 0;//DateTime.Compare(dt2.Date, DateTime.Parse(ds.Tables[0].Rows[0]["ResultCardIssuanceDateEOYYear"].ToString()));
-        //         if (result != -1)
-        //         {
-        //   ///          grdE_SubjectDetail1.DataSource = dsE.Tables[10];
-        //     //        grdE_SubjectDetail1.DataBind();
-        //         }
-        //         else
-        //         {
 
-        //    //         belowmarks1.Visible = false;
-        //         }
-        //     }
-        //     else
-        //     {
-        //    //     belowmarks1.Visible = false;
-        //    //     lblE_Term1.InnerText = "EOY";
-        //     }
-        //   //  gridelective1.DataSource = ViewState["vs_Elective_subjects"];
-        //    // gridelective1.DataBind();
+            //     }
+            //     else
+            //     {
+            //    //     belowmarks1.Visible = false;
+            //   //      tbl_EYE.Visible = false;
+            //     }
+            //     DataSet ds = (DataSet)ViewState["vs_dataset"];
+            //     ds.Dispose();
+            //     // DateTime dt2 = DateTime.Parse("2023-12-26"); //  DateTime.Now; //Temporaroy Disabled this condition for result date compare to todayy date
+            //     if (dsE.Tables[1].Rows.Count > 0)
+            //     {
+            //      //   lblE_Term.InnerText = dsE.Tables[1].Rows[0]["Term"].ToString();
 
-        dsTimline.ConnectionString = objBase._cn.ConnectionString;
+            //         hfE_Trrm_Group_Id.Value = dsE.Tables[0].Rows[0]["Term_Group_Id"].ToString();
+            //         int result = 0; //Temporaroy Disabled this condition for result date compare to todayy date      DateTime.Compare(dt2.Date, DateTime.Parse(ds.Tables[0].Rows[0]["ResultCardIssuanceDateMidYear"].ToString()));
+            //         if (result != -1)
+            //         {
+            //    //         grdE_SubjectDetail.DataSource = dsE.Tables[1];
+            //    //         grdE_SubjectDetail.DataBind();
+            //         }
+            //         else
+            //         {
+
+            //    //         belowmarks.Visible = false;
+            //         }
+
+            //     }
+            //     else
+            //     {
+            //   //      belowmarks.Visible = false;
+            //     //    lblE_Term.InnerText = "MYE";
+            //     }
+            //     if (dsE.Tables[10].Rows.Count > 0)
+            //     {
+
+            //     //    lblE_Term1.InnerText = dsE.Tables[10].Rows[0]["Term"].ToString();
+            //         int result = 0;//DateTime.Compare(dt2.Date, DateTime.Parse(ds.Tables[0].Rows[0]["ResultCardIssuanceDateEOYYear"].ToString()));
+            //         if (result != -1)
+            //         {
+            //   ///          grdE_SubjectDetail1.DataSource = dsE.Tables[10];
+            //     //        grdE_SubjectDetail1.DataBind();
+            //         }
+            //         else
+            //         {
+
+            //    //         belowmarks1.Visible = false;
+            //         }
+            //     }
+            //     else
+            //     {
+            //    //     belowmarks1.Visible = false;
+            //    //     lblE_Term1.InnerText = "EOY";
+            //     }
+            //   //  gridelective1.DataSource = ViewState["vs_Elective_subjects"];
+            //    // gridelective1.DataBind();
+
+            dsTimline.ConnectionString = objBase._cn.ConnectionString;
         dsTimline.SelectCommand = "exec SP_IEP_Forms @user_id = 'Aims.Ho',@Action = 'GET_TYPE',@Optional1 = 19";
 
         dsStatus.ConnectionString = objBase._cn.ConnectionString;

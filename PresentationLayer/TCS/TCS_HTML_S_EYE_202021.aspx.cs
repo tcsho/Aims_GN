@@ -28,7 +28,6 @@ public partial class PresentationLayer_TCS_TCS_HTML_S_EYE202021 : System.Web.UI.
                 Sess = hd.ResultCardDecode(Request.QueryString["se"], _dtCodes);
                 Term = hd.ResultCardDecode(Request.QueryString["tr"], _dtCodes);
                 Student = hd.ResultCardDecode(Request.QueryString["st"], _dtCodes);
-
                 LoadReport();
 
             }
@@ -79,31 +78,8 @@ public partial class PresentationLayer_TCS_TCS_HTML_S_EYE202021 : System.Web.UI.
             DistinctResultDate = dt;
             dt.DefaultView.Sort = "Student_Id ASC";
             //Reptr_Student.DataSource = dt;
-
-            if (ObjMea.Session_Id == 16 && ObjMea.TermGroup_Id == 1)
-            {
-                Reptr_Student.DataSource = filteredDt;
-                Reptr_Student.DataBind();
-
-            }
-            else if (ObjMea.Session_Id >= 16)
-            {
-                
-               Reptr_Student_2025.DataSource = filteredDt;
-               Reptr_Student_2025.DataBind();
-
-            }
-            else
-            {
-               
-               Reptr_Student.DataSource = filteredDt;
-               Reptr_Student.DataBind();
-
-            }
-
-
-          //  Reptr_Student.DataSource = filteredDt;
-          //  Reptr_Student.DataBind(); 
+            Reptr_Student.DataSource = filteredDt;
+            Reptr_Student.DataBind(); 
         }
         catch (Exception ex)
         {

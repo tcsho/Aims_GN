@@ -165,7 +165,7 @@ public partial class PresentationLayer_CenterClassTotalTermDays : System.Web.UI.
             Session["error"] = ex.Message;
             Response.Redirect("~/presentationlayer/ErrorPage.aspx", false);
         }
-    } 
+    }
     private void loadRegions()
     {
         try

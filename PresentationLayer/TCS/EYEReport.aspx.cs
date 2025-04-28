@@ -28,12 +28,6 @@ public partial class PresentationLayer_EYEReport : System.Web.UI.Page
 
 
         string connectionString = ConfigurationManager.ConnectionStrings["isl_amsoConnectionString"].ConnectionString;
-        BLLStudent_Performance_ClassAchvRating objClsSec = new BLLStudent_Performance_ClassAchvRating();
-        DataTable dtsub = new DataTable();
-
-       
-
-
         using (SqlConnection conn = new SqlConnection(connectionString))
         {
 
@@ -51,13 +45,6 @@ public partial class PresentationLayer_EYEReport : System.Web.UI.Page
                 JSONString = JsonConvert.SerializeObject(dt);
 
 
-                objClsSec.Main_Organistion_Id = 1;
-                objClsSec.Class_Id = Convert.ToInt32(dt.Rows[0]["Class_Id"].ToString());
-           
-                dtsub = (DataTable)objClsSec.Student_Performance_ClassAchvRatingSelectAllByOrgId(objClsSec);
-
-                string JSONStringRating = string.Empty;
-                JSONStringRating = JsonConvert.SerializeObject(dtsub);
 
                 SqlCommand commD = new SqlCommand("exec TCS_Result_StudentPerformanceSection_NEW_CLASS1_2 '" + sectionId + "','" + sessionId + "','" + TermGroupId + "','" + StudentId + "'", conn);
 
@@ -90,7 +77,6 @@ public partial class PresentationLayer_EYEReport : System.Web.UI.Page
 
                 var result = new
                 {
-                    Indicator = JsonConvert.DeserializeObject(JSONStringRating),
                     Header = JsonConvert.DeserializeObject(JSONString),
                     Detail = JsonConvert.DeserializeObject(JSONStringD)
                 };
