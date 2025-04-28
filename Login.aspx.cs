@@ -65,6 +65,14 @@ public partial class Login : System.Web.UI.Page
                     Session["RegionID"] = row["Region_Id"].ToString();
                 else
                     Session["RegionId"] = 0;
+                if (!String.IsNullOrEmpty(row["Center_Id"].ToString()))
+                    Session["Center_Id"] = row["Center_Id"].ToString();
+                else
+                    Session["Center_Id"] = 0;
+                if (!String.IsNullOrEmpty(row["User_Name"].ToString()))
+                    Session["User_Name"] = row["User_Name"].ToString();
+                else
+                    Session["User_Name"] = 0;
                 if (row["EmployeeCode"] != null)
                 {
                     Session["EmployeeCode"] = row["EmployeeCode"];
@@ -73,7 +81,7 @@ public partial class Login : System.Web.UI.Page
                 {
                     Session["EmployeeCode"] = 0;
                 }
- 
+
                 Session["isClassTeacher"] = row["isClassTeacher"];
                 Session["rightsRow"] = row;
                 if (row["Main_Organisation_Id"] != null)
@@ -107,10 +115,17 @@ public partial class Login : System.Web.UI.Page
                         {
                             Response.Redirect("~/PresentationLayer/TCS/AdmTestInst.aspx", false);
                         }
+                        else if (row["User_Type_Id"].ToString() == "37" || 
+                            row["User_Type_Id"].ToString() == "38" || 
+                            row["User_Type_Id"].ToString() == "39" ||
+                            row["User_Type_Id"].ToString() == "40" ||
+                            row["User_Type_Id"].ToString() == "41")
+                        {
+                            Response.Redirect("~/PresentationLayer/BIDashboard/dashboardBIMIS.aspx", false);
+                        }
                         else
                         {
                             Response.Redirect("~/PresentationLayer/Default.aspx", false);
-                           // Response.Redirect("~/PresentationLayer/tcs/Tcs_Mobile_App_Dashboard.aspx", false);
                         }
                     }
                 }

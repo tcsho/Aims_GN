@@ -14,6 +14,9 @@
 #osfooter{display:block;position:fixed;bottom:0;left:0;width:100%;height:300px;margin-bottom:-300px;overflow:hidden;background-color:transparent;z-index:5000;text-indent:-5000px;}
 #osfooter div{margin-bottom:-1000px;}
 #osfooter a{display:block; text-indent:-5000px;}
+    .loginbtn {
+        padding-bottom: 8px;
+    }
 </style>
 <!--[if lte IE 6]><style type="text/css">#osfooter{position:absolute; display:none;}</style><![endif]-->
 </head>
@@ -46,15 +49,10 @@
             <asp:TextBox ID="text_password" runat="server" CssClass="loginFields" MaxLength="50"
                             TextMode="password" Width="120px"></asp:TextBox>
                              <asp:ImageButton ID="signin" runat="server" ImageUrl="~/images/sign_in.gif"
-                            OnClick="imagebutton1_Click"></asp:ImageButton>
+                            OnClick="imagebutton1_Click" ImageAlign="Middle" CssClass="loginbtn"></asp:ImageButton>
                             <asp:Label ID="lab_status" runat="server" Text=""></asp:Label>
         </div>
-    
-
     </form>
-
-
-
   </div>
 </div>
 <!-- ####################################################################################################### -->
@@ -62,10 +60,10 @@
   <div id="featured_slide">
     <!-- ####################################################################################################### -->
     <ol>
-      <%--<li>
+      <li>
         <h2><span>I AM – TO LEARN</span></h2>
         <div><img src="images/demo/featured-slide/1.jpg" alt="1" /></div>
-      </li>--%>
+      </li>
       <li>
         <h2><span>Continuous HR Development</span></h2>
         <div><img src="images/demo/featured-slide/2.jpg" alt="2" /></div>
@@ -135,7 +133,7 @@ $("#featured_slide").liteAccordion({
     enumerateSlides: true, // put numbers on slides
 
     slideSpeed: 800, // slide animation speed
-    cycleSpeed: 6000, // time between slide cycles updated
+    cycleSpeed: 6000, // time between slide cycles
 });
 </script>
 <div id="osfooter">
