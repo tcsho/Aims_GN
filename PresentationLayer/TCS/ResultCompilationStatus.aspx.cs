@@ -1,6 +1,8 @@
-﻿using ADG.JQueryExtenders.Impromptu;
 using System;
 using System.Data;
+using System.Globalization;
+using System.Text;
+using System.Web;
 using System.Web.UI.HtmlControls;
 using System.Web.UI.WebControls;
 
@@ -13,23 +15,19 @@ public partial class PresentationLayer_TCS_ResultCompilationStatus : System.Web.
 
             try
             {
-                DateTime date = DateTime.Now;
-                if (date.Month >= 3 && date.Month <= 7)
-                    ddlTermGroup.SelectedValue = "2";
-                else
-                    ddlTermGroup.SelectedValue = "1";
+                lblExportCompilation.Text = string.Empty;
                 if (Session["ContactID"] == null)
                 {
                     Response.Redirect("~/login.aspx", false);
                 }
-                DataTable dt = new DataTable();
+                Title = "Result Compilation Status";
                 TrDhCampus.Visible = false;
                 TrDhRegion.Visible = false;
                 if (Convert.ToInt32(Session["UserType_Id"].ToString()) == 5)//Head Office
                 {
                 }
                 else
-                    ddlTermGroup_SelectedIndexChanged(this, EventArgs.Empty);
+                    BindCompletionDataForCurrentUser();
             }
             catch (Exception ex)
             {
@@ -38,18 +36,22 @@ public partial class PresentationLayer_TCS_ResultCompilationStatus : System.Web.
             }
         }
     }
-    protected void Button1_Click(object sender, EventArgs e)
+
+    /// <summary>Same rule as former term dropdown: Mar–Jul → Second Term (2), else First Term (1).</summary>
+    private static int GetEffectiveTermGroupId()
+    {
+        DateTime date = DateTime.Now;
+        if (date.Month >= 3 && date.Month <= 7)
+            return 2;
+        return 1;
+    }
+
+    private void BindCompletionDataForCurrentUser()
     {
         try
         {
-            if (ddlTermGroup.SelectedIndex <= 0)
-            {
-                ImpromptuHelper.ShowPrompt("Please Select a Term");
-                return;
-            }
             if (Convert.ToInt32(Session["UserType_Id"].ToString()) == 1) // Teacher
             {
-
                 TrDhCampus.Visible = false;
                 TrDhRegion.Visible = false;
                 BindResultCompletionGrid();
@@ -79,23 +81,6 @@ public partial class PresentationLayer_TCS_ResultCompilationStatus : System.Web.
             Session["error"] = ex.Message;
             Response.Redirect("~/presentationlayer/ErrorPage.aspx", false);
         }
-    }
-    protected void ddlTermGroup_SelectedIndexChanged(object sender, EventArgs e)
-    {
-        try
-        {
-            if (ddlTermGroup.SelectedIndex > 0)
-            {
-                ViewState["dtDetails"] = null;
-                Button1_Click(this, EventArgs.Empty);
-            }
-        }
-        catch (Exception ex)
-        {
-            Session["error"] = ex.Message;
-            Response.Redirect("~/presentationlayer/ErrorPage.aspx", false);
-        }
-
     }
     protected void gvRegionResult_PreRender(object sender, EventArgs e)
     {
@@ -219,7 +204,7 @@ public partial class PresentationLayer_TCS_ResultCompilationStatus : System.Web.
             DataTable dtsub = new DataTable();
 
             objClsSec.ClassTeacher_Id = Convert.ToInt32(Session["EmployeeCode"].ToString());
-            objClsSec.TermGroup_Id = Convert.ToInt32(ddlTermGroup.SelectedValue);
+            objClsSec.TermGroup_Id = GetEffectiveTermGroupId();
             if (ViewState["dtDetails"] == null)
             {
                 dtsub = (DataTable)objClsSec.Section_ClassTeacherResultCompletionStatus(objClsSec);
@@ -264,7 +249,7 @@ public partial class PresentationLayer_TCS_ResultCompilationStatus : System.Web.
             DataTable dtsub = new DataTable();
 
             objClsSec.Center_Id = Convert.ToInt32(row["Center_Id"].ToString());
-            objClsSec.TermGroup_Id = Convert.ToInt32(ddlTermGroup.SelectedValue);
+            objClsSec.TermGroup_Id = GetEffectiveTermGroupId();
             if (ViewState["dtDetails"] == null)
             {
                 dtsub = (DataTable)objClsSec.Section_ClassCenterWiseResultCompletionStatus(objClsSec);
@@ -308,7 +293,7 @@ public partial class PresentationLayer_TCS_ResultCompilationStatus : System.Web.
             DataTable dtsub = new DataTable();
 
             objClsSec.Region_Id = Convert.ToInt32(row["Region_Id"].ToString());
-            objClsSec.TermGroup_Id = Convert.ToInt32(ddlTermGroup.SelectedValue);
+            objClsSec.TermGroup_Id = GetEffectiveTermGroupId();
             if (ViewState["dtDetails"] == null)
             {
                 dtsub = (DataTable)objClsSec.Section_ClassRegionWiseResultCompletionStatus(objClsSec);
@@ -369,5 +354,105 @@ public partial class PresentationLayer_TCS_ResultCompilationStatus : System.Web.
         }
 
     }
- 
+
+    private const string SpSuccessfulCompilation = "Successful_Compilation_Aims";
+    private const string SpUnsuccessfulCompilation = "Un_Successful_Compilation_Aims";
+
+    protected void btnExportSuccessfulCompilation_Click(object sender, EventArgs e)
+    {
+        ExportCompilationProcedureToExcel(SpSuccessfulCompilation, "Successful_Compilation_Aims");
+    }
+
+    protected void btnExportUnsuccessfulCompilation_Click(object sender, EventArgs e)
+    {
+        ExportCompilationProcedureToExcel(SpUnsuccessfulCompilation, "Un_Successful_Compilation_Aims");
+    }
+
+    private void ExportCompilationProcedureToExcel(string procedureName, string fileNameBase)
+    {
+        lblExportCompilation.Text = string.Empty;
+        if (Session["ContactID"] == null)
+        {
+            Response.Redirect("~/login.aspx", false);
+            return;
+        }
+
+        if (!string.Equals(procedureName, SpSuccessfulCompilation, StringComparison.Ordinal)
+            && !string.Equals(procedureName, SpUnsuccessfulCompilation, StringComparison.Ordinal))
+        {
+            lblExportCompilation.Text = "Invalid export.";
+            return;
+        }
+
+        try
+        {
+            var dal = new DALBase();
+            DataTable dt = dal.sqlcmdFetch(procedureName);
+            if (dt == null || dt.Rows.Count == 0)
+            {
+                lblExportCompilation.Text = "No rows returned from " + procedureName + ".";
+                return;
+            }
+
+            string safe = SanitizeExcelFileName(fileNameBase);
+            WriteHtmlExcelDownload(dt, safe + "_" + DateTime.Now.ToString("yyyyMMdd_HHmm", CultureInfo.InvariantCulture) + ".xls");
+        }
+        catch (Exception ex)
+        {
+            lblExportCompilation.Text = HttpUtility.HtmlEncode(ex.Message);
+        }
+    }
+
+    private static string SanitizeExcelFileName(string name)
+    {
+        if (string.IsNullOrEmpty(name))
+            return "export";
+        var sb = new StringBuilder(name.Length);
+        foreach (char c in name)
+        {
+            if (char.IsLetterOrDigit(c) || c == '_' || c == '-')
+                sb.Append(c);
+            else
+                sb.Append('_');
+        }
+        return sb.Length > 0 ? sb.ToString() : "export";
+    }
+
+    private void WriteHtmlExcelDownload(DataTable dt, string fileName)
+    {
+        Response.Clear();
+        Response.Buffer = true;
+        Response.ContentType = "application/vnd.ms-excel";
+        Response.ContentEncoding = Encoding.UTF8;
+        Response.Charset = "utf-8";
+        Response.AddHeader("Content-Disposition", "attachment; filename=\"" + fileName + "\"");
+
+        var sb = new StringBuilder(16384);
+        sb.Append("<html xmlns:x=\"urn:schemas-microsoft-com:office:excel\"><head><meta http-equiv=\"Content-Type\" content=\"text/html; charset=utf-8\" /></head><body><table border='1' cellspacing='0' cellpadding='4'>");
+
+        sb.Append("<tr style='font-weight:bold;background-color:#f0f0f0;'>");
+        foreach (DataColumn col in dt.Columns)
+        {
+            sb.Append("<th>").Append(HttpUtility.HtmlEncode(col.ColumnName)).Append("</th>");
+        }
+        sb.Append("</tr>");
+
+        foreach (DataRow row in dt.Rows)
+        {
+            sb.Append("<tr>");
+            foreach (DataColumn col in dt.Columns)
+            {
+                object v = row[col];
+                string text = v == null || v == DBNull.Value ? string.Empty : Convert.ToString(v, CultureInfo.InvariantCulture);
+                sb.Append("<td>").Append(HttpUtility.HtmlEncode(text)).Append("</td>");
+            }
+            sb.Append("</tr>");
+        }
+
+        sb.Append("</table></body></html>");
+        Response.Write(sb.ToString());
+        Response.Flush();
+        HttpContext.Current.ApplicationInstance.CompleteRequest();
+    }
+
 }

@@ -10,7 +10,13 @@ using System.Data.SqlClient;
 public partial class PresentationLayer_TCS_TssCrystalReports : System.Web.UI.Page
 {
     BLLCrystalReports bllcry = new BLLCrystalReports();
-    public ReportDocument report = new ReportDocument();
+    private ReportDocument _report;
+
+    /// <summary>Lazy init so Crystal/log4net is not loaded until a Crystal report actually runs.</summary>
+    public ReportDocument report
+    {
+        get { return _report ?? (_report = new ReportDocument()); }
+    }
     bool _isSys = false;
     bool t = false;
     int n = 0;

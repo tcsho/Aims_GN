@@ -1,7 +1,42 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="~/PresentationLayer/MasterPage.master" AutoEventWireup="true"
+<%@ Page Title="Result Compilation Status" Language="C#" MasterPageFile="~/PresentationLayer/MasterPage.master" AutoEventWireup="true"
     CodeFile="ResultCompilationStatus.aspx.cs" Inherits="PresentationLayer_TCS_ResultCompilationStatus" %>
 
 <%@ Register Assembly="AjaxControlToolkit" Namespace="AjaxControlToolkit" TagPrefix="cc1" %>
+
+<asp:Content ID="ContentHead" ContentPlaceHolderID="head" runat="server">
+    <style type="text/css">
+        .rcs-page { max-width: 1100px; margin: 0 auto; padding: 0 16px 32px; font-family: "Segoe UI", Arial, Helvetica, sans-serif; color: #222; }
+        .rcs-page span { color: #222; }
+        .rcs-hero {
+            background: linear-gradient(135deg, #0c4da2 0%, #1a6fb5 45%, #0a3d7a 100%);
+            color: #fff;
+            border-radius: 8px;
+            padding: 22px 26px;
+            margin-bottom: 20px;
+            box-shadow: 0 4px 14px rgba(12, 77, 162, 0.35);
+        }
+        .rcs-hero-inner { display: flex; align-items: center; justify-content: space-between; gap: 20px; flex-wrap: wrap; }
+        .rcs-title { margin: 0 0 6px; font-size: 26px; font-weight: 600; letter-spacing: 0.02em; }
+        .rcs-subtitle { margin: 0; font-size: 14px; opacity: 0.92; max-width: 640px; line-height: 1.45; }
+        .rcs-hero-logo { max-height: 56px; max-width: 140px; object-fit: contain; display: block; }
+        .rcs-card {
+            background: #fff;
+            border: 1px solid #e0e4ea;
+            border-radius: 8px;
+            padding: 22px 24px 24px;
+            margin-bottom: 22px;
+            box-shadow: 0 2px 8px rgba(0,0,0,.06);
+        }
+        .rcs-card-title { margin: 0 0 8px; font-size: 18px; font-weight: 600; color: #0c4da2; }
+        .rcs-card-desc { margin: 0 0 18px; font-size: 14px; color: #555; line-height: 1.5; }
+        .rcs-btn-row { display: flex; flex-wrap: wrap; gap: 12px; align-items: center; }
+        .rcs-btn-row .btn { min-width: 200px; padding: 10px 18px; font-size: 14px; border-radius: 6px; font-weight: 600; }
+        .rcs-msg { margin-top: 14px; font-size: 13px; }
+        .rcs-main-table { width: 100%; max-width: 100%; }
+        .rcs-section-title { font-size: 15px; font-weight: 600; color: #0c4da2; padding: 8px 0; }
+    </style>
+</asp:Content>
+
 <asp:Content ID="Content1" ContentPlaceHolderID="ContentPlaceHolder1" runat="Server">
     <cc1:ToolkitScriptManager ID="ToolkitScriptManager1" runat="server">
         <Scripts>
@@ -93,54 +128,30 @@
 
                 });
             </script>
-            <table class="main_table" cellspacing="0" cellpadding="0" width="750" align="center"
-                border="0">
-                <tbody>
-                    <tr>
-                        <td colspan="7">
-                            <table style="background-repeat: repeat" cellspacing="0" cellpadding="0" width="100%"
-                                border="0">
-                                <tbody>
-                                    <tr>
-                                        <td style="height: 100%" width=".5%"></td>
-                                        <td id="tdFrmHeading" class="formheading">
-                                            <asp:Label ID="Label1" CssClass="lblFormHead" runat="server" Text="Result Completion Status"></asp:Label>
-                                            <img alt="logo" src="<%= Page.ResolveUrl("~")%>images/h01.png" height="100%" width="100%"
-                                                border="0" />
-                                        </td>
-                                    </tr>
-                                </tbody>
-                            </table>
+            <div class="rcs-page">
+            <div class="rcs-hero">
+                <div class="rcs-hero-inner">
+                    <div>
+                        <h1 class="rcs-title">Result Compilation Status</h1>
+                        <p class="rcs-subtitle">Export AIMS compilation status to Microsoft Excel when needed.</p>
+                    </div>
+                    <img class="rcs-hero-logo" src="<%= Page.ResolveUrl("~/images/lgo1.png") %>" alt="The City School" />
+                </div>
+            </div>
 
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>
-                            <br />
-                            <br />
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>
-                            <div class="form-group">
-                                <asp:Label runat="server" ID="lblTermGroup" Text="*Term : " CssClass="col-lg-4 col-md-4 col-sm-4 col-xs-4 TextLabelMandatory40"></asp:Label>
-                                <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4">
-                                    <asp:DropDownList runat="server" AutoPostBack="true" ID="ddlTermGroup" CssClass="dropdownlist"
-                                        OnSelectedIndexChanged="ddlTermGroup_SelectedIndexChanged">
-                                        <asp:ListItem Value="0" Text="Select"></asp:ListItem>
-                                        <asp:ListItem Value="1" Text="First Term" ></asp:ListItem>
-                                        <asp:ListItem Value="2" Text="Second Term" ></asp:ListItem>
-                                    </asp:DropDownList>
-                                </div>
-                                <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
-                                    <div class="pull-right">
-                                        <asp:Button ID="Button1" runat="server" CssClass="btn btn-primary" OnClick="Button1_Click"
-                                            Text="Refresh" />
-                                    </div>
-                                </div>
-                            </div>
-                        </td>
-                    </tr>
+            <div class="rcs-card">
+                <h2 class="rcs-card-title">Download compilation status report</h2>
+                <div class="rcs-btn-row">
+                    <asp:Button ID="btnExportSuccessfulCompilation" runat="server" CssClass="btn btn-primary" Text="Successful compilations"
+                        OnClick="btnExportSuccessfulCompilation_Click" />
+                    <asp:Button ID="btnExportUnsuccessfulCompilation" runat="server" CssClass="btn btn-primary" Text="Unsuccessful compilations"
+                        OnClick="btnExportUnsuccessfulCompilation_Click" />
+                </div>
+                <asp:Label ID="lblExportCompilation" runat="server" CssClass="rcs-msg" ForeColor="#b00020" />
+            </div>
+
+            <table class="main_table rcs-main-table" cellspacing="0" cellpadding="0" align="center" border="0">
+                <tbody>
                     <tr>
                         <td>
                             <asp:Label runat="server" CssClass="TextLabelMandatory40" ID="lblerror" ForeColor="Red"></asp:Label>
@@ -148,8 +159,8 @@
                         </td>
                     </tr>
                      <tr id="Trteacher" runat="server" class="tr2" visible="false">
-                        <td colspan="2" class="titlesection">
-                             Result Completion Status  
+                        <td colspan="2" class="titlesection rcs-section-title">
+                             Result Compilation Status  
                            
                         </td>
                     </tr>
@@ -178,7 +189,7 @@
                                         <ItemStyle CssClass="hide" />
                                         <HeaderStyle CssClass="hide" />
                                     </asp:BoundField>
-                                    <asp:TemplateField ItemStyle-Width="100%" HeaderText="Student wise result completion status">
+                                    <asp:TemplateField ItemStyle-Width="100%" HeaderText="Student wise result compilation status">
                                         <ItemTemplate>
                                             <table style="table-layout: fixed; height: 92%; width: 100%; vertical-align: top;"
                                                 cellspacing="0" cellpadding="0">
@@ -261,8 +272,8 @@
                         </td>
                     </tr>
                     <tr id="TrDhCampus" runat="server" class="tr2" >
-                        <td class="titlesection">
-                           Result Completion Status
+                        <td class="titlesection rcs-section-title">
+                           Result Compilation Status
                           
                         </td>
                     </tr>
@@ -340,8 +351,8 @@
                         </td>
                     </tr>
                     <tr id="TrDhRegion" runat="server" class="tr2">
-                        <td colspan="2" class="titlesection">
-                             Result Completion Status - Region Wise
+                        <td colspan="2" class="titlesection rcs-section-title">
+                             Result Compilation Status - Region Wise
                            
                         </td>
                     </tr>
@@ -425,7 +436,12 @@
                     </tr>
                 </tbody>
             </table>
+            </div>
         </ContentTemplate>
+        <Triggers>
+            <asp:PostBackTrigger ControlID="btnExportSuccessfulCompilation" />
+            <asp:PostBackTrigger ControlID="btnExportUnsuccessfulCompilation" />
+        </Triggers>
     </asp:UpdatePanel>
     <asp:UpdateProgress ID="UpdateProgress1" runat="server" AssociatedUpdatePanelID="UpdatePanel1">
         <ProgressTemplate>

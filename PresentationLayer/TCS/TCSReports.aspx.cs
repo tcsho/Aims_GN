@@ -1,5 +1,6 @@
-﻿using System;
+using System;
 using System.Data;
+using System.Text.RegularExpressions;
 using System.Web.UI.WebControls;
 using ADG.JQueryExtenders.Impromptu;
 using System.Web.UI.HtmlControls;
@@ -367,7 +368,26 @@ public partial class PresentationLayer_TCS_TCSReports : System.Web.UI.Page
             Session["RptTitle"] = row[0]["rpt_Caption"].ToString();
             Session["reppath"] = Server.MapPath(row[0]["Rpt_Path"].ToString());
             Session["rep"] = row[0]["Rpt_Name"].ToString();
-            _cri = SelectCriteria(_cri, row[0]["Rpt_View"].ToString());
+
+            string rptName = row[0]["Rpt_Name"] != DBNull.Value ? row[0]["Rpt_Name"].ToString() : string.Empty;
+            string rptPath = row[0]["Rpt_Path"] != DBNull.Value ? row[0]["Rpt_Path"].ToString() : string.Empty;
+            string rptView = row[0]["Rpt_View"] != DBNull.Value ? row[0]["Rpt_View"].ToString() : string.Empty;
+            string rptCaption = row[0]["rpt_Caption"] != DBNull.Value ? row[0]["rpt_Caption"].ToString() : rblselected;
+            if (IsCOEYEClassWiseAnalysisCrystalReport(rptName, rptPath, rptCaption))
+            {
+                string qs = BuildCoAnalysisReportQueryString(rptView);
+                Response.Redirect("~/PresentationLayer/TCS/EYEClassWiseAnalysisReport.aspx?" + qs, false);
+                return;
+            }
+
+            if (IsCOClassLevelWiseSubjectAnalysisCrystalReport(rptName, rptPath, rptCaption))
+            {
+                string qs = BuildCoAnalysisReportQueryString(rptView);
+                Response.Redirect("~/PresentationLayer/TCS/ClassLevelWiseSubjectAnalysisReport.aspx?" + qs, false);
+                return;
+            }
+
+            _cri = SelectCriteria(_cri, rptView);
             _isok = true;
             Session["CriteriaRpt"] = _cri;
 
@@ -860,12 +880,20 @@ public partial class PresentationLayer_TCS_TCSReports : System.Web.UI.Page
                 objCen.Session_Id = Convert.ToInt32(Session["Session_Id"].ToString());
             }
 
-            DataTable dt = new DataTable();
-            dt = objCen.CenterSelectByRegionSessionID(objCen);
-            objBase.FillDropDown(dt, ddl_center, "Center_Id", "Center_Name");
-            BindCheckBoxListControl(dt, lstCenter, "Center_Id", "Center_Name");
-
             DataRow row = (DataRow)Session["rightsRow"];
+
+            if (Convert.ToInt32(row["UserLevel_ID"].ToString()) == 10)
+            {
+                fillNetworkCenters();
+            }
+            else
+            {
+                DataTable dt = new DataTable();
+                dt = objCen.CenterSelectByRegionSessionID(objCen);
+                objBase.FillDropDown(dt, ddl_center, "Center_Id", "Center_Name");
+                BindCheckBoxListControl(dt, lstCenter, "Center_Id", "Center_Name");
+            }
+               
 
             if (Convert.ToInt32(row["UserLevel_ID"].ToString()) == 4 || Convert.ToInt32(row["UserLevel_ID"].ToString()) == 5)
             {
@@ -2019,6 +2047,199 @@ public partial class PresentationLayer_TCS_TCSReports : System.Web.UI.Page
     //    ViewState["MultiSession"] = true;
     //}
 
+    private static bool IsCOEYEClassWiseAnalysisCrystalReport(string rptName, string rptPath, string rptCaption)
+    {
+        if (CoReportFieldContains(rptName, "CO_EYEClassWiseAnalysis", "EYEClassWiseAnalysis"))
+            return true;
+        if (CoReportFieldContains(rptPath, "CO_EYEClassWiseAnalysis", "EYEClassWiseAnalysis"))
+            return true;
+        string key = NormalizeReportMatchKey(rptCaption);
+        if (key.Length > 0 && key.IndexOf("eye", StringComparison.Ordinal) >= 0
+            && key.IndexOf("classwise", StringComparison.Ordinal) >= 0
+            && key.IndexOf("subjectwise", StringComparison.Ordinal) < 0)
+            return true;
+        return false;
+    }
+
+    private static bool IsCOClassLevelWiseSubjectAnalysisCrystalReport(string rptName, string rptPath, string rptCaption)
+    {
+        if (CoReportFieldContains(rptName,
+            "CO_ClasslevelwiseSubjectAnalysis",
+            "ClasslevelwiseSubjectAnalysis",
+            "ClassLevelWiseSubjectAnalysis",
+            "EYEClassSubjectwise",
+            "EYE_ClassSubjectwise",
+            "ClassSubjectwiseAnalysis"))
+            return true;
+        if (CoReportFieldContains(rptPath,
+            "CO_ClasslevelwiseSubjectAnalysis",
+            "ClasslevelwiseSubjectAnalysis",
+            "ClassLevelWiseSubjectAnalysis",
+            "EYEClassSubjectwise",
+            "EYE_ClassSubjectwise",
+            "ClassSubjectwiseAnalysis"))
+            return true;
+
+        string key = NormalizeReportMatchKey(rptCaption);
+        if (key.Length == 0)
+            return false;
+        if (key.IndexOf("subjectwise", StringComparison.Ordinal) < 0)
+            return false;
+        if (key.IndexOf("eye", StringComparison.Ordinal) >= 0 && key.IndexOf("class", StringComparison.Ordinal) >= 0)
+            return true;
+        if (key.IndexOf("classlevel", StringComparison.Ordinal) >= 0 && key.IndexOf("subject", StringComparison.Ordinal) >= 0)
+            return true;
+        return false;
+    }
+
+    private static bool CoReportFieldContains(string field, params string[] tokens)
+    {
+        if (string.IsNullOrEmpty(field) || tokens == null)
+            return false;
+        foreach (string token in tokens)
+        {
+            if (!string.IsNullOrEmpty(token) && field.IndexOf(token, StringComparison.OrdinalIgnoreCase) >= 0)
+                return true;
+        }
+        return false;
+    }
+
+    private static string NormalizeReportMatchKey(string text)
+    {
+        if (string.IsNullOrWhiteSpace(text))
+            return string.Empty;
+        return Regex.Replace(text.Trim(), @"[^a-zA-Z0-9]", string.Empty).ToLowerInvariant();
+    }
+
+    private string BuildCoAnalysisReportQueryString(string rptView)
+    {
+        var sb = new System.Text.StringBuilder(768);
+        sb.Append("rv=").Append(Uri.EscapeDataString(rptView ?? string.Empty));
+        sb.Append("&rptid=").Append(Uri.EscapeDataString(Session["Rpt_ID"] != null ? Session["Rpt_ID"].ToString() : string.Empty));
+
+        string pageId = Request.QueryString["id"];
+        if (!string.IsNullOrEmpty(pageId))
+            sb.Append("&pid=").Append(Uri.EscapeDataString(pageId));
+
+        if (pageId != "44")
+        {
+            if (ddl_MOrg.SelectedIndex > 0)
+            {
+                sb.Append("&moid=").Append(Uri.EscapeDataString(ddl_MOrg.SelectedValue));
+                sb.Append("&mon=").Append(Uri.EscapeDataString(ddl_MOrg.SelectedItem.Text));
+            }
+        }
+
+        GridView grdSession = (GridView)UIGridSession.FindControl("grdControl");
+        if (grdSession != null && grdSession.Rows.Count > 0)
+        {
+            string ids = GetDataFromGrid("Session_Id", grdSession).Replace("[", string.Empty).Replace("]", string.Empty);
+            sb.Append("&sessions=").Append(Uri.EscapeDataString(ids));
+        }
+        else if (ddlSession.SelectedIndex > 0)
+        {
+            sb.Append("&session=").Append(Uri.EscapeDataString(ddlSession.SelectedValue));
+            sb.Append("&sessdesc=").Append(Uri.EscapeDataString(ddlSession.SelectedItem.Text));
+        }
+
+        sb.Append("&ddlsession=").Append(Uri.EscapeDataString(ddlSession.SelectedIndex > 0 ? ddlSession.SelectedValue : string.Empty));
+
+        GridView grdRegion = (GridView)UIGridRegion.FindControl("grdControl");
+        if (grdRegion != null && grdRegion.Rows.Count > 0)
+        {
+            string ids = GetDataFromGrid("Region_Id", grdRegion).Replace("[", string.Empty).Replace("]", string.Empty);
+            sb.Append("&regions=").Append(Uri.EscapeDataString(ids));
+        }
+        else if (ddl_region.SelectedIndex > 0)
+        {
+            sb.Append("&rid=").Append(Uri.EscapeDataString(ddl_region.SelectedValue));
+            sb.Append("&rreg=").Append(Uri.EscapeDataString(ddl_region.SelectedItem.Text));
+        }
+
+        GridView grdCenter = (GridView)UIGridCenter.FindControl("grdControl");
+        if (grdCenter != null && grdCenter.Rows.Count > 0)
+        {
+            string ids = GetDataFromGrid("Center_Id", grdCenter).Replace("[", string.Empty).Replace("]", string.Empty);
+            sb.Append("&centers=").Append(Uri.EscapeDataString(ids));
+        }
+        else if (ddl_center.SelectedIndex > 0)
+        {
+            sb.Append("&cid=").Append(Uri.EscapeDataString(ddl_center.SelectedValue));
+            sb.Append("&cname=").Append(Uri.EscapeDataString(ddl_center.SelectedItem.Text));
+        }
+
+        GridView grdClassList = (GridView)UIGridClass.FindControl("grdControl");
+        if (grdClassList != null && grdClassList.Rows.Count > 0)
+        {
+            string ids = GetDataFromGrid("Class_Id", grdClassList).Replace("[", string.Empty).Replace("]", string.Empty);
+            sb.Append("&classes=").Append(Uri.EscapeDataString(ids));
+        }
+        else if (ddlClass.SelectedIndex > 0)
+        {
+            sb.Append("&clid=").Append(Uri.EscapeDataString(ddlClass.SelectedValue));
+            sb.Append("&clname=").Append(Uri.EscapeDataString(ddlClass.SelectedItem.Text));
+        }
+
+        if (ddlResultMonth.SelectedIndex > 0)
+        {
+            sb.Append("&rs=").Append(Uri.EscapeDataString(ddlResultMonth.SelectedValue));
+            sb.Append("&rsdesc=").Append(Uri.EscapeDataString(ddlResultMonth.SelectedItem.Text));
+        }
+
+        if (ddlGradeLevel.SelectedIndex > 0)
+            sb.Append("&glvl=").Append(Uri.EscapeDataString(ddlGradeLevel.SelectedValue));
+
+        if (listTermGroup.SelectedIndex > 0)
+        {
+            sb.Append("&tg=").Append(Uri.EscapeDataString(listTermGroup.SelectedValue));
+            sb.Append("&term=").Append(Uri.EscapeDataString(listTermGroup.SelectedItem.Text));
+        }
+
+        GridView grdTerm = (GridView)UIGridTerm.FindControl("grdControl");
+        if (grdTerm != null && grdTerm.Rows.Count > 0)
+        {
+            string ids = GetDataFromGrid("Evaluation_Criteria_Type_Id", grdTerm).Replace("[", string.Empty).Replace("]", string.Empty);
+            sb.Append("&termids=").Append(Uri.EscapeDataString(ids));
+        }
+        else if (ddlTerm.SelectedIndex > 0)
+            sb.Append("&tid=").Append(Uri.EscapeDataString(ddlTerm.SelectedValue));
+
+        if (list_section.SelectedIndex > 0)
+            sb.Append("&secid=").Append(Uri.EscapeDataString(list_section.SelectedValue));
+
+        if (List_ClassTeacher.SelectedIndex > 0)
+            sb.Append("&cemp=").Append(Uri.EscapeDataString(List_ClassTeacher.SelectedValue));
+
+        DataRow rights = Session["rightsRow"] as DataRow;
+        if (rights != null && Convert.ToInt32(rights["UserLevel_ID"]) == 5)
+            sb.Append("&utid=").Append(Uri.EscapeDataString(rights["EmployeeCode"].ToString()));
+
+        GridView grdGrade = (GridView)UIGridGrade.FindControl("grdControl");
+        if (grdGrade != null && grdGrade.Rows.Count > 0)
+        {
+            string ids = GetDataFromGrid("Result_Grade_Id", grdGrade).Replace("[", string.Empty).Replace("]", string.Empty);
+            sb.Append("&rgids=").Append(Uri.EscapeDataString(ids));
+        }
+        else if (ddlGrade.SelectedIndex > 0)
+            sb.Append("&rgid=").Append(Uri.EscapeDataString(ddlGrade.SelectedValue));
+
+        if (list_student.SelectedIndex > 0)
+            sb.Append("&stid=").Append(Uri.EscapeDataString(list_student.SelectedValue));
+
+        GridView grdSubject = (GridView)UiGridSubject.FindControl("grdControl");
+        if (grdSubject != null && grdSubject.Rows.Count > 0)
+        {
+            string ids = GetDataFromGrid("Subject_Id", grdSubject).Replace("[", string.Empty).Replace("]", string.Empty);
+            sb.Append("&subids=").Append(Uri.EscapeDataString(ids));
+        }
+        else if (list_Subject.SelectedIndex > 0)
+            sb.Append("&subid=").Append(Uri.EscapeDataString(list_Subject.SelectedValue));
+
+        if (ddlGender.SelectedIndex > 0)
+            sb.Append("&gen=").Append(Uri.EscapeDataString(ddlGender.SelectedValue));
+
+        return sb.ToString();
+    }
 
 
     protected string GetDataFromGrid(string Id, GridView grd)

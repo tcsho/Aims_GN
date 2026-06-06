@@ -493,7 +493,70 @@
                         reportcard += '<h4 class="uppertxtinnewreportmargin"><span class="termname fontSize">' + datademo[0].Evaluation_Criteria_Type_Name + '</span> Report Card <span class="yearname">' + datademo[0].Description.replace("AY", '') + '</span></h4>';
 
                         reportcard += "<h4 class='fullnamestudent'>" + datademo[0].First_Name + "</h4>";
-                        reportcard += "<h4> <span class='classname'>" + datademo[0].Class_name + "-" + datademo[0].Section_Name + "</span></h4>";
+                        let className = datademo[0].Class_name;
+                        
+
+
+                        if ((className == "Class 9 (O Level)") && Session_Id == 16 && Term_Id == 2) {
+                            className = "Senior I (O Level)";
+                            reportcard += "<h4> <span class='classname'>" + className + "-" + datademo[0].Section_Name + "</span></h4>";
+                        }
+                        else if ((className == "Class 9 (IGCSE)") && Session_Id == 16 && Term_Id == 2) {
+                            className = "Senior I (IGCSE)";
+                            reportcard += "<h4> <span class='classname'>" + className + "-" + datademo[0].Section_Name + "</span></h4>";
+                        }
+                        else if ((className == "Class 9 (O Level)") && Session_Id >= 17) {
+                            className = "Senior I (O Level)";
+                            reportcard += "<h4> <span class='classname'>" + className + "-" + datademo[0].Section_Name + "</span></h4>";
+                        }
+                        else if ((className == "Class 9 (IGCSE)") && Session_Id >= 17) {
+                            className = "Senior I (IGCSE)";
+                            reportcard += "<h4> <span class='classname'>" + className + "-" + datademo[0].Section_Name + "</span></h4>";
+                        }
+
+
+                        else if ((className == "Class 10 (O Level)") && Session_Id == 16 && Term_Id == 2) {
+                            className = "Senior I (O Level)";
+                            reportcard += "<h4> <span class='classname'>" + className + "-" + datademo[0].Section_Name + "</span></h4>";
+                        }
+                        else if ((className == "Class 10 (IGCSE)") && Session_Id == 16 && Term_Id == 2) {
+                            className = "Senior I (IGCSE)";
+                            reportcard += "<h4> <span class='classname'>" + className + "-" + datademo[0].Section_Name + "</span></h4>";
+                        }
+                        else if ((className == "Class 10 (O Level)") && Session_Id >= 17) {
+                            className = "Senior II (O Level)";
+                            reportcard += "<h4> <span class='classname'>" + className + "-" + datademo[0].Section_Name + "</span></h4>";
+                        }
+                        else if ((className == "Class 10 (IGCSE)") && Session_Id >= 17) {
+                            className = "Senior II (IGCSE)";
+                            reportcard += "<h4> <span class='classname'>" + className + " - " + datademo[0].Section_Name + "</span></h4>";
+                        }
+/*.2026.*/
+else if ((className == "Class 11 (O Level)") && Session_Id == 16 && Term_Id == 2) {
+    className = "Senior III (O Level)";
+    reportcard += "<h4> <span class='classname'>" + className + "-" + datademo[0].Section_Name + "</span></h4>";
+}
+else if ((className == "Class 11 (IGCSE)") && Session_Id == 16 && Term_Id == 2) {
+    className = "Senior III (IGCSE)";
+    reportcard += "<h4> <span class='classname'>" + className + "-" + datademo[0].Section_Name + "</span></h4>";
+}
+else if ((className == "Class 11 (O Level)") && Session_Id >= 17) {
+    className = "Senior III (O Level)";
+    reportcard += "<h4> <span class='classname'>" + className + "-" + datademo[0].Section_Name + "</span></h4>";
+}
+else if ((className == "Class 11 (IGCSE)") && Session_Id >= 17) {
+    className = "Senior III (IGCSE)";
+    reportcard += "<h4> <span class='classname'>" + className + " - " + datademo[0].Section_Name + "</span></h4>";
+}
+/*.END.*/
+
+                        else {
+                            reportcard += "<h4> <span class='classname'>" + datademo[0].Class_name + "-" + datademo[0].Section_Name + "</span></h4>";
+                        }
+
+                       
+
+                        
 
                         reportcard += "</div>";
                         reportcard += "<div class='col-lg-3 col-md-3 col-sm-3 col-xs-3 text-mediaalignright schoollogoNew'>";
@@ -795,16 +858,43 @@
                             reportcard += "</div>";
                         }
 
+                        const classMapping = {
+                            "Class 9 (O Level)": "Senior I (O Level)",
+                            "Class 9 (IGCSE)": "Senior I (IGCSE)",
+                            "Class 10 (O Level)": "Senior II (O Level)",
+                            "Class 10 (IGCSE)": "Senior II (IGCSE)",
+                            "Class 11 (IGCSE)": "Senior III (IGCSE)",
+                            "Class 11 (O Level)": "Senior III (O Level)"
+                        };
+
+                        // Apply mapping
+                        let requestedClass = classMapping[datademo[0].RequestedClass] || datademo[0].RequestedClass;
+                        let promotedToClass = classMapping[datademo[0].PromotedToClass] || datademo[0].PromotedToClass;
+
                         if (Term_Id == 2) {
-                            if (datademo[0].Class_Id == 13 || datademo[0].Class_Id == 91) {
-                                if (result[0].isPromoted == true) {
-                                    reportcard += '<div class="col-lg-12 col-md-12 col-xs-12 col-sm-12 ispromoted">Promoted to ' + datademo[0].PromotedToClass + '</div>';
-                                } else if (result[0].isPromoted == false && result[0].Cond_Prom == true) {
-                            reportcard += '<div class="col-lg-12 col-md-12 col-xs-12 col-sm-12 			ispromoted">Discretionarily Promoted  to ' + result[0].RequestedClass + '</div>';
-                        }
-				else {
-                                    reportcard += '<div class="col-lg-12 col-md-12 col-xs-12 col-sm-12 notpromoted">Contact school management for promotion</div>';
+                            if (result[0].Class_Id == 13 || result[0].Class_Id == 91) {
+                                if (Session_Id >= 16) {
+                                    if (datademo[0].isPromoted) {
+                                        reportcard += '<div class="col-lg-12 col-md-12 col-xs-12 col-sm-12 ispromoted">Promoted to ' + promotedToClass + '</div>';
+                                    } else if (result[0].isPromoted == false && result[0].Cond_Prom == true) {
+                                        reportcard += '<div class="col-lg-12 col-md-12 col-xs-12 col-sm-12 ispromoted">Discretionarily Promoted to ' + requestedClass + '</div>';
+                                    } else {
+                                        reportcard += '<div class="col-lg-12 col-md-12 col-xs-12 col-sm-12 notpromoted">Contact school management for promotion</div>';
+                                    }
                                 }
+                                else {
+
+                                    if (result[0].isPromoted) {
+                                        reportcard += '<div class="col-lg-12 col-md-12 col-xs-12 col-sm-12 ispromoted">Promoted to ' + result[0].PromotedToClass + '</div>';
+                                    } else if (result[0].isPromoted == false && result[0].Cond_Prom == true) {
+                                        reportcard += '<div class="col-lg-12 col-md-12 col-xs-12 col-sm-12 			ispromoted">Discretionarily Promoted  to ' + result[0].RequestedClass + '</div>';
+                                    }
+                                    else {
+                                        reportcard += '<div class="col-lg-12 col-md-12 col-xs-12 col-sm-12 notpromoted">Contact school management for promotion</div>';
+                                    }
+                                }
+
+
                             }
                         }
 			
