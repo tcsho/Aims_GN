@@ -1,4 +1,4 @@
-﻿using ADG.JQueryExtenders.Impromptu;
+using ADG.JQueryExtenders.Impromptu;
 using System;
 using System.Data;
 using System.Drawing;
@@ -38,6 +38,7 @@ public partial class PresentationLayer_LoConsolidation : System.Web.UI.Page
             ScriptManager scriptManager = ScriptManager.GetCurrent(this.Page);
             scriptManager.RegisterPostBackControl(this.btnloconsolidationexport);
             scriptManager.RegisterPostBackControl(this.btnexportsiqaendorsedgrades);
+            scriptManager.RegisterPostBackControl(this.btnexportconsolidationregionreport);
 
 
             if (!Page.IsPostBack)
@@ -90,6 +91,7 @@ public partial class PresentationLayer_LoConsolidation : System.Web.UI.Page
                     ddl_center.Enabled = false;
                     SiqaEndDiv.Visible = false;
                     //ScriptManager.RegisterStartupScript(this, GetType(), "HideMenu2", "hideMenu2();", true);
+                    btnexportconsolidationregionreport.Visible = false;
                 }
                
 
@@ -99,6 +101,7 @@ public partial class PresentationLayer_LoConsolidation : System.Web.UI.Page
                     ddl_Region_SelectedIndexChanged(sender, e);
                     ddl_region.Enabled = false;
                     ddl_center.Enabled = true;
+                    btnexportconsolidationregionreport.Visible = false;
 
                 }
 
@@ -114,6 +117,7 @@ public partial class PresentationLayer_LoConsolidation : System.Web.UI.Page
                     //ddl_center.SelectedValue = row["Center_Id"].ToString();
                     //ddl_center_SelectedIndexChanged(sender, e);
                     ddl_region.Enabled = false;
+                    btnexportconsolidationregionreport.Visible = false;
 
                 }
                 if (userid == 45  || userid == 44)    //maryum.imran   head ofc readonly
@@ -127,6 +131,7 @@ public partial class PresentationLayer_LoConsolidation : System.Web.UI.Page
                     //ddl_center.SelectedValue = row["Center_Id"].ToString();
                     //ddl_center_SelectedIndexChanged(sender, e);
                     //ddl_region.Enabled = false;
+                    btnexportconsolidationregionreport.Visible = false;
 
                 }
                 //BindGrid(); 
@@ -581,7 +586,7 @@ public partial class PresentationLayer_LoConsolidation : System.Web.UI.Page
                 Session["Keystage_id"] = ddlkeystage.SelectedItem.Text.ToString();
             }
 
-    
+
 
             dt = objdata.Search_Lo_Consolidated(
                 ddl_region.SelectedValue.ToString(),
@@ -590,7 +595,8 @@ public partial class PresentationLayer_LoConsolidation : System.Web.UI.Page
                 ddlclass.SelectedValue.ToString(),
                 ddlsubjects.SelectedValue.ToString(),
                 ddl_grouphead.SelectedValue.ToString(),
-                ddlkeystage.SelectedValue.ToString()
+                ddlkeystage.SelectedValue.ToString(),
+                ddlcheck_uncheck_filter.SelectedValue.ToString()
                 );
             if (dt != null)
             {
@@ -670,16 +676,22 @@ public partial class PresentationLayer_LoConsolidation : System.Web.UI.Page
             //***************************************************************************************
 
 
-          
+
             if (Convert.ToInt32(row["UserLevel_ID"].ToString()) == 4) //Campus Officer
             {
-                gvloconsolidation.Columns[51].Visible = false;
+                //gvloconsolidation.Columns[51].Visible = false;
+                //gvloconsolidation.Columns[52].Visible = false;
+                //2025
                 gvloconsolidation.Columns[52].Visible = false;
+                gvloconsolidation.Columns[53].Visible = false;
             }
             else
             {
-                gvloconsolidation.Columns[51].Visible = true;
+                //gvloconsolidation.Columns[51].Visible = true;
+                //gvloconsolidation.Columns[52].Visible = true;
+
                 gvloconsolidation.Columns[52].Visible = true;
+                gvloconsolidation.Columns[53].Visible = true;
             }
           
             
@@ -3007,5 +3019,51 @@ public partial class PresentationLayer_LoConsolidation : System.Web.UI.Page
             objBase.FillDropDown(DT, ddlsubjects, "Subject_ID", "Subject_Name");
         }
 
+    }
+
+    protected void ddlcheck_uncheck_filter_SelectedIndexChanged(object sender, EventArgs e)
+    {
+        BindGrid();
+    }
+  protected void btnregionloconsolidationexport_Click(object sender, EventArgs e)
+    {
+
+        try
+        {
+            BLLSiqa objdata = new BLLSiqa();
+            DataTable dt = new DataTable();
+
+            if (ddl_region.SelectedValue.ToString() == "0")
+            {
+                ImpromptuHelper.ShowPromptGeneric("Please select Region", 0);
+                return;
+            }
+
+            dt = objdata.Search_Lo_Consolidated_Export(
+            ddl_region.SelectedValue.ToString(),
+            ddl_center.SelectedValue.ToString(),
+            ddlteacher.SelectedValue.ToString(),
+            ddlclass.SelectedValue.ToString(),
+            ddlsubjects.SelectedValue.ToString(),
+            ddl_grouphead.SelectedValue.ToString(),
+            ddlkeystage.SelectedValue.ToString()
+            );
+            if (dt != null)
+            {
+                ExportToSpreadsheet(dt, "Export_Region_View_Report_Data");
+                dt = null;
+
+            }
+            else
+            {
+                ImpromptuHelper.ShowPrompt("There Are No Search Results To Export!");
+            }
+
+        }
+        catch (Exception ex)
+        {
+            Session["error"] = ex.Message;
+            Response.Redirect("~/presentationlayer/ErrorPage.aspx", false);
+        }
     }
 }
