@@ -1,4 +1,4 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="~/PresentationLayer/MasterPage.master" AutoEventWireup="true" CodeFile="NBConsolidation.aspx.cs" Inherits="PresentationLayer_LoConsolidation"
+<%@ Page Title="" Language="C#" MasterPageFile="~/PresentationLayer/MasterPage.master" AutoEventWireup="true" CodeFile="NBConsolidation.aspx.cs" Inherits="PresentationLayer_LoConsolidation"
     Theme="BlueTheme" %>
 
 
@@ -905,9 +905,19 @@
                                 </tr>
                             </table>
                             <div style="display: flex; justify-content: flex-end; align-items: flex-end; height: 100%;">
+                                 Data Filter : <asp:DropDownList Width="190px" Height="30px" OnSelectedIndexChanged="ddlcheck_uncheck_filter_SelectedIndexChanged"
+                                                                ID="ddlcheck_uncheck_filter" CssClass="dropdownlist form-control" runat="server" AutoPostBack="true">
+                                                                <asp:ListItem Selected="True" Value="" Text="--Select--"></asp:ListItem>
+                                                                <asp:ListItem Text="Checked" Value="1"></asp:ListItem>
+                                                                <asp:ListItem Text="Unchecked" Value="0"></asp:ListItem>
+<asp:ListItem Text="SIQA Endorsed" Value="2"></asp:ListItem>
+                                                            </asp:DropDownList>
                                 <asp:Button runat="server" ID="btnNbconsolidationexport"
                                     Text="Export View Report" CssClass="btn btn-sm btn-success"
                                     OnClick="btnNbconsolidationexport_Click" />
+                                  <asp:Button runat="server" ID="btnexportconsolidationregionreport"
+                                                 Text="Export Region Wise Report" CssClass="btn btn-sm btn-primary"
+                                                 OnClick="btnregionloconsolidationexport_Click" />
                             </div>
                             <table class="table calGradeTable">
 
@@ -1471,7 +1481,7 @@
                                     <asp:GridView runat="server" ID="gvNB_C_TeacherList" CssClass="table table-bordered" AutoGenerateColumns="false">
                                         <Columns>
                                             <asp:BoundField ItemStyle-Width="20%" DataField="TeacherFullName" HeaderText="Teachers" />
-
+                                            <asp:BoundField ItemStyle-Width="20%" DataField="Designation" HeaderText="Designation" />
                                         </Columns>
                                     </asp:GridView>
 
