@@ -1,4 +1,4 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="~/PresentationLayer/MasterPage.master"
+<%@ Page Title="" Language="C#" MasterPageFile="~/PresentationLayer/MasterPage.master"
     AutoEventWireup="true" CodeFile="SearchStudent.aspx.cs" Inherits="PresentationLayer_SearchStudent"
     Theme="BlueTheme" %>
 
@@ -453,13 +453,13 @@
                                             </asp:LinkButton>
                                         </ItemTemplate>
                                     </asp:TemplateField>
-                                    <asp:TemplateField HeaderText="SDP" Visible="true">
+                                    <asp:TemplateField HeaderText="SSP" Visible="true">
                                         <%--17--%>
                                         <ItemStyle HorizontalAlign="Center" />
                                         <HeaderStyle HorizontalAlign="Center" />
                                         <ItemTemplate>
                                             <%--<a href='<%# ResolveUrl("~/PresentationLayer/tcs/IEP_Form_Wizard.aspx?s="+Eval("Student_Id")) %>'><i class="glyphicon glyphicon-edit TextLabelMandatory40 text-success"></i>--%>
-                                            <asp:Button runat="server" ID="btnAPICall" Text="View SDP" CommandName="CallAPI" CommandArgument='<%# Eval("Student_No") %>' CssClass="btn btn-primary" OnClick="btnAPICall_Click" />
+                                            <asp:Button runat="server" ID="btnAPICall" Text="View SSP" CommandName="CallAPI" CommandArgument='<%# Eval("Student_No") %>' CssClass="btn btn-primary" OnClick="btnAPICall_Click" />
                                             </a>
                                         </ItemTemplate>
                                     </asp:TemplateField>
@@ -653,9 +653,13 @@
                                         <asp:BoundField DataField="Theory_Exam_CH" HeaderText="Exam %">
                                             <ItemStyle Font-Size="14px" />
                                         </asp:BoundField>
-                                        <asp:BoundField DataField="T" HeaderText="Average %">
+                                       <%-- <asp:BoundField DataField="T" HeaderText="Average %">
+                                            <ItemStyle Font-Size="14px" />
+                                        </asp:BoundField>--%>
+					<asp:BoundField DataField="t_display" HeaderText="Average %">
                                             <ItemStyle Font-Size="14px" />
                                         </asp:BoundField>
+                                        
                                         <asp:BoundField DataField="G" HeaderText="Grade">
                                             <ItemStyle Font-Size="14px" />
                                         </asp:BoundField>
