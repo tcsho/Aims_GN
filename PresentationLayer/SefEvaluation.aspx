@@ -1,4 +1,4 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="~/PresentationLayer/MasterPage.master" ValidateRequest="false"
+<%@ Page Title="" Language="C#" MasterPageFile="~/PresentationLayer/MasterPage.master" ValidateRequest="false"
     AutoEventWireup="true" CodeFile="SefEvaluation.aspx.cs" Inherits="PresentationLayer_SefEvaluation"
     Theme="BlueTheme" %>
 
@@ -14,6 +14,320 @@
     </cc1:ToolkitScriptManager>
     <asp:UpdatePanel ID="UpdatePanel1" runat="server">
         <ContentTemplate>
+
+            <script type="text/javascript">
+                /* --- light toast, single definition --- */
+                (function () {
+                    if (window.showToast) return; // don't re-define on partial postbacks
+
+                    function ensureStack() {
+                        var s = document.getElementById('toast-stack');
+                        if (!s) { s = document.createElement('div'); s.id = 'toast-stack'; document.body.appendChild(s); }
+                        return s;
+                    }
+                    document.addEventListener('DOMContentLoaded', ensureStack);
+                    if (window.Sys && Sys.WebForms && Sys.WebForms.PageRequestManager) {
+                        Sys.WebForms.PageRequestManager.getInstance().add_endRequest(ensureStack);
+                    }
+
+                    function iconFor(type) {
+                        var c = document.createElement('span'); c.className = 't-icon';
+                        if (type === 'success') c.style.background = '#10b981';
+                        else if (type === 'warn') c.style.background = '#f59e0b';
+                        else if (type === 'error') c.style.background = '#ef4444';
+                        else c.style.background = '#0ea5e9';
+                        return c;
+                    }
+
+                    window.showToast = function (msg, type) {
+                        type = type || 'info';
+                        var stack = ensureStack();
+                        var t = document.createElement('div'); t.className = 'toast toast--' + type;
+                        var ico = iconFor(type);
+                        var m = document.createElement('div'); m.className = 't-msg'; m.innerHTML = msg || '';
+                        var x = document.createElement('button'); x.className = 't-close'; x.innerHTML = '&times;';
+                        x.onclick = function () { t.classList.remove('show'); setTimeout(function () { t.remove(); }, 250); };
+                        t.appendChild(ico); t.appendChild(m); t.appendChild(x);
+                        stack.appendChild(t);
+                        requestAnimationFrame(function () { t.classList.add('show'); });
+                        setTimeout(function () {
+                            if (t.parentNode) { t.classList.remove('show'); setTimeout(function () { t.remove(); }, 250); }
+                        }, 3500);
+                    };
+                })();
+
+                /* --- keep SLT tab active after postback --- */
+                (function () {
+                    function storeActiveTab(e) {
+                        var trg = e && (e.target || e.srcElement);
+                        var sel = (trg && (trg.getAttribute('data-bs-target') || trg.getAttribute('href'))) || '';
+                        if (sel && sel.charAt(0) === '#') { try { sessionStorage.setItem('activeTab', sel); } catch (_) { } }
+                    }
+                    function restoreActiveTab() {
+                        var sel = sessionStorage.getItem('activeTab') || '#SLTAssignment';
+                        var link = document.querySelector('a[href="' + sel + '"],[data-bs-target="' + sel + '"]');
+                        var pane = document.querySelector(sel);
+                        if (pane) { pane.classList.add('active', 'in'); pane.style.display = 'block'; }
+                        if (link) {
+                            try { if (window.bootstrap && bootstrap.Tab) { new bootstrap.Tab(link).show(); } else { link.click(); } }
+                            catch (_) { }
+                        }
+                    }
+                    document.addEventListener('DOMContentLoaded', function () {
+                        document.body.addEventListener('shown.bs.tab', storeActiveTab, true);
+                        document.body.addEventListener('click', function (e) {
+                            var a = e.target.closest('[data-bs-toggle="tab"],[data-toggle="tab"]');
+                            if (a) storeActiveTab({ target: a });
+                        }, true);
+                        restoreActiveTab();
+                    });
+                    if (window.Sys && Sys.WebForms && Sys.WebForms.PageRequestManager) {
+                        Sys.WebForms.PageRequestManager.getInstance().add_endRequest(function () { restoreActiveTab(); });
+                    }
+                })();
+
+                /* --- dropdown helpers --- */
+                function toggleDropdown(button) {
+                    var allDropdowns = document.querySelectorAll('.dropdown-content');
+                    allDropdowns.forEach(function (d) { d.style.display = 'none'; });
+                    var container = button.closest('.dropdown-container');
+                    var dropdownContent = container.querySelector('.dropdown-content');
+                    if (dropdownContent) dropdownContent.style.display = 'block';
+                    setTimeout(function () {
+                        document.addEventListener('click', function closeDropdown(e) {
+                            if (!container.contains(e.target)) {
+                                dropdownContent.style.display = 'none';
+                                document.removeEventListener('click', closeDropdown);
+                            }
+                        });
+                    }, 0);
+                }
+
+                function toggleAllCheckboxes(selectAllCheckbox) {
+                    var checkboxes = selectAllCheckbox.closest('.dropdown-content')
+                      .querySelectorAll('.checkbox-options input[type="checkbox"]');
+                    checkboxes.forEach(function (c) { c.checked = selectAllCheckbox.checked; });
+                    checkboxes.forEach(function (c) { updateSelectedKeyStages(c); });
+                }
+
+                function updateSelectedKeyStages(checkbox) {
+
+                    var container = checkbox.closest('.dropdown-container');
+                    var allCheckboxes = container.querySelectorAll('.checkbox-options input[type="checkbox"]');
+
+                    /* ===============================
+                       N/A HANDLING
+                       =============================== */
+                    if (checkbox.value === "N/A") {
+
+                        var row = container.closest('tr');
+
+                        var siqaGradesTextBox = row.querySelector('input[class*="siqa-grades"]');
+                        var kpiPointsTextBox = row.querySelector('input[class*="kpi-points"]');
+                        var kpiGradesTextBox = row.querySelector('input[id*="txtKPIGrades"]');
+                        var averageTextBox = row.querySelector('input[class*="kpi-grades"]');
+                        var hdnKPIGrade = row.querySelector('input[id*="hdnKPIGrade"]');
+                        var hdnKPIAvg = row.querySelector('input[id*="hdnKPIAvg"]');
+
+                        if (checkbox.checked) {
+                            // Disable & uncheck other values
+                            allCheckboxes.forEach(function (cb) {
+                                if (cb !== checkbox) {
+                                    cb.checked = false;
+                                    cb.disabled = true;
+                                }
+                            });
+
+                            // ✅ Default values for N/A
+                            if (siqaGradesTextBox) siqaGradesTextBox.value = "A";
+                            if (kpiPointsTextBox) kpiPointsTextBox.value = "3";
+                            if (kpiGradesTextBox) kpiGradesTextBox.value = "ME";
+                            if (averageTextBox) averageTextBox.value = "3";
+                            if (hdnKPIGrade) hdnKPIGrade.value = "3";
+                            if (hdnKPIAvg) hdnKPIAvg.value = "3";
+
+                        } else {
+                            // Re-enable values
+                            allCheckboxes.forEach(function (cb) {
+                                cb.disabled = false;
+                            });
+
+                            // Clear values when N/A is unchecked
+                            if (siqaGradesTextBox) siqaGradesTextBox.value = "";
+                            if (kpiPointsTextBox) kpiPointsTextBox.value = "";
+                            if (kpiGradesTextBox) kpiGradesTextBox.value = "";
+                            if (averageTextBox) averageTextBox.value = "";
+                            if (hdnKPIGrade) hdnKPIGrade.value = "";
+                            if (hdnKPIAvg) hdnKPIAvg.value = "";
+                        }
+                    } else {
+                        // If another option is selected, uncheck N/A
+                        var naCheckbox = Array.from(allCheckboxes)
+                            .find(cb => cb.value === "N/A");
+
+                        if (naCheckbox && checkbox.checked) {
+                            naCheckbox.checked = false;
+                        }
+                    }
+
+                    /* ===============================
+                       DROPDOWN SELECTION LOGIC
+                       =============================== */
+                    var checkedBoxes = container.querySelectorAll('.checkbox-options input[type="checkbox"]:checked');
+                    var dropdownText = container.querySelector('.dropdown-text');
+                    var hiddenField = container.querySelector('[id*="hdnSelectedKeyStages"]');
+
+                    var selectedValues = Array.from(checkedBoxes).map(cb => cb.value);
+                    hiddenField.value = selectedValues.join(',');
+
+                    dropdownText.textContent = selectedValues.length > 3
+                        ? selectedValues.length + " selected"
+                        : (selectedValues.length ? selectedValues.join(', ') : 'Select Key Stages');
+
+                    /* ===============================
+                       CALCULATION LOGIC (NON N/A)
+                       =============================== */
+                    var gradesHiddenField = container.querySelector('[id*="hdnKeyStageGrades"]');
+                    var pointsHiddenField = container.querySelector('[id*="hdnKeyStageGradePoints"]');
+                    var kpiGradesHiddenField = container.querySelector('[id*="hdnKeyStageKPIGrades"]');
+
+                    if (
+                        selectedValues.length &&
+                        !selectedValues.includes("N/A") &&
+                        gradesHiddenField && gradesHiddenField.value &&
+                        pointsHiddenField && pointsHiddenField.value &&
+                        kpiGradesHiddenField && kpiGradesHiddenField.value
+                    ) {
+                        try {
+                            var gradesDict = JSON.parse(gradesHiddenField.value);
+                            var pointsDict = JSON.parse(pointsHiddenField.value);
+                            var kpiGradesDict = JSON.parse(kpiGradesHiddenField.value);
+
+                            var gradeTexts = [], pointsTexts = [], kpiGradeTexts = [];
+                            var totalPoints = 0, count = 0;
+
+                            selectedValues.forEach(function (ks) {
+                                if (gradesDict[ks]) gradeTexts.push(gradesDict[ks]);
+                                if (pointsDict[ks]) {
+                                    pointsTexts.push(pointsDict[ks]);
+                                    var p = parseFloat(pointsDict[ks]);
+                                    if (!isNaN(p)) {
+                                        totalPoints += p;
+                                        count++;
+                                    }
+                                }
+                                if (kpiGradesDict[ks]) kpiGradeTexts.push(kpiGradesDict[ks]);
+                            });
+
+                            var row = container.closest('tr');
+                            var siqaGradesTextBox = row.querySelector('input[class*="siqa-grades"]');
+                            var kpiPointsTextBox = row.querySelector('input[class*="kpi-points"]');
+                            var kpiGradesTextBox = row.querySelector('input[id*="txtKPIGrades"]');
+                            var averageTextBox = row.querySelector('input[class*="kpi-grades"]');
+                            var hdnKPIGrade = row.querySelector('input[id*="hdnKPIGrade"]');
+                            var hdnKPIAvg = row.querySelector('input[id*="hdnKPIAvg"]');
+
+                            if (siqaGradesTextBox) siqaGradesTextBox.value = gradeTexts.join(', ');
+                            if (kpiPointsTextBox) kpiPointsTextBox.value = pointsTexts.join(', ');
+                            if (kpiGradesTextBox) kpiGradesTextBox.value = kpiGradeTexts.join(', ');
+
+                            var avg = count > 0 ? (totalPoints / count).toFixed(2) : "0";
+                            if (averageTextBox) averageTextBox.value = avg;
+                            if (hdnKPIGrade) hdnKPIGrade.value = avg;
+                            if (hdnKPIAvg) hdnKPIAvg.value = avg;
+
+                        } catch (e) {
+                            console.error('Error parsing JSON:', e);
+                        }
+                    }
+                }
+
+                //function updateSelectedKeyStages(checkbox) {
+                //    var container = checkbox.closest('.dropdown-container');
+                //    var checkboxes = container.querySelectorAll('.checkbox-options input[type="checkbox"]:checked');
+                //    var dropdownText = container.querySelector('.dropdown-text');
+                //    var hiddenField = container.querySelector('[id*="hdnSelectedKeyStages"]');
+                //    var gradesHiddenField = container.querySelector('[id*="hdnKeyStageGrades"]');
+                //    var pointsHiddenField = container.querySelector('[id*="hdnKeyStageGradePoints"]');
+                //    var kpiGradesHiddenField = container.querySelector('[id*="hdnKeyStageKPIGrades"]');
+
+                //    var selectedValues = Array.from(checkboxes).map(function (cb) { return cb.value; });
+                //    hiddenField.value = selectedValues.join(',');
+
+                //    dropdownText.textContent = selectedValues.length > 3
+                //      ? (selectedValues.length + " selected")
+                //      : (selectedValues.length > 0 ? selectedValues.join(', ') : 'Select Key Stages');
+
+                //    if (gradesHiddenField && gradesHiddenField.value &&
+                //        pointsHiddenField && pointsHiddenField.value &&
+                //        kpiGradesHiddenField && kpiGradesHiddenField.value) {
+                //        try {
+                //            var gradesDict = JSON.parse(gradesHiddenField.value);
+                //            var pointsDict = JSON.parse(pointsHiddenField.value);
+                //            var kpiGradesDict = JSON.parse(kpiGradesHiddenField.value);
+
+                //            var gradeTexts = [], pointsTexts = [], kpiGradeTexts = [];
+                //            var totalPoints = 0, count = 0;
+
+                //            selectedValues.forEach(function (ks) {
+                //                if (gradesDict[ks]) gradeTexts.push(gradesDict[ks]);
+                //                if (pointsDict[ks]) {
+                //                    pointsTexts.push(pointsDict[ks]);
+                //                    var p = parseFloat(pointsDict[ks]);
+                //                    if (!isNaN(p)) { totalPoints += p; count++; }
+                //                }
+                //                if (kpiGradesDict[ks]) kpiGradeTexts.push(kpiGradesDict[ks]);
+                //            });
+
+                //            var row = container.closest('tr');
+                //            var siqaGradesTextBox = row.querySelector('input[class*="siqa-grades"]');
+                //            var kpiPointsTextBox = row.querySelector('input[class*="kpi-points"]');
+                //            var kpiGradesTextBox = row.querySelector('input[id*="txtKPIGrades"]'); // KPI Grade strings
+                //            var averageTextBox = row.querySelector('input[class*="kpi-grades"]'); // Average field
+                //            var hdnKPIGrade = row.querySelector('input[id*="hdnKPIGrade"]');   // store avg
+                //            var hdnKPIAvg = row.querySelector('input[id*="hdnKPIAvg"]');     // store avg
+
+                //            if (siqaGradesTextBox) siqaGradesTextBox.value = gradeTexts.join(', ');
+                //            if (kpiPointsTextBox) kpiPointsTextBox.value = pointsTexts.join(', ');
+                //            if (kpiGradesTextBox) kpiGradesTextBox.value = kpiGradeTexts.join(', ');
+
+                //            var avg = count > 0 ? (totalPoints / count).toFixed(2) : "0";
+                //            if (averageTextBox) averageTextBox.value = avg;
+                //            if (hdnKPIGrade) hdnKPIGrade.value = avg;
+                //            if (hdnKPIAvg) hdnKPIAvg.value = avg;
+
+                //        } catch (e) { console.error('Error parsing JSON:', e); }
+                //    }
+                //}
+
+                /* row-scoped validation */
+                function validateBeforeSave(btn) {
+                    var row = btn.closest('tr');
+                    if (!row) return true;
+                    var errs = [];
+                    var yr = row.querySelector('select[id*="ddlKPIYear"]');
+                    var ksHidden = row.querySelector('input[id*="hdnSelectedKeyStages"]');
+
+                    if (yr && (!yr.value || yr.value === '')) { errs.push('KPI Year is required'); yr.classList.add('is-invalid'); }
+                    else if (yr) { yr.classList.remove('is-invalid'); }
+
+                    var drop = row.querySelector('.dropdown-toggle');
+                    if (ksHidden && (!ksHidden.value || !ksHidden.value.trim())) {
+                        errs.push('Please select at least one Key Stage'); if (drop) drop.classList.add('is-invalid');
+                    } else { if (drop) drop.classList.remove('is-invalid'); }
+
+                    if (errs.length) { showToast('• ' + errs.join('<br/>• '), 'warn'); return false; }
+                    return true;
+                }
+                window.validateBeforeSave = validateBeforeSave;
+
+                /* delete confirm */
+                $(document).on("click", ".action-icon.delete", function (e) {
+                    if (!confirm("Are you sure you want to delete this record?")) e.preventDefault();
+                });
+            </script>
+
+
             <script type="text/javascript">
                 function closeModalTest() {
 
@@ -33,19 +347,19 @@
                 });
 
 
-               // function printPageArea(areaID) {
-               //     var printContent = document.getElementById(areaID).innerHTML;
-               //     var originalContent = document.body.innerHTML;
-               //     document.body.innerHTML = printContent;
-               //     window.print();
-               //     document.body.innerHTML = originalContent;
-               // }
+                // function printPageArea(areaID) {
+                //     var printContent = document.getElementById(areaID).innerHTML;
+                //     var originalContent = document.body.innerHTML;
+                //     document.body.innerHTML = printContent;
+                //     window.print();
+                //     document.body.innerHTML = originalContent;
+                // }
 
-                    function printPageArea(areaID) {
-    var printContent = document.getElementById(areaID).innerHTML;
+                function printPageArea(areaID) {
+                    var printContent = document.getElementById(areaID).innerHTML;
 
-    // The CSS styles you're using
-    var styles = `
+                    // The CSS styles you're using
+                    var styles = `
         <style>
             body {
                 margin: 0;
@@ -109,11 +423,11 @@
         </style>
     `;
 
-    // Open a new window for printing without setting width and height explicitly
-    var printWindow = window.open('', 'PrintWindow', '');
+                    // Open a new window for printing without setting width and height explicitly
+                    var printWindow = window.open('', 'PrintWindow', '');
 
-    // Write the content to the new window, including styles and the printable content
-    printWindow.document.write(`
+                    // Write the content to the new window, including styles and the printable content
+                    printWindow.document.write(`
         <html>
         <head>
 <title>SIQA Endorsed School Grade</title>
@@ -125,12 +439,12 @@
         </html>
     `);
 
-    // Ensure the document is fully loaded before triggering print
-    printWindow.document.close();
-    printWindow.focus();
-    printWindow.print();
-   // printWindow.close();
-}
+                    // Ensure the document is fully loaded before triggering print
+                    printWindow.document.close();
+                    printWindow.focus();
+                    printWindow.print();
+                    // printWindow.close();
+                }
 
             </script>
 
@@ -217,8 +531,8 @@
                         Text="Cancel" OnClick="Button1_Click1"></asp:Button>
 
                     <asp:Button ID="btnprint" runat="server" CssClass="btn btn-success"
-                                Text="Print" OnClientClick="printPageArea('ConsolidationHistory')"></asp:Button>
-                    
+                        Text="Print" OnClientClick="printPageArea('ConsolidationHistory')"></asp:Button>
+
                 </div>
                 <div cellspacing="1" cellpadding="1" width="100%" bgcolor="#ffffff" border="0" runat="server" id="tblSearch">
                     <div class="row">
@@ -267,6 +581,7 @@
                             <li><a data-toggle="tab" href="#PS6">PS 6</a></li>
                             <li><a data-toggle="tab" href="#Consolidation">CONSOLIDATION</a></li>
                             <li><a data-toggle="tab" href="#ConsolidationHistory">SIQA Endorsed Consolidations</a></li>
+                            <li><a data-toggle="tab" href="#SLTAssignment">SLT Key Stages Assignment</a></li>
                         </ul>
                         <%--<asp:label id="lblerror" runat="server"></asp:label>--%>
                         <div class="tab-content" runat="server">
@@ -1999,6 +2314,80 @@
                                     </div>
                                 </div>
                             </div>
+                            <div id="SLTAssignment" class="tab-pane fade">
+                                <div id="SLTContainer" runat="server" clientidmode="Static">
+                                    <h3 class="titlesection">SLT Key Stages Assignment</h3> 
+                                    <asp:GridView ID="gvSLTAssignment" runat="server" AutoGenerateColumns="False"
+                                        CssClass="table table-bordered"
+                                        OnRowDataBound="gvSLTAssignment_RowDataBound"
+                                        OnRowCommand="gvSLTAssignment_RowCommand">
+                                        <Columns> 
+                                            <asp:TemplateField HeaderText="Employee ID" HeaderStyle-Width="10%">
+                                                <ItemTemplate>
+                                                    <asp:Label ID="lblEmployeeID" runat="server" ForeColor="Black" Text='<%# Eval("EmployeeCode") %>' />
+                                                    <asp:HiddenField ID="hdnEmployeeID" runat="server" Value='<%# Eval("EmployeeCode") %>' />
+                                                </ItemTemplate>
+                                            </asp:TemplateField> 
+                                            <asp:TemplateField HeaderText="School Leader" HeaderStyle-Width="15%">
+                                                <ItemTemplate>
+                                                    <asp:Label ID="lblSchoolLeader" runat="server" ForeColor="Black" Text='<%# Eval("FullName") %>' />
+                                                </ItemTemplate>
+                                            </asp:TemplateField> 
+                                            <asp:TemplateField HeaderText="KPI Year" HeaderStyle-Width="10%">
+                                                <ItemTemplate>
+                                                    <asp:DropDownList ID="ddlKPIYear" runat="server" CssClass="form-control"> 
+                                                        <asp:ListItem Value="2025">2025</asp:ListItem> 
+                                                    </asp:DropDownList>
+                                                    <asp:RequiredFieldValidator ID="rfvKPIYear" runat="server"
+                                                        ControlToValidate="ddlKPIYear" InitialValue=""
+                                                        ErrorMessage="KPI Year is required" Text="*"
+                                                        ForeColor="Red" Display="Dynamic" ValidationGroup="SLTValidation" />
+                                                </ItemTemplate>
+                                            </asp:TemplateField> 
+                                            <asp:TemplateField HeaderText="SIQA Grades" HeaderStyle-Width="15%">
+                                                <ItemTemplate>
+                                                    <asp:TextBox ID="txtSIQAGrades" runat="server" CssClass="form-control siqa-grades"  /> 
+                                                </ItemTemplate>
+                                            </asp:TemplateField> 
+                                            <asp:TemplateField HeaderText="KPI Grade Points" HeaderStyle-Width="15%">
+                                                <ItemTemplate>
+                                                    <asp:TextBox ID="txtKPIGradePoints" runat="server" CssClass="form-control kpi-points" />  
+                                                </ItemTemplate>
+                                            </asp:TemplateField> 
+                                            <asp:TemplateField HeaderText="KPI Grade" HeaderStyle-Width="15%">
+                                                <ItemTemplate>
+                                                    <asp:TextBox ID="txtKPIGrades" runat="server" CssClass="form-control" /> 
+                                                </ItemTemplate>
+                                            </asp:TemplateField> 
+                                            <asp:TemplateField HeaderText="Average" HeaderStyle-Width="15%">
+                                                <ItemTemplate>
+                                                    <asp:TextBox ID="txtKPIGrade" runat="server" CssClass="form-control kpi-grades" /> 
+                                                </ItemTemplate>
+                                            </asp:TemplateField> 
+                                            <asp:TemplateField HeaderText="Actions" HeaderStyle-Width="6%">
+                                                <ItemStyle Width="6%" HorizontalAlign="Center" CssClass="actions-cell" />
+                                                <ItemTemplate>
+                                                    <asp:LinkButton ID="btnSave" runat="server" CssClass="action-icon save"
+                                                        CommandName="SaveRow"
+                                                        CommandArgument="<%# Container.DataItemIndex %>" 
+                                                        CausesValidation="false"
+                                                        Text="💾" ToolTip="Save" />
+                                                    <asp:LinkButton ID="btnEdit" runat="server" CssClass="action-icon edit"
+                                                        CommandName="EditRow"
+                                                        CommandArgument="<%# Container.DataItemIndex %>"
+                                                        Text="✏️" ToolTip="Edit" Visible="false" />
+                                                    <asp:LinkButton ID="btnDelete" runat="server" CssClass="action-icon delete"
+                                                        CommandName="DeleteRow"
+                                                        CommandArgument="<%# Container.DataItemIndex %>"
+                                                        Text="🗑️" ToolTip="Delete" Visible="false" />
+                                                </ItemTemplate>
+                                            </asp:TemplateField> 
+                                        </Columns>
+                                    </asp:GridView> 
+                                    <asp:ValidationSummary ID="valSummary" runat="server"
+                                        ShowMessageBox="False" ShowSummary="False" ValidationGroup="SLTValidation" />
+                                </div>
+                            </div> 
                         </div>
                     </div>
                 </div>
@@ -2046,5 +2435,193 @@
             font-size: 11px;
         }
     </style>
+    <style type="text/css">
+        /* ===========================
+     Dropdown
+     =========================== */
+        .dropdown-container {
+            position: relative;
+            display: inline-block;
+            width: 100%;
+        }
+
+        .dropdown-toggle {
+            width: 100%;
+            padding: 6px 12px;
+            background: #fff;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            text-align: left;
+            cursor: pointer;
+        }
+
+        .dropdown-arrow {
+            position: absolute;
+            right: 10px;
+            top: 50%;
+            transform: translateY(-50%);
+            font-size: 10px;
+        }
+
+        .dropdown-content {
+            position: absolute;
+            z-index: 9999;
+            width: 100%;
+            max-height: 250px;
+            overflow-y: auto;
+            background: #fff;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, .2);
+        }
+
+        .checkbox-options {
+            padding: 5px;
+        }
+
+        .checkbox-item {
+            display: flex;
+            align-items: center;
+            padding: 3px 5px;
+        }
+
+            .checkbox-item input[type="checkbox"] {
+                margin-right: 8px;
+            }
+
+        .select-all {
+            padding: 8px;
+            font-weight: bold;
+            background: #f5f5f5;
+            border-bottom: 1px solid #ddd;
+        }
+
+            .select-all input[type="checkbox"] {
+                margin-right: 8px;
+            }
+
+        /* ===========================
+     Grid & Inputs
+     =========================== */
+        .siqa-grades {
+            padding: 6px 12px;
+            background-color: #f8f9fa;
+            border: 1px solid #ced4da;
+        }
+
+        .actions-cell .action-icon {
+            display: inline-block;
+            margin: 0 6px;
+            font-size: 18px; /* clear but compact */
+            line-height: 1;
+            cursor: default; /* purely visual; no behavior changed */
+            user-select: none;
+        }
+
+            .actions-cell .action-icon.save {
+            }
+
+            .actions-cell .action-icon.edit {
+            }
+
+            .actions-cell .action-icon.delete {
+            }
+
+        /* Tighten table cells for better fit on smaller viewports */
+        .table.table-bordered > tbody > tr > td,
+        .table.table-bordered > thead > tr > th {
+            vertical-align: middle;
+            white-space: nowrap; /* keep one-line headers & inputs */
+        }
+
+        /* Per-row invalid highlight for client validation */
+        .is-invalid {
+            border-color: #ef4444 !important;
+            box-shadow: 0 0 0 3px rgba(239, 68, 68, .15) !important;
+        }
+
+        /* ===========================
+     Toast (light theme)
+     =========================== */
+        #toast-stack {
+            position: fixed;
+            top: 16px;
+            right: 16px;
+            z-index: 99999;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            pointer-events: none;
+        }
+
+        .toast {
+            display: flex;
+            align-items: flex-start;
+            gap: 10px;
+            min-width: 260px;
+            max-width: 380px;
+            padding: 12px 14px;
+            background: #ffffff;
+            color: #1f2937;
+            border: 1px solid rgba(0, 0, 0, .06);
+            border-radius: 12px;
+            box-shadow: 0 6px 18px rgba(0, 0, 0, .08);
+            transform: translateY(-8px);
+            opacity: 0;
+            transition: all .25s ease;
+            font: 500 14px/1.4 system-ui, -apple-system, Segoe UI, Roboto, "Helvetica Neue", Arial, "Noto Sans", "Apple Color Emoji", "Segoe UI Emoji";
+            pointer-events: auto;
+        }
+
+            .toast.show {
+                transform: translateY(0);
+                opacity: 1;
+            }
+
+            .toast .t-icon {
+                flex: 0 0 18px;
+                height: 18px;
+                border-radius: 50%;
+                margin-top: 2px;
+            }
+
+            .toast .t-msg {
+                flex: 1 1 auto;
+            }
+
+            .toast .t-close {
+                border: 0;
+                background: transparent;
+                font-size: 18px;
+                line-height: 1;
+                color: #6b7280;
+                cursor: pointer;
+            }
+
+        /* Light variants */
+        .toast--info {
+            background: #f0f9ff;
+            border-color: #bae6fd;
+            color: #0c4a6e;
+        }
+
+        .toast--success {
+            background: #ecfdf5;
+            border-color: #a7f3d0;
+            color: #065f46;
+        }
+
+        .toast--warn {
+            background: #fff7ed;
+            border-color: #fed7aa;
+            color: #9a3412;
+        }
+
+        .toast--error {
+            background: #fef2f2;
+            border-color: #fecaca;
+            color: #7f1d1d;
+        }
+    </style> 
 </asp:Content>
 
