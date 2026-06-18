@@ -1,4 +1,4 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="~/PresentationLayer/MasterPage.master" AutoEventWireup="true" CodeFile="LoConsolidation.aspx.cs" Inherits="PresentationLayer_LoConsolidation"
+<%@ Page Title="" Language="C#" MasterPageFile="~/PresentationLayer/MasterPage.master" AutoEventWireup="true" CodeFile="LoConsolidation.aspx.cs" Inherits="PresentationLayer_LoConsolidation"
     Theme="BlueTheme" %>
 
 
@@ -233,7 +233,7 @@
 
                                                     <td class="col-lg-3">
                                                         <div class="form-group">
-                                                            <label class="TextLabelLeft">Region ::</label>
+                                                            <label class="TextLabelLeft">Region :</label>
                                                             <asp:DropDownList ID="ddl_region" runat="server" AutoPostBack="True" CssClass="dropdownlist form-control"
                                                                 OnSelectedIndexChanged="ddl_Region_SelectedIndexChanged" Width="100%" OnClientClick="saveActiveTab()">
                                                             </asp:DropDownList>
@@ -795,7 +795,7 @@
 
                                             </tr>
 
-                                            <%--                                *****************************--%>
+                                          
 
                                             <tr class="row">
                                                 <td class="col-lg-2">
@@ -1331,9 +1331,21 @@
                                 </tr>
                             </table>
                             <div style="display: flex; justify-content: flex-end; align-items: flex-end; height: 100%;">
+                                   Data Filter : <asp:DropDownList Width="190px" Height="30px" OnSelectedIndexChanged="ddlcheck_uncheck_filter_SelectedIndexChanged"
+                                                                ID="ddlcheck_uncheck_filter" CssClass="dropdownlist form-control" runat="server" AutoPostBack="true">
+                                                                <asp:ListItem Selected="True" Value="" Text="--Select--"></asp:ListItem>
+                                                                <asp:ListItem Text="Checked" Value="1"></asp:ListItem>
+                                                                <asp:ListItem Text="Unchecked" Value="0"></asp:ListItem>
+							        <asp:ListItem Text="SIQA Endorsed" Value="2"></asp:ListItem>
+                                                            </asp:DropDownList>
                                  <asp:Button runat="server" ID="btnloconsolidationexport"
                                                 Text="Export View Report" CssClass="btn btn-sm btn-success"
                                                 OnClick="btnloconsolidationexport_Click" />
+ <asp:Button runat="server" ID="btnexportconsolidationregionreport"
+                                                 Text="Export Region Wise Report" CssClass="btn btn-sm btn-primary"
+                                                 OnClick="btnregionloconsolidationexport_Click" />
+
+
                             </div>
                             <table class="table calGradeTable">
 
@@ -1752,6 +1764,22 @@
                                                 <ItemTemplate>
                                                     <asp:DropDownList ID="gvDdlTime_ManagementValue" runat="server"
                                                         SelectedValue='<%# Bind("Time_Management") %>' AutoPostBack="false" CssClass="dropdownlist">
+                                                        <asp:ListItem Text="--Select--" Value=""></asp:ListItem>
+                                                        <asp:ListItem Text="OS" Value="OS"></asp:ListItem>
+                                                        <asp:ListItem Text="G" Value="G"></asp:ListItem>
+                                                        <asp:ListItem Text="A" Value="A"></asp:ListItem>
+                                                        <asp:ListItem Text="UA" Value="UA"></asp:ListItem>
+                                                        <asp:ListItem Text="NA" Value="NA"></asp:ListItem>
+                                                    </asp:DropDownList>
+                                                </ItemTemplate>
+                                            </asp:TemplateField>
+                                           <%-- ********************2025************************--%>
+                                              <asp:TemplateField HeaderText="Learning Env">
+                                                <HeaderStyle HorizontalAlign="Center" BackColor="LightGray" ForeColor="#000000" Font-Size="Smaller" />
+                                                <ItemStyle HorizontalAlign="Left" />
+                                                <ItemTemplate>
+                                                    <asp:DropDownList ID="gvDdl_learningenv" runat="server"
+                                                        SelectedValue='<%# Bind("Learning_Env") %>' AutoPostBack="false" CssClass="dropdownlist">
                                                         <asp:ListItem Text="--Select--" Value=""></asp:ListItem>
                                                         <asp:ListItem Text="OS" Value="OS"></asp:ListItem>
                                                         <asp:ListItem Text="G" Value="G"></asp:ListItem>
@@ -2293,6 +2321,7 @@
                                 <asp:GridView runat="server" ID="gvLO_C_TeacherList" CssClass="table table-bordered" AutoGenerateColumns="false">
                                     <Columns>
                                         <asp:BoundField ItemStyle-Width="20%" DataField="TeacherFullName" HeaderText="Teachers" />
+                                        <asp:BoundField ItemStyle-Width="20%" DataField="Designation" HeaderText="Designation" />
 
                                     </Columns>
                                 </asp:GridView>
@@ -2710,6 +2739,22 @@
                                                 <ItemTemplate>
                                                     <asp:DropDownList ID="gvDdlTime_ManagementValue" runat="server"
                                                         SelectedValue='<%# Bind("Time_Management") %>' AutoPostBack="false" CssClass="dropdownlist"  Enabled="false">
+                                                        <asp:ListItem Text="--Select--" Value=""></asp:ListItem>
+                                                        <asp:ListItem Text="OS" Value="OS"></asp:ListItem>
+                                                        <asp:ListItem Text="G" Value="G"></asp:ListItem>
+                                                        <asp:ListItem Text="A" Value="A"></asp:ListItem>
+                                                        <asp:ListItem Text="UA" Value="UA"></asp:ListItem>
+                                                        <asp:ListItem Text="NA" Value="NA"></asp:ListItem>
+                                                    </asp:DropDownList>
+                                                </ItemTemplate>
+                                            </asp:TemplateField>
+
+                                              <asp:TemplateField HeaderText="Learning Env">
+                                                <HeaderStyle HorizontalAlign="Center" BackColor="LightGray" ForeColor="#000000" Font-Size="Smaller" />
+                                                <ItemStyle HorizontalAlign="Left" />
+                                                <ItemTemplate>
+                                                    <asp:DropDownList ID="gvDdl_learningenv" runat="server" Enabled="false"
+                                                        SelectedValue='<%# Bind("Learning_Env") %>' AutoPostBack="false" CssClass="dropdownlist">
                                                         <asp:ListItem Text="--Select--" Value=""></asp:ListItem>
                                                         <asp:ListItem Text="OS" Value="OS"></asp:ListItem>
                                                         <asp:ListItem Text="G" Value="G"></asp:ListItem>
