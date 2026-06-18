@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Data;
 using System.Web;
 using System.Web.UI.WebControls;
@@ -10,6 +10,10 @@ using City.Library.SQL;
 using System.Data.SqlClient;
 using System.Text;
 using System.Security.Cryptography;
+using System.Collections.Generic;
+using System.Web.UI.HtmlControls;
+using System.Linq;
+
 
 public partial class PresentationLayer_SefEvaluation : System.Web.UI.Page
 {
@@ -22,6 +26,7 @@ public partial class PresentationLayer_SefEvaluation : System.Web.UI.Page
     DataSet _dtGrade;
     DataTable _dt_PS_KS4_5;
     DataTable _dtKS2;
+    BLLKpiSef _kpiBll = new BLLKpiSef();
     protected void Page_Load(object sender, EventArgs e)
     {
 
@@ -105,7 +110,7 @@ public partial class PresentationLayer_SefEvaluation : System.Web.UI.Page
                 }
 
 
-                    int UserLevel_ID = Convert.ToInt32(row["UserLevel_ID"].ToString());
+                int UserLevel_ID = Convert.ToInt32(row["UserLevel_ID"].ToString());
                 if (UserLevel_ID == 1 || UserLevel_ID == 2) //Head Office
                 {
 
@@ -264,15 +269,15 @@ public partial class PresentationLayer_SefEvaluation : System.Web.UI.Page
     protected void Call_All_Performance_Standard()
     {
 
-        Load_PS1_Data(ddl_region.SelectedValue.ToString(), ddl_center.SelectedValue.ToString(), ddl_grouphead.SelectedValue.ToString());
+        Load_PS1_Data(ddl_region.SelectedValue.ToString(), ddl_center.SelectedValue.ToString(), ddl_grouphead.SelectedValue.ToString(),ddl_Session.SelectedValue.ToString());
         Bind_Learning_skill_Grid();  //Child Fetching Area of PS1
-        Load_PS2_Data(ddl_region.SelectedValue.ToString(), ddl_center.SelectedValue.ToString(), ddl_grouphead.SelectedValue.ToString());
-        Load_PS3_Data(ddl_region.SelectedValue.ToString(), ddl_center.SelectedValue.ToString(), ddl_grouphead.SelectedValue.ToString());
-        Load_PS4_Data(ddl_region.SelectedValue.ToString(), ddl_center.SelectedValue.ToString(), ddl_grouphead.SelectedValue.ToString());
-        Load_PS5_Data(ddl_region.SelectedValue.ToString(), ddl_center.SelectedValue.ToString(), ddl_grouphead.SelectedValue.ToString());
-        Load_PS6_Data(ddl_region.SelectedValue.ToString(), ddl_center.SelectedValue.ToString(), ddl_grouphead.SelectedValue.ToString());
+        Load_PS2_Data(ddl_region.SelectedValue.ToString(), ddl_center.SelectedValue.ToString(), ddl_grouphead.SelectedValue.ToString(), ddl_Session.SelectedValue.ToString());
+        Load_PS3_Data(ddl_region.SelectedValue.ToString(), ddl_center.SelectedValue.ToString(), ddl_grouphead.SelectedValue.ToString(), ddl_Session.SelectedValue.ToString());
+        Load_PS4_Data(ddl_region.SelectedValue.ToString(), ddl_center.SelectedValue.ToString(), ddl_grouphead.SelectedValue.ToString(), ddl_Session.SelectedValue.ToString());
+        Load_PS5_Data(ddl_region.SelectedValue.ToString(), ddl_center.SelectedValue.ToString(), ddl_grouphead.SelectedValue.ToString(), ddl_Session.SelectedValue.ToString());
+        Load_PS6_Data(ddl_region.SelectedValue.ToString(), ddl_center.SelectedValue.ToString(), ddl_grouphead.SelectedValue.ToString(), ddl_Session.SelectedValue.ToString());
         Load_Consolodation_Data(ddl_region.SelectedValue.ToString(), ddl_center.SelectedValue.ToString(), ddl_Session.SelectedValue.ToString());
-        calculate_PS5_Data(ddl_center.SelectedValue.ToString(), ddl_grouphead.SelectedItem.Text.ToString(), Session["Session_Id"].ToString());
+        calculate_PS5_Data(ddl_center.SelectedValue.ToString(), ddl_grouphead.SelectedItem.Text.ToString(), ddl_Session.SelectedValue.ToString());
         ConsolidationBody();
         ConsolidationBodyHistory();
         Compare_Dropdown_Values();
@@ -937,7 +942,7 @@ public partial class PresentationLayer_SefEvaluation : System.Web.UI.Page
             DataTable dtformulaNb = new DataTable();
             DataTable dtPS5_2_3 = new DataTable();
             BLLSiqa obj = new BLLSiqa();
-            dt = obj.SEF_PS1_CHILD_GET_DATA(ddl_region.SelectedValue, ddl_center.SelectedValue, ddl_grouphead.SelectedValue, subject.Text.ToString().Trim());
+            dt = obj.SEF_PS1_CHILD_GET_DATA(ddl_region.SelectedValue, ddl_center.SelectedValue, ddl_grouphead.SelectedValue, subject.Text.ToString().Trim(), ddl_Session.SelectedValue.ToString());
             //DropDownList Attainment_grade2 = e.Row.FindControl("ddl_1_1_2_grade") as DropDownList;
             DropDownList ddl_1_1_1_grade = e.Row.FindControl("ddl_1_1_1_grade") as DropDownList;
             DropDownList Attainment_grade2 = e.Row.FindControl("ddl_1_1_2_grade") as DropDownList;
@@ -1690,20 +1695,8 @@ public partial class PresentationLayer_SefEvaluation : System.Web.UI.Page
                                 Progress_grade113.SelectedValue = "Acc";
                                 Progress_grade113.Enabled = false;
                             }
-
-
-
                         }
-
-
-
-
                     }
-
-
-
-
-
                 }
             }
 
@@ -1956,6 +1949,9 @@ public partial class PresentationLayer_SefEvaluation : System.Web.UI.Page
             ddl_4_2_1_grade.Enabled = false;
             ddl_5_2_3_grade.Enabled = false;
         }
+
+        //FillSLTEmployeesDynamic();
+        BindSLTAssignmentGrid();
     }
     protected void Button1_Click(object sender, EventArgs e)
     {
@@ -2098,7 +2094,7 @@ public partial class PresentationLayer_SefEvaluation : System.Web.UI.Page
 
         //if(id)
         PS1_Child_Fields_Insert(id);
-        Load_PS1_Data(obj.Region_Id.ToString(), obj.Center_Id.ToString(), obj.Group_ID.ToString());
+        Load_PS1_Data(obj.Region_Id.ToString(), obj.Center_Id.ToString(), obj.Group_ID.ToString(), ddl_Session.SelectedValue.ToString());
 
 
         obj = null;
@@ -2178,7 +2174,7 @@ public partial class PresentationLayer_SefEvaluation : System.Web.UI.Page
         dt = obj.SEF_PS2_Insert(obj);
         if (dt.Rows.Count >= 1)
         {
-            Load_PS2_Data(obj.Region_Id.ToString(), obj.Center_Id.ToString(), obj.Group_ID.ToString());
+            Load_PS2_Data(obj.Region_Id.ToString(), obj.Center_Id.ToString(), obj.Group_ID.ToString(), ddl_Session.SelectedValue.ToString());
             ImpromptuHelper.ShowPrompt("Record Inserted Successfuly");
         }
         obj = null;
@@ -2211,7 +2207,7 @@ public partial class PresentationLayer_SefEvaluation : System.Web.UI.Page
 
         if (dt.Rows.Count >= 1)
         {
-            Load_PS3_Data(obj.Region_Id.ToString(), obj.Center_Id.ToString(), obj.Group_ID.ToString());
+            Load_PS3_Data(obj.Region_Id.ToString(), obj.Center_Id.ToString(), obj.Group_ID.ToString(), ddl_Session.SelectedValue.ToString());
             ImpromptuHelper.ShowPrompt("Record Inserted Successfuly");
         }
         obj = null;
@@ -2247,7 +2243,7 @@ public partial class PresentationLayer_SefEvaluation : System.Web.UI.Page
         dt = obj.SEF_PS4_Insert(obj);
         if (dt.Rows.Count >= 1)
         {
-            Load_PS4_Data(obj.Region_Id.ToString(), obj.Center_Id.ToString(), obj.Group_ID.ToString());
+            Load_PS4_Data(obj.Region_Id.ToString(), obj.Center_Id.ToString(), obj.Group_ID.ToString(), ddl_Session.SelectedValue.ToString());
             ImpromptuHelper.ShowPrompt("Record Inserted Successfuly");
         }
         obj = null;
@@ -2281,7 +2277,7 @@ public partial class PresentationLayer_SefEvaluation : System.Web.UI.Page
         //int result = obj.SEF_PS5_Insert(obj);
         if (dt.Rows.Count >= 1)
         {
-            Load_PS5_Data(obj.Region_Id.ToString(), obj.Center_Id.ToString(), obj.Group_ID.ToString());
+            Load_PS5_Data(obj.Region_Id.ToString(), obj.Center_Id.ToString(), obj.Group_ID.ToString(), ddl_Session.SelectedValue.ToString());
             ImpromptuHelper.ShowPrompt("Record Inserted Successfuly");
         }
         obj = null;
@@ -2334,7 +2330,7 @@ public partial class PresentationLayer_SefEvaluation : System.Web.UI.Page
             // ddl_center.SelectedValue = dt.Rows[0]["Center_Id"].ToString();
             // ddl_6_1_1_grade.SelectedValue = dt.Rows[0]["Eff_of_Leadership_grade1"].ToString();
             // txt_6_1_evidence_source.Text = dt.Rows[0]["Eff_of_Leadership_Evidence_Source_txt"].ToString();
-            Load_PS6_Data(obj.Region_Id.ToString(), obj.Center_Id.ToString(), obj.Group_ID.ToString());
+            Load_PS6_Data(obj.Region_Id.ToString(), obj.Center_Id.ToString(), obj.Group_ID.ToString(), ddl_Session.SelectedValue.ToString());
             //Clear_Data();
             ImpromptuHelper.ShowPrompt("Record Inserted Successfuly");
         }
@@ -2467,12 +2463,12 @@ public partial class PresentationLayer_SefEvaluation : System.Web.UI.Page
     }
 
     //***************************************Data Fetching Area************************************************
-    protected void Load_PS1_Data(string Region_Id, string Center_Id, string Group_ID)
+    protected void Load_PS1_Data(string Region_Id, string Center_Id, string Group_ID, string Session_ID)
     {
         DataTable dt = new DataTable();
         DataTable dtformula = new DataTable();
         BLLSiqa obj = new BLLSiqa();
-        dt = obj.SEF_PS1_GET_DATA(Region_Id, Center_Id, Group_ID);
+        dt = obj.SEF_PS1_GET_DATA(Region_Id, Center_Id, Group_ID, Session_ID);
         if (dt.Rows.Count > 0)
         {
             ddl_region.SelectedValue = dt.Rows[0]["Region_Id"].ToString();
@@ -2486,7 +2482,7 @@ public partial class PresentationLayer_SefEvaluation : System.Web.UI.Page
             PS1_fields_Clear();
         }
 
-        dtformula = obj.SEF_PS1_GET_FORMULA_DROPDOWN(Region_Id, Center_Id, ddl_grouphead.SelectedItem.Text.ToString().Trim());
+        dtformula = obj.SEF_PS1_GET_FORMULA_DROPDOWN(Region_Id, Center_Id, ddl_grouphead.SelectedItem.Text.ToString().Trim(), ddl_Session.SelectedValue.ToString());
         if (dtformula.Rows.Count > 0)
         {
             if (dtformula.Rows[0]["Student_Learning_Skills_Grade_final"].ToString() != "NA")
@@ -2510,12 +2506,12 @@ public partial class PresentationLayer_SefEvaluation : System.Web.UI.Page
         obj = null;
         dtformula = null;
     }
-    protected void Load_PS2_Data(string Region_Id, string Center_Id, string Group_ID)
+    protected void Load_PS2_Data(string Region_Id, string Center_Id, string Group_ID, string Session_ID)
     {
         DataTable dt = new DataTable();
         BLLSiqa obj = new BLLSiqa();
         DataTable dtformula = new DataTable();
-        dt = obj.SEF_PS2_GET_DATA(Region_Id, Center_Id, Group_ID);
+        dt = obj.SEF_PS2_GET_DATA(Region_Id, Center_Id, Group_ID, Session_ID);
         if (dt.Rows.Count > 0)
         {
 
@@ -2553,7 +2549,7 @@ public partial class PresentationLayer_SefEvaluation : System.Web.UI.Page
         {
             PS2_Fields_Clear();
         }
-        dtformula = obj.SEF_PS1_GET_FORMULA_DROPDOWN(Region_Id, Center_Id, ddl_grouphead.SelectedItem.Text.ToString().Trim());
+        dtformula = obj.SEF_PS1_GET_FORMULA_DROPDOWN(Region_Id, Center_Id, ddl_grouphead.SelectedItem.Text.ToString().Trim(), ddl_Session.SelectedValue.ToString());
         if (dtformula.Rows.Count > 0)
         {
             if (dtformula.Rows[0]["Attitudes_Relationships_Grade_Final"].ToString() != "NA")
@@ -2612,13 +2608,13 @@ public partial class PresentationLayer_SefEvaluation : System.Web.UI.Page
         dtformula = null;
         obj = null;
     }
-    protected void Load_PS3_Data(string Region_Id, string Center_Id, string Group_ID)
+    protected void Load_PS3_Data(string Region_Id, string Center_Id, string Group_ID, string Session_ID)
     {
         DataTable dt = new DataTable();
         BLLSiqa obj = new BLLSiqa();
         DataTable dtformula = new DataTable();
         DataTable dtformulaNB = new DataTable();
-        dt = obj.SEF_PS3_GET_DATA(Region_Id, Center_Id, Group_ID);
+        dt = obj.SEF_PS3_GET_DATA(Region_Id, Center_Id, Group_ID, Session_ID);
         if (dt.Rows.Count > 0)
         {
 
@@ -2643,7 +2639,7 @@ public partial class PresentationLayer_SefEvaluation : System.Web.UI.Page
         {
             PS3_Fields_Clear();
         }
-        dtformula = obj.SEF_PS1_GET_FORMULA_DROPDOWN(Region_Id, Center_Id, ddl_grouphead.SelectedItem.Text.ToString().Trim());
+        dtformula = obj.SEF_PS1_GET_FORMULA_DROPDOWN(Region_Id, Center_Id, ddl_grouphead.SelectedItem.Text.ToString().Trim(), ddl_Session.SelectedValue.ToString());
         if (dtformula.Rows.Count > 0)
         {
             if (dtformula.Rows[0]["Lesson_Planning_Grade_Final"].ToString() != "NA")
@@ -2694,12 +2690,12 @@ public partial class PresentationLayer_SefEvaluation : System.Web.UI.Page
         dt = null;
         obj = null;
     }
-    protected void Load_PS4_Data(string Region_Id, string Center_Id, string Group_ID)
+    protected void Load_PS4_Data(string Region_Id, string Center_Id, string Group_ID, string Session_ID)
     {
         DataTable dt = new DataTable();
         BLLSiqa obj = new BLLSiqa();
         DataTable dtformula = new DataTable();
-        dt = obj.SEF_PS4_GET_DATA(Region_Id, Center_Id, Group_ID);
+        dt = obj.SEF_PS4_GET_DATA(Region_Id, Center_Id, Group_ID, Session_ID);
         if (dt.Rows.Count > 0)
         {
             ddl_region.SelectedValue = dt.Rows[0]["Region_Id"].ToString();
@@ -2729,7 +2725,7 @@ public partial class PresentationLayer_SefEvaluation : System.Web.UI.Page
         {
             PS4_Fields_Clear();
         }
-        dtformula = obj.SEF_PS1_GET_FORMULA_DROPDOWN(Region_Id, Center_Id, ddl_grouphead.SelectedItem.Text.ToString().Trim());
+        dtformula = obj.SEF_PS1_GET_FORMULA_DROPDOWN(Region_Id, Center_Id, ddl_grouphead.SelectedItem.Text.ToString().Trim(), ddl_Session.SelectedValue.ToString());
         if (dtformula.Rows.Count > 0)
         {
             if (dtformula.Rows[0]["Need_Ability_Group_Grade_Final"].ToString() != "NA")
@@ -2756,11 +2752,11 @@ public partial class PresentationLayer_SefEvaluation : System.Web.UI.Page
         dt = null;
         dtformula = null;
     }
-    protected void Load_PS5_Data(string Region_Id, string Center_Id, string Group_ID)
+    protected void Load_PS5_Data(string Region_Id, string Center_Id, string Group_ID, string Session_ID)
     {
         DataTable dt = new DataTable();
         BLLSiqa obj = new BLLSiqa();
-        dt = obj.SEF_PS5_GET_DATA(Region_Id, Center_Id, Group_ID);
+        dt = obj.SEF_PS5_GET_DATA(Region_Id, Center_Id, Group_ID, Session_ID);
         if (dt.Rows.Count > 0)
         {
             ddl_region.SelectedValue = dt.Rows[0]["Region_Id"].ToString();
@@ -2788,11 +2784,11 @@ public partial class PresentationLayer_SefEvaluation : System.Web.UI.Page
         }
         dt = null;
     }
-    protected void Load_PS6_Data(string Region_Id, string Center_Id, string Group_ID)
+    protected void Load_PS6_Data(string Region_Id, string Center_Id, string Group_ID, string Session_ID)
     {
         DataTable dt = new DataTable();
         BLLSiqa obj = new BLLSiqa();
-        dt = obj.SEF_PS6_GET_DATA(Region_Id, Center_Id, Group_ID);
+        dt = obj.SEF_PS6_GET_DATA(Region_Id, Center_Id, Group_ID, Session_ID);
         if (dt.Rows.Count > 0)
         {
             obj.Region_Id = Convert.ToInt32(ddl_region.SelectedValue.ToString());
@@ -4345,4 +4341,415 @@ public partial class PresentationLayer_SefEvaluation : System.Web.UI.Page
         return html.ToString();
     }
     //-----SR Work END
+
+    protected void BindSLTAssignmentGrid()
+    {
+        try
+        {
+            string category = "SLT";
+            int region = Convert.ToInt32(ddl_region.SelectedValue);
+            int center = Convert.ToInt32(ddl_center.SelectedValue);
+            int session = Convert.ToInt32(ddl_Session.SelectedValue);
+
+            DataTable dtemp = _kpiBll.GetEmployees(category, region, center);
+            //DataTable dtStages = _kpiBll.GetKeyStagesForCenter(region, center, session);
+            DataTable dtExistingAssignments = _kpiBll.GetSLTAssignments(session, region, center);
+
+            if (dtemp != null && dtemp.Rows.Count > 0)
+            {
+                //if (!dtemp.Columns.Contains("KeyStages")) dtemp.Columns.Add("KeyStages", typeof(string));
+                if (!dtemp.Columns.Contains("SIQA_Grade")) dtemp.Columns.Add("SIQA_Grade", typeof(string));
+                if (!dtemp.Columns.Contains("KPI_Grade_Points")) dtemp.Columns.Add("KPI_Grade_Points", typeof(string));
+                if (!dtemp.Columns.Contains("KPI_Points")) dtemp.Columns.Add("KPI_Points", typeof(string));
+                if (!dtemp.Columns.Contains("KPI_Grade")) dtemp.Columns.Add("KPI_Grade", typeof(string));
+                if (!dtemp.Columns.Contains("KPI_Year")) dtemp.Columns.Add("KPI_Year", typeof(int));
+                if (!dtemp.Columns.Contains("HasExistingAssignment")) dtemp.Columns.Add("HasExistingAssignment", typeof(bool));
+
+                foreach (DataRow row in dtemp.Rows)
+                {
+                    string employeeCode = row["EmployeeCode"].ToString();
+                    DataRow[] existingAssignments = dtExistingAssignments != null
+                        ? dtExistingAssignments.Select("Employee_Id = '" + employeeCode + "'")
+                        : new DataRow[0];
+
+                    if (existingAssignments.Length > 0)
+                    {
+                        DataRow assignment = existingAssignments[0];
+                        //row["KeyStages"] = assignment["Assigned_Key_Stage"];
+                        row["SIQA_Grade"] = assignment["SIQA_Grade"];
+                        row["KPI_Grade_Points"] = assignment["KPI_Grade_Points"];
+                        row["KPI_Points"] = assignment["KPI_Points"];
+                        row["KPI_Grade"] = assignment["KPI_Grade"];
+                        row["KPI_Year"] = assignment["KPI_Year"];
+                        row["HasExistingAssignment"] = true;
+                    }
+                    else
+                    {
+                        //row["KeyStages"] = "";
+                        row["SIQA_Grade"] = "";
+                        row["KPI_Grade_Points"] = "";
+                        row["KPI_Points"] = "";
+                        row["KPI_Grade"] = "";
+                        row["KPI_Year"] = DBNull.Value;
+                        row["HasExistingAssignment"] = false;
+                    }
+                }
+
+                gvSLTAssignment.DataSource = dtemp;
+                gvSLTAssignment.DataBind();
+
+                //ViewState["KeyStagesData"] = dtStages;
+                ViewState["RegionId"] = region;
+                ViewState["CenterId"] = center;
+                ViewState["SessionId"] = session;
+            }
+            else
+            {
+                DataTable emptyTable = new DataTable();
+                emptyTable.Columns.Add("EmployeeCode");
+                emptyTable.Columns.Add("FullName");
+                //emptyTable.Columns.Add("KeyStages");
+                emptyTable.Columns.Add("SIQA_Grade");
+                emptyTable.Columns.Add("KPI_Grade_Points");
+                emptyTable.Columns.Add("KPI_Points");
+                emptyTable.Columns.Add("KPI_Grade");
+                emptyTable.Columns.Add("KPI_Year", typeof(int));
+                emptyTable.Columns.Add("HasExistingAssignment", typeof(bool));
+                DataRow newRow = emptyTable.NewRow();
+                newRow["EmployeeCode"] = string.Empty;
+                newRow["FullName"] = string.Empty;
+                //newRow["KeyStages"] = string.Empty;
+                newRow["SIQA_Grade"] = string.Empty;
+                newRow["KPI_Grade_Points"] = string.Empty; 
+                newRow["KPI_Grade"] = string.Empty;
+                newRow["KPI_Points"] = string.Empty; 
+                newRow["KPI_Year"] = DBNull.Value;
+                newRow["HasExistingAssignment"] = false;
+                emptyTable.Rows.Add(newRow);
+                gvSLTAssignment.DataSource = emptyTable;
+                gvSLTAssignment.DataBind();
+            }
+        }
+        catch
+        {
+            DataTable emptyTable = new DataTable();
+            emptyTable.Columns.Add("EmployeeCode");
+            emptyTable.Columns.Add("FullName");
+            //emptyTable.Columns.Add("KeyStages");
+            emptyTable.Columns.Add("SIQA_Grade");
+            emptyTable.Columns.Add("KPI_Grade_Points");
+            emptyTable.Columns.Add("KPI_Points");
+            emptyTable.Columns.Add("KPI_Grade");
+            emptyTable.Columns.Add("KPI_Year", typeof(int));
+            emptyTable.Columns.Add("HasExistingAssignment", typeof(bool));
+            DataRow newRow = emptyTable.NewRow();
+            newRow["EmployeeCode"] = string.Empty;
+            newRow["FullName"] = string.Empty;
+            //newRow["KeyStages"] = string.Empty;
+            newRow["SIQA_Grade"] = string.Empty;
+            newRow["KPI_Grade_Points"] = string.Empty;
+            newRow["KPI_Grade"] = string.Empty;
+            newRow["KPI_Points"] = string.Empty;
+            newRow["KPI_Year"] = DBNull.Value;
+            newRow["HasExistingAssignment"] = false;
+            emptyTable.Rows.Add(newRow);
+            gvSLTAssignment.DataSource = emptyTable;
+            gvSLTAssignment.DataBind();
+        }
+    }
+     
+    protected void gvSLTAssignment_RowDataBound(object sender, GridViewRowEventArgs e)
+    {
+        if (e.Row.RowType == DataControlRowType.DataRow)
+        {
+            DataRowView drv = (DataRowView)e.Row.DataItem;
+
+            TextBox txtSIQAGrades = (TextBox)e.Row.FindControl("txtSIQAGrades");
+            TextBox txtKPIGradePoints = (TextBox)e.Row.FindControl("txtKPIGradePoints");
+            TextBox txtKPIGrades = (TextBox)e.Row.FindControl("txtKPIGrades");
+            TextBox txtKPIGrade = (TextBox)e.Row.FindControl("txtKPIGrade");
+
+            if (txtSIQAGrades != null && drv.Row.Table.Columns.Contains("SIQA_Grade"))
+            {
+                if (drv["SIQA_Grade"] != DBNull.Value)
+                    txtSIQAGrades.Text = drv["SIQA_Grade"].ToString();
+                else
+                    txtSIQAGrades.Text = string.Empty;
+            }
+
+            if (txtKPIGradePoints != null && drv.Row.Table.Columns.Contains("KPI_Grade_Points"))
+            {
+                if (drv["KPI_Grade_Points"] != DBNull.Value)
+                    txtKPIGradePoints.Text = drv["KPI_Grade_Points"].ToString();
+                else
+                    txtKPIGradePoints.Text = string.Empty;
+            }
+
+            // Correct column for KPI Grades
+            if (txtKPIGrades != null && drv.Row.Table.Columns.Contains("KPI_Grade"))
+            {
+                if (drv["KPI_Grade"] != DBNull.Value)
+                    txtKPIGrades.Text = drv["KPI_Grade"].ToString();
+                else
+                    txtKPIGrades.Text = string.Empty;
+                
+            }
+
+            // Correct column for Average
+            if (txtKPIGrade != null && drv.Row.Table.Columns.Contains("KPI_Points"))
+            {
+                if (drv["KPI_Points"] != DBNull.Value)
+                    txtKPIGrade.Text = drv["KPI_Points"].ToString();
+                else
+                    txtKPIGrade.Text = string.Empty;
+            }
+        }
+    }
+      
+    protected void gvSLTAssignment_RowCommand(object sender, GridViewCommandEventArgs e)
+    {
+        if (e.CommandArgument == null) return;
+        int rowIndex;
+        if (!int.TryParse(e.CommandArgument.ToString(), out rowIndex)) return;
+        if (rowIndex < 0 || rowIndex >= gvSLTAssignment.Rows.Count) return;
+        GridViewRow row = gvSLTAssignment.Rows[rowIndex];
+        if (row == null) return;
+
+        int regionId = SafeToInt(ddl_region.SelectedValue);
+        int centerId = SafeToInt(ddl_center.SelectedValue);
+        int sessionId = SafeToInt(ddl_Session.SelectedValue);
+
+        Dictionary<string, object> model = BuildSltModelFromRow(row, sessionId, regionId, centerId);
+        if (model == null) return;
+
+        if (string.Equals(e.CommandName, "SaveRow", StringComparison.OrdinalIgnoreCase) ||
+            string.Equals(e.CommandName, "EditRow", StringComparison.OrdinalIgnoreCase))
+        {
+            _kpiBll.UpsertSLTAssignment(model);
+            ShowAlert("Saved successfully.", "success");
+        }
+        else if (string.Equals(e.CommandName, "DeleteRow", StringComparison.OrdinalIgnoreCase))
+        {
+            Dictionary<string, object> key = new Dictionary<string, object>();
+            key["Session_Id"] = model["Session_Id"];
+            key["Region_Id"] = model["Region_Id"];
+            key["Center_Id"] = model["Center_Id"];
+            key["Employee_Id"] = model["Employee_Id"];
+            _kpiBll.DeleteSLTAssignment(key);
+            ShowAlert("Deleted successfully.", "success");
+        }
+
+        BindSLTAssignmentGrid();
+    }
+
+    //protected void gvSLTAssignment_RowDataBound(object sender, GridViewRowEventArgs e)
+    //{
+    //    if (e.Row.RowType == DataControlRowType.DataRow)
+    //    {
+    //        try
+    //        {
+    //            var checkboxOptions = e.Row.FindControl("checkboxOptions") as HtmlGenericControl;
+    //            var hdnSelectedKeyStages = e.Row.FindControl("hdnSelectedKeyStages") as HiddenField;
+    //            var txtSIQAGrades = e.Row.FindControl("txtSIQAGrades") as TextBox;
+    //            var txtKPIGradePoints = e.Row.FindControl("txtKPIGradePoints") as TextBox;
+    //            var txtKPIGrades = e.Row.FindControl("txtKPIGrades") as TextBox;
+    //            var txtKPIGrade = e.Row.FindControl("txtKPIGrade") as TextBox;
+    //            var hdnKPIGrade = e.Row.FindControl("hdnKPIGrade") as HiddenField;
+    //            var hdnKPIAvg = e.Row.FindControl("hdnKPIAvg") as HiddenField;
+    //            var ddlKPIYear = e.Row.FindControl("ddlKPIYear") as DropDownList;
+
+    //            if (checkboxOptions == null || hdnSelectedKeyStages == null) return;
+
+    //            int regionId = Convert.ToInt32(ddl_region.SelectedValue);
+    //            int centerId = Convert.ToInt32(ddl_center.SelectedValue);
+    //            int sessionId = Convert.ToInt32(ddl_Session.SelectedValue);
+
+    //            DataTable keyStagesData = _kpiBll.GetKeyStagesForCenter(regionId, centerId, sessionId);
+    //            if (keyStagesData == null || keyStagesData.Rows.Count == 0)
+    //            {
+    //                checkboxOptions.InnerHtml = "<div>No key stages available</div>";
+    //                return;
+    //            }
+
+    //            string selectedKeyStages = hdnSelectedKeyStages.Value ?? "";
+    //            var selectedList = !string.IsNullOrEmpty(selectedKeyStages) ? selectedKeyStages.Split(',').ToList() : new System.Collections.Generic.List<string>();
+
+    //            var keyStageGrades = new System.Collections.Generic.Dictionary<string, string>();
+    //            var keyStageGradePoints = new System.Collections.Generic.Dictionary<string, string>();
+    //            var keyStageKPIGrades = new System.Collections.Generic.Dictionary<string, string>();
+    //            var sb = new System.Text.StringBuilder();
+
+    //            foreach (DataRow r in keyStagesData.Rows)
+    //            {
+    //                string ks = r["KeyStage"] != null ? r["KeyStage"].ToString() : "";
+    //                if (string.IsNullOrEmpty(ks)) continue;
+    //                string siqa = r["Grade"] != null ? r["Grade"].ToString() : "";
+    //                string pts = (r["GradePoints"] != DBNull.Value && r["GradePoints"] != null) ? r["GradePoints"].ToString() : "0";
+    //                string kpi = r.Table.Columns.Contains("KPIGrade_string") && r["KPIGrade_string"] != null ? r["KPIGrade_string"].ToString() : "";
+
+    //                keyStageGrades[ks] = siqa;
+    //                keyStageGradePoints[ks] = pts;
+    //                keyStageKPIGrades[ks] = kpi;
+
+    //                bool isSel = selectedList.Contains(ks);
+    //                sb.AppendFormat("<div class='checkbox-item'><input type='checkbox' value='{0}' {1} onchange='updateSelectedKeyStages(this)' /><label>{0}</label></div>", ks, isSel ? "checked='checked'" : "");
+    //            }
+    //            checkboxOptions.InnerHtml = sb.ToString();
+
+    //            var hdnKeyStageGrades = e.Row.FindControl("hdnKeyStageGrades") as HiddenField;
+    //            var hdnKeyStageGradePoints = e.Row.FindControl("hdnKeyStageGradePoints") as HiddenField;
+    //            var hdnKeyStageKPIGrades = e.Row.FindControl("hdnKeyStageKPIGrades") as HiddenField;
+
+    //            if (hdnKeyStageGrades != null) hdnKeyStageGrades.Value = Newtonsoft.Json.JsonConvert.SerializeObject(keyStageGrades);
+    //            if (hdnKeyStageGradePoints != null) hdnKeyStageGradePoints.Value = Newtonsoft.Json.JsonConvert.SerializeObject(keyStageGradePoints);
+    //            if (hdnKeyStageKPIGrades != null) hdnKeyStageKPIGrades.Value = Newtonsoft.Json.JsonConvert.SerializeObject(keyStageKPIGrades);
+
+    //            if (!string.IsNullOrEmpty(selectedKeyStages))
+    //            {
+    //                var sel = selectedKeyStages.Split(',');
+    //                var siqaList = new System.Collections.Generic.List<string>();
+    //                var ptsList = new System.Collections.Generic.List<string>();
+    //                var kpiNames = new System.Collections.Generic.List<string>();
+    //                double total = 0; int cnt = 0;
+
+    //                foreach (var ks in sel)
+    //                {
+    //                    if (keyStageGrades.ContainsKey(ks)) siqaList.Add(keyStageGrades[ks]);
+    //                    if (keyStageGradePoints.ContainsKey(ks))
+    //                    {
+    //                        ptsList.Add(keyStageGradePoints[ks]);
+    //                        double p; if (double.TryParse(keyStageGradePoints[ks], out p)) { total += p; cnt++; }
+    //                    }
+    //                    if (keyStageKPIGrades.ContainsKey(ks)) kpiNames.Add(keyStageKPIGrades[ks]);
+    //                }
+
+    //                if (txtSIQAGrades != null) txtSIQAGrades.Text = string.Join(", ", siqaList);
+    //                if (txtKPIGradePoints != null) txtKPIGradePoints.Text = string.Join(", ", ptsList);
+    //                if (txtKPIGrades != null) txtKPIGrades.Text = string.Join(", ", kpiNames);
+
+    //                string avg = (cnt > 0 ? (total / cnt).ToString("F2") : "0");
+    //                if (txtKPIGrade != null) txtKPIGrade.Text = avg;
+    //                if (hdnKPIGrade != null) hdnKPIGrade.Value = avg;
+    //                if (hdnKPIAvg != null) hdnKPIAvg.Value = avg;
+    //            }
+    //            else
+    //            {
+    //                if (txtSIQAGrades != null) txtSIQAGrades.Text = string.Empty;
+    //                if (txtKPIGradePoints != null) txtKPIGradePoints.Text = "0";
+    //                if (txtKPIGrades != null) txtKPIGrades.Text = string.Empty;
+    //                if (txtKPIGrade != null) txtKPIGrade.Text = "0";
+    //                if (hdnKPIGrade != null) hdnKPIGrade.Value = "0";
+    //                if (hdnKPIAvg != null) hdnKPIAvg.Value = "0";
+    //            }
+
+    //            var data = (DataRowView)e.Row.DataItem;
+    //            if (ddlKPIYear != null && data != null && data.Row.Table.Columns.Contains("KPI_Year"))
+    //            {
+    //                var yrObj = data["KPI_Year"];
+    //                if (yrObj != DBNull.Value && yrObj != null)
+    //                {
+    //                    string yr = Convert.ToString(yrObj);
+    //                    if (ddlKPIYear.Items.FindByValue(yr) != null) ddlKPIYear.SelectedValue = yr;
+    //                }
+    //            }
+
+    //            bool hasExistingAssignment = false;
+    //            if (data != null && data.Row.Table.Columns.Contains("HasExistingAssignment"))
+    //            {
+    //                var v = data["HasExistingAssignment"];
+    //                if (v != DBNull.Value && v != null) hasExistingAssignment = Convert.ToBoolean(v);
+    //            }
+    //            foreach (Control cell in e.Row.Controls)
+    //            {
+    //                var dc = cell as DataControlFieldCell;
+    //                if (dc == null) continue;
+    //                foreach (Control c in dc.Controls)
+    //                {
+    //                    var lb = c as LinkButton;
+    //                    if (lb == null) continue;
+    //                    if (lb.CommandName == "SaveRow") lb.Visible = !hasExistingAssignment;
+    //                    else if (lb.CommandName == "EditRow" || lb.CommandName == "DeleteRow") lb.Visible = hasExistingAssignment;
+    //                }
+    //            }
+    //        }
+    //        catch { }
+    //    }
+    //}
+
+    private Dictionary<string, object> BuildSltModelFromRow(GridViewRow row, int sessionId, int regionId, int centerId)
+    {
+        if (row == null) return null;
+
+        Label lblEmployeeID = row.FindControl("lblEmployeeID") as Label;
+        Label lblSchoolLeader = row.FindControl("lblSchoolLeader") as Label;
+        HiddenField hdnSelectedKeyStages = row.FindControl("hdnSelectedKeyStages") as HiddenField;
+        DropDownList ddlKPIYear = row.FindControl("ddlKPIYear") as DropDownList;
+        TextBox txtSIQAGrades = row.FindControl("txtSIQAGrades") as TextBox;
+        TextBox txtKPIGradePoints = row.FindControl("txtKPIGradePoints") as TextBox;
+        TextBox txtKPIGrades = row.FindControl("txtKPIGrades") as TextBox;
+        TextBox txtKPIGrade = row.FindControl("txtKPIGrade") as TextBox;
+        HiddenField hdnKPIGrade = row.FindControl("hdnKPIGrade") as HiddenField;
+        HiddenField hdnKPIAvg = row.FindControl("hdnKPIAvg") as HiddenField;
+
+        string employeeCode = (lblEmployeeID != null && lblEmployeeID.Text != null) ? lblEmployeeID.Text.Trim() : "";
+        string schoolLeader = (lblSchoolLeader != null && lblSchoolLeader.Text != null) ? lblSchoolLeader.Text.Trim() : "";
+
+        string ksCsv = (hdnSelectedKeyStages != null && hdnSelectedKeyStages.Value != null) ? hdnSelectedKeyStages.Value.Trim() : "";
+        string gradesCsv = (txtSIQAGrades != null && txtSIQAGrades.Text != null) ? txtSIQAGrades.Text.Trim() : "";
+        string pointsCsv = (txtKPIGradePoints != null && txtKPIGradePoints.Text != null) ? txtKPIGradePoints.Text.Trim() : "";
+        string avgStrForGrade = (txtKPIGrades != null && txtKPIGrades.Text != null) ? txtKPIGrades.Text.Trim() : "";
+        string avgStrForPoints = (txtKPIGrade != null && txtKPIGrade.Text != null) ? txtKPIGrade.Text.Trim() : "0";
+
+        if (string.IsNullOrWhiteSpace(employeeCode)) { ShowAlert("Employee code is required.", "error"); return null; }
+
+        int kpiYear = 0;
+        if (ddlKPIYear != null && ddlKPIYear.SelectedValue != null) int.TryParse(ddlKPIYear.SelectedValue, out kpiYear);
+        if (kpiYear == 0) { ShowAlert("KPI Year is required.", "error"); return null; }
+
+        //if (string.IsNullOrWhiteSpace(ksCsv)) { ShowAlert("Please select at least one Key Stage.", "error"); return null; }
+
+        decimal avgVal;
+        if (!decimal.TryParse(avgStrForPoints, System.Globalization.NumberStyles.Any, System.Globalization.CultureInfo.InvariantCulture, out avgVal))
+            avgVal = 0m;
+        int User_ID = Convert.ToInt32(Session["ContactID"].ToString());
+        Dictionary<string, object> model = new Dictionary<string, object>();
+        model["Session_Id"] = sessionId;
+        model["Region_Id"] = regionId;
+        model["Center_Id"] = centerId;
+        model["Employee_Id"] = employeeCode;
+        model["EmployeeCode"] = employeeCode;
+        model["School_Leader"] = schoolLeader;
+        model["Assigned_Key_Stage"] = ksCsv;
+        model["KPI_Year"] = kpiYear;
+        model["SIQA_Grade"] = gradesCsv;
+        model["KPI_Grade_Points"] = pointsCsv;
+        model["KPI_Points"] = avgStrForPoints;        // numeric average
+        model["KPI_Grade"] = avgStrForGrade; // same average as string
+        model["UserName"] = User_ID;
+       
+        return model;
+    }
+
+    private int SafeToInt(string s)
+    {
+        int v; return int.TryParse(s, out v) ? v : 0;
+    }
+
+    private void ShowAlert(string message, string type = "info")
+    {
+        var safe = (message ?? string.Empty)
+            .Replace("\\", "\\\\")
+            .Replace("'", "\\'")
+            .Replace("\r", string.Empty)
+            .Replace("\n", "<br/>");
+
+        var js = "window.showToast && window.showToast('" + safe + "', '" + type + "');";
+        ScriptManager.RegisterStartupScript(
+            this,
+            this.GetType(),
+            "toast_" + Guid.NewGuid().ToString("N"),
+            js,
+            true
+        );
+    } 
 }
