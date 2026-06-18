@@ -1,4 +1,4 @@
-﻿<%@ Page Language="C#" AutoEventWireup="true" CodeFile="EOY2023.aspx.cs" Inherits="PresentationLayer_TCS_ReportCard_EOY2023" %>
+<%@ Page Language="C#" AutoEventWireup="true" CodeFile="EOY2023.aspx.cs" Inherits="PresentationLayer_TCS_ReportCard_EOY2023" %>
 
 
 <!DOCTYPE html>
@@ -74,7 +74,7 @@
                                 <h4><span class="classname"></span> - <span class="classsec"></span></h4>
                             </div>
                             <div class="col-lg-3 col-md-3 col-sm-3 col-xs-3 text-mediaalignright schoollogoNew">
-                                <img src="newlogonewr.png" />
+                                <img id="schoolLogo" src="newlogonewr.png" />
                             </div>
                         </div>
                         <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 dobtable">
@@ -807,34 +807,49 @@
                                     reportcard += '<td class="text-center">CA</td>';
                                     var Session = result[0].Session_Id;
 
-                                    if (Session != 16) {
+                                    if ((Session > 16 && (Term_Id == 1 || Term_Id == 2)) || (Session == 16 && Term_Id == 2)) {
+                                        reportcard += '<td class="text-center">Exam</td>';
+                                    }
+                                    else if ((Session < 16) || (Session == 16 && Term_Id == 1)) {
                                         reportcard += '<td class="text-center">Exam (Term 1)</td>';
                                         reportcard += '<td class="text-center">Exam (Term 2)</td>';
-                                    }
-                                    else {
-                                        reportcard += '<td class="text-center">Exam</td>';
                                     }
                                     reportcard += '<td class="text-center">Final Result</td>';
                                     reportcard += '<td class="text-center">Grade</td>';
 
 
-                                    if (Session != 16) {
+                                    if ((Session > 16 && (Term_Id == 1 || Term_Id == 2)) || (Session == 16 && Term_Id == 2)) {
+                                       
+                                    }
+                                    else if ((Session < 16) || (Session == 16 && Term_Id == 1)) {
                                         reportcard += '<td class="text-center norightborder">Effort</td>';
                                     }
+
+                                  
                                     reportcard += '</tr>';
                                     reportcard += '<tr>';
 
                                     reportcard += '<td class="text-center">' + course_work + '</td>';
-                                    if (Session != 16) {
+
+                                    if ((Session > 16 && (Term_Id == 1 || Term_Id == 2)) || (Session == 16 && Term_Id == 2)) {
+
+                                    }
+                                    else if ((Session < 16) || (Session == 16 && Term_Id == 1)) {
                                         reportcard += '<td class="text-center">' + MYE + '</td>';
                                     }
+                                   
                                     reportcard += '<td class="text-center">' + EOY + '</td>';
                                     reportcard += '<td class="text-center">' + exammark + '</td>';
 
                                     reportcard += '<td class="text-center">' + grade + '</td>';
-                                    if (Session != 16) {
+
+                                    if ((Session > 16 && (Term_Id == 1 || Term_Id == 2)) || (Session == 16 && Term_Id == 2)) {
+
+                                    }
+                                    else if ((Session < 16) || (Session == 16 && Term_Id == 1)) {
                                         reportcard += '<td class="text-center norightborder">' + effort + '</td>';
                                     }
+                                   
                                     reportcard += '</tr>';
                                     reportcard += '</table>';
                                     reportcard += '<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 commentsec">';/*'+result[i].ClassTeacher_Comments+'*/
@@ -1131,34 +1146,49 @@
                                         reportcard2 += '<td class="text-center">CA</td>';
                                         var Session = result[0].Session_Id;
 
-                                        if (Session != 16) {
+                                        if ((Session > 16 && (Term_Id == 1 || Term_Id == 2)) || (Session == 16 && Term_Id == 2)) {
+                                            reportcard2 += '<td class="text-center">Exam</td>';
+                                        }
+                                        else if ((Session < 16) || (Session == 16 && Term_Id == 1)) {
                                             reportcard2 += '<td class="text-center">Exam (Term 1)</td>';
                                             reportcard2 += '<td class="text-center">Exam (Term 2)</td>';
-                                        }
-                                        else {
-                                            reportcard2 += '<td class="text-center">Exam</td>';
                                         }
                                         reportcard2 += '<td class="text-center">Final Result</td>';
                                         reportcard2 += '<td class="text-center">Grade</td>';
 
 
-                                        if (Session != 16) {
+                                        if ((Session > 16 && (Term_Id == 1 || Term_Id == 2)) || (Session == 16 && Term_Id == 2)) {
+
+                                        }
+                                        else if ((Session < 16) || (Session == 16 && Term_Id == 1)) {
                                             reportcard2 += '<td class="text-center norightborder">Effort</td>';
                                         }
+
+
                                         reportcard2 += '</tr>';
                                         reportcard2 += '<tr>';
 
                                         reportcard2 += '<td class="text-center">' + course_work + '</td>';
-                                        if (Session != 16) {
+
+                                        if ((Session > 16 && (Term_Id == 1 || Term_Id == 2)) || (Session == 16 && Term_Id == 2)) {
+
+                                        }
+                                        else if ((Session < 16) || (Session == 16 && Term_Id == 1)) {
                                             reportcard2 += '<td class="text-center">' + MYE + '</td>';
                                         }
+
                                         reportcard2 += '<td class="text-center">' + EOY + '</td>';
                                         reportcard2 += '<td class="text-center">' + exammark + '</td>';
 
                                         reportcard2 += '<td class="text-center">' + grade + '</td>';
-                                        if (Session != 16) {
+
+                                        if ((Session > 16 && (Term_Id == 1 || Term_Id == 2)) || (Session == 16 && Term_Id == 2)) {
+
+                                        }
+                                        else if ((Session < 16) || (Session == 16 && Term_Id == 1)) {
                                             reportcard2 += '<td class="text-center norightborder">' + effort + '</td>';
                                         }
+                                       
                                         reportcard2 += '</tr>';
                                         reportcard2 += '</table>';
                                         reportcard2 += '<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 commentsec">';
@@ -1434,34 +1464,49 @@
                                         reportcard2 += '<td class="text-center">CA</td>';
                                         var Session = result[0].Session_Id;
 
-                                        if (Session != 16) {
+                                        if ((Session > 16 && (Term_Id == 1 || Term_Id == 2)) || (Session == 16 && Term_Id == 2)) {
+                                            reportcard2 += '<td class="text-center">Exam</td>';
+                                        }
+                                        else if ((Session < 16) || (Session == 16 && Term_Id == 1)) {
                                             reportcard2 += '<td class="text-center">Exam (Term 1)</td>';
                                             reportcard2 += '<td class="text-center">Exam (Term 2)</td>';
-                                        }
-                                        else {
-                                            reportcard2 += '<td class="text-center">Exam</td>';
                                         }
                                         reportcard2 += '<td class="text-center">Final Result</td>';
                                         reportcard2 += '<td class="text-center">Grade</td>';
 
 
-                                        if (Session != 16) {
+                                        if ((Session > 16 && (Term_Id == 1 || Term_Id == 2)) || (Session == 16 && Term_Id == 2)) {
+
+                                        }
+                                        else if ((Session < 16) || (Session == 16 && Term_Id == 1)) {
                                             reportcard2 += '<td class="text-center norightborder">Effort</td>';
                                         }
+
+
                                         reportcard2 += '</tr>';
                                         reportcard2 += '<tr>';
 
                                         reportcard2 += '<td class="text-center">' + course_work + '</td>';
-                                        if (Session != 16) {
+
+                                        if ((Session > 16 && (Term_Id == 1 || Term_Id == 2)) || (Session == 16 && Term_Id == 2)) {
+
+                                        }
+                                        else if ((Session < 16) || (Session == 16 && Term_Id == 1)) {
                                             reportcard2 += '<td class="text-center">' + MYE + '</td>';
                                         }
+
                                         reportcard2 += '<td class="text-center">' + EOY + '</td>';
                                         reportcard2 += '<td class="text-center">' + exammark + '</td>';
 
                                         reportcard2 += '<td class="text-center">' + grade + '</td>';
-                                        if (Session != 16) {
+
+                                        if ((Session > 16 && (Term_Id == 1 || Term_Id == 2)) || (Session == 16 && Term_Id == 2)) {
+
+                                        }
+                                        else if ((Session < 16) || (Session == 16 && Term_Id == 1)) {
                                             reportcard2 += '<td class="text-center norightborder">' + effort + '</td>';
                                         }
+                                       
                                         reportcard2 += '</tr>';
                                         reportcard2 += '</table>';
                                         reportcard2 += '<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 commentsec">';
@@ -1732,32 +1777,46 @@
                                         reportcard2 += '<td class="text-center">CA</td>';
                                         var Session = result[0].Session_Id;
 
-                                        if (Session != 16) {
+                                        if ((Session > 16 && (Term_Id == 1 || Term_Id == 2)) || (Session == 16 && Term_Id == 2)) {
+                                            reportcard2 += '<td class="text-center">Exam</td>';
+                                        }
+                                        else if ((Session < 16) || (Session == 16 && Term_Id == 1)) {
                                             reportcard2 += '<td class="text-center">Exam (Term 1)</td>';
                                             reportcard2 += '<td class="text-center">Exam (Term 2)</td>';
-                                        }
-                                        else {
-                                            reportcard2 += '<td class="text-center">Exam</td>';
                                         }
                                         reportcard2 += '<td class="text-center">Final Result</td>';
                                         reportcard2 += '<td class="text-center">Grade</td>';
 
 
-                                        if (Session != 16) {
+                                        if ((Session > 16 && (Term_Id == 1 || Term_Id == 2)) || (Session == 16 && Term_Id == 2)) {
+
+                                        }
+                                        else if ((Session < 16) || (Session == 16 && Term_Id == 1)) {
                                             reportcard2 += '<td class="text-center norightborder">Effort</td>';
                                         }
+
+
                                         reportcard2 += '</tr>';
                                         reportcard2 += '<tr>';
 
                                         reportcard2 += '<td class="text-center">' + course_work + '</td>';
-                                        if (Session != 16) {
+
+                                        if ((Session > 16 && (Term_Id == 1 || Term_Id == 2)) || (Session == 16 && Term_Id == 2)) {
+
+                                        }
+                                        else if ((Session < 16) || (Session == 16 && Term_Id == 1)) {
                                             reportcard2 += '<td class="text-center">' + MYE + '</td>';
                                         }
+
                                         reportcard2 += '<td class="text-center">' + EOY + '</td>';
                                         reportcard2 += '<td class="text-center">' + exammark + '</td>';
 
                                         reportcard2 += '<td class="text-center">' + grade + '</td>';
-                                        if (Session != 16) {
+
+                                        if ((Session > 16 && (Term_Id == 1 || Term_Id == 2)) || (Session == 16 && Term_Id == 2)) {
+
+                                        }
+                                        else if ((Session < 16) || (Session == 16 && Term_Id == 1)) {
                                             reportcard2 += '<td class="text-center norightborder">' + effort + '</td>';
                                         }
                                         reportcard2 += '</tr>';
@@ -2034,13 +2093,13 @@
 
                         if (result[0].isPromoted == false && result[0].Cond_Prom == false) {
                             if ((result[0].Region_Name == "(TCS)-Central Region" || result[0].Region_Name == "(TCS) Northern Region") && result[0].Class_Id == 12) {
-                                reportcard2 += '<div class="col-lg-12 col-md-12 col-xs-12 col-sm-12 notpromoted9thclass ">Promoted to Senior I (O Level)</div>';
+                                reportcard2 += '<div class="col-lg-12 col-md-12 col-xs-12 col-sm-12 notpromoted9thclass ">Promoted to Senior I</div>';
                             }
  else if ((result[0].Center_Name == "S064- (TCS) Quetta Cantt" || result[0].Center_Name == "S067- (TCS) Quetta Campus") && result[0].Class_Id == 12) {
                                 reportcard2 += '<div class="col-lg-12 col-md-12 col-xs-12 col-sm-12 notpromoted ">Contact school management for promotion</div>';
                             }
                             else if (result[0].Region_Name == "(TCS)-Southern Region" && result[0].Class_Id == 12) {
-                                reportcard2 += '<div class="col-lg-12 col-md-12 col-xs-12 col-sm-12 notpromoted9thclass ">Promoted to Senior I (O Level)</div>';
+                                reportcard2 += '<div class="col-lg-12 col-md-12 col-xs-12 col-sm-12 notpromoted9thclass ">Promoted to Senior I</div>';
                             } else {
                                 reportcard2 += '<div class="col-lg-12 col-md-12 col-xs-12 col-sm-12 notpromoted ">Not Promoted</div>';
                             }
@@ -2127,6 +2186,12 @@
                         $(".yearname").text(result[0].Description.replace("AY", ''));
                         $(".headerstudentname").text(result[0].StudentName + "-" + result[0].Student_Id);
                         $(".headerstudentcenter").text(result[0].Center_Name);
+                        if (result[0].Session_Id >= 17 && result[0].Center_Name == "C053-(TCS) Alpha Campus") {
+                            $("#schoolLogo").attr("src", "ALPHAShalimarLogo.png");
+                        }
+                        else {
+                            $("#schoolLogo").attr("src", "newlogonewr.png");
+                        }
                     }, complete: function () {
                         /*$('.costgraph').css({
                             'cssText': 'background:none !important'
