@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Data;
 using System.Web;
 using System.Web.UI.WebControls;
@@ -1032,6 +1032,25 @@ public partial class PresentationLayer_SearchStudent : System.Web.UI.Page
             objClsSec.Session_Id = session;
             objClsSec.Student_Id = Convert.ToInt32(studentid);
             dtsub = objClsSec.Result_ByEmployeeCenterWise(objClsSec);
+
+         //****************************2025-06-05************************
+          if (!dtsub.Columns.Contains("t_display"))
+            {
+                dtsub.Columns.Add("t_display", typeof(string));
+            }
+
+            foreach (DataRow row in dtsub.Rows)
+            {
+                if (row["Theory_Exam_CH"] != DBNull.Value && row["Theory_Exam_CH"].ToString().Trim() == "-")
+                {
+                    row["t_display"] = "-";
+                }
+                else
+                {
+                    row["t_display"] = row["t"].ToString();
+                }
+            }
+        //****************************End************************
             ViewState["Table"] = dtsub;
             if (dtsub.Rows.Count > 0)
             {
@@ -1039,9 +1058,6 @@ public partial class PresentationLayer_SearchStudent : System.Web.UI.Page
                 dv_details.DataSource = dtsub;
                 dv_details.DataBind();
             }
-
-
-
         }
         catch (Exception ex)
         {
@@ -1477,7 +1493,7 @@ public partial class PresentationLayer_SearchStudent : System.Web.UI.Page
 
         DocumentUpload(Convert.ToInt32(ViewState["StudentId"]), ViewState["Regionid"].ToString(), ViewState["Centerid"].ToString(), ViewState["Classid"].ToString());
     }
-
+/*
     private void DocumentUpload(int studentid, string Regionid, string Centerid, string classid)
     {
         HttpPostedFile postedFile;
@@ -1585,7 +1601,122 @@ public partial class PresentationLayer_SearchStudent : System.Web.UI.Page
             return;
         }
         lblerror.Visible = false;
+    }*/
+
+
+    private void DocumentUpload(int studentid, string Regionid, string Centerid, string classid)
+    {
+        HttpPostedFile postedFile;
+        if (FileUpload1.HasFile)
+        {
+            HttpFileCollection uploadedFiles = Request.Files;
+            for (int i = 0; i < uploadedFiles.Count; i++)
+            {
+                postedFile = uploadedFiles[i];
+                if (postedFile.ContentLength > 1048576)
+                {
+                    lblerror.ForeColor = System.Drawing.Color.Red;
+                    lblerror.Text = "Please check File size is above 1MB....";
+                    lblerror.Visible = true;
+                    return;
+                }
+                postedFile = null;
+            }
+
+            for (int i = 0; i < uploadedFiles.Count; i++)
+            {
+                postedFile = uploadedFiles[i];
+                string FileName = postedFile.FileName;
+                string additionals = "";
+
+
+                if (1 == 1)
+                {
+
+
+                    string Extension = Path.GetExtension(FileUpload1.PostedFile.FileName);
+                    string FolderPath = ConfigurationManager.AppSettings["FolderPath"];
+                    string FilePath = Server.MapPath(FolderPath + FileName);
+
+                    if (Extension.ToLower() == ".jpg" || Extension.ToLower() == ".jpeg" || Extension.ToLower() == ".png")
+                    {
+                        //string regionFolder = Server.MapPath("~\\PresentationLayer\\TCS\\Files\\" + Regionid + "\\");
+                        string regionFolder = Server.MapPath("~\\Student_Images\\" + Regionid + "\\");
+                        string centerFolder = Path.Combine(regionFolder, Centerid);
+                        string classFolder = Path.Combine(centerFolder, classid);
+
+                        if (!Directory.Exists(regionFolder))
+                        {
+                            Directory.CreateDirectory(regionFolder);
+                        }
+
+                        if (!Directory.Exists(centerFolder))
+                        {
+                            Directory.CreateDirectory(centerFolder);
+                        }
+                        if (!Directory.Exists(classFolder))
+                        {
+                            Directory.CreateDirectory(classFolder);
+                        }
+
+
+
+                        int contentLength = postedFile.ContentLength;
+                        byte[] buffer = new byte[contentLength];
+                        postedFile.InputStream.Read(buffer, 0, contentLength);
+                        string fileName = FileUpload1.PostedFile.FileName.ToString();
+                        additionals = DateTime.Now.Year.ToString().PadLeft(4, '0') + DateTime.Now.Month.ToString().PadLeft(2, '0') + DateTime.Now.Day.ToString().PadLeft(2, '0') + Extension.ToLower();
+                        // FileStream stream = new FileStream(base.Server.MapPath("~\\PresentationLayer\\TCS\\Files\\" + Regionid + "\\" + Centerid + "\\" + classid + "\\" + Convert.ToString(studentid) + "_" + additionals), FileMode.Create);
+                        FileStream stream = new FileStream(base.Server.MapPath("~\\Student_Images\\" + Regionid + "\\" + Centerid + "\\" + classid + "\\" + Convert.ToString(studentid) + "_" + additionals), FileMode.Create);
+                        stream.Write(buffer, 0, buffer.Length);
+                        stream.Close();
+
+                        BLLSearchStudent objblli = new BLLSearchStudent();
+
+                        objblli.Student_Id = studentid;
+                        //  objblli.Image_Path = "~\\PresentationLayer\\TCS\\Files\\" + Regionid + "\\" + Centerid + "\\" + classid + "\\" + Convert.ToString(studentid) + "_" + additionals;
+                        objblli.Image_Path = "~\\Student_Images\\" + Regionid + "\\" + Centerid + "\\" + classid + "\\" + Convert.ToString(studentid) + "_" + additionals;
+                        objblli.Update_student_Profile_Image_Path(objblli);
+                        objblli = null;
+
+                        BindGrid();
+
+                    }
+                    else if (Extension.ToLower() == ".doc" || Extension.ToLower() == ".docx" || Extension.ToLower() == ".xlsx" || Extension.ToLower() == ".xls" || Extension.ToLower() == ".pdf")
+                    {
+                        lblerror.ForeColor = System.Drawing.Color.Red;
+                        lblerror.Text = "Only JPEG,JPG,PNG file is allowed to upload....";
+                        lblerror.Visible = true;
+                        return;
+
+                    }
+                    else
+                    {
+                        lblerror.ForeColor = System.Drawing.Color.Red;
+                        lblerror.Text = "File size is above 1MB....";
+                        lblerror.Visible = true;
+                        return;
+                    }
+                }
+
+
+            }
+            int a = Convert.ToInt32(ViewState["Us_ID"]);// Updatestatus
+
+
+        }
+        else
+        {
+            lblerror.ForeColor = System.Drawing.Color.Red;
+            lblerror.Text = "There's issue with files please select again....";
+            lblerror.Visible = true;
+            return;
+        }
+        lblerror.Visible = false;
     }
+
+
+
 
     protected void btnAPICall_Click(object sender, EventArgs e)
   {
