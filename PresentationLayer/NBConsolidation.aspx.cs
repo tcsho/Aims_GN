@@ -1,4 +1,4 @@
-﻿using ADG.JQueryExtenders.Impromptu;
+using ADG.JQueryExtenders.Impromptu;
 using System;
 using System.Data;
 using System.Drawing;
@@ -22,6 +22,10 @@ public partial class PresentationLayer_LoConsolidation : System.Web.UI.Page
     {
         ScriptManager scriptManager = ScriptManager.GetCurrent(this.Page);
         scriptManager.RegisterPostBackControl(this.btnNbconsolidationexport);
+        scriptManager.RegisterPostBackControl(this.btnexportsiqaendorsedgrades);
+        scriptManager.RegisterPostBackControl(this.btnexportconsolidationregionreport);
+
+        
         try
         {
             if (!Page.IsPostBack)
@@ -75,6 +79,7 @@ public partial class PresentationLayer_LoConsolidation : System.Web.UI.Page
                     ddl_region.Enabled = false;
                     ddl_center.Enabled = false;
                     SiqaEndDiv.Visible = false;
+                    btnexportconsolidationregionreport.Visible = false;
                     //ScriptManager.RegisterStartupScript(this, GetType(), "HideMenu2", "hideMenu2();", true);
                 }
                 else if (Convert.ToInt32(row["UserLevel_ID"].ToString()) == 3) //Regional Officer
@@ -83,6 +88,7 @@ public partial class PresentationLayer_LoConsolidation : System.Web.UI.Page
                     ddl_Region_SelectedIndexChanged(sender, e);
                     ddl_region.Enabled = false;
                     ddl_center.Enabled = true;
+                    btnexportconsolidationregionreport.Visible = false;
 
                 }
                 int userid = Convert.ToInt32(row["User_Type_Id"].ToString());
@@ -97,6 +103,7 @@ public partial class PresentationLayer_LoConsolidation : System.Web.UI.Page
                     // ddl_center.SelectedValue = row["Center_Id"].ToString();
                     // ddl_center_SelectedIndexChanged(sender, e);
                     ddl_region.Enabled = false;
+                    btnexportconsolidationregionreport.Visible = false;
                 }
                 if (userid == 45 || userid == 44)
                 {
@@ -106,7 +113,8 @@ public partial class PresentationLayer_LoConsolidation : System.Web.UI.Page
                     btnNbconsolidationexport.Enabled = false;
                     ddl_region.SelectedValue = row["Region_Id"].ToString();
                     ddl_Region_SelectedIndexChanged(sender, e);
-                   
+                    btnexportconsolidationregionreport.Visible = false;
+
                 }
 
             }
@@ -479,7 +487,8 @@ public partial class PresentationLayer_LoConsolidation : System.Web.UI.Page
                 ddlclass.SelectedValue.ToString(),
                 ddlsubjects.SelectedValue.ToString(),
                 ddl_grouphead.SelectedValue.ToString(),
-                ddlkeystage.SelectedValue.ToString()
+                ddlkeystage.SelectedValue.ToString(),
+                ddlcheck_uncheck_filter.SelectedValue.ToString()
                 );
             if (dt != null)
             {
@@ -1844,6 +1853,52 @@ public partial class PresentationLayer_LoConsolidation : System.Web.UI.Page
             if (dthistory != null)
             {
                 ExportToSpreadsheet(dthistory, "Export_Siqa_Endorsed_Grades");
+                dt = null;
+
+            }
+            else
+            {
+                ImpromptuHelper.ShowPrompt("There Are No Search Results To Export!");
+            }
+
+        }
+        catch (Exception ex)
+        {
+            Session["error"] = ex.Message;
+            Response.Redirect("~/presentationlayer/ErrorPage.aspx", false);
+        }
+    }
+
+    protected void ddlcheck_uncheck_filter_SelectedIndexChanged(object sender, EventArgs e)
+    {
+        BindGrid();
+    }
+    protected void btnregionloconsolidationexport_Click(object sender, EventArgs e)
+    {
+
+        try
+        {
+            BLLSiqa objdata = new BLLSiqa();
+            DataTable dt = new DataTable();
+
+            if (ddl_region.SelectedValue.ToString() == "0")
+            {
+                ImpromptuHelper.ShowPromptGeneric("Please select Region :", 0);
+                return;
+            }
+
+            dt = objdata.NB_Consolidation_Export(
+            ddl_region.SelectedValue.ToString(),
+            ddl_center.SelectedValue.ToString(),
+            ddlteacher.SelectedValue.ToString(),
+            ddlclass.SelectedValue.ToString(),
+            ddlsubjects.SelectedValue.ToString(),
+            ddl_grouphead.SelectedValue.ToString(),
+            ddlkeystage.SelectedValue.ToString()
+            );
+            if (dt != null)
+            {
+                ExportToSpreadsheet(dt, "Export_Region_View_Report_Data");
                 dt = null;
 
             }
