@@ -1,4 +1,4 @@
-﻿
+
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
@@ -28,6 +28,12 @@ public partial class PresentationLayer_EYEReport : System.Web.UI.Page
 
 
         string connectionString = ConfigurationManager.ConnectionStrings["isl_amsoConnectionString"].ConnectionString;
+        BLLStudent_Performance_ClassAchvRating objClsSec = new BLLStudent_Performance_ClassAchvRating();
+        DataTable dtsub = new DataTable();
+
+       
+
+
         using (SqlConnection conn = new SqlConnection(connectionString))
         {
 
@@ -45,6 +51,13 @@ public partial class PresentationLayer_EYEReport : System.Web.UI.Page
                 JSONString = JsonConvert.SerializeObject(dt);
 
 
+                objClsSec.Main_Organistion_Id = 1;
+                objClsSec.Class_Id = Convert.ToInt32(dt.Rows[0]["Class_Id"].ToString());
+           
+                dtsub = (DataTable)objClsSec.Student_Performance_ClassAchvRatingSelectAllByOrgId(objClsSec);
+
+                string JSONStringRating = string.Empty;
+                JSONStringRating = JsonConvert.SerializeObject(dtsub);
 
                 SqlCommand commD = new SqlCommand("exec TCS_Result_StudentPerformanceSection_NEW_CLASS1_2 '" + sectionId + "','" + sessionId + "','" + TermGroupId + "','" + StudentId + "'", conn);
 
@@ -53,38 +66,95 @@ public partial class PresentationLayer_EYEReport : System.Web.UI.Page
                 dataD.Fill(dtD);
 
 
-                // Grouping the DataTable by subjectName
-                var groupedDataD = dtD.AsEnumerable()
-                    .GroupBy(rowD => new
-                    {
-                        subjectId = rowD.Field<int>("subject_Id"),
-                        subjectName = rowD.Field<string>("Subject_Name")
-                    })
-                    .Select(groupD => new
-                    {
-                        subjectName = groupD.Key.subjectName,
-                        subjectid = groupD.Key.subjectId,
 
-                        Items = groupD.Select(rowD => dtD.Columns.Cast<DataColumn>()
-                         .ToDictionary(colD => colD.ColumnName, colD => rowD[colD]))
-                    });
+                //// Grouping the DataTable by subjectName
+                //var groupedDataD = dtD.AsEnumerable()
+                //    .GroupBy(rowD => new
+                //    {
+                //        subjectId = rowD.Field<int>("subject_Id"),
+                //        subjectName = rowD.Field<string>("Subject_Name"),
+                //        studentId = rowD.Field<int>("Student_Id")
+                //    })
+                //    .Select(groupD => new
+                //    {
+                //        subjectName = groupD.Key.subjectName,
+                //        subjectid = groupD.Key.subjectId,
+                //        StudentId = groupD.Key.studentId,
+
+                //        Items = groupD.OrderBy(rowD => rowD.Field<int>("OrderOfPer")).Select(rowD => dtD.Columns.Cast<DataColumn>()
+                //         .ToDictionary(colD => colD.ColumnName, colD => rowD[colD]))
+                //    });
 
 
 
-                string JSONStringD = string.Empty;
+                //string JSONStringD = string.Empty;
 
-                JSONStringD = JsonConvert.SerializeObject(groupedDataD);
+                //JSONStringD = JsonConvert.SerializeObject(groupedDataD);
+
+                //var result = new
+                //{
+                //    Indicator = JsonConvert.DeserializeObject(JSONStringRating),
+                //    Header = JsonConvert.DeserializeObject(JSONString),
+                //    Detail = JsonConvert.DeserializeObject(JSONStringD)
+                //};
+
+
+                //return JsonConvert.SerializeObject(result);
+
+
+                // ---------------- HEADER GROUPING ---------------- 
+                var headerGrouped = dt.AsEnumerable()
+                    .GroupBy(r => r.Field<int>("Student_Id"))
+                    .ToDictionary(
+                        g => g.Key,
+                        g => g.CopyToDataTable()
+                    );
+
+                // ---------------- DETAIL GROUPING ----------------
+                var detailGrouped = dtD.AsEnumerable()
+                    .GroupBy(r => r.Field<int>("Student_Id"))
+                    .ToDictionary(
+                        g => g.Key,
+                        g => g.GroupBy(rowD => new
+                        {
+                            subjectId = rowD.Field<int>("subject_Id"),
+                            subjectName = rowD.Field<string>("Subject_Name")
+                        })
+                        .Select(groupD => new
+                        {
+                            subjectName = groupD.Key.subjectName,
+                            subjectid = groupD.Key.subjectId,
+
+                            Items = groupD.OrderBy(x => x.Field<int>("OrderOfPer"))
+                                .Select(rowD =>
+                                    dtD.Columns.Cast<DataColumn>()
+                                    .ToDictionary(colD => colD.ColumnName, colD => rowD[colD])
+                                )
+                        }).ToList()
+                    );
+
+                // ---------------- FINAL MERGED RESULT ----------------
+                var finalResult = headerGrouped.Select(h => new
+                {
+                    StudentId = h.Key,
+                    Header = JsonConvert.DeserializeObject(
+                        JsonConvert.SerializeObject(h.Value)
+                    ),
+                    Detail = detailGrouped.ContainsKey(h.Key)
+                                ? detailGrouped[h.Key].Cast<object>().ToList()
+                                : new List<object>()
+                })
+                .ToList();
 
                 var result = new
                 {
-                    Header = JsonConvert.DeserializeObject(JSONString),
-                    Detail = JsonConvert.DeserializeObject(JSONStringD)
+                    Indicator = JsonConvert.DeserializeObject(JSONStringRating),
+                    Header = finalResult, //JsonConvert.SerializeObject(finalResult),
+
                 };
 
-
+                // Return JSON
                 return JsonConvert.SerializeObject(result);
-
-
 
             }
             catch (Exception)
@@ -98,4 +168,5 @@ public partial class PresentationLayer_EYEReport : System.Web.UI.Page
         }
     }
 
-}
+}﻿
+
